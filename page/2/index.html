@@ -17,18 +17,18 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/2/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:title" content="Talkless">
+<meta property="og:url" content="http://c0mm4nd.com/page/2/index.html">
+<meta property="og:site_name" content="Talkless">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/page/2/">
+<link rel="canonical" href="http://c0mm4nd.com/page/2/">
 
 
 <script id="page-configurations">
@@ -41,7 +41,7 @@
   };
 </script>
 
-  <title>Hexo</title>
+  <title>Talkless</title>
   
 
 
@@ -92,13 +92,14 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">Talkless</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -115,14 +116,51 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">34</span></a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">53</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -132,6 +170,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -145,21 +185,21 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/fit9132-db-notes/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/fit5152-a1-paper/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/fit9132-db-notes/" class="post-title-link" itemprop="url">Notes for FIT9132: Intro to DB</a>
+            <a href="/fit5152-a1-paper/" class="post-title-link" itemprop="url">Reading paper in FIT5152: 知识评估和进展分析与设计的统一框架 A Unified Framework for Knowledge Assessment and Progression Analysis and Design</a>
         </h2>
 
         <div class="post-meta">
@@ -176,7 +216,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-06 19:06:55" itemprop="dateModified" datetime="2021-03-06T19:06:55+08:00">2021-03-06</time>
+                <time title="Modified: 2021-03-06 22:55:53" itemprop="dateModified" datetime="2021-03-06T22:55:53+08:00">2021-03-06</time>
               </span>
 
           
@@ -190,400 +230,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>整体难度不大，tutor也很给面子（要是我自己给自己打分肯定更低</p>
-<p>建议尽早摘抄知识点并且在Tut/Ass时候就用起来，别像我一样前面拍脑子考前总结才发现都在PPT里。</p>
-<h2 id="W1"><a href="#W1" class="headerlink" title="W1"></a>W1</h2><p>回顾历史DB发展以及名人</p>
-<h2 id="W2-Conceptual-Modelling"><a href="#W2-Conceptual-Modelling" class="headerlink" title="W2 Conceptual Modelling"></a>W2 Conceptual Modelling</h2><p>理论模型</p>
-<p>因为是chow’s foot图，所以复合（1：1）、多值（1：N）属性记得加个实体来表述会更直观</p>
-<h3 id="理论模型设计"><a href="#理论模型设计" class="headerlink" title="理论模型设计"></a>理论模型设计</h3><p>开发企业数据模型。</p>
-<ul>
-<li>对应于ANSI / SPARC体系结构的概念级别。</li>
-<li>独立于所有物理实施注意事项（要使用的数据库类型）。</li>
-<li>可以采用各种设计方法，例如UML，ER（实体关系）。</li>
-<li>ER由实体之间的<strong>实体</strong>和<strong>关系</strong>组成</li>
-</ul>
-<p>ENTITY具有属性（我们希望记录的东西），其中一个或多个属性将标识实体实例（称为KEY）</p>
-<h3 id="强弱实体"><a href="#强弱实体" class="headerlink" title="强弱实体"></a>强弱实体</h3><p><strong>强实体</strong></p>
-<blockquote>
-<p>具有可以在不参考其他实体的情况下定义的Key。例如EMPLOYEE实体。</p>
-<p><img src="./fit9132-db-notes/image-20210218223640286.png" alt="image-20210218223640286"></p>
-</blockquote>
-<p><strong>弱实体</strong></p>
-<blockquote>
-<p>具有要求存在一个或多个其他实体的Key。例如FAMILY实体-需要包括员工的KEY才能为家庭创建合适的密钥</p>
-<p><img src="./fit9132-db-notes/image-20210218223450092.png" alt="image-20210218223450092"></p>
-</blockquote>
-<p>数据库设计人员通常根据业务规则确定一个实体是否可被描述为弱实体，例如</p>
-<blockquote>
-<p> 客户每月支付帐款</p>
-<p> Key：cust_no，date_paid</p>
-<p>或者：payment_no（如果是凭空创造的surrogate Key？- 不属于理论模型）</p>
-</blockquote>
-<p>理论模型不加surrogate Key！</p>
-<table>
-<thead>
-<tr>
-<th>显著Identifying</th>
-<th>不显著Non-identifying</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Identifier of A is part of identifier of B.</td>
-<td>Identifier of A is NOT part of identifier of B.</td>
-</tr>
-<tr>
-<td>实线</td>
-<td>虚线</td>
-</tr>
-<tr>
-<td>ENROLMENT - STUDENT Enrolment key includes student id, which is an identifier of student.<br />CAR - CAR_COLOR<br />存在同样的key</td>
-<td>Department no (identifier of department) is not part of Employee’s identifier.</td>
-</tr>
-</tbody></table>
-<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>类型: 简易，复合，单值，多值，派生</p>
-<p>鱼尾纹chow’s foot表示法不支持多值属性。 值被列为单独的属性。</p>
-<p>关联（或复合）实体</p>
-<h2 id="ERD"><a href="#ERD" class="headerlink" title="ERD"></a>ERD</h2><p>关系数据库模型，即ERM，构成ERD(实体关系图)的基础。<br>ERD代表最终用户查看的概念数据库。<br>ERD描述了数据库的主要组成部分：实体，属性和关系。<br>因为实体代表现实世界中的对象，所以实体和对象一词经常互换使用。 </p>
-<p>正好实体关系图也能在vuepress里用markdown+mermaid绘制，所以可以直接画着玩。由于还处于experimental，所以是只能表现实体和关系，并不能展示属性</p>
-<p>在mermaid里，几对几这样的关系分成左右两部分描述。</p>
-<table>
-<thead>
-<tr>
-<th>左边</th>
-<th>右边</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>`</td>
-<td>o`</td>
-<td>`o</td>
-</tr>
-<tr>
-<td>`</td>
-<td></td>
-<td>`</td>
-</tr>
-<tr>
-<td><code>&#125;o</code></td>
-<td><code>o&#123;</code></td>
-<td>零或多个 (无上限)</td>
-</tr>
-<tr>
-<td>`}</td>
-<td>`</td>
-<td>`</td>
-</tr>
-</tbody></table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">erDiagram</span><br><span class="line">    CUSTOMER ||--o&#123; ORDER : places</span><br></pre></td></tr></table></figure>
-
-<p>表示<strong>一个</strong>CUSTOMER强对应<strong>0或多个</strong>ORDER，即一个顾客对应着0个(未点单)或多个其点过的订单</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">erDiagram</span><br><span class="line">    ORDER ||--|&#123; ITEM : contains</span><br></pre></td></tr></table></figure>
-
-<p>表示<strong>一个</strong>ORDER强对应<strong>0或多个</strong>ITEM，即一份订单上存在一个或多个商品</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">erDiagram</span><br><span class="line">    CUSTOMER &#125;|..|&#123; ADDRESS : uses</span><br></pre></td></tr></table></figure>
-
-<p>表示<strong>0或多个</strong>CUSTOMER弱对应<strong>0或多个</strong>ADDRESS，即存在多个顾客且存在多个地址，之间存在弱对应关系</p>
-<h2 id="W3-Relational-Model"><a href="#W3-Relational-Model" class="headerlink" title="W3 Relational Model"></a>W3 Relational Model</h2><p>Relational Model&amp;Relational Algebra关系模型与代数</p>
-<p>这个作业里是用SQL Developer从Logical里生成出来的，所以到SQL（DDL）部分才开始create。</p>
-<p>这里主要讲的是</p>
-<ul>
-<li>用NAME(Attribs…)表示的实体，每个数据都是一个tuple</li>
-<li>其中的各种key: SuperKey(一或多个属性，独一无二), CK（一或多个属性）, PK（从CK中选的一个），AK（alternate keys。PK以外的CK）</li>
-<li>代数（select，project，join，其他union，diff，div啥的都不用）顺便为后面归一化做准备</li>
-</ul>
-<p>功能性依赖Functional Dep</p>
-<p>如果在任何时候属性（集）A的值都确定单属性B值（当且仅当），则属性B在A上是功能依赖的。</p>
-<p>• order_no → order_date<br>• prod_no → prod_desc<br>• order_no, prod_no → ordered_qty</p>
-<p>RM 特点：</p>
-<ul>
-<li>要有独一无二的名字</li>
-<li>每个属性要有独一无二名字（用prefix</li>
-<li>属性不能多值</li>
-<li>所有属性值应当来自同一个域</li>
-<li>必须有主键</li>
-<li>relations 之间的 Logical (not physical) connections 通过primary/foreign keys表示</li>
-</ul>
-<h2 id="W4-Normalisation"><a href="#W4-Normalisation" class="headerlink" title="W4 Normalisation"></a>W4 Normalisation</h2><p>归一化</p>
-<ul>
-<li><p>为了避免在插入，更新和删除数据时可能发生的异常，应规范化关系。</p>
-</li>
-<li><p>规范化是一系列系统步骤，用于逐步完善数据模型。</p>
-</li>
-<li><p>基于primary key（或候选 candidate keys）分析关系的正式方法 密钥）和功能依赖项。用作：“自下而上设计”的一种设计技术，以及作为一种验证通过“自上而下的设计”产生的结构的方式（将ER模型转换为逻辑模型-参见下周）</p>
-</li>
-</ul>
-<p>更新异常的类型包括：</p>
-<p>•插入异常-仅在新员工被分配到项目时才插入</p>
-<p>•删除异常-删除分配给项目的唯一员工？</p>
-<p>​    –删除特定工作类别的唯一员工？</p>
-<p>•修改（或 更新）异常</p>
-<p>​    -更新作业类别的每小时费率 - 需要更新多行</p>
-<p>归一化目标</p>
-<ul>
-<li><p>创建有效的关系，即每个关系都符合关系模型的属性。 特别是：–实体完整性–引用完整性–没有多对多关系–每个单元格都包含一个值（是原子的）。</p>
-</li>
-<li><p>在RDBMS中实施时，实际上：–每个表代表一个主题 –没有数据项 将不必要地存储在多个表中。–可以建立表之间的关系（标识了PK和FK对）。–每个表都没有插入，更新和删除异常。</p>
-</li>
-</ul>
-<p>功能性依赖Functional Dep</p>
-<p>参照前面</p>
-<p>部分依赖Partial Dep（1-&gt;2）</p>
-<p>缺少对多个属性键的完全依赖</p>
-<ul>
-<li>ORDERNO, PRODNO ➔ PRODDESC, QTY_ORDERED</li>
-<li>尽管qty_ordered完全取决于orderno和prodno，但仅需prodno即可确定proddesc</li>
-<li>proddesc部分依赖于orderno和prodno</li>
-<li>用人话说，就是现在看起来是主键是orderno，但是要是有个prodno也能决定qty ，那就把prodno和qty拎出去</li>
-<li>拎出去之后那个新实体的key在原位置保留且<strong>作为key</strong>！</li>
-</ul>
-<p>传递依赖Transitive Dep（2-&gt;3）</p>
-<ul>
-<li>当Y取决于X，Z取决于Y时发生</li>
-<li>因此Z也取决于X，即。 X➔Y➔Z 并且Y不是候选键（或候选键的一部分）</li>
-<li>ORDER_NO➔CUST_NO➔CUST_NAME: CUSTOMER(<u>CUST_NO</u>, CUST_NAME)</li>
-<li>emp_no➔job_class➔chg_hour: JOB (<u>job_class</u>, chg_hour)</li>
-<li>拎出去之后那个新实体的key在原位置保留但是<strong>不作为key</strong>！</li>
-</ul>
-<p>UNF-&gt;1NF</p>
-<ol>
-<li><p>确定重复组的Key。</p>
-</li>
-<li><p>删除任何重复组以及主要关系的PK。</p>
-</li>
-<li><p>由于重复组的去除而导致的新关系的PK通常具有由主要关系的PK组成的复合PK 以及上面1.中选择的唯一标识符，但是必须进行检查。说人话就是拎出来的实体要带原来的Key，也要有自己的Key，就反正至少俩</p>
-</li>
-</ol>
-<p>最后写出所有的Partial dependencies</p>
-<p>1NF -&gt; 2NF</p>
-<p>2NF下的关系</p>
-<ul>
-<li>继承前面的</li>
-<li>把所有Partial dependencies<strong>部分依赖</strong>拎出来</li>
-</ul>
-<p>最后写出所有的Transitive dependencies</p>
-<p>2NF -&gt; 3NF</p>
-<p>如果3NF，则存在关系</p>
-<ul>
-<li>继承前面的</li>
-<li>把所有Transitive dependencies<strong>传递依赖</strong>项都拎出来</li>
-</ul>
-<p>最后要写出所有的Full Dependencies</p>
-<h2 id="W5-Logical-Model"><a href="#W5-Logical-Model" class="headerlink" title="W5 Logical Model"></a>W5 Logical Model</h2><p>就是Assignment里让你画在SQL Developer里那个。按实际制作流程来看应该比relational model先讲。</p>
-<p>在Conceptual Model正确情况下较简单，但是别像我一样拍脑子做。</p>
-<h3 id="逻辑设计（1b）"><a href="#逻辑设计（1b）" class="headerlink" title="逻辑设计（1b）"></a>逻辑设计（1b）</h3><ul>
-<li>开发针对特定数据库模型的数据模型（例如关系，分层，网络，面向对象，noSQL）。</li>
-<li>独立于任何特定供应商DBMS软件包的任何实施细节。</li>
-<li>归一化技术（请参阅w4）用于测试关系逻辑模型的正确性。</li>
-</ul>
-<h3 id="1-映射常规（强）实体"><a href="#1-映射常规（强）实体" class="headerlink" title="1. 映射常规（强）实体"></a>1. 映射常规（强）实体</h3><p>先是把Conceptual Model里的Key转为PK或者FK，加UQ</p>
-<h3 id="2-映射弱实体"><a href="#2-映射弱实体" class="headerlink" title="2. 映射弱实体"></a>2. 映射弱实体</h3><h3 id="3-映射二元关系"><a href="#3-映射二元关系" class="headerlink" title="3. 映射二元关系"></a>3. 映射二元关系</h3><h4 id="1-M"><a href="#1-M" class="headerlink" title="1:M"></a>1:M</h4><p>记得加fk到M那侧</p>
-<h4 id="M-N"><a href="#M-N" class="headerlink" title="M:N"></a>M:N</h4><p>Conceptual里的M:N关系需要转为1:N和N:1</p>
-<p>例如</p>
-<p><img src="./fit9132-db-notes/image-20210217003847464.png" alt="image-20210217003847464"></p>
-<p>转为</p>
-<p><img src="./fit9132-db-notes/image-20210217003857615.png" alt="image-20210217003857615"></p>
-<p>如图TEAM和EMPLOYEEE之间的leads关系</p>
-<p><img src="./fit9132-db-notes/image-20210217225042251.png" alt="image-20210217225042251"></p>
-<p><img src="./fit9132-db-notes/image-20210217225057637.png" alt="image-20210217225057637"></p>
-<p>在强制侧的PK变成可选那侧的FK（如emp_no的到了team成了fk，虽然人家是1:M</p>
-<p>如果都是可选的，那就加到null最少那侧</p>
-<p>如果两边都强制那就考虑合并吧</p>
-<h3 id="4-映射关联实体"><a href="#4-映射关联实体" class="headerlink" title="4. 映射关联实体"></a>4. 映射关联实体</h3><p>就类似上面M:N的处理，不过关联实体往往有surrogate key，例如XXX_no，所以就这个no加P别的纯粹F</p>
-<h3 id="5-映射一元关系"><a href="#5-映射一元关系" class="headerlink" title="5. 映射一元关系"></a>5. 映射一元关系</h3><p>1:1，1:M 不变</p>
-<p>MN：加实体</p>
-<p><img src="./fit9132-db-notes/image-20210217230405132.png" alt="image-20210217230405132"></p>
-<h3 id="6-映射三元关系"><a href="#6-映射三元关系" class="headerlink" title="6. 映射三元关系"></a>6. 映射三元关系</h3><p>拆成三个二元</p>
-<h2 id="W6-DDL"><a href="#W6-DDL" class="headerlink" title="W6 DDL"></a>W6 DDL</h2><p>SQL create</p>
-<p>uq的constraint写inline</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> unit</span><br><span class="line">(</span><br><span class="line">unit_code <span class="type">CHAR</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">unit_name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">CONSTRAINT</span> uq_unit_name <span class="keyword">UNIQUE</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> ,</span><br><span class="line"><span class="keyword">CONSTRAINT</span> pk_unit <span class="keyword">PRIMARY</span> KEY (unit_code)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>这里提一下前面W3里的内容，就是FK要么是其他的PK，要么就是NULL，所以就基本上不写NOT NULL。另外FK一般拎出来alter。ON DELETE CASCADE保证引用完整性（感觉一般不用</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> enrolment</span><br><span class="line"><span class="keyword">ADD</span></span><br><span class="line">(</span><br><span class="line"><span class="keyword">CONSTRAINT</span> fk_enrolment_student <span class="keyword">FOREIGN</span> KEY (stu_nbr) <span class="keyword">REFERENCES</span> student ( stu_nbr),</span><br><span class="line"></span><br><span class="line"><span class="keyword">CONSTRAINT</span> fk_enrolment_unit <span class="keyword">FOREIGN</span> KEY (unit_code) <span class="keyword">REFERENCES</span> unit (unit_code)</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>值的约束</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE student</span><br><span class="line">ADD (stu_address varchar(200),</span><br><span class="line">status char(1) DEFAULT &#39;C&#39;,</span><br><span class="line">constraint status_chk CHECK (status in (&#39;G&#39;,&#39;C&#39;))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="W7-SQL"><a href="#W7-SQL" class="headerlink" title="W7 SQL"></a>W7 SQL</h2><p>主要讲的就是select和where</p>
-<p>限定词：</p>
-<ul>
-<li>=, !=, &lt;&gt;, &lt;, &gt;, &gt;=, &lt;=</li>
-<li>between</li>
-</ul>
-<p>NOTE: between aaa and bbb时候aaa和bbb<strong>都</strong>是被包括进去的</p>
-<ul>
-<li>in (‘aaa’, ‘bbb’ …)</li>
-<li>like: %表示0+个字符, _表示单字符</li>
-<li>is null, is not null (判断null时候不能用=或!=)</li>
-<li>any, all</li>
-<li>exists</li>
-</ul>
-<p>select执行后三种状态：True, False和Unknown（匹配到NULL）。是True才算被检索到。</p>
-<p>select 检索时候做运算（如grade+1）则列名变成该算式（”grade+1”），反正就很难看，所以一般用as 重命名一下。当as的新名字有空格，用**” “**去包围（不是单引号！），列名始终用双引号。</p>
-<p>NULL算啥都还是NULL，也可以用NVL(原列名, 值)来代替NULL做运算（如NVL(enrol_mark, 0)默认NULL为0）</p>
-<p>Order by</p>
-<ul>
-<li><p>NULL<strong>S</strong> LAST, NULL<strong>S</strong> FIRST</p>
-</li>
-<li><p>DESC （默认ASC故可省略）</p>
-</li>
-</ul>
-<p>SELECT DISTINCT 去重复行</p>
-<p>JOIN</p>
-<blockquote>
-<p>from aaa JOIN bbb ON aaa.a = bbb.b</p>
-<p>from aaa JOIN bbb ON aaa.key = bbb.key </p>
-<p>from aaa JOIN bbb USING (key) </p>
-<p>from aaa NATURAL JOIN bbb</p>
-</blockquote>
-<p>to_char(SYSDATE, ‘dd-Mon-yyyy hh:mi:ss PM’)</p>
-<p>反过来就to_date(datetime, ‘dd-Mon-yyyy hh:mi:ss PM’ )</p>
-<p>一些系统变量SYSDATE SYSDATETIME USER </p>
-<p>另外数字的format里0和9区别: 9占位但不padding（除非小数，但用FM连小数也不），0占位还padding</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select to_char(1, &#39;999.999&#39;),</span><br><span class="line">  2         to_char(1, &#39;000.000&#39;),</span><br><span class="line">  3         to_char(1, &#39;900.009&#39;),</span><br><span class="line">  4         to_char(1, &#39;999.000&#39;)</span><br><span class="line">  5  from   dual;</span><br><span class="line"></span><br><span class="line">1.000</span><br><span class="line">001.000</span><br><span class="line">01.000</span><br><span class="line">1.000</span><br><span class="line"></span><br><span class="line">select to_char(1, &#39;FM999.999&#39;),</span><br><span class="line">       to_char(1, &#39;FM000.000&#39;),</span><br><span class="line">       to_char(1, &#39;FM900.009&#39;),</span><br><span class="line">       to_char(1, &#39;FM999.000&#39;)</span><br><span class="line">from   dual;</span><br><span class="line"></span><br><span class="line">1.</span><br><span class="line">001.000</span><br><span class="line">01.00</span><br><span class="line">1.000</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="W8-DML"><a href="#W8-DML" class="headerlink" title="W8  DML"></a>W8  DML</h2><p>Update, Delete and Transaction Management</p>
-<p>记得每个insert/update 都要commit！</p>
-<h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><p>主要讲事务上的读写锁S（shared lock）和X（exclusive lock）</p>
-<p>当一个新Tx，</p>
-<ul>
-<li>读SLock: 更新SLock到S(Tx)</li>
-<li>写SLock: 新Tx wait 上个老Tx</li>
-<li>读XLock: wait</li>
-<li>写XLock: wait</li>
-</ul>
-<p><strong>最后画个wait的图</strong>，判断是否deadlock（回环）</p>
-<h3 id="CheckPoint"><a href="#CheckPoint" class="headerlink" title="CheckPoint"></a>CheckPoint</h3><p>rolled forward：REDO+after-images</p>
-<p>rolled back：UNDO+before-images</p>
-<p>checkpoint：就把在checkpoint后fail前commit的重做（REDO），未完成的rollback（UNDO），区间前面完成的也不理</p>
-<p><img src="./fit9132-db-notes/image-20210217155937874.png" alt="image-20210217155937874"></p>
-<p>如图</p>
-<p>T1: 无需操作</p>
-<p>T3,T5 roll back: 因为没commit</p>
-<p>T2 roll forward: 因为在checkpoint点和fail点中间提交的</p>
-<p>T4 roll forward: 因为在检查点后开始且fail前提交的</p>
-<h2 id="W9-Aggregate-Functions"><a href="#W9-Aggregate-Functions" class="headerlink" title="W9 Aggregate Functions"></a>W9 Aggregate Functions</h2><p>COUNT, MAX, MIN, AVG</p>
-<p>COUNT，AVG ignore null rows</p>
-<p>GROUP BY -&gt; 合并keys相同的rows，对每个合并后的Aggregate使用Fn</p>
-<p>HAVING -&gt; 对Group BY的结果进行约束 </p>
-<p>IN</p>
-<p>ANY, ALL</p>
-<p>extract</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extract(year from ofyear) as year</span><br></pre></td></tr></table></figure>
-
-
-
-<p>decode: </p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">decode (cltype, </span><br><span class="line">  <span class="string">&#x27;L&#x27;</span>, <span class="string">&#x27;Lecture&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;T&#x27;</span>, <span class="string">&#x27;Tutorial&#x27;</span>) <span class="keyword">as</span> Classtype</span><br></pre></td></tr></table></figure>
-
-
-
-<p>lpad</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lpad(</span><br><span class="line">  extract(year from ofyear) || &#39; S&#39; || semester,</span><br><span class="line">  10,&#39; &#39;) as offering</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="W10-Advanced-SQL"><a href="#W10-Advanced-SQL" class="headerlink" title="W10 Advanced SQL"></a>W10 Advanced SQL</h2><p>好家伙分数大头</p>
-<h3 id="CASE"><a href="#CASE" class="headerlink" title="CASE"></a>CASE</h3><ul>
-<li>case when expr then val end</li>
-<li>case var then val end</li>
-</ul>
-<h3 id="Subquery"><a href="#Subquery" class="headerlink" title="Subquery"></a>Subquery</h3><p>基本上哪里都能套</p>
-<h4 id="nested"><a href="#nested" class="headerlink" title="nested"></a>nested</h4><p>xxx in (select)</p>
-<h4 id="correlated"><a href="#correlated" class="headerlink" title="correlated"></a>correlated</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> studid, unitcode, mark</span><br><span class="line"><span class="keyword">from</span> uni.enrolment e1</span><br><span class="line"><span class="keyword">where</span> mark <span class="operator">=</span> (<span class="keyword">select</span> <span class="built_in">max</span>(mark)</span><br><span class="line">  <span class="keyword">from</span> uni.enrolment e2</span><br><span class="line">  <span class="keyword">where</span> e1.unitcode <span class="operator">=</span> e2.unitcode)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> unitcode, studid;</span><br></pre></td></tr></table></figure>
-
-<p>这个也能用在update，insert这些上（很好用</p>
-<h4 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> studid, e.unitcode, mark</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">(<span class="keyword">select</span> unitcode, <span class="built_in">max</span>(mark) <span class="keyword">as</span> max_mark</span><br><span class="line">  <span class="keyword">from</span> uni. enrolment</span><br><span class="line">  <span class="keyword">group</span> <span class="keyword">by</span> unitcode) max_table</span><br><span class="line"><span class="keyword">join</span> uni.enrolment e <span class="keyword">on</span> e.unitcode <span class="operator">=</span>   max_table.unitcode <span class="keyword">and</span></span><br><span class="line">e.mark <span class="operator">=</span> max_table.max_mark</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> unitcode, studid;</span><br></pre></td></tr></table></figure>
-
-<p>这里max_table就是select出来内容的alia</p>
-<p>或者</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">grade,</span><br><span class="line"><span class="built_in">count</span>(grade) <span class="keyword">as</span> grade_count,</span><br><span class="line">(<span class="keyword">SELECT</span> </span><br><span class="line">  <span class="built_in">count</span>(grade) <span class="keyword">from</span> uni.enrolment) <span class="keyword">as</span> total_rows,</span><br><span class="line">  <span class="number">100</span><span class="operator">*</span><span class="built_in">count</span>(grade)<span class="operator">/</span>(<span class="keyword">SELECT</span> <span class="built_in">count</span>(grade) <span class="keyword">FROM</span> uni.enrolment</span><br><span class="line">) <span class="keyword">as</span> percentage</span><br><span class="line"><span class="keyword">FROM</span> uni.enrolment</span><br><span class="line"><span class="keyword">where</span> grade <span class="keyword">is</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> grade</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> grade;</span><br></pre></td></tr></table></figure>
-
-<p>套中套</p>
-<h3 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h3><p>基本不用 （因为ass不让</p>
-<p>考试应该就可以</p>
-<p>但是基本上功能和前面subquery差不多</p>
-<h3 id="Joins"><a href="#Joins" class="headerlink" title="Joins"></a>Joins</h3><p>natural join, self join, outer join </p>
-<p>这个就没前面的natural join那样慈眉善目了，丢分巨头</p>
-<h4 id="self-join"><a href="#self-join" class="headerlink" title="self join"></a>self join</h4><p>Show the name of the manager for each employee.</p>
-<p>因为manager也是employee，所以就算self join，通过mgrno和empno来对应。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM emp.employee e1 JOIN emp.employee e2</span><br><span class="line">ON e1.mgrno &#x3D; e2.empno;</span><br></pre></td></tr></table></figure>
-
-<p>吓得我去看了眼考试SQL的模型，还好没一元关系</p>
-<h4 id="outer-join"><a href="#outer-join" class="headerlink" title="outer join"></a>outer join</h4><p>这个用的比较多</p>
-<h5 id="full-outer-join"><a href="#full-outer-join" class="headerlink" title="full outer join"></a>full outer join</h5><p>两边对应不上的都保留</p>
-<p><img src="./fit9132-db-notes/image-20210218213524538.png" alt="image-20210218213524538"></p>
-<p>如图，左边的id=3没对应所以右边空null，右边4没对应所以左边空null</p>
-<h5 id="left-right-outer-join"><a href="#left-right-outer-join" class="headerlink" title="left/right outer join"></a>left/right outer join</h5><p>left只保证左边的都有对应，因此只保留右边的null</p>
-<p>right只保证右边的都有对应，因此只留左边的null。</p>
-<p>另外左右是根据join关键词的左边右边决定的，比如上面的full就是<code>id_name full outer join id_subj_mark</code></p>
-<h3 id="Set-Operators"><a href="#Set-Operators" class="headerlink" title="Set Operators"></a>Set Operators</h3><p>大前提：列能对的上</p>
-<p>Union All 加法（不去重）</p>
-<p>Union 加法（去重）</p>
-<p>Intersect 重叠部分，即$A \and B$</p>
-<p>Minus 减法，即$A-(A \and B)$</p>
-<p>另外，union优先级比order by高</p>
-<h3 id="Oracle-Functions"><a href="#Oracle-Functions" class="headerlink" title="Oracle Functions"></a>Oracle Functions</h3><p>见文档</p>
-<h2 id="W11-BigData"><a href="#W11-BigData" class="headerlink" title="W11 BigData"></a>W11 BigData</h2><p>纯介绍+NoSQL</p>
-<p>JSON_OBJECT(‘key’ value val FORMAT JSON)</p>
-<p>JSON_ARRAYAGG(JSON_OBJECT(), JSON_OBJECT())</p>
-<p>MongoDB</p>
-<p>insertOne(), insertMany([])</p>
-<p>find({})或者find(匹配, 需要的列)，例如find({_id: 2}, {name: 1})只取id=2那列的name</p>
-<p>op: </p>
-<p>{$and: [{}, {}]}</p>
-<p>{$or: [{}, {}]}</p>
-<p>updateOne(匹配, {$set: {}})</p>
-<p>$ 替代符 placeholder to update the <strong>first element</strong> that matches the query condition，例如 client.$.addr</p>
-<p>deleteOne()</p>
-<p>deleteMany()</p>
-<h2 id="W12"><a href="#W12" class="headerlink" title="W12"></a>W12</h2><p>无Lec</p>
-<h2 id="错题"><a href="#错题" class="headerlink" title="错题"></a>错题</h2><p>输出<code>   Fri 01 February 2019 RM</code>这样的date str用<code> lpad(rtrim(to_char(ca.carndate, &#39;Dy DD Month&#39;)) || &#39; &#39; || to_char(ca.carndate, &#39;YYYY&#39;),23) AS carnival_date,</code>（人裂开</p>
-<h2 id="Exam"><a href="#Exam" class="headerlink" title="Exam"></a>Exam</h2><p>Sample给的这么全面想想也不会考的很简单……</p>
-<h3 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h3><h4 id="Relational-Model-10"><a href="#Relational-Model-10" class="headerlink" title="Relational Model 10"></a>Relational Model 10</h4><ol>
-<li>不同attrib（估计考试会换成不同的key）</li>
-<li>a. &amp; b. 代数式（一定要记得最后再π一下去掉不必要的列</li>
-</ol>
-<h4 id="Database-Design-20"><a href="#Database-Design-20" class="headerlink" title="Database Design 20"></a>Database Design 20</h4><p>根据文章徒手撸Logical Model（简易版，其实就和ASS1的Conceptual差不多了）</p>
-<p>写纸上</p>
-<h4 id="Normalisation-10"><a href="#Normalisation-10" class="headerlink" title="Normalisation 10"></a>Normalisation 10</h4><p>写全过程（记得最后一定要跟上Full Dep</p>
-<h4 id="SQL-40"><a href="#SQL-40" class="headerlink" title="SQL 40"></a>SQL 40</h4><p>根据给出的Model写</p>
-<ol>
-<li>insert，alter还有update</li>
-<li>简单select + 巨难的left outer join</li>
-<li>又是left outer join再配合having count(distinct ) + select subquery </li>
-</ol>
-<h4 id="Big-Data-and-No-SQL-10"><a href="#Big-Data-and-No-SQL-10" class="headerlink" title="Big Data and No SQL 10"></a>Big Data and No SQL 10</h4><ol>
-<li><p>json和mongodb</p>
-</li>
-<li><p>神tm名词解释Volume，Velocity，Variety。估计考试要求介绍NOSQL了</p>
-</li>
-</ol>
-<h4 id="Transaction-10"><a href="#Transaction-10" class="headerlink" title="Transaction 10"></a>Transaction 10</h4><ol>
-<li>锁</li>
-<li>checkpoint</li>
-</ol>
-<h2 id="Exam-1"><a href="#Exam-1" class="headerlink" title="Exam"></a>Exam</h2><p>题型的确和Sample一模一样</p>
-<p>前四个除了第一个问答题以外不用多说，老内容了，而且感觉更简单？（也可能是我掉坑）。</p>
-<p>第一个问答题改成了Relation里tuple的特性</p>
-<p><img src="./fit9132-db-notes/image-20210219224938123.png" alt="image-20210219224938123"></p>
-<p>就这部分内容</p>
-<p>后面BigData部分，mongodb直接要求写find和insertOne，find有点难因为是在一个list/array里找匹配的object。问题没有根据预测考NoSQL，考的是Volume的内容</p>
-<p><img src="./fit9132-db-notes/image-20210219225409532.png" alt="image-20210219225409532"></p>
-<p>checkpoint也变名词解释Write Through和Deferred Write</p>
-
+          <p>作者 Shuhan Wang, Fang He &amp; Erik Andersen</p>
+<p>论文翻译，侵删</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>设计引人入胜的学习内容固然重要，但也很困难，并且通常涉及许多手动规范。 我们提出了一个统一的框架，该框架利用<strong>自动问题分解和部分排序图的构建</strong>来简化多个工作流：知识评估以及进行性分析和设计。 我们通过在线日语评估工具对847名参与者进行了研究，结果表明我们的框架可以有效地衡量学生的能力并预测学生在特定问题上的表现。 我们还提供了对课程分析的结果，结果表明两种不同教科书的进度令人惊讶地相似，并且我们的框架可以导致发现专家进行设计的一般原理。 最后，我们演示了自动进度生成以及所需的排序和步调，允许进行进度定制以及将从一个课程中提取的参数映射到另一个课程</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/fit5152-a1-paper/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -602,747 +259,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/fit9137-arch_and_net-notes/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/regenerate-cgo-definitions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/fit9137-arch_and_net-notes/" class="post-title-link" itemprop="url">Notes for FIT9137: Arch and Net notes</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-04 20:36:00" itemprop="dateCreated datePublished" datetime="2020-11-04T20:36:00+08:00">2020-11-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-06 19:05:44" itemprop="dateModified" datetime="2021-03-06T19:05:44+08:00">2021-03-06</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>虽然在定义上是个基础课，但是实际上比国内的大计基深入的不是一点点。如果不是前阵子因为cryptocurrency mining的研究一直都在钻研底层，估计还挺难消化的。即便如此，不仔细的我到现在的quiz还是没能拿到过100……</p>
-<h2 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h2><p>w1 到 w3 是非常快速且底层的计算机（与系统）架构介绍。</p>
-<h2 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h2><p>w4 开始讲的就是Netowork的内容，直到w12，所以可以认为是整个课其实重点就在这里……</p>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>网络的基本组成部分：Client，Sever，Router，Comm-Links（inter-connects network devices，换句话说就是medium）</p>
-<p>网络的形式（规模）：LAN（本地网络），BN（主干网），MAN（城域网），WAN（广域网）</p>
-<p>还有个大一统的Internet</p>
-<h4 id="消息的传输"><a href="#消息的传输" class="headerlink" title="消息的传输"></a>消息的传输</h4><p>基于包交换的网络： 消息被分割为多个包packets</p>
-<h5 id="传输速率："><a href="#传输速率：" class="headerlink" title="传输速率："></a>传输速率：</h5><p>home2ISP: 1Mbps</p>
-<p>home2home: 10-20Mbps</p>
-<p>WLAN: 50-500Mbps</p>
-<p>LAN: 1Gbps</p>
-<p>BN: 10Gbps</p>
-<p>光纤: Tbps</p>
-<h5 id="层级（Layers）与协议（Protocols）"><a href="#层级（Layers）与协议（Protocols）" class="headerlink" title="层级（Layers）与协议（Protocols）"></a>层级（Layers）与协议（Protocols）</h5><p>TCP/IP模型</p>
-<table>
-<thead>
-<tr>
-<th>Layers</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>5. Application (App)</td>
-</tr>
-<tr>
-<td>4. Transport (Logical conn)</td>
-</tr>
-<tr>
-<td>3. Network (Routing)</td>
-</tr>
-<tr>
-<td>2. Datalink (Low-level conn)</td>
-</tr>
-<tr>
-<td>1. Physical (Hardware)</td>
-</tr>
-</tbody></table>
-<p>Switch: 1+2</p>
-<p>Router: 1+2+3</p>
-<p>Protocol Data Unit (PDU): </p>
-<ol start="5">
-<li><p>Message (HTTP)</p>
-</li>
-<li><p>Segment (TCP)</p>
-</li>
-<li><p>Packet (IP)</p>
-</li>
-<li><p>Frame (Ethernet)</p>
-</li>
-<li><p>Bit</p>
-</li>
-</ol>
-<p>每一层都对数据会进行调制/解调（en/decapsulate），就类似tcp conn里套socks5再套ss/ssr一样</p>
-<p>模块化设计</p>
-<p>优秀的协议栈有三种特征：</p>
-<p>低耦合（Low Coupling）高聚合（High Cohesive）无信息（Information Hiding）</p>
-<h3 id="Physical-DataLink-Layer"><a href="#Physical-DataLink-Layer" class="headerlink" title="Physical/DataLink Layer"></a>Physical/DataLink Layer</h3><p>Intro</p>
-<p>物理层：直接连接设备</p>
-<p>数据链接层：管理俩设备间的物理连接</p>
-<p>物理层：主要焦点于如何将bits转换为信号以及转回bits</p>
-<p>数据链接层：</p>
-<ul>
-<li>Media Access Control：在设备发送时控制</li>
-<li>Error Control：确保数据正确到达</li>
-<li>Protocols：同步与异步传输</li>
-<li>Transmission Efficiency：消息长度vs错误率</li>
-</ul>
-<h5 id="数字信号与模拟信号"><a href="#数字信号与模拟信号" class="headerlink" title="数字信号与模拟信号"></a>数字信号与模拟信号</h5><p>老古董POTS: Plain Old Telephone Service</p>
-<ul>
-<li><p>语音在电话之间传递</p>
-</li>
-<li><p>声音（模拟）转换成电波（麦克风）</p>
-</li>
-<li><p>电波通过铜线传播</p>
-</li>
-<li><p>电波（扬声器）转回声音</p>
-</li>
-</ul>
-<p>通过使用Modem来将数字信号转换成模拟信号</p>
-<p>Modem（<strong>Mo</strong>dulator/<strong>Dem</strong>odulator）</p>
-<p>这里我们都使用正弦（sin）波。y = A * sin(f*2πX+φ) 波具有三个属性：</p>
-<ul>
-<li>振幅A</li>
-<li>频率f</li>
-<li>相位φ</li>
-</ul>
-<h3 id="数据链接层"><a href="#数据链接层" class="headerlink" title="数据链接层"></a>数据链接层</h3><p>两个子层</p>
-<h4 id="逻辑链接控制（LLC）"><a href="#逻辑链接控制（LLC）" class="headerlink" title="逻辑链接控制（LLC）"></a>逻辑链接控制（LLC）</h4><ul>
-<li>处理PDU头</li>
-<li>错误控制</li>
-<li>定义与网络层的接口</li>
-</ul>
-<h4 id="媒体访问控制（MAC）"><a href="#媒体访问控制（MAC）" class="headerlink" title="媒体访问控制（MAC）"></a>媒体访问控制（MAC）</h4><ul>
-<li>在与物理层符号和frame之间编码/解码</li>
-<li>错误检测</li>
-<li>当设备传输时控制</li>
-</ul>
-<p>[WIP]</p>
-<h3 id="LAN-amp-WLAN"><a href="#LAN-amp-WLAN" class="headerlink" title="LAN &amp; WLAN"></a>LAN &amp; WLAN</h3><p>Why use a LAN</p>
-<p>信息共享（文件，数据库，email等交流），资源共享（打印机等硬件，软件授权，公网连接）</p>
-<h4 id="LAN的类型"><a href="#LAN的类型" class="headerlink" title="LAN的类型"></a>LAN的类型</h4><p>专用服务器LAN</p>
-<ul>
-<li><p>网络包含服务器和客户端</p>
-</li>
-<li><p>每个服务器有一个或多个<strong>特定任务</strong>（e.g. DHCP，email…）</p>
-</li>
-<li><p>是<strong>最流行</strong>的企业网络</p>
-</li>
-</ul>
-<p>P2P LAN（例如家庭LAN，更便宜但性能更差）</p>
-<ul>
-<li><p>无专用服务器</p>
-</li>
-<li><p>所有的计算机都作为服务端也作为客户端</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>专用服务器LAN</th>
-<th>P2P LAN</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>成本</td>
-<td>贵（需要更多硬件）</td>
-<td>便宜（重用存在的硬件）</td>
-</tr>
-<tr>
-<td>性能</td>
-<td>很高，可拓展</td>
-<td>第，不太能拓展</td>
-</tr>
-<tr>
-<td>可靠性</td>
-<td>很高（企业级组件）</td>
-<td>低</td>
-</tr>
-<tr>
-<td>管理</td>
-<td>更简单（中心化）</td>
-<td>更困难</td>
-</tr>
-</tbody></table>
-<h4 id="基础LAN组件"><a href="#基础LAN组件" class="headerlink" title="基础LAN组件"></a>基础LAN组件</h4><p>NOS（Network Operating System）</p>
-<p>NIC（Network Interface Card）网卡</p>
-<p>Switch</p>
-<p>Cable</p>
-<p>Client，Server</p>
-<h5 id="NIC网卡"><a href="#NIC网卡" class="headerlink" title="NIC网卡"></a>NIC网卡</h5><p>实现了物理层与数据链接层</p>
-<ul>
-<li><p>包括独一无二的数据链接层地址（MAC Address）</p>
-</li>
-<li><p>提供到网络的物理连接（socket插座或antenna天线）</p>
-</li>
-<li><p>实现了协议（错误检测，frame构建，调制解调等等）</p>
-</li>
-</ul>
-<p>连接到电脑</p>
-<ul>
-<li>通常内置于主板</li>
-<li>或者通过USB/PCI-Express等接口连接</li>
-</ul>
-<h5 id="Network-Cables网线"><a href="#Network-Cables网线" class="headerlink" title="Network Cables网线"></a>Network Cables网线</h5><p>网络设备间的物理连接</p>
-<p>不同的类别：</p>
-<ul>
-<li><p>UTP （LAN最常用类型）</p>
-</li>
-<li><p>STP （防护双绞线）</p>
-</li>
-<li><p>光纤 （当前LAN不常用）</p>
-</li>
-<li><p>同轴线 （只有老LAN在用）</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>品名</th>
-<th>数据速率</th>
-<th>网线</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>10BASE-T</td>
-<td>10Mbps</td>
-<td>UTP cat3 / cat5，三类线五类线</td>
-</tr>
-<tr>
-<td>100BASE-T</td>
-<td>100Mbps</td>
-<td>UTP cat5</td>
-</tr>
-<tr>
-<td>1000BASE-T</td>
-<td>1Gbps</td>
-<td>UTP 5e，6 &lt;-现在常用</td>
-</tr>
-<tr>
-<td>1000BASE-X</td>
-<td>1Gbps</td>
-<td>光纤 （单模式或多模式）</td>
-</tr>
-<tr>
-<td>10GbE</td>
-<td>10Gbps</td>
-<td>UTP cat6，ca7，光纤</td>
-</tr>
-<tr>
-<td>40GbE/100GbE</td>
-<td>40Gbps/100Gbps</td>
-<td>光纤</td>
-</tr>
-</tbody></table>
-<h5 id="NOS网络操作系统"><a href="#NOS网络操作系统" class="headerlink" title="NOS网络操作系统"></a>NOS网络操作系统</h5><p>用来访问与控制LAN的软件</p>
-<ul>
-<li>服务端NOS提供网络管理工具与网络服务</li>
-<li>客户端NOS提供访问网络服务的方式</li>
-</ul>
-<p>由服务端NOS提供的服务</p>
-<ul>
-<li>文件夹服务</li>
-<li>网络与用户描述</li>
-<li>文件，web，打印，email服务器等等</li>
-</ul>
-<p>NOS服务端软件</p>
-<p>处理网络功能</p>
-<ul>
-<li>全协议栈（数据链接，网络，传输，应用层）</li>
-<li>包括应用软件如HTTP，FTP，SMTP，DHCP，LDAP，DHCP，DNS，SQL…</li>
-</ul>
-<p>替代或加强普通操作系统</p>
-<ul>
-<li>可以得到服务器性能上的优化而非用户程序</li>
-</ul>
-<p>例如</p>
-<ul>
-<li>Linux</li>
-<li>Microsoft Windows Server</li>
-</ul>
-<p>NOS客户端软件</p>
-<p>处理网络连接</p>
-<ul>
-<li>数据连接层，网络层，传输层</li>
-<li>和应用层交互</li>
-<li>曾经是分离的系统</li>
-<li>现在被整合进了所有的主流操作系统</li>
-</ul>
-<p>客户端现在可以查阅与获取网络资源</p>
-<ul>
-<li>现在客户端可用的服务</li>
-</ul>
-<h3 id="以太网，集线器与交换机"><a href="#以太网，集线器与交换机" class="headerlink" title="以太网，集线器与交换机"></a>以太网，集线器与交换机</h3><p>主流LAN技术</p>
-<ul>
-<li>标准化如IEEE802.3</li>
-<li>被几乎所有LAN使用</li>
-<li>1973年开发，1980年被标准化</li>
-</ul>
-<p>物理层</p>
-<ul>
-<li>起初是基于共享媒介的同轴电缆，10Mbps</li>
-<li>现在大多转换成了基于UTP的100Mbps或1Gbps网络</li>
-<li>光纤的标准能最高100Gbps</li>
-</ul>
-<p>以太网<br>拓扑结构：</p>
-<ol>
-<li>共享线路</li>
-<li>星状（P2P）</li>
-<li>多hub设计</li>
-</ol>
-<p>以太网MAC（扼要重述）</p>
-<p>基于意图的媒体获取</p>
-<ul>
-<li>设备间资源获取上的竞争</li>
-<li>如果设备同时发送frame会发生冲突</li>
-</ul>
-<p>冲突</p>
-<ul>
-<li>没有被避免，但是可容忍可检测</li>
-<li>在小型和中型网络里非常高效</li>
-</ul>
-<p>媒体获取控制（Media Access Control）：CSMA/CD</p>
-<ul>
-<li>事件感知（CS）：在线路上侦听，只在没有其他型号被感知时传输</li>
-<li>多重获取（MA）：多个设备访问同一个介质</li>
-<li>冲突检测（CD）：当非己信号被检测到<br>传输拥挤信号（因此所有其他设备检测冲突）<br>都在重新发送前等待随机时间</li>
-</ul>
-<p>共享以太网中的问题<br>半双向：同一时间只有一个设备能够发送</p>
-<h2 id="W8"><a href="#W8" class="headerlink" title="W8"></a>W8</h2><p>又到了不温习就不会做作业的地步了……</p>
-<p>网络层： Routing</p>
-<p>A router is a layer 3 device</p>
-<ul>
-<li><p>one IP address per interface, i.e. typically per subnet it is connected to</p>
-</li>
-<li><p>Clients send packets to routers if destination is outside their own subnet</p>
-</li>
-<li><p>Routers use IP address to determine over where the packet is sent next</p>
-</li>
-</ul>
-<p>For each incoming packet, the router</p>
-<ul>
-<li>looks at the packet’s destination IP<br>address</li>
-<li>consults the routing table:<br><em>to which other router should I send a packet for this destination, or can I deliver it directly?</em></li>
-<li>if destination not in table: send to default gateway</li>
-<li>if no default gateway configured: packet can’t be routed</li>
-</ul>
-<p>Three components:</p>
-<ul>
-<li>The routing protocol:<br>how to find the best route between a sender and a receiver through the network</li>
-<li>The routing table:<br>the best routes currently known are stored in a lookup table for fast access</li>
-<li>The routing decisions:<br>deciding for each incoming packet where it is sent next</li>
-</ul>
-<p>Types of routing</p>
-<ol>
-<li>Centralized<ul>
-<li>All clients connect to central computer, which makes the routing decisions</li>
-<li>Used on small, host-based networks</li>
-</ul>
-</li>
-<li>Decentralized<ul>
-<li>Each device makes its own decisions</li>
-<li>Information needs to be exchanged to prepare routing tables</li>
-<li>Used on the Internet</li>
-</ul>
-</li>
-</ol>
-<p>Decentralized routing:</p>
-<p>Static routing:</p>
-<ul>
-<li>Network manager prepares <strong>fixed routing tables</strong></li>
-<li>Manually updated when the network changes</li>
-<li>Used in simple networks that don’t change a lot</li>
-</ul>
-<h2 id="IP-subnets"><a href="#IP-subnets" class="headerlink" title="IP subnets"></a>IP subnets</h2><p>mask 计算方式就是bin对比，比如/20表示<code>&quot;1&quot;*20+&quot;0&quot;*(32-20)</code>，mask则是取ip（每个数字分开LE encode，从右往左写）与这个的&amp;值（即上下都是1就取1否则0）</p>
-<p>要看清楚到底是ip还是mask。X.X.0.0这种就是mask，因为可以作为一个subnet的Network(gateway) address。作为mask的ip可能不带<code>/20</code>这样的后缀（因为人家能表达了）</p>
-<p>X.X.X.X(/XX)在mask /XX（或者X.X.X.X）有几个subnet？先算前面那个的<code>/XX</code>比如20。再算后面那个的那比如24。那么subnet个数就是2^(24-20) = 16个。每个subnet里的ip数就是2^(32-24)=256，其中host ip数就是256-2 = 254</p>
-<h2 id="错题集！"><a href="#错题集！" class="headerlink" title="错题集！"></a>错题集！</h2><blockquote>
-<p>Q: An access point ensures that all computers within range of the access point can communicate with each other</p>
-<p>A: T</p>
-</blockquote>
-<p>做的时候选了F，想的是没准就有内网隔离你访问个锤子。看到答案可能应该是想表达在一个LAN的意思。</p>
-<blockquote>
-<p>Q: IPv6 is backwards compatible with IPv4.</p>
-<p>A: F</p>
-</blockquote>
-<p>做的时候以为是v6兼容不兼容v4，那肯定兼容啊。2002就是划给v4的（<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/6to4">6to4</a>）。直到看到答案才意识到问题意思应该是<strong>直接兼容</strong>。6to4毕竟是走了个转换通道的。而且google之后有明确答案。</p>
-<blockquote>
-<p>Q: What is the main advantage of fibre-optic cables over copper cables?</p>
-<p>Select one:</p>
-<p>a. Higher latency</p>
-<p>b. All of the other answers</p>
-<p>c. Cheaper</p>
-<p>d. Lower resistance</p>
-<p>e. Much faster data rates</p>
-<p>A: e</p>
-</blockquote>
-<p>本来想想光纤无敌无脑选b。现在想想应该是铜在工艺和成本上来说是更便宜的，latency的话查了是copper更快（<a target="_blank" rel="noopener" href="https://www.arista.com/assets/data/pdf/Copper-Faster-Than-Fiber-Brief.pdf">This is close to the oft-quoted <strong>5 ns</strong> per meter for <strong>fiber</strong>. The <strong>latency</strong> for the twinax <strong>copper</strong> cables shown is <strong>4.60</strong> ns per meter</a>）</p>
-<blockquote>
-<p>An advantage of centralized routing is:</p>
-<p>Select one:</p>
-<p>a. routing does reflect changing network conditions, such as computers that are overloaded by many messages</p>
-<p>b. if anything happens to the computer developing the routing table, the routing tables cannot be changed until that computer is fixed, or until a new computer is selected to perform the function</p>
-<p>c. it requires more processing by each computer or router in the network than dynamic routing</p>
-<p>d. the routing tables are stored at all computers in the network</p>
-<p>e. routing decisions are simple</p>
-<p>A: e</p>
-</blockquote>
-<p>不懂，背一下吧</p>
-<blockquote>
-<p>How can a set of 802.11b access points be configured to operate without interference?</p>
-<p>Select one:</p>
-<p>a. assign the same channel to no more than two access points</p>
-<p>b. assigning each access point a different channel to communicate with clients</p>
-<p>c. none of the above</p>
-<p>d. separate each access point by more than 10 meters</p>
-<p>e. use omnidirectional antennas on some access points and directional on others.</p>
-<p>A: b</p>
-</blockquote>
-<p>很果断地选c，因为觉得肯定得首先不一样其次要1，6，11三个选。答案b其实就是不一样的意思，1，6，11应该只是最优情况。</p>
-<p><a target="_blank" rel="noopener" href="http://www.wireless-nets.com/resources/tutorials/assign_ap_channels.html">http://www.wireless-nets.com/resources/tutorials/assign_ap_channels.html</a></p>
-<blockquote>
-<p>_____ indicates what resources on each server are available on the network for use by other computers and what people are allowed what access to the network.</p>
-<p>Select one:</p>
-<p>a. server allocation list</p>
-<p>b. network profile</p>
-<p>c. network operating system</p>
-<p>d. user access log</p>
-<p>e. user profile</p>
-<p>A: e</p>
-</blockquote>
-<p>完全不记得啥时候讲了user profile。用Acrobat搜了一下在W6（LAN&amp;WAN）。</p>
-<p>就user profile是一个Server NOS（Network OS）的一个service</p>
-<p>总的来说就这几个</p>
-<ul>
-<li>directory service</li>
-<li>network &amp; user profiles</li>
-<li>file, web, print, email server etc</li>
-</ul>
-<p>然而后面就没具体介绍了……这题就当介绍一下（别的几个知道的</p>
-<blockquote>
-<p>How many bits are required to sample an incoming signal 4000 times per second using 64 different amplitude levels?</p>
-<p>A: 6</p>
-</blockquote>
-<p>写了是64的我一脸懵逼。现在来复盘一下。先用Acrobat定位了一下知识点在W6。$s(t) = A sin(2\pi ft + \phi)$。这里$f$已经确定了是个常量<em>4000 times per second</em>，$\phi$没提到，变的应该只有A，有64个不同的值。<del>首先已知了我们64错了。</del></p>
-<p><img src="./fit9137-arch_and_net-notes/image-20210212012622535.png" alt="image-20210212012622535"></p>
-<p>题目说了有64个amplitude的值，另外求的是可以代表bit的数量。意思应该就是64个值可以用几个bit概括？一个bit可以表示0，1。两个就是00，01，10，11四个，以此类推就是n个bit代表$2^n$个。$64 = 2^6$。所以是6。（要注意审题啊完全没意识到是bit）</p>
-<blockquote>
-<p>Which of the following is <strong>not</strong> a controlled access method of media access control?</p>
-<p>Select one:</p>
-<p>a. CSMA/CD</p>
-<p>b. hub polling</p>
-<p>c. roll call polling</p>
-<p>d. Token passing</p>
-<p>e. polling</p>
-<p>A: a. CSMA/CD</p>
-</blockquote>
-<p>相关知识忘得差不多了，只记得CSMA/CD是和Media有关的。CSMA/CD也是W6（LAN&amp;WLAN）的内容。</p>
-<p>CSMA/CD是一个Media Access Control。</p>
-<ul>
-<li>Carrier Sense (CS):<br>listen on bus, only transmit if no other signal is “sensed”</li>
-<li>Multiple Access (MA):<br>several devices access the same medium</li>
-<li>Collision Detection (CD):<br>when signal other than own is detected:<ul>
-<li>transmit jam signal (so all other devices detect collision)</li>
-<li>both wait random time before re-transmitting</li>
-</ul>
-</li>
-</ul>
-<p>CSMA/CD limits size of collision domain</p>
-<p>而那些Polling是W5（Physical &amp; DataLink Layer）的内容。</p>
-<ol>
-<li>Roll Call Polling （类hub）</li>
-<li> Hub Polling / Token Passing （P2P）</li>
-</ol>
-<p>人家都叫Controlled Access。</p>
-<blockquote>
-<p>Errors normally appear in ？？？, which is when more than one data bit is changed by the error-causing condition.</p>
-<p>A: burst</p>
-</blockquote>
-<p>我tm写的DataLink Layer……找了一圈也没看见这个in burst的说法，背一下吧</p>
-<blockquote>
-<p>_____ controls errors by detecting and correcting them at the receiving end without retransmission of the original message.</p>
-<p>Select one:</p>
-<p>a. Hamming code</p>
-<p>b. Wave division multiplexing</p>
-<p>c. Huffman encoding</p>
-<p>d. Hub polling</p>
-<p>e. Front end processing</p>
-<p>A: Hamming code</p>
-</blockquote>
-<p>Hamming code出现在W5（Phy&amp;DL Layer）的Forward Error Correction的example里。example分别为</p>
-<ul>
-<li>Hamming code 汉明码 (used e.g. in error correcting memory)</li>
-<li>Reed-Solomon codes  里德-所罗门码 (CDs, DVDs, Blue-ray, QR Codes, Digital TV broadcast, DSL)</li>
-</ul>
-<p>其他的Wave division multiplexing没找到，但是multiplex应该是多路复用和error关系不大</p>
-<p>Huffman encoding没找到</p>
-<p>Hub polling前面说了是个Controlled Access</p>
-<p>Front end processing前端处理？听着就不靠谱，也没找到。</p>
-<blockquote>
-<p>In ARQ, a NAK:</p>
-<p>Select one:</p>
-<p>a. is sent by the sender at the same time as it sends a data packet</p>
-<p>b. refers to non-asynchronous Kermit technique</p>
-<p>c. means that the sender should continue with sending the next message</p>
-<p>d. is sent by the recipient if the message contains an error</p>
-<p>e. is sent by the recipient if the message was received without error</p>
-<p>A: d</p>
-</blockquote>
-<p>ARQ（包括NAK）也在W5.</p>
-<p><img src="./fit9137-arch_and_net-notes/image-20210212020517127.png" alt="image-20210212020517127"></p>
-<p><img src="./fit9137-arch_and_net-notes/image-20210212020527545.png" alt="image-20210212020527545"></p>
-<p><strong>acknowledgement</strong> (<strong>ACK</strong>) <strong>negative-acknowledgement</strong> (<strong>NAK</strong> or <strong>NACK</strong>)</p>
-<p>这里干脆吧<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Automatic_repeat_request">ARQ（Automatic Repeat Request/automatic repeat query)</a>也看掉。ARQ是一种用于数据传输的错误控制方法，它使用确认（接收方发送的消息，表明它已正确接收到一个数据包）和超时（在接收确认之前经过了指定的时间段）来实现可靠的数据传输 通过不可靠的通信渠道。 如果发送方在超时之前未收到确认，则通常会重新传输数据包，直到发送方收到确认或超过预定义的重传次数为止。（就等于是一直ping你直到ping通或者次数到</p>
-<blockquote>
-<p>A _____ is a user’s connection into a packet switched service.</p>
-<p>Select one:</p>
-<p>a. packet asynchronous/discrete device</p>
-<p>b. packet asymmetric/data transmission device</p>
-<p>c. packet analyzer/decoder device</p>
-<p>d. packet assembly/disassembly device</p>
-<p>e. packet analog/digital device</p>
-<p>A: d. packet assembly/disassembly device</p>
-</blockquote>
-<p>W11(Backbones MAN WAN)里WAN Packet Switched Services讲到的packet assembly/disassembly （简称PAD）。如图，背一背吧</p>
-<p><img src="./fit9137-arch_and_net-notes/image-20210212021401150.png" alt="image-20210212021401150"></p>
-<blockquote>
-<p>_____ refers to changing the shape of a wave in different ways to represent a 1 or a 0.</p>
-<p>Select one:</p>
-<p>a. demodulation</p>
-<p>b. modulation</p>
-<p>c. digitizing.</p>
-<p>d. sampling</p>
-<p>e. shaping</p>
-<p>A: a. demodulation</p>
-</blockquote>
-<p>脑补的是调制解调器，网线（01）到电话线（wave）是调制，回来解调。这里要求的是wave → 01所以是解调。（看反了</p>
-<blockquote>
-<p>Web-based e-mail like Hotmail is an example of three-tier client-server architecture that provides access to e-mail messages.</p>
-<p>A: T</p>
-</blockquote>
-<p>想的是B/S，通过<em>three-tier client-server architecture</em>关键词查了下看见<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Multitier_architecture#Three-tier_architecture">Wikipedia</a>里说: <em>In the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Web_development">web development</a> field, three-tier is often used to refer to <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Website">websites</a>, commonly <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Electronic_commerce">electronic commerce</a> websites</em></p>
-<blockquote>
-<p>In unix or Linux Operating System, the most common types of files are ____________.</p>
-<p>Select one:</p>
-<p>a. device file</p>
-<p>b. directory file</p>
-<p>c. ordinary file and directory file</p>
-<p>d. ordinary file</p>
-<p>A: d. ordinary file</p>
-</blockquote>
-<p>错两次了不应该</p>
-<blockquote>
-<p>Which of the following technique is used for encapsulation?</p>
-<p>Select one:</p>
-<p>a. one of the pieces that results when an IP gateway divides an IP datagram into smaller pieces for transmission across a network that cannot handle the original datagram size</p>
-<p>b. the technique used by protocols in which a lower level protocol accepts a message from a higher level protocol and places it in the data portion of the low level frame</p>
-<p>c. the technique used in best-effort delivery systems to avoid endlessly looping packets</p>
-<p>d. all of these options</p>
-<p>A: b</p>
-</blockquote>
-<p>encapsulation封装的定义</p>
-<blockquote>
-<p>In which type of routing do computers or routers count the number of hops along a route and periodically exchange information on the hop count with their neighbors?</p>
-<p>Select one:</p>
-<p>a. circuitous</p>
-<p>b. decentralized</p>
-<p>c. distance vector</p>
-<p>d. link state</p>
-<p>e. indirect</p>
-<p>A: distance vector</p>
-</blockquote>
-<p>W8 Routing的内容</p>
-<p>Distance vector 交换目的地距离，选择最短路径（RIP (Routing Information Protocol) BGP(Border Gateway Protocol)）</p>
-<p><img src="./fit9137-arch_and_net-notes/image-20210224213438907.png" alt="image-20210224213438907"></p>
-<p>link state 交换链接质量消息，选最快路径（OSPF）</p>
-<p>别的都没出现。</p>
-<blockquote>
-<p>An exception condition in a computer system caused by an event external to the CPU is known as?</p>
-<p>Select one:</p>
-<p>a. Halt</p>
-<p>b. Process</p>
-<p>c. Interrupt</p>
-<p>d. None of above</p>
-<p>A: c</p>
-</blockquote>
-<p>Halt虽然也是停，但真没东西叫这个</p>
-<blockquote>
-<p>An interrupt is a signal to the processor to suspend its current tasks and deal with whatever caused the interrupt. Which of the following method cannot be classified as Interrupts?</p>
-<p>Select one:</p>
-<p>a. Program/Software triggered</p>
-<p>b. Timer triggered</p>
-<p>c. I/O operation triggered</p>
-<p>d. Other Hardware triggered</p>
-<p>e. Page fault triggered</p>
-<p>A: e</p>
-</blockquote>
-<p><img src="./fit9137-arch_and_net-notes/image-20210224214502048.png" alt="image-20210224214502048"></p>
-<p>PageFault是后面（内存）才出现的</p>
-<blockquote>
-<p>A solution to resolve the problem of external fragmentation is to _________________</p>
-<p>Select one:</p>
-<p>a. permit the logical address space of a process to be non contiguous</p>
-<p>b. permit smaller processes to be allocated memory at last</p>
-<p>c. permit larger processes to be allocated memory at last</p>
-<p>d. All of these options</p>
-<p>A: a</p>
-</blockquote>
-<p><img src="./fit9137-arch_and_net-notes/image-20210224214748781.png" alt="image-20210224214748781"></p>
-<p>解决方案：paging</p>
-<blockquote>
-<p>For purposes of routing, the Internet is divided into ___________.</p>
-<p>Select one:</p>
-<p>a. wide area networks</p>
-<p>b. autonomous networks</p>
-<p>c. autonomous systems</p>
-<p>d. none of these options</p>
-<p>A:  c. autonomous systems</p>
-</blockquote>
-<p>W8的内容，自治系统（差不多就ISP的网）</p>
-<p><img src="./fit9137-arch_and_net-notes/image-20210224215420764.png" alt="image-20210224215420764"></p>
-<blockquote>
-<p>In 802.3, the address consisting of all 1 bits is reserved for ___________________.</p>
-<p>Select one:</p>
-<p>a. Unicast</p>
-<p>b. Multicast</p>
-<p>c. Broadcast</p>
-<p>d. Ordinary</p>
-<p>A: c. Broadcast</p>
-</blockquote>
-<p>802.3是以太网的协议。从Ethernet Frame里根本没找到这个……背吧</p>
-<blockquote>
-<p>In IEEE802.11, the addressing machanism can include upto ________________ addresses.</p>
-<p>Select one:</p>
-<p>a. four</p>
-<p>b. five</p>
-<p>c. six</p>
-<p>d. none of these options</p>
-<p>A: a. four</p>
-</blockquote>
-<p>IEEE802.11 是WLAN的协议。</p>
-<p><img src="./fit9137-arch_and_net-notes/image-20210224220918086.png" alt="image-20210224220918086"></p>
-<blockquote>
-<p>OC-3072 has a data rate of</p>
-<p>Select one:</p>
-<p>a. 1.244 Gbps</p>
-<p>b. 159.25 Gbps</p>
-<p>c. 39.813 Gbps</p>
-<p>d. 1.544 Mbps</p>
-<p>e. 100 Mbps</p>
-</blockquote>
-<p>OC-X = X * 51.84 Mbps</p>
-<blockquote>
-<p>Both the _____ layer perform error checking.</p>
-<p>Select one:</p>
-<p>a. presentation and transport</p>
-<p>b. application and presentation</p>
-<p>c. transport and data link</p>
-<p>d. physical and data link</p>
-<p>e. network and physical</p>
-<p>A: c. transport and data link</p>
-</blockquote>
-<blockquote>
-<p>_____ is a line-of-sight type of wireless media.</p>
-<p>Select one:</p>
-<p>a. microwave</p>
-<p>b. radio</p>
-<p>c. twisted pair</p>
-<p>d. coaxial cable</p>
-<p>e.  fiber optic</p>
-<p>A: microwave</p>
-</blockquote>
-<p><img src="./fit9137-arch_and_net-notes/image-20210224225948321.png" alt="image-20210224225948321"></p>
-<p>直接拿来覆盖范围的，就好像学校到处有的校园网</p>
-<blockquote>
-<p>Which of the following is not true about CSMA/CD?</p>
-<p>Select one:</p>
-<p>a. It is used in token ring protocol LANs</p>
-<p>b. It is a contention-based media access control technique</p>
-<p>c. When a collision has occurred, the computers that wish to transmit wait a random amount of time after a colliding message before attempting to retransmit</p>
-<p>d. Computers on the circuit ‘listen’ before transmitting</p>
-<p>e. The acronym refers to Carrier Sense Multiple Access with Collision Detection</p>
-<p>A: a. It is used in token ring protocol LANs</p>
-</blockquote>
-<p>CSMA/CD是W6 Ethernet内容</p>
-<p>前面只有hub，hub的逻辑拓扑是shared bus，物理拓扑是star</p>
-<blockquote>
-<p>The probability of detecting an error, provided that one has occurred, using cyclic redundancy checking is about</p>
-<p>Select one:</p>
-<p>a. &gt;99%</p>
-<p>b. 75%</p>
-<p>c. 0%</p>
-<p>d. 50%</p>
-<p>e. exactly 100%</p>
-<p>A: a. &gt;99%</p>
-</blockquote>
-<p>cyclic redundancy checking 就是CRC。W5里的。</p>
-<p><img src="./fit9137-arch_and_net-notes/image-20210224232144187.png" alt="image-20210224232144187"></p>
-<p>所以就相当于$ 99% &lt; \frac{\infin-1}{\infin} &lt; 100% $</p>
-<p>Breaking a network into smaller parts is called  Network Segmentation  -&gt; W6</p>
-<p>dynamic routing -&gt; W8</p>
-<p>drawback: The transmission of status information “wastes” network capacity that could be used to send user messages</p>
-<p>Many organizations today are installing traditional wired Ethernet for desktop users and install Wi-Fi as <strong>overlay networks</strong></p>
-<p>Layer-2地址：L2即DL层，真实网卡MAC地址</p>
-<p>Layer-3：L3即Net层，logical address，arp得到L2</p>
-<p>802.11b?</p>
-<p>802.11g?</p>
-<p>802.3</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/regenerate-cgo-definitions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -1364,7 +290,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-06 15:56:56" itemprop="dateModified" datetime="2021-03-06T15:56:56+08:00">2021-03-06</time>
+                <time title="Modified: 2021-03-06 22:36:57" itemprop="dateModified" datetime="2021-03-06T22:36:57+08:00">2021-03-06</time>
               </span>
 
           
@@ -1379,21 +305,15 @@
 
       
           <p>因为之前都是让IDE/VScode(goreturns)自动处理的import，所以今天在用vscode重新format的时候才看到，在<code>import &quot;C&quot;</code>的上面有个可以点的<code>regenerate cgo definitions</code>按钮。</p>
-<p>这里就根据这个<a target="_blank" rel="noopener" href="https://github.com/golang/go/issues/35721">github issue</a>来阐述一下这个按钮是干啥的，该怎么用。答案是根据<a target="_blank" rel="noopener" href="https://www.reddit.com/r/vscode/comments/hjphbz/what_is_the_purpose_of_regenerate_cgo_definitions/">reddit上这个帖子的回复</a>找到的</p>
-<h2 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h2><p>使用了<code>import &quot;C&quot;</code>的源代码文件不是真正有效的Go。它们在严重依赖于go tool在构建软件包时所产生的额外信息。尽管可以通过设置<a target="_blank" rel="noopener" href="https://golang.org/pkg/go/types/#Config">types.Config.FakeImportC flag</a>来解决这些问题，可以对它们进行解析，但不能进行类型检查。</p>
-<p>许多人建议gopls使用包中的GoFiles而不是其CompiledGoFiles。<br>GoFiles是原始的（即无效的）文件。使用它们可能会给编辑包的人带来更好的体验，但是由于包将不再进行类型检查，因此它将完全破坏依赖于类型信息的所有内容。在当前架构中进行更改之前，我们必须非常仔细地评估效果。</p>
-<p>我们可以考虑两次检查cgo软件包的类型，一次使用实际代码，一次使用用户的代码。那将会是一个重大的架构变化。</p>
-<p>或者，我们可以在<code>.go</code>文件更改时运行cgo工具，以生成实际代码。这是一种更加可靠的方法，但是运行cgo处理的成本可能太高，尤其是在大型的包上。</p>
-<p>无论如何，这是一个大项目，需要大量的测试和思考。我们不太可能很快在这里做出巨大的改进。</p>
-<h2 id="Beta测试指令"><a href="#Beta测试指令" class="headerlink" title="Beta测试指令"></a>Beta测试指令</h2><p>这是当前的状态：如果您使用tip Go（即gotip安装的golang, gotip是从开发分支上编译并运行go的命令）在master分支上构建gopls，那么您应该具有很好的cgo创作经验。<br>据我所知有一个bug在自动代码补全上，它会提供_cgo_foo之类的符号，而不是正确的C.foo。</p>
-<p>不过，有一个障碍是，除非您告知，否则它不会重新生成cgo绑定。<br>为此，在使用cgo的文件中，在<code>import &quot;C&quot;</code>行的顶部应该有一个<code>regenerate cgo</code>的按钮。<br>当您引用C中的新标识符时，或使用影响Go可以看到的符号的方式更改魔术注释时，将需要使用它。</p>
-<p>要进行设置，请按照以下说明进行操作：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ go get golang.org&#x2F;dl&#x2F;gotip</span><br><span class="line">$ gotip download # 安装开发版golang</span><br><span class="line">[...]</span><br><span class="line">Success. You may now run &#39;gotip&#39;!</span><br><span class="line">$ cd &#x2F;</span><br><span class="line">$ GO111MODULE&#x3D;on gotip get golang.org&#x2F;x&#x2F;tools&#x2F;gopls@master</span><br><span class="line">$ gotip version</span><br><span class="line">... devel +f7f9c8f ...</span><br><span class="line">$ gotip version $(which gopls)</span><br><span class="line">... devel +f7f9c8f ...</span><br></pre></td></tr></table></figure>
-
-<p>您无需使用tip Go即可在自己的项目上工作，仅需用其构建gopls。（这是2020.05.01的更新，现在2020.10.24估计是不用了）</p>
-<h2 id="说人话"><a href="#说人话" class="headerlink" title="说人话"></a>说人话</h2><p>就是，go自己读不懂cgo，要靠别的工具。但是别的工具一直调用会很浪费资源，那就让大家通过按钮手动让go通过工具读cgo。</p>
-<p>但是看起来bug还是挺多的，所以issue也没close</p>
-
+<p>这里就根据这个<a href="https://github.com/golang/go/issues/35721" target="_blank" rel="noopener">github issue</a>来阐述一下这个按钮是干啥的，该怎么用。答案是根据<a href="https://www.reddit.com/r/vscode/comments/hjphbz/what_is_the_purpose_of_regenerate_cgo_definitions/" target="_blank" rel="noopener">reddit上这个帖子的回复</a>找到的</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/regenerate-cgo-definitions/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1412,16 +332,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/public-blockchain-research-report/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/public-blockchain-research-report/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -1443,7 +363,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-06 15:56:48" itemprop="dateModified" datetime="2021-03-06T15:56:48+08:00">2021-03-06</time>
+                <time title="Modified: 2021-03-06 23:57:41" itemprop="dateModified" datetime="2021-03-06T23:57:41+08:00">2021-03-06</time>
               </span>
 
           
@@ -1457,83 +377,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="市场上新一代公链研究"><a href="#市场上新一代公链研究" class="headerlink" title="市场上新一代公链研究"></a>市场上新一代公链研究</h1><p>Time: 2020-09-25T22:39+08:00</p>
-<h2 id="出发点"><a href="#出发点" class="headerlink" title="出发点"></a>出发点</h2><p>原本应该是edX上BerkeleyX CS198.2x: Blockchain Technology的Homework3，这里干脆就对所有知名的链做点分析。</p>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>为了准备最终作业，本周的任务是对您选择的特定区块链进行研究，并将其发到在论坛。<br>您可以将此作业作为最终作业的头脑风暴会议。<br>重点是综合在材料的最后几周中学到的概念，主要是关于可伸缩性，安全性和去中心化的主题，并将这种理解应用于我们可能在课堂上未曾详细介绍过的各种区块链（或完全没介绍过的）。</p>
-<p>请在下面的论坛中进行协作。<br>如果其他人写了关于您选择的区块链平台的文章，请添加到他们的帖子中，而不是您自己再建立个。<br>我们正在为每位经过深思熟虑的讨论贡献的人寻找大约1-2个段落。<br>请在您的帖子中引用您的消息来源。<br>也请在下面的文本框中粘贴您贡献的内容。<br>我们将对您提交的文本以及您参与讨论的内容进行评分。</p>
-<p>以下是一些您可以编写的详细子话题，然后是一些更详细的提交规范。</p>
-<h3 id="动机和用例-市场"><a href="#动机和用例-市场" class="headerlink" title="动机和用例/市场"></a>动机和用例/市场</h3><p>如果您的平台是面向用例的：它解决什么现实问题？您是否正在建立供应链平台？您的货币适合物联网等特定细分市场吗？</p>
-<p>如果您的平台是基础架构：（例如，以太坊允许开发人员在公共系统中轻松编写和部署智能合约）这可以解决加密/区块链行业中的哪些常见问题？其他人如何利用您的平台做更大的事情？</p>
-<h3 id="共识机制"><a href="#共识机制" class="headerlink" title="共识机制"></a>共识机制</h3><p>为什么采用这种共识算法？它的优点和缺点是什么？</p>
-<p>例如，在许可的分类帐中使用PBFT效率更高，因为它不需要挖掘，并且在半信任的环境中效果很好。</p>
-<h3 id="独特的功能"><a href="#独特的功能" class="headerlink" title="独特的功能"></a>独特的功能</h3><p>谈论您的加密货币或平台的一些很酷的方面。它具有增强的隐私性吗？它是否支持阈值签名？它是模块化的，因此特别适合企业集成吗？它使用zk-SNARK还是zk-STARK？是侧链吗？</p>
-<h3 id="潜在漏洞和博弈论攻击"><a href="#潜在漏洞和博弈论攻击" class="headerlink" title="潜在漏洞和博弈论攻击"></a>潜在漏洞和博弈论攻击</h3><p>例如，如果您的区块链使用权益证明，您可能会遇到什么问题？您的系统是否完全不信任？如果不是，请详细说明一些担忧和权衡。您的平台有游戏理论问题吗？<br>可伸缩性注意事项</p>
-<p>例如，如果它是由几家银行共享的私有链，那么在区块链上存储大量数据就不是那么重要了。您的区块链是否允许状态通道？它实现分片吗？它允许侧链吗？可以被群众合理使用吗？<br>规</p>
-<p>是否存在KYC / AML问题？对像您这样的区块链当前的监管观点是什么？</p>
-<h3 id="规格："><a href="#规格：" class="headerlink" title="规格："></a>规格：</h3><ul>
-<li>它不能使用工作量证明。在课程中，我们对PoW进行了很多分析，您应该尝试将类似的分析应用于其他平台和加密货币。</li>
-<li>同上，它不能是比特币或以太坊。</li>
-<li>确保引用您的消息来源。</li>
-<li>在讨论区中应该大致为1-2个段落。您可以自由编写更多内容，但主要内容应为1-2个段落。</li>
-</ul>
-<p>卡住？这里有一些建议：</p>
-<ul>
-<li>Hyperledger</li>
-<li>Rootstock（ps: 中文意思是砧木）（这是工作量证明里的例外，因为它使用合并挖掘）</li>
-<li>Interledger</li>
-<li>Stellar</li>
-<li>Cosmos</li>
-<li>Polkadot（ps: 中文意思是波尔卡圆点）</li>
-<li>Monax</li>
-<li>Tezos</li>
-</ul>
-<h2 id="Hyperledger"><a href="#Hyperledger" class="headerlink" title="Hyperledger"></a>Hyperledger</h2><h3 id="什么是Hyperledger？"><a href="#什么是Hyperledger？" class="headerlink" title="什么是Hyperledger？"></a>什么是Hyperledger？</h3><p>Hyperledger是一个开源<strong>社区</strong>，致力于为企业级区块链部署开发一套稳定的框架，工具和库。</p>
-<p>它是各种分布式分类帐框架（包括Hyperledger Fabric，Sawtooth，Indy）以及Hyperledger Caliper之类的工具以及Hyperledger Ursa之类的库的中立场所。[1]</p>
-<p>换句话说，Hyperledger（或Hyperledger项目）是开放源代码区块链及相关工具的总体项目，由Linux基金会于2015年12月启动，已获得IBM，Intel和SAP Ariba的捐款，以支持协作开发基于区块链的分布式账簿。[2]</p>
-<p>去掉孵化中和停止维护的项目，由Hyperledger直接负责的项目有如下几个[3]：</p>
-<ul>
-<li>Hyperledger Besu：以太坊客户端，在以太坊公共网络、专用网络和测试网络（如Rinkeby，Ropsten和Görli）上运行。</li>
-<li>Hyperledger Fabric：Go写的分布式账簿。（基本上说Hyperledger就是在指它）</li>
-<li>Hyperledger Indy：专为去中心化身份而构建的分布式账簿</li>
-<li>Hyperledger Iroha：C++写的分布式账簿</li>
-<li>Hyperledger Sawtooth：具有多语言支持的分布式账簿</li>
-</ul>
-<p>[1]来源：<a target="_blank" rel="noopener" href="https://www.hyperledger.org/">https://www.hyperledger.org/</a><br>[2]来源：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Hyperledger">https://en.wikipedia.org/wiki/Hyperledger</a><br>[3]来源：<a target="_blank" rel="noopener" href="https://wiki.hyperledger.org/">https://wiki.hyperledger.org/</a></p>
-<h3 id="动机和用例-市场-1"><a href="#动机和用例-市场-1" class="headerlink" title="动机和用例/市场"></a>动机和用例/市场</h3><p>Hyperledger项目的目的是通过开发区块链和分布式账本来促进跨行业的协作，特别着重于提高这些系统的性能和可靠性（与可比的加密货币设计相比），以便它们能够支持全球业务交易 由主要的技术，金融和供应链公司提供。</p>
-<p>项目将通过针对特定用途模块的框架集成独立的开放协议和标准，包括具有自己的共识和存储例程的区块链，以及用于身份，访问控制和智能合约的服务。<br>早期有人对Hyperledger会开发自己的比特币类型的加密货币感到困惑，但Behlendorf毫无保留地表示Hyperledger Project本身将永远不会构建自己的加密货币。[1]</p>
-<p>[1]来源：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Hyperledger">https://en.wikipedia.org/wiki/Hyperledger</a></p>
-<h3 id="共识机制-1"><a href="#共识机制-1" class="headerlink" title="共识机制"></a>共识机制</h3><p>因为项目涉及多个区块链子项目，所以用表格讨论</p>
-<table>
-<thead>
-<tr>
-<th>子项目</th>
-<th>共识</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Besu</td>
-<td>PoW or PoAuthority [1]</td>
-</tr>
-<tr>
-<td>Fabric</td>
-<td>CFT（基于raft）[2]</td>
-</tr>
-<tr>
-<td>Indy</td>
-<td>RBFT[3]</td>
-</tr>
-<tr>
-<td>Iroha</td>
-<td>YAC（另一种CFT）[4]</td>
-</tr>
-<tr>
-<td>Sawtooth</td>
-<td>Dynamic Consensus（包括PBFT，Proof of Elapsed Time，Raft，Devmode） [5]</td>
-</tr>
-</tbody></table>
-<p>[1]<a target="_blank" rel="noopener" href="https://besu.hyperledger.org/en/stable/Concepts/Consensus-Protocols/Overview-Consensus/">https://besu.hyperledger.org/en/stable/Concepts/Consensus-Protocols/Overview-Consensus/</a><br>[2]<a target="_blank" rel="noopener" href="https://hyperledger-fabric.readthedocs.io/en/release-2.2/whatis.html#pluggable-consensus">https://hyperledger-fabric.readthedocs.io/en/release-2.2/whatis.html#pluggable-consensus</a><br>[3]<a target="_blank" rel="noopener" href="https://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwiYgs_vzYTsAhX4yIsBHbPyBz4QFjACegQIAhAB&amp;url=https://wiki.hyperledger.org/download/attachments/20024919/Understanding%2520Hyperledger%2520Indy%2520Ledger.pdf?version=1&modificationDate=1571126012000&api=v2&amp;usg=AOvVaw3qDagJGg5Xapx9Dh5ANQxD">https://www.google.com.hk/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwiYgs_vzYTsAhX4yIsBHbPyBz4QFjACegQIAhAB&amp;url=https%3A%2F%2Fwiki.hyperledger.org%2Fdownload%2Fattachments%2F20024919%2FUnderstanding%2520Hyperledger%2520Indy%2520Ledger.pdf%3Fversion%3D1%26modificationDate%3D1571126012000%26api%3Dv2&amp;usg=AOvVaw3qDagJGg5Xapx9Dh5ANQxD</a><br>[4]<a target="_blank" rel="noopener" href="https://iroha.readthedocs.io/en/master/overview.html">https://iroha.readthedocs.io/en/master/overview.html</a><br>[5]<a target="_blank" rel="noopener" href="https://sawtooth.hyperledger.org/docs/core/releases/latest/introduction.html">https://sawtooth.hyperledger.org/docs/core/releases/latest/introduction.html</a></p>
-<p>优点与缺点</p>
-<h3 id="规格（技术细节）"><a href="#规格（技术细节）" class="headerlink" title="规格（技术细节）"></a>规格（技术细节）</h3><h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+          <p>原本应该是edX上BerkeleyX CS198.2x: Blockchain Technology的Homework3，这里干脆就对所有知名的链做点分析。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/public-blockchain-research-report/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1552,16 +404,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/bitcoins-with-homomorphic-value/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/bitcoins-with-homomorphic-value/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -1597,7 +449,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a target="_blank" rel="noopener" href="https://bitcointalk.org/index.php?topic=305791.0">原文链接</a></p>
+          <p><a href="https://bitcointalk.org/index.php?topic=305791.0" target="_blank" rel="noopener">原文链接</a></p>
 <p>我已经不停地研究了几个月，因为它本身似乎是一个有趣的结构，是支付隐私的另一个不同的方面（例如，从用户的角度来看，或者如果我们希望商业实体能够从可审计但对商业敏感的信息中获取信息， 使用智能合约），而且除了可以直接使用以外，它还可以实现一些我们尚未想到的功能，或者可以提高ZeroCoin之类想法的效率（我不知道如何使用，但似乎与之相关 ）。</p>
           <!--noindex-->
             <div class="post-button">
@@ -1625,16 +477,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/coinjoin/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/coinjoin/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -1656,7 +508,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-06 15:45:00" itemprop="dateModified" datetime="2021-03-06T15:45:00+08:00">2021-03-06</time>
+                <time title="Modified: 2021-03-06 22:38:01" itemprop="dateModified" datetime="2021-03-06T22:38:01+08:00">2021-03-06</time>
               </span>
 
           
@@ -1673,7 +525,7 @@
           <p>比特币通常被宣传为隐私工具，但比特币中的唯一隐私性来自匿名地址，该匿名地址易销毁，但是通过地址重复使用，“污点”分析，跟踪付款，监控节点IP地址，网络爬虫以及许多其他机制很容易使该隐私性受到破坏。一旦破坏了这种隐私，很难恢复，有些情况下恢复成本也很高。</p>
 <p>传统银行业务默认提供大量隐私保护。您的亲人看不到您正在购买节育措施剥夺他们未来的孙子孙女；您的雇主无法从薪水中获悉您支持的公益；贼人们也无法看到您最近的购买或判断您是如何富有的人，他们无法锁定目标并欺骗您。对于个人和企业而言，比特币的隐私性不足会是一个首要的切实的不利因素。</p>
 <p>即使用户通过切换到BIP32地址链上来避免地址重复使用，当他们进行较大的交易时，他们仍然会因旧币和过去的付款而失去隐私。</p>
-<p>隐私错误也会造成外部成本：您可能有良好的保护隐私行为，但是当您与不这样做的人（例如使用<a target="_blank" rel="noopener" href="https://en.bitcoin.it/wiki/Green_address">“绿色地址”</a>的人）进行交易时，您和每个与他交易的人一样都会被迫失去一些隐私性。隐私性的缺失也给比特币带来了严重的系统风险：如果降级了的隐私性允许人们汇集中心化的列表甄别好坏币，则当您真诚接受的硬币后来未被其他人兑现时，您就会发现比特币上币与币之间的可替代性遭到破坏，并且其去中心性也伴随着人们被迫给他们自己的币实施流行的黑名单。</p>
+<p>隐私错误也会造成外部成本：您可能有良好的保护隐私行为，但是当您与不这样做的人（例如使用<a href="https://en.bitcoin.it/wiki/Green_address" target="_blank" rel="noopener">“绿色地址”</a>的人）进行交易时，您和每个与他交易的人一样都会被迫失去一些隐私性。隐私性的缺失也给比特币带来了严重的系统风险：如果降级了的隐私性允许人们汇集中心化的列表甄别好坏币，则当您真诚接受的硬币后来未被其他人兑现时，您就会发现比特币上币与币之间的可替代性遭到破坏，并且其去中心性也伴随着人们被迫给他们自己的币实施流行的黑名单。</p>
 <p>这条消息描述了比特币用户可以用来显着改善其隐私性的交易方式，我一直称其为CoinJoin。它不涉及比特币协议的任何更改，并且几年前至今也有数次使用，但是似乎尚未得到广泛的理解。</p>
 <p>我首先在一个异想天开的帖子中公开地描述了这种交易方式——“全盘污染！”——通过这个着重讨论了这些交易的一个特定副作用，并期望人们会自己看到其余的含义。</p>
 <p>往往清晰击败含蓄，甚至理解该想法的人也有一些本可以被解答的问题。因此，这个帖子就是为此而写。</p>
@@ -1703,16 +555,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/ielts-notes/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/ielts-notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -1734,7 +586,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-06 15:55:32" itemprop="dateModified" datetime="2021-03-06T15:55:32+08:00">2021-03-06</time>
+                <time title="Modified: 2021-03-06 23:58:19" itemprop="dateModified" datetime="2021-03-06T23:58:19+08:00">2021-03-06</time>
               </span>
 
           
@@ -1749,823 +601,14 @@
 
       
           <p>雅思笔记</p>
-<h1 id="R"><a href="#R" class="headerlink" title="R"></a>R</h1><h2 id="题目对应文章内容顺序"><a href="#题目对应文章内容顺序" class="headerlink" title="题目对应文章内容顺序"></a>题目对应文章内容顺序</h2><table>
-<thead>
-<tr>
-<th>题型</th>
-<th>顺序？</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>选择</td>
-<td>顺序</td>
-</tr>
-<tr>
-<td>填空（段落概括）</td>
-<td>个别答案乱序</td>
-</tr>
-<tr>
-<td>填空（其他）</td>
-<td>简答，句子填卡，表格填卡，笔记填空，流程图填空，示意图填空均顺序</td>
-</tr>
-<tr>
-<td>配对</td>
-<td>乱序</td>
-</tr>
-<tr>
-<td>总体</td>
-<td>跨题型不一定顺序</td>
-</tr>
-</tbody></table>
-<h1 id="L-听力"><a href="#L-听力" class="headerlink" title="L: 听力"></a>L: 听力</h1><h2 id="基础信息"><a href="#基础信息" class="headerlink" title="基础信息"></a>基础信息</h2><p>考试时间30min+10填卡，共4*10问</p>
-<p>题型</p>
-<ul>
-<li>信息表题</li>
-<li>分类比较表</li>
-<li>笔记填空</li>
-<li>单句填空</li>
-<li>简答填空</li>
-<li>分类配对</li>
-<li>单选多选</li>
-<li>(地图流程)</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>场景</th>
-<th>要点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>租房住宿</strong></td>
-<td>房价水电煤价(数字)，地理位置，家具，花园，车库，厨房设施</td>
-</tr>
-<tr>
-<td><strong>旅行</strong></td>
-<td>度假地，娱乐内容，交通工具，住处，人数，价格，预定机票房价(细节)</td>
-</tr>
-<tr>
-<td>购物</td>
-<td>优缺点，价格，个人信息，专家意见</td>
-</tr>
-<tr>
-<td>地理</td>
-<td>地点，人名，气候，语言，当地主要产业，主要景点，优缺点</td>
-</tr>
-<tr>
-<td>图书馆</td>
-<td>办证所需材料，使用须知等</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>题号</th>
-<th>场景类别</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>L1</td>
-<td>日常活动</td>
-</tr>
-<tr>
-<td>L2</td>
-<td>新生入学</td>
-</tr>
-<tr>
-<td>L3</td>
-<td>选课，论文研究</td>
-</tr>
-<tr>
-<td>L4</td>
-<td>学术讲座: 野生动物，地理</td>
-</tr>
-</tbody></table>
-<h3 id="信息表"><a href="#信息表" class="headerlink" title="信息表"></a>信息表</h3><h4 id="人名"><a href="#人名" class="headerlink" title="人名"></a>人名</h4><ol>
-<li>拼写</li>
-</ol>
-<ul>
-<li>大小写</li>
-<li>辨析l/o m/n t/s a/i/r</li>
-<li>fullname (first-last, given-family, fore-sur)</li>
-</ul>
-<ol start="2">
-<li>名字格式</li>
-</ol>
-<p>Title: Mr./Mrs./Miss/ Ms.(发音类Mizi)/Dr./Prof. + 姓氏</p>
-<ol start="3">
-<li>常见名字</li>
-</ol>
-<p>默认考生会写</p>
-<p>Kevin, Helen, Mike, John, Lee</p>
-<h4 id="日期"><a href="#日期" class="headerlink" title="日期"></a>日期</h4><ul>
-<li><strong>英式</strong>: DD/MM/YY =&gt; 8th March, 2004</li>
-<li>美式: MM/DD/YY =&gt; March 8th, 2004</li>
-</ul>
-<h4 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h4><p>纯数字:</p>
-<ul>
-<li>Telephone number</li>
-<li>Fax number </li>
-<li>Account number</li>
-<li>Credit card number</li>
-</ul>
-<p>数字字母组合:</p>
-<ul>
-<li>Driver’s license number</li>
-<li>Passport number</li>
-<li>Flight number</li>
-<li>Membership number</li>
-<li>Student ID number</li>
-<li>Postcode</li>
-</ul>
-<p>Tricks:<br>| 情况 | 方法 |<br>|–|–|<br>| 两个或三个数字重复 | double/triple |<br>| 0 | o, zero, nought/naught |<br>| 18003456000 | 800 =&gt; eight hundred, 6000 =&gt; six thousand, 其他逐个 |<br>| 电话 | 出现area code或country code必须加上 |</p>
-<h4 id="国籍"><a href="#国籍" class="headerlink" title="国籍"></a>国籍</h4><p>必须形容词形式 e.g. London =&gt; British |</p>
-<h4 id="受教育水平"><a href="#受教育水平" class="headerlink" title="受教育水平"></a>受教育水平</h4><p>Undergraduate =&gt; Postgraduate</p>
-<h4 id="教职"><a href="#教职" class="headerlink" title="教职"></a>教职</h4><p>学院: faculty/department</p>
-<h4 id="主修"><a href="#主修" class="headerlink" title="主修"></a>主修</h4><p>subject/major</p>
-<h3 id="考察频率"><a href="#考察频率" class="headerlink" title="考察频率"></a>考察频率</h3><p>最常: Social/ Environment/ Science</p>
-<p>不常: Crime/ Culture/ Language/ Celebrity</p>
-<h2 id="分类比较表"><a href="#分类比较表" class="headerlink" title="分类比较表"></a>分类比较表</h2><p>扫描横纵轴=&gt;表格整体内容</p>
-<p>听前: 根据已知信息=&gt; 预判缺失信息</p>
-<p>听时: =&gt; 定位未知信息 (顺序)</p>
-<p>所听即所得。</p>
-<p>注意点：</p>
-<ul>
-<li>题目要求(words&amp;number count)&amp;拼写规律</li>
-<li>n. 单复数</li>
-<li>v. 时态</li>
-<li>adj. 比较级最高级(上下一致)</li>
-</ul>
-<h2 id="单句填空"><a href="#单句填空" class="headerlink" title="单句填空"></a>单句填空</h2><ol>
-<li>获取背景</li>
-<li>画出信号词=&gt;预测词性</li>
-<li>注意多个信息同时给出情况</li>
-<li>注意：<strong>时间， 人名，数字，专有书写</strong></li>
-<li>首字母大写</li>
-</ol>
-<p>信号词后置情况</p>
-<ol>
-<li>被动 A include B =&gt; B is included in A</li>
-<li>形容词结构 Excellent XX =&gt; I thought sth was excellent</li>
-<li>介词+n. A+of/for/about/in/on/to+B= B A  e.g. the habit of animals = animals habit</li>
-</ol>
-<p>aaa’s xxx : aaa有生命</p>
-<p>xxx of bbb : bbb无生命</p>
-<p>key <strong>to</strong></p>
-<p>solution <strong>to</strong> </p>
-<ol start="4">
-<li>修饰词后置 goods made of aaa &amp; bbb: The tech they introduced meant that <em>metal</em> and <em>leather</em> goods were produced …</li>
-<li>位置拆分: xxx is header of ____? A: Yes she is in Computer center B: She is header now.</li>
-</ol>
-<h2 id="笔记填空"><a href="#笔记填空" class="headerlink" title="笔记填空"></a>笔记填空</h2><p>一般L3，L4，题材为lecture</p>
-<p>所听即所得</p>
-<p>信号词</p>
-<ul>
-<li>实词(adj. n. v.) or 其替换词</li>
-<li>逻辑关系</li>
-<li><strong>转折</strong></li>
-<li>顺序，序列</li>
-<li>解释</li>
-<li>因果</li>
-</ul>
-<p>and/ in addition/ one more thing/ what’s more/ besides/ either/ also</p>
-<p>too/ as well / moreover / together/ further more</p>
-<p>for instance/ for example / such as / like = <strong>saying</strong></p>
-<p>likewise/ similary</p>
-<p>Although/ by(in) contrast/ as a matter of fact/ nevertheless/ instead/ however/ otherwise/ while/ but / despite / on the contrary/ on the other hand / in spite of / whereas</p>
-<p>顺序序列:<br>first/ in the first place/ first of all/ to begin with/ previously/ second/ then/ subsequently/ last but not least/ third/ in the middle/ after/ between/ before/ meanwhile/ after/ between/ before/ meanwhile/ until</p>
-<p>for a start/ afterward/ finally/ for one thing/ for another</p>
-<p>解释强调:<br>That is/ particular/ I mean/ namely/ especially/ actually/ specially/ equally/ in other words/ that is to say/ another way of saying</p>
-<p>因果关系-&gt;(果)<br>as a result/ therefore/ so/ for this reason/ consquently/ thus/ because of / for / since</p>
-<p>总结<br>as a result in short/ in sum/ on the whole/ in concluction/ in brief/ to conclude/ in a word/ to sum up/ to summarize/ altogether/ finally/ consequently/ thus/ therefore/ overall</p>
-<p>预示关键信息到来<br>What I mean is xxx / and I will xxx / before I move on to xxx / no. sorry</p>
-<p>场景词(图书馆+论文)</p>
-<ul>
-<li>questionaire 问卷/调查对象</li>
-<li>wording 措辞</li>
-<li>response rate 回收率</li>
-<li>car park = parking lot = 停车场</li>
-<li>respondents 调查对象</li>
-</ul>
-<p>身体部位:<br>skin/ fur/ feather/ quill/ hair/ wing/ claw/ hoof/ paw/ front feet/ back leg/ muscle/ lip/ membrane(膜)/ beak/ nose hole= nostril/ neck/ back/ skull/ skeleton/ tail/ bladder(膀胱) / scale(鳞片)/ nail </p>
-<p>prevent from predator/ prey/ squirrel松鼠/ squid乌贼/ raccoon狸</p>
-<p>maintain  the group/unity</p>
-<p>camouflage</p>
-<p>feed/breed offsprings</p>
-<p>move underground</p>
-<p>adapt to harsh env</p>
-<h3 id="简答"><a href="#简答" class="headerlink" title="简答"></a>简答</h3><p>who/when/where/what/why</p>
-<h3 id="分类配对"><a href="#分类配对" class="headerlink" title="分类配对"></a>分类配对</h3><ul>
-<li>题干展开</li>
-<li>选项展开</li>
-</ul>
-<p>不要忽略I agree with/ it is the same as …</p>
-<h3 id="地图流程题"><a href="#地图流程题" class="headerlink" title="地图流程题"></a>地图流程题</h3><h3 id="单选-多选"><a href="#单选-多选" class="headerlink" title="单选/多选"></a>单选/多选</h3><p>L2/L3</p>
-<ul>
-<li><strong>补全式选择</strong></li>
-<li>问答式选择</li>
-</ul>
-<p>选项</p>
-<ul>
-<li>短: 只需比较之间相同与不同之处做纵向扫描</li>
-<li>长: 至少把最长选项划出核心词</li>
-</ul>
-<p>原则<br>顺序: 最后一个往往正确<br>同性相斥: 俩同一概念则都不正确<br>陌生词汇: 陌生词汇往往不是答案<br>绝对性: only must只要注意材料里有没有绝对判断，往往不是答案<br>最近答案: 不要看到选项文字一致就选择，答案往往是同义表达(trap)。</p>
-<p>陷阱</p>
-<ul>
-<li>v. n. 替换</li>
-<li>形容词 副词 替换</li>
-</ul>
-<p>数字替换</p>
-<ul>
-<li>a quarter = 25% = 1/4 = 15min = 3month</li>
-<li>in the 1980s = in the 20th centry</li>
-<li>fortnight = 14d = 2week</li>
-<li>couple = 2</li>
-<li>dozen = 12</li>
-<li>decade = 10y</li>
-<li>century = 100y</li>
-<li>1980s = 1980~1989</li>
-</ul>
-<p>同义词，同义词组 替换</p>
-<ul>
-<li>approach =&gt; method</li>
-<li>assistance =&gt; help</li>
-<li>travel =&gt; goto</li>
-<li>A rather than B =&gt; prefer A to B</li>
-</ul>
-<p>句式转换</p>
-<ul>
-<li>双重否定 =&gt; 肯定</li>
-<li>主动 =&gt; 被动</li>
-</ul>
-<p>fee =&gt; charge<br>permit =&gt; allow<br>scientist =&gt; reseacher<br>disadv =&gt; downside<br>sign =&gt; dication</p>
-<h1 id="S-口语"><a href="#S-口语" class="headerlink" title="S: 口语"></a>S: 口语</h1><h1 id="S1"><a href="#S1" class="headerlink" title="S1"></a>S1</h1><p>It is important to do … for undergraduate</p>
-<p>How + adj + 主 + 谓 =&gt; How excited we are</p>
-<p>be disappointed <strong>at</strong> </p>
-<p>whether to do (or not)</p>
-<p>look forwarding to <strong>doing</strong></p>
-<p>insist on <strong>doing</strong>/ sth/ one’s doing</p>
-<p>He insists on <strong>our</strong> accepting the xxx</p>
-<ul>
-<li>hear sb. doing</li>
-<li>find sb. done</li>
-</ul>
-<p>sth 介词短语 in order 处于状态</p>
-<p>类型</p>
-<ul>
-<li><strong>喜好</strong></li>
-<li><strong>个人习惯</strong></li>
-<li><strong>个人偏好</strong></li>
-<li>比较</li>
-<li>观点</li>
-<li>解释</li>
-<li>未来计划</li>
-<li>大群体问题</li>
-<li>问题解决方案</li>
-<li>引子（引导）</li>
-</ul>
-<p>WH: sb. do sth + 人 + 时 + 地 + 目的</p>
-<p>I always <strong>go</strong> swimming <strong>when</strong> I have free time <strong>on</strong> local swimming stadium <strong>to</strong> practice my swimming rings</p>
-<h3 id="喜好"><a href="#喜好" class="headerlink" title="喜好"></a>喜好</h3><ul>
-<li>I like </li>
-<li>I’m really into</li>
-<li>I’m fond of</li>
-<li>I enjoy</li>
-</ul>
-<p>人的需求(meet)</p>
-<ul>
-<li>social needs</li>
-<li>material/phyical needs</li>
-<li>spritual needs</li>
-</ul>
-<p>套路：</p>
-<ol>
-<li>Although:</li>
-</ol>
-<p>[direct answer] + although 反面 + I still like xxx bacause xxx</p>
-<ol start="2">
-<li>Direct answer + e.g. (swimming) + WH (I always …)</li>
-<li>Direct answer (dislike) + 反面opinion + bad experience</li>
-</ol>
-<h3 id="Usually-通常题"><a href="#Usually-通常题" class="headerlink" title="Usually 通常题"></a>Usually 通常题</h3><p>问法 </p>
-<ul>
-<li>usually/like to do during xxx</li>
-<li>how do you spend during xxx</li>
-</ul>
-<p>套路</p>
-<ol>
-<li><p>时间利用型<br>Sometimes WH1; Other times WH2</p>
-</li>
-<li><p>分类讨论型<br>It depends, if xxx then I will xxxx; but if yyy, then I will yyyy</p>
-</li>
-</ol>
-<h3 id="频率题"><a href="#频率题" class="headerlink" title="频率题"></a>频率题</h3><ul>
-<li>low often</li>
-<li>everyday</li>
-<li>weekly/once a week</li>
-<li>annally/once a year</li>
-</ul>
-<p>套路</p>
-<ol>
-<li>(经常) I do sth a lot + e.g.(细分种类) + WH</li>
-</ol>
-<h3 id="个人偏好"><a href="#个人偏好" class="headerlink" title="个人偏好"></a>个人偏好</h3><p>Do you prefer A or B</p>
-<p>like A or B</p>
-<p>which better A or B</p>
-<p>套路:<br>I would prefer A over B because xxxA√ whereas xxxB√ but </p>
-<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><ol>
-<li>A &amp; B difference </li>
-</ol>
-<p>What are the difference between A &amp; B</p>
-<p>please compare A and B</p>
-<p>Do you think A &amp; B feel the same about sth</p>
-<p>套路<br>Compared to A, B is xxx for example yyy. On the other hand, A is xxx for example yyy (xxx必须为同一点)</p>
-<ol start="2">
-<li>past/present comperesion</li>
-</ol>
-<p>difference between sth in past and now</p>
-<p>套路<br>In the past, [Topic] was xxx for example , but after a few years, [Topic] started, xxx and now it is xxx</p>
-<h3 id="观点"><a href="#观点" class="headerlink" title="观点"></a>观点</h3><p>Do you think sth is good / necessary</p>
-<p>What is the benefits of sth</p>
-<p>Would you say its good for someone to do sth</p>
-<p>套路</p>
-<ul>
-<li>[direct answer] + 正面opinion + although + 反面opinion</li>
-<li>[direct answer] + 客观opinion + 个人经历</li>
-</ul>
-<h3 id="万能观点"><a href="#万能观点" class="headerlink" title="万能观点"></a>万能观点</h3><ol>
-<li>便宜</li>
-<li>方便</li>
-<li>交友 their custom cultures and histories share th same love for xxx</li>
-<li>放松 xxx can help me relax and relieve the pressure from work and study (after a day’s hard work) I feel like my fatigue stress and depress are gone.</li>
-</ol>
-<h3 id="万能句型"><a href="#万能句型" class="headerlink" title="万能句型"></a>万能句型</h3><ol>
-<li>xxx can enhance someone’s xxx, becasue …</li>
-</ol>
-<p>enhance =&gt; cultivate =&gt; develop =&gt; improve =&gt; build up</p>
-<p>技能<br>hands on skill/ independent</p>
-<p>运动<br>physical ability/ coordination skill</p>
-<p>艺术<br>artistic/creativity talent/taste</p>
-<p>文艺<br>mental develop/ knowledge of xxx</p>
-<p>social skills/ teamwork ability/ sense of responsibility</p>
-<ol start="2">
-<li><p>xxx keeps someone posted(了解) about the xxx(文化传播类)</p>
-</li>
-<li><p>xxx helps someone get a better picture of xxx</p>
-</li>
-<li><p>xxx brings someone sth(convenient/ happiness/ sense of achievement/ relaxation)</p>
-</li>
-<li><p>xxx is good/bad for someone’s sth(health/ growth/ future development/ career/ studies)</p>
-</li>
-<li><p>xxx has a positive/negitive influence/effect on xxx</p>
-</li>
-<li><p>xxx is a good way to express someone’s 某种心情(emotions/ love/ care/ respect/ gratitude(谢意)/ passion)</p>
-</li>
-<li><p>xxx add spice(给生活加乐趣) to someone’s life</p>
-</li>
-<li><p>xxx is a necessary part of life</p>
-</li>
-<li><p>xxx can fulfill people’s 某需求(spirtual/material/physical/social/curiosity needs)</p>
-</li>
-</ol>
-<h3 id="人物类"><a href="#人物类" class="headerlink" title="人物类"></a>人物类</h3><ol>
-<li><p>家人/老师 某次没考好=&gt; frustrated =&gt; 鸡汤 =&gt; 总结</p>
-</li>
-<li><p>名人</p>
-</li>
-<li><p>外表描述</p>
-</li>
-</ol>
-<h3 id="地点类"><a href="#地点类" class="headerlink" title="地点类"></a>地点类</h3><ul>
-<li>风景</li>
-<li>放松</li>
-<li>室内装修</li>
-</ul>
-<p>树: birch 桦 maple 枫 ork 橡 pine 松 willow 柳 carnation 康乃馨 tulip 郁金香 lotus 莲 Yellowstone  </p>
-<p>Academy =&gt; art school</p>
-<h3 id="物品类"><a href="#物品类" class="headerlink" title="物品类"></a>物品类</h3><h3 id="事件-媒体"><a href="#事件-媒体" class="headerlink" title="事件/媒体"></a>事件/媒体</h3><p>-&gt; 运动</p>
-<p>agility 柔韧性</p>
-<p>vital capacity 肺活量</p>
-<ul>
-<li>好处</li>
-<li>危险项目</li>
-<li>经过</li>
-</ul>
-<p>natatorium = swimming stadium</p>
-<h3 id="风景"><a href="#风景" class="headerlink" title="风景"></a>风景</h3><p>spendid sights</p>
-<p>skyscrapers</p>
-<p>it has improve effiency</p>
-<p>choose to live </p>
-<p>spacious</p>
-<p>friend in need is a friend indeed</p>
-<p>uni<strong>v</strong>ersity</p>
-<p><strong>ch</strong>aracteristic (|k|)</p>
-<p><strong>stay up</strong> late at night 熬夜</p>
-<p>refresh my mind</p>
-<p>be refreshed and energetic</p>
-<ul>
-<li>Shanghai Tower</li>
-<li>The Oriental Pearl Radio &amp; TV Tower</li>
-<li>Global Center</li>
-<li>The Tower of World Trade Center</li>
-<li>CBD - Central Business District</li>
-</ul>
-<p>have a face-to-face communication with sb</p>
-<p>have a quickj bite 边走边啃</p>
-<p>intimate亲密的</p>
-<h3 id="Novel"><a href="#Novel" class="headerlink" title="Novel"></a>Novel</h3><ul>
-<li>classic</li>
-<li>Romance</li>
-<li>Horror</li>
-<li>Detective</li>
-<li>science-fiction</li>
-<li>auto-biography 自传</li>
-</ul>
-<h3 id="Movie"><a href="#Movie" class="headerlink" title="Movie"></a>Movie</h3><ul>
-<li>classic </li>
-<li>Romance</li>
-<li>Thriller</li>
-<li>Detective</li>
-<li>science movie</li>
-<li>auto-biography 自传</li>
-<li>action</li>
-</ul>
-<p>fight against xxx and protect xxx, try to make a living</p>
-<p>enrich vocal</p>
-<h3 id="Edu"><a href="#Edu" class="headerlink" title="Edu"></a>Edu</h3><p>tedious 繁重的</p>
-<p>fax </p>
-<p>online course</p>
-<p>distract走神  = absent-mind</p>
-<p>nearsighted 近视</p>
-<p>cervical problem 颈椎病</p>
-<p>unchecked infomation</p>
-<p>plot情节</p>
-<p>tell right分辨是非</p>
-<p>campus bullying 校园霸凌</p>
-<h2 id="S3"><a href="#S3" class="headerlink" title="S3"></a>S3</h2><ul>
-<li>校园学习</li>
-<li>教育</li>
-<li>环保</li>
-</ul>
-<h3 id="校园学习"><a href="#校园学习" class="headerlink" title="校园学习"></a>校园学习</h3><p>小组讨论/辩论好处 </p>
-<p>CN: </p>
-<ul>
-<li>lecture</li>
-<li>tutorial</li>
-</ul>
-<p>US:</p>
-<ul>
-<li>seminar</li>
-<li>group discussion/ debate</li>
-<li>presentation</li>
-<li>case study</li>
-<li>role play</li>
-</ul>
-<p>教育 carmming 填鸭式 priority</p>
-<p>擅长 be gifted for/ talented in/ skilled in</p>
-<p>(diff 后加复数)<br>diff stu have diff talents, some xxx, some yyy</p>
-<p>Art = painting music instument sports gymnastics(体操)</p>
-<h3 id="环保"><a href="#环保" class="headerlink" title="环保"></a>环保</h3><ul>
-<li>污染现状</li>
-<li>措施</li>
-<li>种树</li>
-</ul>
-<p>现状</p>
-<ul>
-<li><strong>water</strong></li>
-<li><strong>air</strong></li>
-<li>pollution</li>
-<li>soil</li>
-<li>light</li>
-<li>noise</li>
-</ul>
-<p>encourage 滋生</p>
-<p>greenhouse effect</p>
-<p>gases: carbon dioxide/ mathane/ ozone</p>
-<p>haze雾霾(smog)</p>
-<p>措施</p>
-<ul>
-<li>个人</li>
-<li>政府: enact/introduce 颁布</li>
-</ul>
-<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>Why …</p>
-<ul>
-<li>大群体问题 we …</li>
-<li>问题解决方案</li>
-<li>比较</li>
-</ul>
-<p>Why … ?</p>
-<p>套路</p>
-<ol>
-<li>one of the main reasons is that that … and also …</li>
-<li>Firstly I think it is coz … and also …</li>
-</ol>
-<p>2 reason * 2 sentences</p>
-<p>For starters, xxx. Plus/More importantly</p>
-<p>未来计划plan</p>
-<p>大群体:</p>
-<p>套路</p>
-<ol>
-<li><p>people 喜欢/习惯 xxx for example xxx. On the other hand, xxx people 喜欢/习惯 xxx for example xxx.</p>
-</li>
-<li><p>Most people xxx for example xxx , but personally speaking I think [对大群体做出批判] so I xxxx (特例)</p>
-</li>
-</ol>
-<p>解决方案:</p>
-<p>How … / Advise for …</p>
-<p>套路 </p>
-<ol>
-<li>As a xxx, xxx. As a xxx, xxx. (2*solution)</li>
-<li>It would really be helpful if sb. did sth, you know right now, [现状], so if someone did sth(深层次拓展solution), [问题如何得到解决]</li>
-</ol>
-<h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
-<li>Do you have …</li>
-<li>Do you know …</li>
-<li>Do you have done xxx before … </li>
-</ul>
-<h2 id="S3-1"><a href="#S3-1" class="headerlink" title="S3"></a>S3</h2><ul>
-<li>风景</li>
-<li>室内装修</li>
-<li>人物</li>
-<li>运动</li>
-<li>科技</li>
-<li>工作</li>
-<li>小说</li>
-<li>电影</li>
-<li>艺术</li>
-</ul>
-<h3 id="风景-1"><a href="#风景-1" class="headerlink" title="风景"></a>风景</h3><p>as beautiful as a picture =&gt; picturesque (如画的) </p>
-<p>attraction scenic spot</p>
-<p>birch 桦 tulip 郁金香</p>
-<p>around the lake</p>
-<p>live a xxx life</p>
-<p>go for a sightseeing</p>
-<h3 id="interior-design-decoration-室内设计"><a href="#interior-design-decoration-室内设计" class="headerlink" title="interior design/decoration 室内设计"></a>interior design/decoration 室内设计</h3><p>patio umbrella set 遮阳伞下桌椅 = outdoor</p>
-<p>well-furnished</p>
-<p>sun-shading</p>
-<h3 id="运动"><a href="#运动" class="headerlink" title="运动"></a>运动</h3><ul>
-<li>play + 球类</li>
-<li>go + ving</li>
-<li>do + 非老外原生运动</li>
-</ul>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="发音"><a href="#发音" class="headerlink" title="发音"></a>发音</h2><p>暂略</p>
-<h1 id="W-写作"><a href="#W-写作" class="headerlink" title="W: 写作"></a>W: 写作</h1><h2 id="基础信息-1"><a href="#基础信息-1" class="headerlink" title="基础信息"></a>基础信息</h2><h3 id="W1"><a href="#W1" class="headerlink" title="W1"></a>W1</h3><p>20min写150，建议不超过180</p>
-<p>段落分布</p>
-<ol>
-<li>Intro</li>
-<li>Summary</li>
-<li>Body1</li>
-<li>Body2</li>
-</ol>
-<h4 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h4><ol>
-<li>Type- line graph, pie chart, bar chart, table</li>
-<li>give/show/illurstrate/display/compare info about …</li>
-<li>限定词from 1980 to 2030, between 1xxx and 1yyy, from the year until aaaa, over a period of 50y</li>
-</ol>
-<p>e.g. C9-T1-W1</p>
-<p>The line graph illurstrates consumption of energy of the USA from a 2008 report between 1980 and 2030.</p>
-<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><ul>
-<li>It is clear that</li>
-<li>We can clear see that</li>
-<li>Overall</li>
-</ul>
-<p>TA(task achievement): </p>
-<ul>
-<li>list figures -&gt; 多组数据优先考虑最大值</li>
-<li>compare figures</li>
-<li>report figures -&gt; general trend + the most obvious features</li>
-</ul>
-<p>CC(cohesion and coherence):</p>
-<ul>
-<li>显性: conversely/ by contrast/ on the other hand/ (不用however) </li>
-<li>隐性: likewise/ similarly/ also </li>
-</ul>
-<p>e.g.</p>
-<pre><code>29m ton petrol was consumed in 1980, this figure rose to 90m tons
-
-followed by Solar energy(12m ton)
-
-half of which was Solar energy
-
-as much as Solar energy
-
-followed by a rise of 12m tons in 2000
-</code></pre>
-<p>LR(Lexical resources):</p>
-<ul>
-<li>rise/ increase/ grow/ ascend (rose/ increased/ grew/ ascended)</li>
-<li>fall/ drop/ decrease/ dip(fell/ dropped/ decreased/ dipped)</li>
-<li>Dramatically/ sharply/ hugely</li>
-<li>Slightly/ gradually/ slowly</li>
-</ul>
-<p>GRA(Grammatical range and accuary):</p>
-<ul>
-<li>Introduction+summary -&gt; present tense</li>
-<li>Body (1980xxx) -&gt; past tense</li>
-<li>Body (2030xxx) -&gt; future tense</li>
-<li>Body (no time) -&gt; present tense </li>
-</ul>
-<p>趋势类动词句式:</p>
-<ul>
-<li>xxx increase to 20% in 1990</li>
-<li>, reaching 20%</li>
-<li>, with a peak at 20%</li>
-<li>xxx decrease, with a bottom at 20%</li>
-<li>xxx increase, from 20% in 1990 to 30% in 2000</li>
-<li>xxx increased by 20 % in 2000</li>
-</ul>
-<p>趋势类名词句式:</p>
-<ul>
-<li>rise/ increase/ growth</li>
-<li>fall/ decrease/ drop</li>
-<li>soar/ plunge</li>
-</ul>
-<p>xxx experience(witness/ saw) an increase(rise/ growth) in yyyyy</p>
-<pre><code>错误: xxx had an increase
-正确: had an upword
-</code></pre>
-<ul>
-<li>to/with a peak at 20%</li>
-<li>reaching 20%</li>
-<li>see an increase in xxx of yyy</li>
-<li>see an increase of xxx in yyy</li>
-</ul>
-<p>趋势（预测）</p>
-<ul>
-<li>will be expected to</li>
-<li>will be thought</li>
-<li>be predicted to  错误: saw an increase for<br>  正确: saw an increase in</li>
-</ul>
-<p>粗略性表达:</p>
-<p>About/ approximately/ generally/ nearly</p>
-<ul>
-<li>4.9% =&gt; just under 5%</li>
-<li>5.1% =&gt; just over </li>
-<li>98% =&gt; the majority(priority)</li>
-<li>25% =&gt; one quarter</li>
-</ul>
-<p>百分比下的单复数</p>
-<ul>
-<li>30% of <strong>student</strong> <strong>achieve</strong> a high score</li>
-<li>30% of <strong>water</strong> <strong>comes</strong> from sea</li>
-</ul>
-<p>句式的改写</p>
-<ol>
-<li>35% of xxx was consumed, followed by/compared to xxx</li>
-<li>xxx saw an increase in consumption of xxx had the largest consumption, at xxx</li>
-<li>xxx equaled 45 xxx</li>
-<li>xxx be equal to 45 xxx</li>
-<li>xxx be as much/many as xxx</li>
-</ol>
-<p>6.5以上，要求each sentence is new</p>
-<ul>
-<li>old people =&gt; elder people =&gt; people aged 65+</li>
-<li>v+adv =&gt; adj+n</li>
-<li>The figure for xxx = the contribution of xxx </li>
-</ul>
-<p>Pie chart的重要表述: 占据</p>
-<ul>
-<li>account(v.) for</li>
-<li>make up </li>
-<li>represent 5% of the total/totality</li>
-</ul>
-<p>Pie chart中的最显著特征: <strong>最大面积</strong></p>
-<h4 id="静态图"><a href="#静态图" class="headerlink" title="静态图"></a>静态图</h4><p>summary:</p>
-<ol>
-<li>极值 especially xxx</li>
-</ol>
-<p>A大， B小。 剩下such dramatic differences are not seen when we compare the figure for xxx</p>
-<p>个体过多(&gt;=3) =&gt; 描述<strong>最中之最</strong> less (&lt;12%) -&gt; least at 5% xxx in xxx</p>
-<p>波动:<br>It <strong>fluctuated</strong> (and repeat), from the highest of xxx in 1990 to the lowest of xxx in 2000 </p>
-<p>It rose from xxx in 1990 to xxx in 2000</p>
-<h4 id="工艺流程图"><a href="#工艺流程图" class="headerlink" title="工艺流程图"></a>工艺流程图</h4><p>Flow chart intro + summary</p>
-<p>The diagram illurstrates the way in which xxx is produced by xxx</p>
-<p>It is clear that the whole process consists of (1/2/3) stages, including A B and C</p>
-<p>It is clear that the whole process involves xxx stages</p>
-<p>Body(全被动):</p>
-<p>Beginning with the first stage, called xxx, [detail1], when it comes to the second stage, [detail2]</p>
-<p>Then =&gt; , before =&gt; , followed by =&gt; , after which =&gt; . At that time, =&gt; , at which time =&gt; which is in order to ensure/gurantee that …</p>
-<p>最后<br>xxx will be delivered to xxx</p>
-<p>俩流程时需要做出比较</p>
-<h2 id="Alternatives"><a href="#Alternatives" class="headerlink" title="Alternatives"></a>Alternatives</h2><p>It is clear that although xxx, it saw a decrease xxx </p>
-<p>Body2 开头</p>
-<pre><code>Regarding xxx, 
-
-With the respect to/Enperienced the less main reason, they xxx
-</code></pre>
-<p>xxx rose, before falling to 5% == xxx rose and then fall xxx = After rising to 6%, this figure fell to 5%</p>
-<h2 id="错误记录"><a href="#错误记录" class="headerlink" title="错误记录"></a>错误记录</h2><table>
-<thead>
-<tr>
-<th>错误情况</th>
-<th>正确</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>the figure of</td>
-<td>the figure for</td>
-</tr>
-<tr>
-<td>xxx. Then xxx</td>
-<td>改用,after xxx/,compared to xxx/, followed by (a rise to 40…)</td>
-</tr>
-<tr>
-<td>占大多数描述方式过少</td>
-<td>take the majority. the proportion of xxx was the largest. take the largest share</td>
-</tr>
-<tr>
-<td>句式不全面</td>
-<td>-ing/-ed, clause(条件约束), There be, v.-&gt;n., positive-&gt;active</td>
-</tr>
-<tr>
-<td>同时写两个不分开</td>
-<td>A and B xxx respectively. the absence of Shaun Derry and Adel Taarabt because of illness and injury respectively.</td>
-</tr>
-<tr>
-<td>占据用词过少</td>
-<td>occupy = account for … of the (total) / represent/ constitude</td>
-</tr>
-<tr>
-<td>句子之间连贯性不足</td>
-<td>Regrading …/ … is used for … / compared to … / … for …</td>
-</tr>
-<tr>
-<td>表达都高</td>
-<td>Both rank first</td>
-</tr>
-<tr>
-<td>贼少</td>
-<td>merely 2%</td>
-</tr>
-<tr>
-<td>百分比表述</td>
-<td>with % of / at %</td>
-</tr>
-<tr>
-<td>数字表达过多</td>
-<td>用背后含义表述(e.g. 人口百分比-&gt;人数)，数-&gt;量/concept, percentage =&gt; frequency.</td>
-</tr>
-<tr>
-<td>then 不能用作连词</td>
-<td>,and then =&gt; , before …</td>
-</tr>
-</tbody></table>
-<p>采分点</p>
-<ul>
-<li>v. n. 趋势 in …</li>
-<li>被动×1; 主动×1</li>
-<li>分词(ing×1,过去分词×1)</li>
-<li>介词短语</li>
-<li>从句(让步状语，定语从句，时间状语从句)</li>
-<li>There be</li>
-</ul>
-<h4 id="地图题"><a href="#地图题" class="headerlink" title="地图题"></a>地图题</h4><p>The map illustrates the layout of xxx in yyyy and its development in yyyy</p>
-<p>It is clear that xxx change considerablly and xxx main features can be seen. During the development, some facilities are available to visitors.</p>
-<p>Body Types:</p>
-<ul>
-<li>Imporovement: expansion + addition + reduction</li>
-<li>Relocation: e.g. Western -&gt; Eastern</li>
-<li>Function: eduactional xxx</li>
-</ul>
-<p>sentence pattern</p>
-<ul>
-<li>be built</li>
-<li>be added</li>
-<li>be established</li>
-<li>be constructed</li>
-</ul>
-<p>junction 十字路口/ three branches</p>
-<p>be replaced by = be deminished in order to </p>
-<p>onthe either side = on both side</p>
-<p>be expanded/ extended/ enlarged</p>
-<p>be reduced in size</p>
-<p>The reduction of school is in order to make way for xxx</p>
-<p>expansion/extension</p>
-<p>run/go from … to … 延伸: e.g. the road goes from east to west. The road goes from the main entrance to the xxx</p>
-<p>link with</p>
-<p>branch(split) off from</p>
-<p>accomodation un./ equipment un./ studio -&gt; studios</p>
-<h3 id="W2"><a href="#W2" class="headerlink" title="W2"></a>W2</h3><p>40min写250，建议不超过300</p>
-<p>_____ it means that _____, such as _____ , _____  and _____ . In addition, __________ . In fact, __________ , for instance _______________</p>
-<p>On the other hand, __________, which means __________ . For example, __________ . Moreover, __________  such as _____ , _____ and _____.</p>
-<p>Best =&gt; +可替换方案</p>
-<p>salary 可数-&gt; salaries</p>
-<p>such as / including …</p>
-<p>abundant fund</p>
-<p>cram xxx into</p>
-<p>intensive courses = lots of courses</p>
-<p>arouse interest</p>
-<h4 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h4><p>陈述段<br>Topic sentence + explaination + examples / Topic sentence + examples + explaination</p>
-<h4 id="题型-最终奥义"><a href="#题型-最终奥义" class="headerlink" title="题型+最终奥义"></a>题型+最终奥义</h4><ol>
-<li>both views =&gt; agree 1, agree 2, my opinion</li>
-<li>agree/disagree =&gt; agree reason 1, agree reason 2, disagree 3 but agree.</li>
-<li>advantage overweigh disadv? 如上</li>
-<li>Reasons? Solution. =&gt; (Reason1 + Reason2) + (Sol1 + Sol2)</li>
-<li>Reasons? Pos/Neg? =&gt; (Reason1 + Reason2) + (Pos1 + Pos2)</li>
-<li>Solutions? =&gt; S1 + S2 + S3</li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/ielts-notes/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -2584,16 +627,16 @@ With the respect to/Enperienced the less main reason, they xxx
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/build-wasm-runtime/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/build-wasm-runtime/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -2615,7 +658,7 @@ With the respect to/Enperienced the less main reason, they xxx
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-06 15:44:12" itemprop="dateModified" datetime="2021-03-06T15:44:12+08:00">2021-03-06</time>
+                <time title="Modified: 2021-03-06 22:34:07" itemprop="dateModified" datetime="2021-03-06T22:34:07+08:00">2021-03-06</time>
               </span>
 
           
@@ -2630,21 +673,16 @@ With the respect to/Enperienced the less main reason, they xxx
 
       
           <p>因为NGIN的contract系统也就是智能合约上需要嵌入的wasm engine支持fee cost on opcode(instr)，因此需要从wasmtime迁移到其他引擎。</p>
-<p>虽然说找到了<a target="_blank" rel="noopener" href="https://github.com/perlin-network/life">life</a>完全符合我们的需要，但毕竟是人家的项目而且在host func嵌入的方面不如wasmtime顺手。</p>
+<p>虽然说找到了<a href="https://github.com/perlin-network/life" target="_blank" rel="noopener">life</a>完全符合我们的需要，但毕竟是人家的项目而且在host func嵌入的方面不如wasmtime顺手。</p>
 <p>既然是从头做起(from scratch)的项目，那么再多做个wasm runtime应该也不过分。</p>
-<h2 id="Compilation-Execution-modes"><a href="#Compilation-Execution-modes" class="headerlink" title="Compilation/Execution modes"></a>Compilation/Execution modes</h2><p>从<a target="_blank" rel="noopener" href="https://github.com/appcypher/awesome-wasm-runtimes">awesome-wasm-runtimes</a>的项目介绍里可以看到life的编译/执行模式是Interpreted，而wasmtime是JIT。</p>
-<p>其实还有个叫AOT的，像Lucet这个引擎就是用的AOT。</p>
-<p>Interpreted顾名思义就是被“解释”，就类似脚本语言那样一句一句地输入并执行。换句话说就是引擎会读取源码或IR（介于高级语言和二进制机器码之间的中间表达，比如bytecode，wasm binary可以认为是IR）并立即把这些语句执行掉。</p>
-<p>JIT一边读取源代码或IR，一边对已读取内容飞速编译再执行，即在执行时编译。可以认为是JIT是对内容与当前执行环境做了优化之后再进行执行。</p>
-<p>AOT则接近gcc这种编译器。AOT在程序执行之前进行完整编译。</p>
-<p>所以很明显JIT引擎在优化后很容易比Interpreted快很多，wagon和wasmtime，wasmer的<a target="_blank" rel="noopener" href="https://github.com/wasmerio/wasmer-go#benchmarks">速度根本没法比</a>(虽然也有语言速度上差距)。但是从wasmtime的issue记录来看负优化也不是没有。</p>
-<p>因此从当前目标来看其实我们只需要先完成一个解释器，然后再通过编写compiler去对内容再做优化（JIT）。</p>
-<h2 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h2><p>这里我们选择的是<a target="_blank" rel="noopener" href="https://www.w3.org/TR/wasm-core-1/">w3c的wasm标准</a>，也就是version1。</p>
-<p>其中的Values，Modules等内容在别的wasm内容中也提过了所以不多说。</p>
-<p>最为关键的在于如何将一个Module给实例化为Instance且通过Call一个mainFunc的方式跑起来。</p>
-<h2 id="Compile-Interpret"><a href="#Compile-Interpret" class="headerlink" title="Compile/Interpret"></a>Compile/Interpret</h2><p>本质上就是需要将wasm解释为机械码然后跑起来。</p>
-<p>在将module实力化之前，我们需要对module中内容进行解析，构建出一个索引空间，用来快速访问我们需要的内容（其实也就function，global，table，memory）。这个内容也可能是外部module提供的，因此也需要提供externModules。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/build-wasm-runtime/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -2663,16 +701,16 @@ With the respect to/Enperienced the less main reason, they xxx
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/wasm-core-1/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/wasm-core-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -2694,7 +732,7 @@ With the respect to/Enperienced the less main reason, they xxx
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-06 15:58:16" itemprop="dateModified" datetime="2021-03-06T15:58:16+08:00">2021-03-06</time>
+                <time title="Modified: 2021-03-06 22:37:12" itemprop="dateModified" datetime="2021-03-06T22:37:12+08:00">2021-03-06</time>
               </span>
 
           
@@ -2709,499 +747,14 @@ With the respect to/Enperienced the less main reason, they xxx
 
       
           <p>细枝末节略，无关内容略。</p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文档介绍了WebAssembly核心标准的1.0版。WebAssembly是一种安全，可移植的低级代码格式，旨在有效执行和紧凑表达。</p>
-<p>相关文档：核心WebAssembly规范，WebAssembly JS接口和WebAssembly Web API。</p>
-<h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><h3 id="1-1-引言"><a href="#1-1-引言" class="headerlink" title="1.1. 引言"></a>1.1. 引言</h3><p>WebAssembly（缩写为Wasm）是一种安全，可移植的低级代码格式，旨在高效执行和紧凑表达。</p>
-<p>它的主要目标是在Web上启用高性能应用程序，但是它没有做任何特定于Web的假设或提供特定于Web的功能，因此它也可以在其他环境中使用。</p>
-<p>WebAssembly是W3C组织开发的开放标准。</p>
-<p>本文档介绍了核心WebAssembly标准的1.0版。其未来将被替换为添加具有其他功能的新增量发行版。</p>
-<h4 id="1-1-1-设计目标"><a href="#1-1-1-设计目标" class="headerlink" title="1.1.1. 设计目标"></a>1.1.1. 设计目标</h4><p>WebAssembly的设计目标如下：</p>
-<ul>
-<li>快速，安全和可移植的语义：</li>
-</ul>
-<p><strong>快速</strong>：利用几乎所有现代硬件共有的功能，以接近本机的代码性能执行。</p>
-<p><strong>安全</strong>：代码经过验证并在内存安全的[2]沙盒环境中执行，可防止数据损坏或安全漏洞。</p>
-<p><strong>定义明确</strong>：以易于非正式地和正式地进行推理的方式，全面而精确地定义有效的程序及其行为。</p>
-<p><strong>与硬件无关</strong>：可以在所有现代体系结构，台式机或移动设备以及嵌入式系统上进行编译。</p>
-<p><strong>与语言无关</strong>：不青睐任何特定的语言，编程模型或对象模型。</p>
-<p><strong>与平台无关</strong>：可以嵌入在浏览器中，作为独立VM运行或集成在其他环境中。</p>
-<p><strong>开放</strong>：程序可以通过简单通用的方式与其环境进行互操作。</p>
-<ul>
-<li>高效便携的表示形式：</li>
-</ul>
-<p><strong>紧凑</strong>：具有比典型文本或本机代码格式小的传输速度快的二进制格式。</p>
-<p><strong>模块化</strong>：程序可以分成较小的部分，可以分别传输，缓存和使用。</p>
-<p><strong>高效</strong>：可以通过一次快速遍历进行解码，验证和编译，等同于即时（JIT）或提前（AOT）编译。</p>
-<p><strong>可流式传输</strong>：允许在看到所有数据之前尽快开始解码，验证和编译。</p>
-<p><strong>可并行化</strong>：允许将解码，验证和编译分为许多独立的并行任务。</p>
-<p><strong>可移植性</strong>：没有任何现代硬件无法广泛支持的架构假设。</p>
-<p>WebAssembly代码还旨在易于检查和调试，尤其是在Web浏览器之类的环境中，但是此类功能超出了本规范的范围。</p>
-<p>[1]“WebAssembly”的缩写，而不是首字母缩写，因此未使用大写字母。</p>
-<p>[2]没有任何程序可以破坏WebAssembly的内存模型。当然，它不能保证编译为WebAssembly的不安全语言不会破坏其自身的内存布局，例如WebAssembly的线性内存中。</p>
-<h4 id="1-1-2-作用域"><a href="#1-1-2-作用域" class="headerlink" title="1.1.2. 作用域"></a>1.1.2. 作用域</h4><p>WebAssembly的核心是一套<em>虚拟指令集体系结构（虚拟ISA）</em>。<br>因此，其具有许多用例，且可以嵌入许多不同的环境中。<br>为了涵盖它们的多样性并实现最大程度的重用，WebAssembly规范被拆分并分层为多个文档。</p>
-<p>本文档与WebAssembly的核心ISA层有关。<br>它定义了指令集，二进制编码，验证和执行语义以及文本表示形式。<br>但是，它没有定义WebAssembly程序如何与它们在其中执行的特定环境交互，也没有定义如何从这样的环境中调用它们。</p>
-<p>取而代之的是，此规范得到了其他文档的补充，这些文档定义了到特定嵌入环境（例如Web）的接口。<br>这些都将定义适合给定环境的WebAssembly<em>应用程序编程接口（API）</em>。</p>
-<h3 id="1-2-安全性考量"><a href="#1-2-安全性考量" class="headerlink" title="1.2. 安全性考量"></a>1.2. 安全性考量</h3><p>WebAssembly不提供对执行代码的计算环境的环境访问。<br>与环境的任何交互（例如I/O，对资源的访问或操作系统调用）只能通过调用嵌入器提供的功能并将其导入WebAssembly模块中来执行。<br>嵌入程序可以通过控制或限制其可用于导入的功能来建立适用于相应环境的安全策略。<br>这些注意事项是嵌入程序的责任，也是特定环境的API定义的内容。</p>
-<p>由于WebAssembly旨在转换为直接在主机硬件上运行的机器代码，因此可能会在硬件级别受到旁通道攻击。<br>在这是一个潜在的脆弱的环境中，嵌入程序可能必须设置适当的缓解措施以隔离WebAssembly计算。</p>
-<h4 id="1-2-1-依赖"><a href="#1-2-1-依赖" class="headerlink" title="1.2.1. 依赖"></a>1.2.1. 依赖</h4><p>WebAssembly依赖于两个现有标准：</p>
-<ul>
-<li>[IEEE-754-2019]，用于表示浮点数据和相应数字运算的语义。</li>
-<li>[UNICODE]，用于表示导入/导出名称和文本格式。</li>
-</ul>
-<p>但是，为了使本规范变得独立，将上述标准的相关方面定义并正式化为本规范的一部分，例如二进制表示和浮点值的取整，以及Unicode的值范围和UTF-8编码字符。</p>
-<blockquote>
-<p>注意!</p>
-<p>前述标准是所有各个定义的权威来源。本规范中给出的形式化旨在与这些定义匹配。所描述的语法或语义上的任何差异均应视为错误。</p>
-</blockquote>
-<h3 id="1-3-概览"><a href="#1-3-概览" class="headerlink" title="1.3. 概览"></a>1.3. 概览</h3><h4 id="1-3-1-概念"><a href="#1-3-1-概念" class="headerlink" title="1.3.1 概念"></a>1.3.1 概念</h4><p>WebAssembly编码一种低级的，类似于程序集的编程语言。该语言围绕以下概念构建。</p>
-<p><strong>值Values</strong></p>
-<blockquote>
-<p>WebAssembly仅提供四种基本值类型。这些是整数和<a target="_blank" rel="noopener" href="https://www.w3.org/TR/wasm-core-1/#biblio-ieee-754-2019">IEEE-754-2019</a>数字，分别为32位和64位宽度。32位整数还用作布尔值和内存地址。可以使用这些类型的常规操作，包括它们之间转换的完整矩阵。有符号和无符号整数类型之间没有区别。取而代之的是，整数会被相应的操作解释为无符号或有两个补码表示形式的符号。</p>
-</blockquote>
-<p><strong>指令Instructions</strong></p>
-<blockquote>
-<p>WebAssembly的计算模型基于<em>堆栈计算机</em> 。代码由按顺序执行的指令序列组成。指令在隐式操作数堆栈[1]上操作值，并分为两个主要类别。简单的指令对数据执行基本操作。它们从操作数堆栈中弹出参数，并将结果压回该操作数堆栈。控制指令会改变控制流程。控制流是结构化的，这意味着它可以用嵌套好的结构（例如块，循环和条件）来表示。分支只能针对此类构造。</p>
-</blockquote>
-<p><strong>陷阱Traps</strong></p>
-<blockquote>
-<p>w在某些情况下，某些指令可能会产生陷阱，该陷阱会立即中止执行。陷阱不能由WebAssembly代码处理，但是会报告给外部环境，通常可以在外部环境中捕获它们。</p>
-</blockquote>
-<p><strong>功能Functions</strong></p>
-<blockquote>
-<p>代码被组织成单独的功能。每个函数都将值序列作为参数，并返回值序列作为结果。 [2]函数可以互相调用，包括递归调用，从而导致无法直接访问的隐式调用堆栈。函数还可以声明可用作虚拟寄存器的可变局部变量。</p>
-</blockquote>
-<p><strong>表Tables</strong></p>
-<blockquote>
-<p>表是特定元素类型的不透明值的数组。它允许程序通过动态索引操作数间接选择这些值。当前，唯一可用的元素类型是无类型的函数引用。因此，程序可以通过向表中的动态索引间接调用函数。例如，这允许通过表索引模拟功能指针。</p>
-</blockquote>
-<p><strong>线性内存Linear Memory</strong></p>
-<blockquote>
-<p>线性内存是连续，可变的原始字节数组。这样的存储器以初始大小创建，但是可以动态增长。程序可以在任何字节地址（包括未对齐）将线性存储器中的值加载/存储在线性存储器中或将其存储在其中。整数加载和存储可以指定小于各自值类型的大小的存储大小。如果访问不在当前内存大小的范围内，则会发生陷阱。</p>
-</blockquote>
-<p><strong>模块Modules</strong></p>
-<blockquote>
-<p>WebAssembly二进制文件采用模块的形式，该模块包含函数，表和线性内存的定义以及可变或不可变的全局变量。也可以导入定义，指定模块/名称对和合适的类型。每个定义可以选择以一个或多个名称导出。除定义外，模块还可以为其内存或表定义初始化数据，该初始化数据采用复制到给定偏移量的段的形式。他们还可以定义自动执行的启动功能。</p>
-</blockquote>
-<p><strong>嵌入器Embedder</strong></p>
-<blockquote>
-<p>WebAssembly实现通常将嵌入到主机环境中。此环境定义了如何启动模块加载，如何提供导入（包括主机端定义）以及如何访问导出。但是，任何特定嵌入的细节都超出了本规范的范围，而是由互补的，特定于环境的API定义提供。</p>
-</blockquote>
-<p>[1]实际上，实现无需维护实际的操作数堆栈。取而代之的是，堆栈可以看作是一组由指令隐式引用的匿名寄存器。类型系统可确保始终静态地了解堆栈高度，从而确保所有引用的寄存器。<br>[2]在当前版本的WebAssembly中，最多只有一个结果值。</p>
-<h4 id="1-3-2-语义解析"><a href="#1-3-2-语义解析" class="headerlink" title="1.3.2. 语义解析"></a>1.3.2. 语义解析</h4><p>从概念上讲，WebAssembly的语义分为三个阶段。对于语言的每个部分，规范都会对其进行指定。</p>
-<p><strong>解码Decoding</strong></p>
-<blockquote>
-<p>WebAssembly模块以二进制格式分发。解码过程将格式化并将其转换为模块的内部表示形式。在本规范中，此表示是通过抽象语法建模的，但是实际的实现可以改为直接编译为机器代码。</p>
-</blockquote>
-<p><strong>验证Validation</strong></p>
-<blockquote>
-<p>被解码的模块必须<em>有效</em>。验证检查许多格式​​正确的条件，以确保模块有意义且安全。特别是，它对功能及其内部的指令序列进行类型检查，以确保例如一致地使用操作数堆栈。</p>
-</blockquote>
-<p><strong>执行Execution</strong></p>
-<blockquote>
-<p>最后，一个有效的模块可以被<em>执行</em>。执行可以进一步分为两个阶段：</p>
-<p><strong>实例化Instantiation</strong>。模块实例是模块的动态表示，带有其自己的状态和执行堆栈。实例化将执行模块主体本身，并为其定义所有导入。它将初始化全局变量，内存和表，并调用模块的启动函数（如果已定义）。它返回模块导出的实例。</p>
-<p><strong>调用Invocation</strong>。一旦实例化，就可以通过在模块实例上<em>调用</em>导出的函数来启动进一步的WebAssembly计算。给定必需的参数，该函数将执行相应的函数并返回其结果。</p>
-<p>实例化和调用是在嵌入环境中的操作。</p>
-</blockquote>
-<h2 id="2-架构"><a href="#2-架构" class="headerlink" title="2. 架构"></a>2. 架构</h2><h3 id="2-1-规定"><a href="#2-1-规定" class="headerlink" title="2.1. 规定"></a>2.1. 规定</h3><p>WebAssembly是一种编程语言，具有多种具体表示形式（其二进制格式和文本格式）。 两者都映射到一个共同的结构。为简明起见，以抽象语法的形式描述了此结构。本规范的所有部分均根据此抽象语法定义。</p>
-<h4 id="2-1-1-语法符号"><a href="#2-1-1-语法符号" class="headerlink" title="2.1.1. 语法符号"></a>2.1.1. 语法符号</h4><p>在定义抽象语法的语法规则时采用以下约定。</p>
-<ul>
-<li>结束符号（原子）以sans-serif字体编写$\mathrm{i32, end}$。</li>
-<li>非结束符以斜体字体表示：$valtype，instr$。</li>
-<li>$A^n$是A的$n\geq0$个迭代的序列。</li>
-<li>$A^*$是A的可能是空的迭代序列。（这是n无关的$A^n$的简写。）</li>
-<li>$A^+$是A的非空迭代序列。（这是$A^n$的简写，其中n≥1。）</li>
-<li>$A^?$是A的可选出现。（这是$A^n$的简写，其中n≤1。）</li>
-<li>产生式被写成$sym::=A_1∣…∣A_n$。</li>
-<li>大型产生式可能会分为多个定义，可以用第一个以显式椭圆$sym::=A_1|…$结束，并以椭圆以$sym::=…∣A_2$开头来表示。</li>
-<li>一些产品在括号中加上附加条件“$(\mathrm{if} condition)$”，这为将产品组合扩展为许多单独的案例提供了捷径。</li>
-</ul>
-<h4 id="2-1-2-辅助符号"><a href="#2-1-2-辅助符号" class="headerlink" title="2.1.2. 辅助符号"></a>2.1.2. 辅助符号</h4><p>在处理语法结构时，还使用以下表示法：</p>
-<ul>
-<li>$\epsilon$表示空序列。</li>
-<li>$|s|$表示序列s的长度。</li>
-<li>$s[i]$表示序列s的第i个元素，从0开始。</li>
-<li>$s[i:n]$表示序列s的子序列$s[i]…s [i+n-1]$。</li>
-<li>$s\ with [i] = A$表示与s相同的序列，除了第i个元素被A代替。</li>
-<li>$s\ with [i:n] = A^n$表示与s相同的序列，不同之处在于子序列$s[i:n]$被An取代。</li>
-<li>$concat(s^*)$表示通过将$s^*$中的所有序列$s^i$串联而形成的平坦序列。</li>
-</ul>
-<p>此外，采用以下约定：</p>
-<ul>
-<li><p>符号$x^n$（其中x是非终结符号）被视为跨x的各个序列（类似于$x^*$，$x^+$，$x^?$）的元变量。</p>
-</li>
-<li><p>当给定一个序列$x^n$时，则假定在$(A1xA2)^n$中写入的序列中x的出现与xn呈逐点对应关系（对于$x^*$，$x^+$，$x^?$同样）。这隐式表达了在序列上映射语法结构的形式。</p>
-</li>
-</ul>
-<p>以下形式的生产被解释为分别将一组固定的字段$field_i$映射到“值” Ai的记录：<br>$$r ::= { field_1 A_1, field_2 A_2,… }$$</p>
-<p>使用以下表示法来处理此类记录：</p>
-<ul>
-<li><p>$r.field$表示r的字段filed的内容。</p>
-</li>
-<li><p>$r\ with\ field = A$表示与r相同的记录，除了字段组件的内容被A代替。</p>
-</li>
-<li><p>$r1 \oplus r2$通过逐点追加每个序列来表示具有相同序列字段的两个记录的组合：</p>
-</li>
-</ul>
-<p>$${ field_1 A_1^*, field_2 A_2^*, … } {field_1 B_1^*, field_2 B_2^*, … } = { field_1 A_1^* B_1^*, field_2 A_2^* B_2^*,… }$$</p>
-<ul>
-<li>$\oplus r^*$分别表示记录序列的组成；如果序列为空，则结果记录的所有字段均为空。</li>
-</ul>
-<p>序列和记​​录的更新符号递归地概括为“路径” $pth ::=([…]|.field)^+$所访问的嵌套组件：</p>
-<ul>
-<li>$s\ with\ [i]\ pth = A$是$s\ with [i] =(s[i]\ with\ pth = A)$的缩写。</li>
-<li>$r\ with\ field\ pth = A$是$r\ with\ field =(r.field\ with\ pth = A)$的缩写。</li>
-</ul>
-<p>其中$r\ with\ .field = A$缩写为$r\ with\ field = A$</p>
-<h4 id="2-1-3-向量"><a href="#2-1-3-向量" class="headerlink" title="2.1.3. 向量"></a>2.1.3. 向量</h4><p>向量是形式为$A^n$（或$A^*$）的有界序列，其中A可以是值或复杂的构造。一个向量最多可包含$2^32-1$（即MaxUint256）个元素。</p>
-<p>$$vec(A) ::= A^n\ (if\ n&lt;2^{32})$$</p>
-<h3 id="2-2-值"><a href="#2-2-值" class="headerlink" title="2.2. 值"></a>2.2. 值</h3><p>WebAssembly程序对原始数值进行操作。<br>此外，在程序的定义中，值的不可变序列出现以表示更复杂的数据，例如文本字符串或其他向量。</p>
-<h4 id="2-2-1-Bytes"><a href="#2-2-1-Bytes" class="headerlink" title="2.2.1. Bytes"></a>2.2.1. Bytes</h4><p>值的最简单形式是未解释的原始字节。<br>在抽象语法中，它们表示为十六进制文字。</p>
-<p>$$ byte​::=​0x00 |…| 0xFF​ $$</p>
-<h5 id="2-2-1-1-惯例"><a href="#2-2-1-1-惯例" class="headerlink" title="2.2.1.1. 惯例"></a>2.2.1.1. 惯例</h5><ul>
-<li><p>元变量$b$的范围为字节。</p>
-</li>
-<li><p>字节有时被解释为自然数$n &lt; 256$。</p>
-</li>
-</ul>
-<p>2.2.2. 整数</p>
-<p>具有不同值范围的不同类别的整数通过其<em>位宽</em>$N$以及是<em>无符号</em>还是<em>有符号</em>来区分。</p>
-<p>$$uN ::= 0 | 1| … | 2^N-1$$<br>$$sN ::= -2^N-1|…| -1 | 0 | 1 | … | 2^N-1$$<br>$$iN ::= uN$$</p>
-<p>后者定义了未解释的整数，其有符号性解释会根据上下文而变化。<br>在抽象语法中，它们表示为无符号值。<br>但是，某些运算会根据二进制补码解释将其转换为带符号。</p>
-<blockquote>
-<p>注意</p>
-<p>在本规范中出现的主要整数类型是u32，u64，s32，s64，i8，i16，i32，i64。但是，例如在浮点数的定义中，其他大小也可以作为辅助结构。</p>
-</blockquote>
-<h5 id="2-2-2-1-惯例"><a href="#2-2-2-1-惯例" class="headerlink" title="2.2.2.1. 惯例"></a>2.2.2.1. 惯例</h5><ul>
-<li>元变量$m，n，i$的范围是整数。</li>
-<li>如上面的语法所示，数字可以用简单的算术表示。<br>为了区分$2^N$之类的算术与$(1)^N$之类的序列，用括号将后者区分。</li>
-</ul>
-<h4 id="2-2-3-浮点数"><a href="#2-2-3-浮点数" class="headerlink" title="2.2.3. 浮点数"></a>2.2.3. 浮点数</h4><p>浮点数据表示32或64位值，它们对应于[IEEE-754-2019]标准（第3.3节）的相应二进制格式。</p>
-<p>每个值都有一个符号和大小。 幅值可以表示为形式为$m_0 m_1 m_2 \ldots m_M \cdot 2^e$的正态数，其中$e$是指数，m是其最高位$m_0$为1的有效数，或者以次正规数来表示 指数固定为最小可能值，且$m_0$为0; 在次法线中的是零正值和负值。 由于有效位数是二进制值，因此法线以$(1 +m\cdot 2^{-M})\cdot 2e$的形式表示，其中$M$是$m$的位宽； 对于次普通人也是如此。</p>
-<p>可能的大小还包括特殊值$\infty$（无穷大）和nan（即NaN，非数字）。NaN值具有一个有效载荷，该载荷描述了基础二进制表示形式中的尾数位。 信号和安静的NaN之间没有区别。</p>
-<p>$$fN ::= +fNmag | -fNmag$$<br>$$\displaylines{fNmag ::=(1+uM\cdot 2^{-M})\cdot 2^e ((if\ −2^{E−1} + 2 \leq e \leq 2^{E−1}−1))\<br>|\ (0+uM\cdot 2^{-M})\cdot 2^e (if\ e=-2^{E-1}+2)\<br>\infty\<br>nan(n)\ (if 1\leq n\lt 2^M)}$$</p>
-<p>当 M=signif(N) 且 E=expon(N) 则</p>
-<p>$$\displaylines{signif(32) = 23 \<br>expon(32) =8 \<br>signif(64)=52\<br>expon(64)=11}$$</p>
-<p>一个*规范的(canonical)*NaN是浮点数值$\pm nan(canon_N)$，其中$canon_N$是有效载荷，其最高有效位为1而所有其他均为0：</p>
-<p>$$canon_N = 2^{signif(N)-1}$$</p>
-<p>一个*算术(arithmetic)*NaN是$n\geq canon_N$的浮点值$\pm nan(n)$，因此最高有效位为1，其他所有位均为任意。</p>
-<blockquote>
-<p>注意</p>
-<p>在抽象语法中，子范数以有效数字的前导0区分。 次正态的指数与正态数的最小可能指数具有相同的值。 仅在二进制表示中，次正态的指数与任何正态数的指数的编码方式不同。</p>
-</blockquote>
-<h5 id="2-2-3-1-惯例"><a href="#2-2-3-1-惯例" class="headerlink" title="2.2.3.1. 惯例"></a>2.2.3.1. 惯例</h5><ul>
-<li>元变量z取自从上下文清晰可辨的浮点值。</li>
-</ul>
-<h4 id="2-2-4-名称Names"><a href="#2-2-4-名称Names" class="headerlink" title="2.2.4. 名称Names"></a>2.2.4. 名称Names</h4><p>名称是字符序列，是[UNICODE]（第2.4节）定义的标量值。</p>
-<p>$$\displaylines{name::= char^* \ (if\ |utf8(char^*)|&lt;2^{32})\<br>char ::= U+00|\ldots|U+D7FF|U+E000|…U+10FFFF}$$</p>
-<p>由于二进制格式的限制，名称的长度受其UTF-8编码的长度限制。</p>
-<h5 id="2-2-4-1-惯例"><a href="#2-2-4-1-惯例" class="headerlink" title="2.2.4.1. 惯例"></a>2.2.4.1. 惯例</h5><ul>
-<li>字符（Unicode标量值）有时与n &lt;1114112的自然数互换使用。</li>
-</ul>
-<h3 id="2-3-类型Types"><a href="#2-3-类型Types" class="headerlink" title="2.3 类型Types"></a>2.3 类型Types</h3><p>WebAssembly中的各种实体按类型分类。<br>在验证，实例化以及可能的执行期间检查类型。</p>
-<h4 id="2-3-1-值-Value-类型"><a href="#2-3-1-值-Value-类型" class="headerlink" title="2.3.1 值(Value)类型"></a>2.3.1 值(Value)类型</h4><p>值类型对WebAssembly代码可以计算的单个值以及变量接受的值进行分类。</p>
-<p>$$valtype ::= i32|i64|f32|f64$$</p>
-<p>i32和i64类型分别将32位和64位整数分类。<br>整数不是固有地带符号或无符号的，它们的解释由单个操作确定。</p>
-<p>f32和f64类型分别将32位和64位浮点数分类。<br>它们分别对应于[IEEE-754-2019]标准（第3.3节）定义的相应二进制浮点表示形式，也称为单精度和双精度。</p>
-<h5 id="2-3-3-1-惯例"><a href="#2-3-3-1-惯例" class="headerlink" title="2.3.3.1. 惯例"></a>2.3.3.1. 惯例</h5><ul>
-<li>元变量t可以从清晰的上下文中范围内的值类型。</li>
-<li>符号$|t|$表示值类型的位宽。即，$|i32|=|f32|=32$和$|i64|=|f64|＝64$。</li>
-</ul>
-<h4 id="2-3-2-结果-Result-类型"><a href="#2-3-2-结果-Result-类型" class="headerlink" title="2.3.2. 结果(Result)类型"></a>2.3.2. 结果(Result)类型</h4><p>结果类型对执行指令或块的结果进行分类，该指令或块是用括号写入的一系列值。</p>
-<p>$$resulttyle ::= [valtype^?]$$</p>
-<blockquote>
-<p>注意</p>
-<p>在当前版本的WebAssembly中，结果最多允许一个值。但是，这可能会泛化为将来版本中的值序列。</p>
-</blockquote>
-<h4 id="2-3-3-函数-Function-类型"><a href="#2-3-3-函数-Function-类型" class="headerlink" title="2.3.3 函数(Function)类型"></a>2.3.3 函数(Function)类型</h4><p>函数类型对函数的签名进行分类，将参数向量映射到结果向量，如下所示。</p>
-<p>$$ functype ::= [vec(valtype)] -&gt; [vec(valtype)]$$</p>
-<blockquote>
-<p>注意</p>
-<p>在当前版本的WebAssembly中，有效函数类型的结果类型向量的长度最多为1。此限制在将来的版本中可能会消除。</p>
-</blockquote>
-<h4 id="2-3-4-限制"><a href="#2-3-4-限制" class="headerlink" title="2.3.4. 限制"></a>2.3.4. 限制</h4><p>限制对与内存类型和表类型关联的可调整大小的存储的大小范围进行分类。</p>
-<p>$$limits ::= {min u32, max u32^?}$$</p>
-<p>如果没有给出最大值，则相应的存储可以增长到任何大小。</p>
-<h4 id="2-3-5-内存-Memories-类型"><a href="#2-3-5-内存-Memories-类型" class="headerlink" title="2.3.5. 内存(Memories)类型"></a>2.3.5. 内存(Memories)类型</h4><p>存储器类型将线性存储器及其大小范围分类。</p>
-<p>$$memtype ::= limits$$</p>
-<p>这些限制限制了内存的最小和最大可选大小。 限制以页面大小为单位给出。</p>
-<h4 id="2-3-6-表格类型"><a href="#2-3-6-表格类型" class="headerlink" title="2.3.6. 表格类型"></a>2.3.6. 表格类型</h4><p>表类型根据大小范围内的元素类型的元素对表进行分类。</p>
-<p>$$\displaylines{tabletype ::= limits elemtype\<br>elemtype::=funcref}$$</p>
-<p>像内存一样，表格的最小和最大大小限制也受到限制。<br>限制以条目数给出。</p>
-<p>元素类型funcref是所有函数类型的无限并集。<br>因此，该类型的表包含对异构类型函数的引用。</p>
-<blockquote>
-<p>注意</p>
-<p>在WebAssembly的未来版本中，可能会引入其他元素类型。</p>
-</blockquote>
-<h4 id="2-3-7-全局变量类型"><a href="#2-3-7-全局变量类型" class="headerlink" title="2.3.7. 全局变量类型"></a>2.3.7. 全局变量类型</h4><p>全局变量类型对全局变量进行分类，这些全局变量具有一个值，并且可以是可变的或不可变的。</p>
-<p>$$\displaylines{globaltype ::= mut valtype\mut ::= const | var}</p>
-<h4 id="2-3-8-外部类型"><a href="#2-3-8-外部类型" class="headerlink" title="2.3.8. 外部类型"></a>2.3.8. 外部类型</h4><p>外部类型使用各自的类型对导入和外部值进行分类。</p>
-<p>$$ externtype :: = func functype| table tabletype | mem memtype | global globaltype $$</p>
-<h5 id="2-3-8-1-惯例"><a href="#2-3-8-1-惯例" class="headerlink" title="2.3.8.1 惯例"></a>2.3.8.1 惯例</h5><p>为外部类型的序列定义了以下辅助符号。<br>它以保留顺序的方式筛选出特定种类的条目：</p>
-<p>$$\displaylines{funcs(externtype^*)=[functype|(func functype) \in externtype^*] \<br>tables(externtype^*)=[tabletype | (table tabletype)\in externtype^*] \<br>mems(externtype^*)=[memtype | (mem memtype)\in externtype^*] \<br>globals(externtype^*)=[globaltype | (global globaltype)\in externtype^*]}$$</p>
-<h3 id="2-4-指令Instructions"><a href="#2-4-指令Instructions" class="headerlink" title="2.4. 指令Instructions"></a>2.4. 指令Instructions</h3><p>WebAssembly代码由指令序列组成。 它的计算模型基于堆栈机，其中指令在隐式操作数堆栈上操纵值，使用（弹出）自变量值并生成或返回（推入）结果值。</p>
-<blockquote>
-<p>注意</p>
-<p>在当前版本的WebAssembly中，单个指令最多可以推入一个结果值。在将来的版本中可能会取消此限制。</p>
-</blockquote>
-<p>除了来自堆栈的动态操作数之外，某些指令还具有静态中间参数，通常是索引或类型注释，它们是指令本身的一部分。</p>
-<p>某些指令的结构在于将嵌套的指令序列括起来。</p>
-<p>以下各节将指令分为许多不同的类别。</p>
-<h4 id="2-4-1-数值指令"><a href="#2-4-1-数值指令" class="headerlink" title="2.4.1. 数值指令"></a>2.4.1. 数值指令</h4><p>数值指令提供对特定类型数值的基本操作。<br>这些操作与硬件中可用的各个操作紧密匹配。</p>
-<p>$$nn,mm::= 32| 64$$<br>$$sx ::=  \rm{u} |  \rm{s}$$<br>$$\displaylines{instr ::= \mathrm{i} nn.\mathrm{const}\ inn | \mathrm{i}nn.\mathrm{const}\ fnn \<br>| \mathrm{i}nn.iunop | \mathrm{f}nn.funop \<br>| \mathrm{i}nn.ibinop | \mathrm{f}nn.fbinop \<br>| \mathrm{i}nn.itestop \<br>| \mathrm{i}nn.irelop | \mathrm{f}nn.frelop \<br>| \mathrm{i32.wrap_i64} | \mathrm{i64.extend_i32_}sx | \mathrm{i}nn.\mathrm{trunc_f}mm_sx \<br>| \mathrm{f32.demote_f64} | \mathrm{f64.promote_f32} | \mathrm{f}nn.\mathrm{convert_i}mm_sx \<br>| \mathrm{i}nn.\mathrm{reinterpret_f}nn | \mathrm{i}nn.\mathrm{reinterpret_i}nn \<br>| \ldots}$$<br>$$ iunop ::= \mathrm{clz | ctz | opocnt}$$<br>$$ \displaylines{ibinop ::= \mathrm{add | sub | mul | div_}sx \mathrm{|rem_}sx \<br>| \mathrm{and | or | xor | shl | shr_}sx \mathrm{| rtol | rtor} }$$<br>$$ funop ::= \mathrm{abs | neg | sqrt | ceil | floor | trunc | nearest}$$<br>$$ fbinop ::= \mathrm{add | sub | mul | div | min | max | copysign}$$<br>$$ itestop ::= \mathrm{eqz}$$<br>$$ irelop ::= \mathrm{eq | ne | lt_}sx \mathrm{| gt_}sc \mathrm{| le_}sx \mathrm{| ge_}sx$$<br>$$ frelop ::= \mathrm{eq | ne | lt | gt | le | ge }$$</p>
-<p>数字指令按值类型划分。 对于每种类型，可以区分几个子类别：</p>
-<ul>
-<li>常量：返回静态常量。</li>
-<li>一元运算符：使用一个操作数并产生相应类型的一个结果。</li>
-<li>二进制运算符：使用两个操作数并产生一个相应类型的结果。</li>
-<li>测试：消耗一个相应类型的操作数，并产生一个布尔整数结果。</li>
-<li>比较：消耗两个各自类型的操作数，并产生一个布尔整数结果。</li>
-<li>转换：使用一种类型的值并产生另一种类型的结果（转换的源类型是“_”之后的类型）。</li>
-</ul>
-<p>一些整数指令有两种形式，其中带符号注释sx区分是将操作数解释为无符号整数还是带符号整数。<br>对于其他整数指令，对有符号的解释使用二进制补码意味着无论有符号性如何，它们的行为都相同。</p>
-<h5 id="2-4-1-1-惯例"><a href="#2-4-1-1-惯例" class="headerlink" title="2.4.1.1. 惯例"></a>2.4.1.1. 惯例</h5><p>有时，根据以下语法速记将操作分组在一起很方便：</p>
-<p>$$unop ::= iunop | funop$$<br>$$binop ::= ibinop | fbinop$$<br>$$testop ::= itestop$$<br>$$relop ::= irelop | frelop$$<br>$$cutop ::= \mathrm{wrap | entend | trunc | convert | demote | promote | reinterpret}$$</p>
-<h4 id="2-4-2-参数指令"><a href="#2-4-2-参数指令" class="headerlink" title="2.4.2. 参数指令"></a>2.4.2. 参数指令</h4><p>该组中的指令可以对任何值类型的操作数进行运算。</p>
-<p>$$ \displaylines{ instr ::= \ldots \<br>| \mathrm{drop} \<br>| \mathrm{select} }$$ </p>
-<p>drop运算符只是丢掉单个操作数。</p>
-<p>select运算符根据其第三个操作数是否为零来选择执行其前两个操作数之一。</p>
-<h4 id="2-4-3-变量指令"><a href="#2-4-3-变量指令" class="headerlink" title="2.4.3. 变量指令"></a>2.4.3. 变量指令</h4><p>变量指令涉及对局部或全局变量的访问。</p>
-<p>$$ \displaylines{ instr ::= \ldots \<br>| \mathrm{local.get}\ localidx \<br>| \mathrm{local.set}\  localidx \<br>| \mathrm{local.tee}\ localidx \<br>| \mathrm{global.get}\ globalidx \<br>| \mathrm{global.set}\ globalidx}$$</p>
-<p>这些指令分别获取或设置变量的值。<br>local.tee指令类似于local.set，但会返回其参数。</p>
-<h4 id="2-4-4-内存指令"><a href="#2-4-4-内存指令" class="headerlink" title="2.4.4. 内存指令"></a>2.4.4. 内存指令</h4><p>该组指令与线性内存有关。</p>
-<p>$$ memarg ::= { \mathrm{offset}\ u32, \mathrm{align}\ u32 }$$</p>
-<p>内存可以通过使用不同<em>值类型</em>的加载（load）和存储（store）指令来访问。<br>它们都使用一个内存中间值memarg，该值包含一个地址<em>偏移量（offset）</em>和一个预期的<em>编排方式</em>（表示为2的幂的指数）。<br>整数的加载和存储可以选择指定小于各自值类型的位宽度的存储大小。<br>在一些加载情况下，则需要符号扩展模式$sx$来选择适当的行为。</p>
-<p>静态地址偏移量被添加到动态地址操作数，从而产生33位长度的<em>有效地址</em>，该地址是从零开始的索引，可从该索引访问内存。<br>所有值以Little-Endian读取和写入。<br>如果任何已访问的内存字节超出了内存当前大小所隐含的地址范围，就会产生陷阱（Trap）。</p>
-<blockquote>
-<p>注意</p>
-<p>WebAssembly的未来版本可能会提供具有64位地址范围的内存指令。</p>
-<p>（这也是为啥现在叫wasm32）</p>
-</blockquote>
-<p>memory.size指令返回当前的内存大小。<br>memory.grow指令将内存增加给定的增量，并返回先前的大小；如果无法分配足够的内存，则返回-1。<br>两条指令均以页面大小为单位。</p>
-<blockquote>
-<p>注意</p>
-<p>在当前版本的WebAssembly中，所有内存指令都隐式地（默认）对内存索引0进行操作。此限制在将来的版本中可能会取消。</p>
-</blockquote>
-<h4 id="2-4-5-控制指令"><a href="#2-4-5-控制指令" class="headerlink" title="2.4.5. 控制指令"></a>2.4.5. 控制指令</h4><p>该组中的指令会影响控制流程。</p>
-<p>$$ \displaylines{ instr ::= \ldots \<br>| \mathrm{nop} \<br>| \mathrm{unreachable} \<br>| \mathrm{block}\ resulttype\ instr^<em>\ \mathrm{end} \<br>| \mathrm{loop }\ resulttype\ instr^</em>\ \mathrm{end} \<br>| \mathrm{if}\ resulttype\ instr^<em>\ \mathrm{else}\ instr^</em>\ \mathrm{end} \<br>| \mathrm{br}\ labelidx \<br>| \mathrm{br_if}\ labelidx \<br>| \mathrm{br_table}\ vec(labelidx)\ labelidx \<br>| \mathrm{return} \<br>| \mathrm{call}\ funcidx \<br>| \mathrm{call_indirect}\ typeidx}$$</p>
-<p>nop指令不执行任何操作。</p>
-<p>unreachable指令触发无条件的陷阱。</p>
-<p>block,loop以及if指令是结构化指令。<br>它们将嵌套的指令序列（称为块）括起来，以指令末尾或伪指令终止或分隔。<br>正如语法规定的那样，必须将它们嵌套好。<br>结构化指令可以产生一个如注释结果类型描述的值。</p>
-<p>每个结构化控制指令都会引入一个隐式标签。<br>标签（Label）是分支指令通过标签索引引用的目标。<br>与其他索引空间不同，标签的索引是相对于嵌套深度的，也就是说，标签0指的是包围引用分支指令的最内部结构化控制指令，而递增的索引则引用更远的索引。<br>因此，只能从关联的结构化控制指令中引用标签。<br>这也意味着分支只能指向外部，“脱离”它们所针对的控制构造的块。<br>具体效果取决于该控制结构：<br>在block或if情况下，向前跳转直到匹配到end后恢复执行。<br>在loop循环情况下，向后跳到loop开始。</p>
-<blockquote>
-<p>注意</p>
-<p>这将强制执行结构化的控制流程。<br>直观地讲，在大多数类似于C的语言中，针对块的if分支的行为类似于break语句，而针对循环的分支的行为类似于continue语句。</p>
-</blockquote>
-<p>分支（Branch）指令有以下几种形式：<br>br：执行无条件分支<br>br_if：执行条件分支<br>br_table：通过操作数索引到标签向量的间接操作来执行该间接操作，该标签向量是指令的直接执行对象，如果操作数超出范围，则指向默认目标。<br>return：无条件分支到最外层代码块的快捷方式，该块隐式地是当前函数的主体。<br>采取分支将操作数堆栈展开到输入目标结构化控制指令的高度。<br>但是，以非空结果类型为目标的控制指令作为目标的前向分支首先消耗匹配的操作数，并在展开后将它们推回操作数堆栈中，以作为终止的结构化指令的结果。</p>
-<p>call指令调用另一个函数，从堆栈中使用必要的参数并返回调用的结果值。<br>call_indirect指令通过将操作数索引到表中来间接调用函数。<br>由于表（table）可能包含异构类型funcref的函数元素，因此将根据指令的立即数对被调用方进行动态检查，以检查该函数类型（function type），如果调用不匹配，则调用将使用陷阱（trap）中止。</p>
-<blockquote>
-<p>注意</p>
-<p>在当前版本的WebAssembly中，call_indirect默认对表索引（tableidx）0操作。在将来的版本中可能会取消此限制。</p>
-</blockquote>
-<h4 id="2-4-6-表达式Expression"><a href="#2-4-6-表达式Expression" class="headerlink" title="2.4.6. 表达式Expression"></a>2.4.6. 表达式Expression</h4><p>函数（function）主体，全局变量（globals）的初始化值以及元素（element）或数据（data）段的偏移量都作为表达式给出。表达式是由结束（end）标记终止的指令（instruction）序列。</p>
-<p>$$ expr ::= instr* \mathrm{end}$$</p>
-<p>在某些地方，验证器将表达式限制为常量，从而限制了被允许的指令集。</p>
-<h3 id="2-5-模块-Modules"><a href="#2-5-模块-Modules" class="headerlink" title="2.5 模块 Modules"></a>2.5 模块 Modules</h3><p>WebAssembly程序被组织成模块，这些模块是部署，加载和编译的单元。<br>一个模块包含了类型（types），函数（functions），表（tables），内存（memories）和全局变量（globals）的定义。<br>此外，它可以声明导入（imports）和导出（exports），并以数据（data）和元素（element）段或启动函数的形式提供初始化逻辑。</p>
-<p>$$ \displaylines{ module ::= { types\ vec(functype),<br>funcs\ vec(func), \<br>tables\ vec(table), \<br>mems vec(mem), \<br>globals\ vec(elem), \<br>data\ vec(data), \<br>start\ start^?, \<br>imports\ vec(import),<br>exports\ vec(export) }}$$</p>
-<p>每个向量，甚至整个模块，都可能是空的。</p>
-<h4 id="2-5-1-索引"><a href="#2-5-1-索引" class="headerlink" title="2.5.1. 索引"></a>2.5.1. 索引</h4><p>定义被以从0开始的索引引用。<br>每个定义类都有其自己专属的索引空间，如以下类所示。</p>
-<p>$$\displaylines{ typeidx ::= u32\<br>funcidx ::= u32\<br>tableidx ::= u32\<br>memidx ::= u32\<br>globalidx ::= u32\<br>localidx ::= u32\<br>labelidx ::= u32}$$</p>
-<p>函数（functions），表（tables），内存（memories）和全局变量（globals）的索引空间包括在同一模块中声明的相应导入（imports）中。<br>这些导入（imports）的索引在同一索引空间中优先于其他定义的索引。</p>
-<p>局部变量（locals）的索引空间只能在函数内部访问，并且包括以此为参数的函数。这种函数位于局部变量之前。</p>
-<p>标签（label）索引引用指令序列内的结构化控制指令。</p>
-<h5 id="2-5-1-1-惯例"><a href="#2-5-1-1-惯例" class="headerlink" title="2.5.1.1. 惯例"></a>2.5.1.1. 惯例</h5><ul>
-<li>元变量l覆盖标签索引。</li>
-<li>元变量x，y覆盖其他任何索引空间中的索引。</li>
-</ul>
-<h4 id="2-5-2-类型"><a href="#2-5-2-类型" class="headerlink" title="2.5.2. 类型"></a>2.5.2. 类型</h4><p>模块的类型组件定义了一个功能类型（function types）的向量。</p>
-<p>所有功能类型必须在此组件中定义模块中使用。<br>它们由类型索引引用。</p>
-<blockquote>
-<p>注意</p>
-<p>WebAssembly的未来版本可能会添加类型定义的其他形式。</p>
-</blockquote>
-<h4 id="2-5-3-函数"><a href="#2-5-3-函数" class="headerlink" title="2.5.3. 函数"></a>2.5.3. 函数</h4><p>模块的funcs组件定义具有以下结构的函数向量：</p>
-<p>$$ func ::= {\mathrm{type}\ typeidx, \mathrm{locals}\ vec(valtype), \mathrm{body}\ expr}$$</p>
-<p>函数（function）的类型通过引用模块中定义的类型来声明其签名。<br>该函数的参数通过函数主体中从0的局部索引进行引用； 他们是可变的。</p>
-<p>局部变量（locals）声明一个可变局部变量及其类型的向量。<br>这些变量是通过函数体内的局部索引来引用的。<br>第一个局部变量的索引是最小索引，其不引用任何参数。</p>
-<p>主体（body）是一个指令序列，在终止时必须产生一个与函数类型的结果类型（result type）匹配的堆栈。</p>
-<p>函数通过函数索引被引用，由最小索引开始，不引用任何函数导入（function import）。</p>
-<h4 id="2-5-4-表"><a href="#2-5-4-表" class="headerlink" title="2.5.4. 表"></a>2.5.4. 表</h4><p>模块的表组件定义了由表类型描述的一个表向量：</p>
-<p>$$ table ::= { \mathrm{type}\ tabletype }$$</p>
-<p>表是特定表元素类型的不透明值的向量。<br>表类型的限制中的最小的大小指定了该表的初始大小。<br>而如果存在最大则其大小限制该表稍后可以增长至的大小。</p>
-<p>可以通过元素段（element segment）初始化表。</p>
-<p>通过表索引引用表，从最小索引开始，不需要引用一个表导入（table import）。<br>大多数构造都隐式引用表索引0。</p>
-<blockquote>
-<p>注意</p>
-<p>在当前版本的WebAssembly中，最多可以在一个模块中定义或导入一个表，并且所有构造都隐式引用表0。此限制在将来的版本中可能会取消。</p>
-</blockquote>
-<h4 id="2-5-5-内存"><a href="#2-5-5-内存" class="headerlink" title="2.5.5. 内存"></a>2.5.5. 内存</h4><p>模块的内存（mems）组件定义了一个线性存储器（或简称为存储器）的向量，如其存储器类型所述：</p>
-<p>$$ mem := {\mathrm{type}\ memtype }$$</p>
-<p>内存是未被解释的原始字节的向量。<br>内存类型的限制中的最小（Min）大小指定该内存的初始大小，而最大内存大小（Max，如果存在）则限制了以后可以增长的大小。<br>两者均以页面大小为单位。</p>
-<p>可以通过数据段（data segment）初始化内存。</p>
-<p>内存被内存索引引用，从最小索引开始，不引用内存导入（memory import）。<br>大多数构造都隐式引用内存索引0。</p>
-<blockquote>
-<p>注意</p>
-<p>在当前版本的WebAssembly中，最多可以在一个模块中定义或导入一个内存，并且所有构造都隐式引用此内存0。此限制在将来的版本中可能会取消。</p>
-<p>（换句话说现在的mems根本就是个单元素数组，里面就一个memory）</p>
-</blockquote>
-<h4 id="2-5-6-全局变量Globals"><a href="#2-5-6-全局变量Globals" class="headerlink" title="2.5.6. 全局变量Globals"></a>2.5.6. 全局变量Globals</h4><p>模块的全局变量组件定义了一个全局变量的向量（或简称为globals）：</p>
-<p>$$global ::= { \mathrm{type}\ globaltype, \mathrm{init}\ expr}$$</p>
-<p>每个全局变量都存储给定全局变量类型（global type）的单个值。<br>它的类型还指定了全局变量是不可变的还是可变的。<br>此外，每个全局变量都使用常量初始化表达式（expr）给出的初始化值进行初始化。</p>
-<p>全局变量通过全局索引引用，从最小的索引开始，不引用全局导入。</p>
-<h4 id="2-5-7-元素段-Element-Segments"><a href="#2-5-7-元素段-Element-Segments" class="headerlink" title="2.5.7. 元素段 Element Segments"></a>2.5.7. 元素段 Element Segments</h4><p>表的初始内容未初始化。<br>模块的elem组件定义元素段的向量，这些向量以给定的偏移量从元素的静态向量初始化表的子范围。</p>
-<p>$$ elem ::= { \mathrm{table}\ tableidx, \mathrm{offset}\ express, \mathrm{init} vec(funcidx)}$$</p>
-<p>偏移量（offset）由一个常量表达式给出。</p>
-<blockquote>
-<p>注意</p>
-<p>在当前版本的WebAssembly中，模块中最多允许一个表。因此，唯一有效的tableidx为0。</p>
-</blockquote>
-<h4 id="2-5-8-数据段-Data-Segments"><a href="#2-5-8-数据段-Data-Segments" class="headerlink" title="2.5.8. 数据段 Data Segments"></a>2.5.8. 数据段 Data Segments</h4><p>内存的初始内容为一堆零值字节。<br>模块的数据组件定义数据段的向量，这些数据段以给定的偏移量和静态字节向量来初始化内存范围。</p>
-<p>$$ data ::= { \mathrm{data}\ memidx, \mathrm{offset}\ expr, \mathrm{init}\ vec(byte) }$$</p>
-<p>偏移量（offset）由一个常量表达式给出。</p>
-<blockquote>
-<p>注意</p>
-<p>在当前版本的WebAssembly中，一个模块中最多允许有一个内存。 因此，唯一有效的memidx为0。</p>
-</blockquote>
-<h4 id="2-5-9-启动函数-Start-Function"><a href="#2-5-9-启动函数-Start-Function" class="headerlink" title="2.5.9. 启动函数 Start Function"></a>2.5.9. 启动函数 Start Function</h4><p>模块的启动（start）组件声明一个启动函数的函数索引，该函数在初始化表和内存后在实例化模块时自动调用。</p>
-<p>$$ start ::= { \mathrm{func}\ funcidx }$$</p>
-<blockquote>
-<p>注意</p>
-<p>启动功能用于初始化模块的状态。在初始化完成之前，无法访问模块及其导出（exports）。</p>
-</blockquote>
-<h4 id="2-5-10-导出-exports"><a href="#2-5-10-导出-exports" class="headerlink" title="2.5.10. 导出 exports"></a>2.5.10. 导出 exports</h4><p>模块的导出组件定义了一组导出。一旦实例化该模块，主机环境就可以访问它们。</p>
-<p>$$ export ::= { \mathrm{name}\ name, \mathrm{desc}\ exportdesc }$$<br>$$ \displaylines{ exportdesc ::= \mathrm{func}\ funcidx\<br>| \mathrm{table}\ tableidx\<br>| \mathrm{mem}\ memidx\<br>| \mathrm{global}\ globalidx}$$</p>
-<p>每个导出都用唯一的名称标记。<br>可导出的定义是函数，表，内存和全局变量，它们通过相应的描述符进行引用。</p>
-<h5 id="2-5-10-1-惯例"><a href="#2-5-10-1-惯例" class="headerlink" title="2.5.10.1. 惯例"></a>2.5.10.1. 惯例</h5><p>为导出序列定义了以下辅助符号，以保留顺序的方式过滤出特定种类的索引：</p>
-<ul>
-<li>$func(export^*)=[ funcidx | \mathrm(func)\ funcidx \in (export.\mathrm{desc}) ]$</li>
-<li>$tables(export^*)=[ tableidx | \mathrm(table)\ tableidx \in (export.\mathrm{desc}) ]$</li>
-<li>$mems(export^*)=[ memidx | \mathrm(mem)\ memidx \in (export.\mathrm{desc}) ]$</li>
-<li>$globals(export^*)=[ globalidx | \mathrm(global)\ globalidx \in (export.\mathrm{desc}) ]$</li>
-</ul>
-<h4 id="2-5-11-导入-imports"><a href="#2-5-11-导入-imports" class="headerlink" title="2.5.11. 导入 imports"></a>2.5.11. 导入 imports</h4><p>模块的导入组件定义了实例化所需的一组导入。</p>
-<p>$$ import ::= { \mathrm{module}\ name, \mathrm{name}\ name, \mathrm{desc}\ importdesc}$$<br>$$ \displaylines{ importdesc ::= \mathrm{func}\ typeidx\<br>| \mathrm{table}\ tabletype\<br>| \mathrm{mem}\ memtype\<br>| \mathrm{global}\ globaltype}$$</p>
-<p>每个导入都由两级名称空间标记，该名称空间由<em>模块名称</em>和该模块内<em>实体的名称</em>组成。<br>可导入的定义为函数，表，内存和全局变量。<br>每个导入都由一个描述符指定，该描述符的类型与实例化期间提供的定义必须匹配。</p>
-<p>每次导入都会在相应的索引空间（index space）中定义一个索引。<br>在每个索引空间中，导入索引都位于模块本身包含的任何定义的第一个索引之前。</p>
-<blockquote>
-<p>注意</p>
-<p>与导出名称不同，导入名称不一定是唯一的。<br>可以多次导入同一“模块名::名称”。<br>这样的导入甚至可能具有不同的类型描述，包括不同种类的实体。<br>仍然可以实例化具有此类导入的模块，具体取决于<em>嵌入程序</em>如何允许解析和提供导入的细节。<br>但是，不需要嵌入程序来支持此类重载，并且WebAssembly模块本身无法实现重载名称。</p>
-</blockquote>
-<h2 id="3-验证"><a href="#3-验证" class="headerlink" title="3. 验证"></a>3. 验证</h2><h3 id="3-1-惯例"><a href="#3-1-惯例" class="headerlink" title="3.1. 惯例"></a>3.1. 惯例</h3><p>验证将检查WebAssembly模块的格式是否正确，因为只能有效的模块能够被实例化。</p>
-<p>有效性是由类型系统根据模块及其内容的抽象语法定义的。<br>对于每个抽象语法，都有一个键入规则，用于指定适用于它的约束。<br>所有规则均以两种等效形式给出：</p>
-<ul>
-<li>用行文，以直观的形式描述含义。</li>
-<li>用公式表示法，以数学形式描述规则。[1]</li>
-</ul>
-<blockquote>
-<p>注意</p>
-<p>行文和公式规则是等效的，因此阅读本规范不需要理解公式符号。<br>公式提供了更简洁的符号描述，该符号广泛用于编程语言的语义中，并易于进行数学证明。</p>
-</blockquote>
-<p>在这两种情况下，规则都是以声明方式制定的。也就是说，它们仅制定约束条件，而没有定义算法。<br>附录中提供了根据本规范的用于类型检查指令序列的健全完整算法的框架。</p>
-<h4 id="3-1-1-上下文"><a href="#3-1-1-上下文" class="headerlink" title="3.1.1. 上下文"></a>3.1.1. 上下文</h4><p>单个定义的有效性被制定为与上下文相关，该上下文收集有关周围模块和范围内定义的相关信息：</p>
-<ul>
-<li>类型：当前模块中定义的类型列表。</li>
-<li>函数：在当前模块中声明的功能列表，以其功能类型表示。</li>
-<li>表：在当前模块中声明的表格列表，以表格类型表示。</li>
-<li>内存：在当前模块中声明的内存列表，以其内存类型表示。</li>
-<li>全局变量：在当前模块中声明的全局变量列表，以其全局类型表示。</li>
-<li>局部变量：在当前函数中声明的本地列表（包括参数），以其值类型表示。</li>
-<li>标签：从当前位置可访问的标签堆栈，以其结果类型表示。</li>
-<li>返回值：当前函数的返回类型，表示为可选结果类型，当不允许返回时（如独立表达式），该结果类型不存在。</li>
-</ul>
-<p>换句话说，上下文包含每个索引空间的一系列适当类型，描述该空间中的每个定义条目。<br>局部变量，标签和返回类型仅用于验证函数体中的指令，而在其他地方保留为空。<br>标签栈是上下文中随指令序列的验证而变化的唯一部分。</p>
-<p>更具体地说，上下文被定义为具有抽象语法的记录（records），$C$：</p>
-<p>$$ \displaylines{C::=\mathrm{types}\ functype^*,\<br>\mathrm{funcs}\ functype^*,\<br>\mathrm{tables}\ tabletype^*,\<br>\mathrm{mems}\ memtype^*,\<br>\mathrm{globals}\ globaltype^*,\<br>\mathrm{locals}\ valtype^*,\<br>\mathrm{labels}\ resulttype^*,\<br>\mathrm{return}\ resulttype^?}$$</p>
-<p>除了使用$C.\mathrm{field}$编写的现场访问外，还采用以下表示法来处理上下文：</p>
-<ul>
-<li>拼写上下文时，将省略空白字段。</li>
-<li>$C, \mathrm{field}\ A^*$表示与$C$相同的上下文，但元素$A^*$附加在其$\mathrm{field}$组件序列之前。</li>
-</ul>
-<blockquote>
-<p>注意</p>
-<p>我们使用诸如$C.labels[i]$之类的索引符号在上下文中的相应索引空间中查找索引。<br>上下文扩展符号$C，\mathrm{field}\ A$主要用于局部扩展相对索引空间，例如标签索引。<br>因此，将符号定义为附加在各个序列的前面，引入新的相对索引0并移动现有的相对索引。</p>
-</blockquote>
-<h4 id="3-1-2-行文符号"><a href="#3-1-2-行文符号" class="headerlink" title="3.1.2. 行文符号"></a>3.1.2. 行文符号</h4><p>验证由程式化规则为抽象语法的每个相关部分指定。 这些规则不仅说明定义短语何时有效的约束，而且还使用类型对短语进行分类。 在说明这些规则时采用了以下约定。</p>
-<ul>
-<li>当且仅当满足相应规则表示的所有约束时，短语A才被称为“对于T型有效”。 T的形式取决于A是什么。</li>
-</ul>
-<blockquote>
-<p>注意</p>
-<p>例如，如果$A$是一个函数，则$T$也是一个函数类型。<br>如果$A$是全局类型，则$T$也是全局类型； 如此类推。</p>
-</blockquote>
-<ul>
-<li><p>规则隐式假定给定上下文$C$。</p>
-</li>
-<li><p>在某些地方，此上下文在本地扩展到带有其他条目的上下文$C’$。措词“*在上下文中$C’$，…声明…*”用于表示以下声明必须在扩展上下文中包含的假设下适用。</p>
-</li>
-</ul>
-<h4 id="3-1-3-正式符号"><a href="#3-1-3-正式符号" class="headerlink" title="3.1.3. 正式符号"></a>3.1.3. 正式符号</h4><blockquote>
-<p>注意</p>
-<p>本节简要说明了正式指定键入规则的表示法。<br>对于感兴趣的读者，可以在相应的书中找到更全面的介绍。 [2]</p>
-</blockquote>
-<p>短语$A$具有各自类型$T$的命题被写为$A:T$。<br>但是，总的来说，键入取决于上下文$C$。<br>为明确表示这一点，完整的形式为判断$C\vdash A:T$，它表示$A:T$在C的假设下成立。</p>
-<p>正式的符号规则使用一种标准的方法来指定类型系统，将它们呈现为<em>推理规则</em>。<br>每个规则具有以下一般形式：</p>
-<p>$$\frac{<br>     {premise}_1 \qquad {premise}_2 \qquad \dots \qquad {premise}_n<br>   }{<br>     {conclusion}<br>   }$$</p>
-<p>这样的规则被认为是一个大含义：如果所有前提都成立，那么结论成立。<br>有些规则没有前提；它们是其结论无条件成立的<em>公理</em>。<br>结论始终是判断$C \vdash A : T$，并且抽象语法的每个相关构造A都有一个相应的规则。</p>
-<blockquote>
-<p>注意</p>
-<p>例如，可以将i32.add指令的输入规则作为一个公理给出：<br>$$\frac{<br>      }{<br>        C \vdash i32.add : [i32, i32] \to [i32]<br>      }$$</p>
-<p>该指令对于[i32, i32]→[i32]类型始终有效（假设它使用两个i32值并产生一个i32），而与任何其他条件无关。<br>像local.get这样的指令可以按如下方式键入：<br>$$\frac{<br>        C.locals[x] = t<br>      }{<br>        C \vdash \mathrm{local.get}\ x : [] \to [t]<br>      }$$<br>在此，前提要求上下文中存在直接本地索引x。<br>该指令产生其各自类型t的值（并且不消耗任何值）。<br>如果C.locals[x]不存在，则前提不成立，并且指令类型错误。</p>
-<p>最后，结构化指令需要一个递归规则，其中前提本身就是键入判断：<br>$$\frac{<br>        C,\ \mathrm{label}[t^?] \vdash instr^\ast : [] \to [t^?]<br>      }{<br>        C \vdash \mathrm{block}[t^?]\ instr^\ast \ \mathrm{end}: [] \to [t^?]<br>      }$$<br>一个block指令仅在其主体中的指令序列有效时才有效。<br>此外，结果类型必须与区块的注解$[t^?]$匹配。<br>如果是这样，则块指令与主体具有相同的类型。<br>在内部，可以使用相同类型的其他标签，这可以通过使用前提的其他标签信息扩展上下文C来表示。</p>
-</blockquote>
-<p>[1]语义来自以下文章：Andreas Haas，Andreas Rossberg，Derek Schuff，Ben Titzer，Dan Gohman，Luke Wagner，Alon Zakai，JF Bastien，Michael Holman。 《通过WebAssembly加速Web》。 第38届ACM SIGPLAN编程语言设计和实现会议（PLDI 2017）的会议记录。 ACM 2017年。</p>
-<p>[2]例如：Benjamin Pierce。 《类型和编程语言》。 麻省理工学院出版社2002</p>
-<h3 id="3-2-类型"><a href="#3-2-类型" class="headerlink" title="3.2. 类型"></a>3.2. 类型</h3><p>大多数类型都是普遍有效的。<br>但是，限制适用于函数类型以及表类型和内存类型的限制，必须在验证期间进行检查。</p>
-<h4 id="3-2-1-限制Limits"><a href="#3-2-1-限制Limits" class="headerlink" title="3.2.1. 限制Limits"></a>3.2.1. 限制Limits</h4><p>界限必须具有在给定范围内的有意义的界限。</p>
-<h5 id="3-2-1-1-min-n-max-m"><a href="#3-2-1-1-min-n-max-m" class="headerlink" title="3.2.1.1. ${min\ n, max\ m^?}$"></a>3.2.1.1. ${min\ n, max\ m^?}$</h5><ul>
-<li>n的值不能大于k。</li>
-<li>如果最大值$m^?$不为空，则：<ul>
-<li>它的值不能大于k。</li>
-<li>它的值不能小于n。</li>
-</ul>
-</li>
-<li>然后该限制在范围k内有效。</li>
-</ul>
-<p>$$\frac{<br>     n \leq k<br>     \qquad<br>     (m \leq k)^?<br>     \qquad<br>     (n \leq m)^?<br>   }{<br>     \vdash limits { min<del>n, max</del>m^? } : k<br>   }$$</p>
-<h4 id="3-2-2-函数类型"><a href="#3-2-2-函数类型" class="headerlink" title="3.2.2. 函数类型"></a>3.2.2. 函数类型</h4><p>函数类型不能指定一个以上的结果。</p>
-<h5 id="3-2-2-1-t-1-n-to-t-2-m"><a href="#3-2-2-1-t-1-n-to-t-2-m" class="headerlink" title="3.2.2.1. $[t_1^n] \to [t_2^m]$"></a>3.2.2.1. $[t_1^n] \to [t_2^m]$</h5><ul>
-<li>参数m不得大于1。</li>
-<li>则函数类型有效。</li>
-</ul>
-<p>$$\frac{<br>   }{<br>     \vdash [t_1^\ast] \to [t_2^?] ~ok<br>   }$$</p>
-<blockquote>
-<p>注意</p>
-<p>在将来的WebAssembly版本中，可能消除对返回值至多一个的限制。</p>
-</blockquote>
-<h4 id="3-2-3-表类型"><a href="#3-2-3-表类型" class="headerlink" title="3.2.3. 表类型"></a>3.2.3. 表类型</h4><h5 id="3-2-3-1-元素类型：限制"><a href="#3-2-3-1-元素类型：限制" class="headerlink" title="3.2.3.1. 元素类型：限制"></a>3.2.3.1. 元素类型：限制</h5><ul>
-<li>限制limits必须在$2^32$范围内有效</li>
-<li>则表类型有效。</li>
-</ul>
-<p>$$   \frac{<br>     \vdash limits: 2^{32}<br>   }{<br>     \vdash limits<del>elemtype</del>\mathrm{ok}<br>   }$$</p>
-<h4 id="3-2-4-内存类型"><a href="#3-2-4-内存类型" class="headerlink" title="3.2.4. 内存类型"></a>3.2.4. 内存类型</h4><h5 id="3-2-4-1-限制"><a href="#3-2-4-1-限制" class="headerlink" title="3.2.4.1. 限制"></a>3.2.4.1. 限制</h5><ul>
-<li>限制limits必须在$2^16$范围内有效</li>
-<li>则内存类型有效。</li>
-</ul>
-<p>$$   \frac{<br>     \vdash limits: 2^{16}<br>   }{<br>     \vdash limits~\mathrm{ok}<br>   }$$</p>
-<h4 id="3-2-5-全局类型"><a href="#3-2-5-全局类型" class="headerlink" title="3.2.5. 全局类型"></a>3.2.5. 全局类型</h4><h5 id="3-2-5-1-可变值类型"><a href="#3-2-5-1-可变值类型" class="headerlink" title="3.2.5.1. 可变值类型"></a>3.2.5.1. 可变值类型</h5><ul>
-<li>全局类型有效</li>
-</ul>
-<p>$$   \frac{<br>   }{<br>     \vdash globaltype\ mut<del>valtype</del>\mathrm{ok}<br>   }$$</p>
-<h4 id="3-2-6-外部类型"><a href="#3-2-6-外部类型" class="headerlink" title="3.2.6. 外部类型"></a>3.2.6. 外部类型</h4><h5 id="3-2-6-1-函数类型-func"><a href="#3-2-6-1-函数类型-func" class="headerlink" title="3.2.6.1. 函数类型 func"></a>3.2.6.1. 函数类型 func</h5><ul>
-<li>func的函数类型functype必须有效。</li>
-<li>则外部类型有效。</li>
-</ul>
-<p>$$   \frac{<br>     \vdash functype<del>ok<br>   }{<br>     \vdash func</del>functype~ok<br>   }$$</p>
-<h5 id="3-2-6-2-表类型-table"><a href="#3-2-6-2-表类型-table" class="headerlink" title="3.2.6.2. 表类型 table"></a>3.2.6.2. 表类型 table</h5><ul>
-<li>差不多同上，仅类型区别，类型有效则有效</li>
-</ul>
-<h5 id="3-2-6-3-内存类型-mem"><a href="#3-2-6-3-内存类型-mem" class="headerlink" title="3.2.6.3. 内存类型 mem"></a>3.2.6.3. 内存类型 mem</h5><ul>
-<li>差不多同上，仅类型区别，类型有效则有效</li>
-</ul>
-<h5 id="3-2-6-4-全局类型-global"><a href="#3-2-6-4-全局类型-global" class="headerlink" title="3.2.6.4. 全局类型 global"></a>3.2.6.4. 全局类型 global</h5><ul>
-<li>差不多同上，仅类型区别，类型有效则有效</li>
-</ul>
-<h3 id="3-3-指令"><a href="#3-3-指令" class="headerlink" title="3.3. 指令"></a>3.3. 指令</h3><p>指令按函数类型[t]→[t]进行分类，这些函数类型描述了指令如何操纵操作数堆栈。 这些类型描述了必需的输入堆栈，其中弹出了一条指令的类型为t的参数值，以及提供的输出堆栈，其返回的结果为类型t的结果。</p>
-<h2 id="4-执行"><a href="#4-执行" class="headerlink" title="4. 执行"></a>4. 执行</h2><h2 id="5-二进制格式"><a href="#5-二进制格式" class="headerlink" title="5. 二进制格式"></a>5. 二进制格式</h2><h2 id="6-文本格式"><a href="#6-文本格式" class="headerlink" title="6. 文本格式"></a>6. 文本格式</h2><h2 id="A-附录"><a href="#A-附录" class="headerlink" title="A. 附录"></a>A. 附录</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/wasm-core-1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -3220,16 +773,16 @@ With the respect to/Enperienced the less main reason, they xxx
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/chain-scaling/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/chain-scaling/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -3251,7 +804,7 @@ With the respect to/Enperienced the less main reason, they xxx
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-06 15:44:50" itemprop="dateModified" datetime="2021-03-06T15:44:50+08:00">2021-03-06</time>
+                <time title="Modified: 2021-03-06 23:47:44" itemprop="dateModified" datetime="2021-03-06T23:47:44+08:00">2021-03-06</time>
               </span>
 
           
@@ -3269,61 +822,96 @@ With the respect to/Enperienced the less main reason, they xxx
 <p>虽然现在的公链生态已经获得成功，但是其反受繁荣现状的掣肘。尤其是比特币和以太坊，存在严重的可扩展性问题。从其成为能够支持全球规模交易量的全球网络的目标来看，目前两者都在交易吞吐量(tps)方面表现不佳。</p>
 <p>从根本上讲，扩展解决方案可以增加交易量或减少交易时间。这也是理所当然的，因为可缩放性是按区块链可实现的tps（每秒交易量）衡量的。</p>
 <p>展望未来，我们可以通过两种方式对区块链扩展解决方案进行分类。首先是与传统的云架构缩放级别（水平，垂直和对角线）进行粗略的比较。其次，存在特定于区块链的缩放分类：第1层（在链上）和第2层（在链外）。</p>
-<h2 id="纵向缩放"><a href="#纵向缩放" class="headerlink" title="纵向缩放"></a>纵向缩放</h2><p>正常情况下，tps算法如下</p>
-<p>$$tps = BlockSize\times AvgTxSize\div BlockTime$$</p>
-<p>因此我们可以给出如下几种优化方案</p>
-<h3 id="减少区块时间"><a href="#减少区块时间" class="headerlink" title="减少区块时间"></a>减少区块时间</h3><p>我们不能简单地减少区块时间，因为那样会导致自然产生的分叉率更高，从而降低了系统安全性。因为在减少块时间的同时，网络中广播新区块的时间是依旧不变的。</p>
-<p>以太坊一直通过采用GHOST（Greedy Heaviest Observed SubTree，贪婪的最高权重的被观测子树）协议来解决这个问题。使用GHOST协议，矿工并不会简单地同意最长的链条（比特币方案），而是“重量”最大的链条。这个“重量”是由一条链的长度和其叔块数计算得出的一个值。</p>
-<h3 id="增加区块大小（容量）"><a href="#增加区块大小（容量）" class="headerlink" title="增加区块大小（容量）"></a>增加区块大小（容量）</h3><p>增加区块大小能够改善区块链的TPS。因为一个区块可以包含更多交易，也将降低交易费用。</p>
-<p>但是，与减少块时间一样，增加大小存在一些副作用。一方面，增加块大小将意味着很难分叉，并且根据社区的不同，这可能不是令人愉快的体验（BCH）。这也将使区块链总体积以更快的速度增长，这也是减少区块时间的难题。最后，增加块大小很可能不是一次性解决方案，因为可伸缩性提升只是线性的。将来可能需要再次增加块大小，从而引发“滑坡”式的争论。</p>
-<h3 id="减少交易体积"><a href="#减少交易体积" class="headerlink" title="减少交易体积"></a>减少交易体积</h3><p>隔离见证（SegWit）是对比特币的升级，可将交易签名从交易内部移至交易结束时的单独结构，称为隔离见证。对于非隔离见证节点，这将减少有效交易规模，因为它们不知道读入隔离见证。</p>
-<p>非隔离见证节点将看到没有签名的交易，但会将交易标记为有效。另一方面，SegWit节点将知道读入隔离的见证人，并使用签名对其进行验证。</p>
-<p>SegWit最初旨在解决比特币中的交易延展性。它还使用软分叉来实现，并导致较小的区块链大小。但是，SegWit只是线性可伸缩性的一次提升。</p>
-<p>递归SNARKs也可以减小事务大小。与其将交易本身存储在区块链中，我们可以存储证明这些交易确实发生的证据，以及谁拥有多少加密货币的最终资产负债表。这通过减小事务大小来提高效率，并且还因为机器可以在几毫秒内验证证明。但是，当前，为了生成这些样式的证明，需要可信的环境设置。在实践中，生成证明非常昂贵。</p>
-<h2 id="链下纵向缩放"><a href="#链下纵向缩放" class="headerlink" title="链下纵向缩放"></a>链下纵向缩放</h2><p>考虑到区块链的速度限制了它的可扩展性，我们可以考虑完全消除链上成本更高的操作，仅在需要全局真相时才发布。</p>
-<h3 id="闪电网络-amp-雷电网络"><a href="#闪电网络-amp-雷电网络" class="headerlink" title="闪电网络&amp;雷电网络"></a>闪电网络&amp;雷电网络</h3><p>可以使用HTLC（哈希时间锁定合同）来实现比特币中的支付渠道，并且可以将交易从主要的比特币区块链转移到侧链。</p>
-<p>如果Alice和Bob经常进行交易，那么对于Alice和Bob来说，建立一个私人支付渠道是很有意义的，他们在这里进行链下交易。 仅当他们想结清最终余额时，他们才会回发到主区块链。 这样一来，Alice和Bob仍然可以像往常一样进行交易，但是主区块链只需要存储Alice和Bob的初始余额和期末余额。</p>
-<p>比特币闪电网络的根本思想是建立一个“支付渠道”网络，如图所示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">    Alice --- Bob</span><br><span class="line">    Alice --- David</span><br><span class="line">    Bob --- Eva</span><br><span class="line">    Bob ---  Fiona</span><br><span class="line">    </span><br><span class="line">    David --- Eva</span><br><span class="line"></span><br><span class="line">    Eva --- Fiona</span><br><span class="line">    Fiona --- Charlie</span><br><span class="line">    Eva --- Charlie</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/chain-scaling/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
-<p>在上图中，只要存在通过支付渠道网络从Alice到Charlie的路径，Alice就可以立即向Charlie付款，而无需直接面向Charlie付款。</p>
-<p>以太坊在工作中有一个类似的可扩展性解决方案，适当命名为雷电网络(Raiden)。</p>
-<p>付款渠道和付款渠道网络将使我们无需进行很多交易，将付款委托给简单的簿记。由于主区块链仅在支付渠道中看到各方的开始和结束余额，因此我们可以使大部分交易保持脱链状态：将比特币从不到10的tps扩展到潜在的数十万tps。</p>
-<p>但是这种方式依然存在一些问题：必须锁定资金才能启动支付渠道；集中到中心辐射型(hub-and-spoke)拓扑的支付渠道网络的集中化问题。</p>
-<h2 id="横向缩放"><a href="#横向缩放" class="headerlink" title="横向缩放"></a>横向缩放</h2><h3 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h3><p>分片是一种数据库扩展策略，可将一个完整的数据库分为多个“分片”，每个分片数据库都包含来自原始数据库的子集的数据，该原始数据库的子集是原始数据库。相同的想法可以应用于区块链，并且目前是以太坊研究的活跃领域之一。</p>
-<p>将分片应用至区块链意味着并非每个节点都跟踪每个区块。这是第一层横向缩放解决方案。我们可以有多个并行运行的区块链，每个区块包含所有交易的子集。当前正在研究的问题包括分片式区块链系统中各个节点的分类（例如，看到单个分片的节点与看到所有分片的节点），跨分片通信以及针对单分片接管的防御措施。</p>
-<h3 id="侧链"><a href="#侧链" class="headerlink" title="侧链"></a>侧链</h3><p>侧链的想法是，可以出于不同目的创建多个侧链，以插入主链，从而有效减少主链上的流量。</p>
-<p>其本质是将hash分散在多个链上，因此存在安全隐患。</p>
-<h2 id="高级缩放及其通用化"><a href="#高级缩放及其通用化" class="headerlink" title="高级缩放及其通用化"></a>高级缩放及其通用化</h2><h3 id="Plasma"><a href="#Plasma" class="headerlink" title="Plasma"></a>Plasma</h3><p>以太坊的Plasma可视为一种对角线缩放解决方案，因为它可以通过实施侧链实现横向缩放，并通过Tendermint和替代共识机制提高速度来实现纵向缩放。链下交易的安全性源自根链，根链是系统内真实性的主要来源。</p>
-<p>FourState是一个由伯克利成员组成的区块链组成的团队，它使用Cosmos SDK编写了Plasma的实现，从而实现了更大的灵活性和可扩展性。</p>
-<p>区块链从上到下有3个主要的抽象层：</p>
-<ul>
-<li>应用层：处理事务并更新系统状态</li>
-<li>共识层：确保整个网络都同意交易和数据库更新</li>
-<li>网络层：确保所有节点在合理的时间内获得更新</li>
-</ul>
-<p>Tendermint项目的目的是提供网络和共识层，以便可以在其之上构建任意应用程序。Tendermint是Cosmos网络的共识“引擎”，旨在使区块链具有互操作性和可扩展性。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>下表总结了我们已了解的缩放解决方案，并按2种不同的方法进行了分类。第1层和第2层指定解决方案是在链上还是链外构建。解决方案也可以横向或纵向缩放。</p>
-<table>
-<thead>
-<tr>
-<th>\</th>
-<th>纵向</th>
-<th>横向</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>第二层</td>
-<td>1. 支付通道<br>2. 闪电网络<br>3. 雷电网络<br>4. Plasma</td>
-<td>1. 侧链<br>2. Plasma<br>3. Cosmos</td>
-</tr>
-<tr>
-<td>第一层</td>
-<td>1. 区块时间，大小<br>2. GHOST<br>3. SegWit(2x)<br>4. 递归SNARKS<br>5. 其他架构、共识</td>
-<td>1. 分片</td>
-</tr>
-</tbody></table>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/chain-on-enterprise-view/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/chain-on-enterprise-view/" class="post-title-link" itemprop="url">企业视角下的区块链: Chain on Enterprise View</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-12 09:39:51" itemprop="dateCreated datePublished" datetime="2020-09-12T09:39:51+08:00">2020-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-06 23:48:33" itemprop="dateModified" datetime="2021-03-06T23:48:33+08:00">2021-03-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="区块链归类"><a href="#区块链归类" class="headerlink" title="区块链归类"></a>区块链归类</h2><p>出于方便理解和技术分类，我们倾向于在面向企业的介绍中将区块链描述为一种一种高度专业化的数据库。当然从最底层来看也确实是如此。</p>
+<p>我们可以简单分类一下</p>
+<pre class="mermaid">graph LR
+    数据库 --> 中心化数据库
+    数据库 --> 分布式数据库
+    分布式数据库 --> 分布式账簿
+    分布式账簿 --> 区块链</pre>
+<p>对于集中式数据库，您必须信任单个数据库——并不需要达成共识。</p>
+<p>对于分布式数据库，信任概念开始成为关注的重点。在分布式数据库中，您可以拥有一个受信任的容错数据库网络。</p>
+<p>在分布式数据库中，存在分布式账簿，通常意味着宽松的信任保证。它们可以使彼此之间不完全信任的各方达成共识。</p>
+<p>最后，我们的主人公，区块链，是分布式账簿的子类。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/chain-on-enterprise-view/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -3399,7 +987,7 @@ With the respect to/Enperienced the less main reason, they xxx
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -3407,18 +995,39 @@ With the respect to/Enperienced the less main reason, they xxx
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
 
       </div>
 
@@ -3443,7 +1052,7 @@ With the respect to/Enperienced the less main reason, they xxx
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
@@ -3476,28 +1085,68 @@ With the respect to/Enperienced the less main reason, they xxx
 
 <script src="/js/next-boot.js"></script>
 
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
+<script src="/js/bookmark.js"></script>
 
 
 
 
   
 
+
+
+
   
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
 
 </body>
 </html>

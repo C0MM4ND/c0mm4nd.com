@@ -17,46 +17,46 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪…… S1 Intro这门课是基于intro to db的，默认大家都是SQL老手了。同样的，BI和数据仓库也是在DB之上的概念。 Operational DB企业拿来操作日常行为的数据库（买卖，预约 etc， 用来支持商业行为）  使用集中于事务 便于决策制定 但是决策分析能力不够  数据仓库相比Operational DB加强了决策能力。">
+  <meta name="description" content="好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪……">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Notes for FIT5195: Business intelligence and data warehousing">
-<meta property="og:url" content="http://example.com/fit5195-bi-notes/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪…… S1 Intro这门课是基于intro to db的，默认大家都是SQL老手了。同样的，BI和数据仓库也是在DB之上的概念。 Operational DB企业拿来操作日常行为的数据库（买卖，预约 etc， 用来支持商业行为）  使用集中于事务 便于决策制定 但是决策分析能力不够  数据仓库相比Operational DB加强了决策能力。">
+<meta property="og:url" content="http://c0mm4nd.com/fit5195-bi-notes/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪……">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210110235639103.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210110235535385.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210111002948496.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210111003647783.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210111003924868.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210119153311615.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210119153321174.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223222154124.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223223650881.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223223700052.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223223251503.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223225111085.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223225107357.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223225048177.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223225531130.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223222154124.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223230148094.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210224001704514.png">
-<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210224002158112.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210110235639103.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210110235535385.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210111002948496.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210111003647783.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210111003924868.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/fit5195-bi-notes/image-20210119153311615.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/fit5195-bi-notes/image-20210119153321174.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210223222154124.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223223650881.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223223700052.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210223223251503.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210223225111085.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210223225107357.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210223225048177.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210223225531130.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210223222154124.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210223230148094.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210224001704514.png">
+<meta property="og:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210224002158112.png">
 <meta property="article:published_time" content="2020-11-04T12:36:00.000Z">
-<meta property="article:modified_time" content="2021-03-06T11:40:03.683Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2021-03-06T14:38:01.067Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
 <meta property="article:tag" content="done">
 <meta property="article:tag" content="business intelligence">
 <meta property="article:tag" content="data warehouse">
 <meta property="article:tag" content="database">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210110235639103.png">
+<meta name="twitter:image" content="http://c0mm4nd.com/fit5195-bi-notes/image-20210110235639103.png">
 
-<link rel="canonical" href="http://example.com/fit5195-bi-notes/">
+<link rel="canonical" href="http://c0mm4nd.com/fit5195-bi-notes/">
 
 
 <script id="page-configurations">
@@ -69,7 +69,7 @@
   };
 </script>
 
-  <title>Notes for FIT5195: Business intelligence and data warehousing | Hexo</title>
+  <title>Notes for FIT5195: Business intelligence and data warehousing | Talkless</title>
   
 
 
@@ -120,13 +120,14 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">Talkless</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -143,14 +144,51 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">34</span></a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">53</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -160,6 +198,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -174,16 +214,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/fit5195-bi-notes/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/fit5195-bi-notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -204,7 +244,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-06 19:40:03" itemprop="dateModified" datetime="2021-03-06T19:40:03+08:00">2021-03-06</time>
+                <time title="修改时间：2021-03-06 22:38:01" itemprop="dateModified" datetime="2021-03-06T22:38:01+08:00">2021-03-06</time>
               </span>
 
           
@@ -218,7 +258,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪……</p>
+        <p>好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪……</p>
+<span id="more"></span>
+
 <h2 id="S1-Intro"><a href="#S1-Intro" class="headerlink" title="S1 Intro"></a>S1 Intro</h2><p>这门课是基于intro to db的，默认大家都是SQL老手了。同样的，BI和数据仓库也是在DB之上的概念。</p>
 <h3 id="Operational-DB"><a href="#Operational-DB" class="headerlink" title="Operational DB"></a>Operational DB</h3><p>企业拿来操作日常行为的数据库（买卖，预约 etc， 用来支持商业行为）</p>
 <ul>
@@ -231,7 +273,10 @@
 <h4 id="建立数据仓库"><a href="#建立数据仓库" class="headerlink" title="建立数据仓库"></a>建立数据仓库</h4><p>通过将Operational DB转换为数据仓库来创建数据仓库</p>
 <p>转换包括一系列数据操作步骤</p>
 <p>所有的数据转换称为Extract-Transform-Load ETL</p>
-<p><img src="./fit5195-bi-notes/image-20210110235639103.png" alt="image-20210110235639103"></p>
+<img src="/fit5195-bi-notes/image-20210110235639103.png" class="" title="image-20210110235639103">
+
+
+
 <h4 id="使用数据仓库"><a href="#使用数据仓库" class="headerlink" title="使用数据仓库"></a>使用数据仓库</h4><p>使用数据仓库的手段是从数据仓库提取数据以进行进一步的数据分析</p>
 <p>从数据仓库中提取数据的查询是在线分析工具或OLAP</p>
 <p>OLAP会捕获原始数据，该原始数据可以使用任何Business Intelligence（BI）工具格式化。<br>在OLAP中，对数据进行集中处理的数据最为重要。BI工具可用于进一步的表示和可视化<br>接收原始数据的BI工具可以任何形式表示数据：报告，图形，仪表板等</p>
@@ -247,8 +292,11 @@
 <li>高度准确地预测未来的行为和结果</li>
 </ul>
 <p>在实践中，第一点是收集和存储操作数据，这不会影响到操作系统的持久性；而恰恰相反，它会损害操作系统的功能。<br>但是，BI系统将使用操作数据作为信息的输入材料。<br>其余的过程和结果将前面的点解释为面向生成知识，并且它们是BI系统的重点</p>
-<p><img src="./fit5195-bi-notes/image-20210110235535385.png" alt="image-20210110235535385"></p>
-<h2 id="S2-星形架构-Star-Schema"><a href="#S2-星形架构-Star-Schema" class="headerlink" title="S2 星形架构 Star Schema"></a>S2 星形架构 Star Schema</h2><h3 id="星形架构"><a href="#星形架构" class="headerlink" title="星形架构"></a>星形架构</h3><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/power-bi/guidance/star-schema">了解星型架构及其对 Power BI 的重要性 - Power BI | Microsoft Docs</a></p>
+<img src="/fit5195-bi-notes/image-20210110235535385.png" class="" title="image-20210110235535385">
+
+
+
+<h2 id="S2-星形架构-Star-Schema"><a href="#S2-星形架构-Star-Schema" class="headerlink" title="S2 星形架构 Star Schema"></a>S2 星形架构 Star Schema</h2><h3 id="星形架构"><a href="#星形架构" class="headerlink" title="星形架构"></a>星形架构</h3><p><a href="https://docs.microsoft.com/zh-cn/power-bi/guidance/star-schema" target="_blank" rel="noopener">了解星型架构及其对 Power BI 的重要性 - Power BI | Microsoft Docs</a></p>
 <p>Star Schema 是多维视图的一种设计表示形式。是数据建模技术用于将多维决策支持数据映射到关系数据库中。</p>
 <p>对于Star Schema的开发主义者来说，关系建模技术是一种错误的解决方案：ER和归一化，无需多余的数据库结构即可处理复杂的数据分析。</p>
 <p>Star Schema由三个部件组成：</p>
@@ -257,17 +305,24 @@
 <li>Dimensions维度（其他属性，提供对Facts额外的视角）</li>
 <li>Attributes属性（包含在维度表中）</li>
 </ol>
-<p><img src="./fit5195-bi-notes/image-20210111002948496.png" alt="image-20210111002948496"></p>
+<img src="/fit5195-bi-notes/image-20210111002948496.png" class="" title="image-20210111002948496">
+
+
+
 <h3 id="转化（ETL）流程"><a href="#转化（ETL）流程" class="headerlink" title="转化（ETL）流程"></a>转化（ETL）流程</h3><p>从ER图转为数据仓库（星形架构）</p>
 <p>首先得有个分析点</p>
 <h4 id="双列表格法"><a href="#双列表格法" class="headerlink" title="双列表格法"></a>双列表格法</h4><p>创建星型模式时，您需要想象要分析的数据由两列组成。</p>
 <p><strong>第一列</strong>是类别（例如A，B，C，D），<strong>第二列</strong>是统计数字（例如 B）。</p>
 <p>第二列（例如F）必须在所有两列表中保持一致。</p>
-<p><img src="./fit5195-bi-notes/image-20210111003647783.png" alt="image-20210111003647783"></p>
+<img src="/fit5195-bi-notes/image-20210111003647783.png" class="" title="image-20210111003647783">
+
+
+
 <p>多个Facts下措施：</p>
 <p>双列表中的第二列是数字事实度量值（例如F列），实际上可以是多列（称它们为：F1，F2， F3）</p>
 <p>只要所有这些列（例如F1，F2， F3）涉及所有类别（例如A，B，C，D）。</p>
-<p><img src="./fit5195-bi-notes/image-20210111003924868.png" alt="image-20210111003924868"></p>
+<img src="/fit5195-bi-notes/image-20210111003924868.png" class="" title="image-20210111003924868">
+
 <h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><ol>
 <li>先建立各个维度表</li>
 <li>将各个维度的行写入维度表</li>
@@ -296,7 +351,7 @@
 <li>无效值和缺失值的处理</li>
 </ol>
 <h2 id="S4-Multifact"><a href="#S4-Multifact" class="headerlink" title="S4 Multifact"></a>S4 Multifact</h2><p>就讲讲怎么在一个DW里放多个Fact来更好地表达measure</p>
-<p><img src="./fit5195-bi-notes/image-20210119153311615.png" alt="image-20210119153311615"><img src="./fit5195-bi-notes/image-20210119153321174.png" alt="image-20210119153321174"></p>
+<p><img src="fit5195-bi-notes/image-20210119153311615.png" alt="image-20210119153311615" loading="lazy"><img src="fit5195-bi-notes/image-20210119153321174.png" alt="image-20210119153321174" loading="lazy"></p>
 <p>我们需要在Fact表中存放一个avg参数么？NO： Average of an Average</p>
 <p>在FACT中存放平均值不是个好主意，那我们应该如何处理这些问题？</p>
 <p>我们可以存放<strong>总数</strong>（total xxx）以及<strong>数量</strong>（number of xxx）</p>
@@ -313,26 +368,31 @@
 <p>也叫做SCD（Slowly Changing Dimensions，缓慢改变的维度）</p>
 <h3 id="with-Bridge-Table"><a href="#with-Bridge-Table" class="headerlink" title="with Bridge Table"></a>with Bridge Table</h3><p>使用Bridge的话可以像加个弱实体那样加个DIM</p>
 <p>像这样，其中BookID 和俩Date形成composite key</p>
-<p><img src="./fit5195-bi-notes/image-20210223222154124.png" alt="image-20210223222154124"></p>
+<img src="/fit5195-bi-notes/image-20210223222154124.png" class="" title="image-20210223222154124">
+
 <p>如果Book和BookPrice是1：1关系那就可以并到一起</p>
-<p>例如<img src="./fit5195-bi-notes/image-20210223223650881.png" alt="image-20210223223650881">变<img src="./fit5195-bi-notes/image-20210223223700052.png" alt="image-20210223223700052"></p>
+<p>例如<img src="fit5195-bi-notes/image-20210223223650881.png" alt="image-20210223223650881" loading="lazy">变<img src="fit5195-bi-notes/image-20210223223700052.png" alt="image-20210223223700052" loading="lazy"></p>
 <h3 id="Temporal-Attributes"><a href="#Temporal-Attributes" class="headerlink" title="Temporal Attributes"></a>Temporal Attributes</h3><p>Temporal attribute是一个属性，其值具有生命周期</p>
 <p>例如，每个书价都有生命期（即时间限制），即BookPriceDIM表中的StartDate和EndDate</p>
 <h3 id="Temporal-Dimensions"><a href="#Temporal-Dimensions" class="headerlink" title="Temporal Dimensions"></a>Temporal Dimensions</h3><p>Temporal Dimensions是其中具有特定生命周期的维度表</p>
 <p>例如图中BranchHistoryDIM（MerchandisePriceDIM算Temporal attribute）</p>
-<p><img src="./fit5195-bi-notes/image-20210223223251503.png" alt="image-20210223223251503"></p>
+<img src="/fit5195-bi-notes/image-20210223223251503.png" class="" title="image-20210223223251503">
+
 <h3 id="Slowly-Changing-Dimensions"><a href="#Slowly-Changing-Dimensions" class="headerlink" title="Slowly Changing Dimensions"></a>Slowly Changing Dimensions</h3><p>主要讲SCD的几个种类，定义前面说了。值得一提的是这个Slowly也是很重要的，对于快速改变的值，比如股票价格，车辆位置，需要的是实时(realtime) DW，或者说流式(stream)DW</p>
 <h4 id="Type-0"><a href="#Type-0" class="headerlink" title="Type 0"></a>Type 0</h4><p>实际上并不在DIM上存历史数据</p>
 <p>建立数据仓库时，DIM存储记录的“原始或初始”的值</p>
 <p>例如：book的全价记录在BookDIM中</p>
-<p><img src="./fit5195-bi-notes/image-20210223225111085.png" alt="image-20210223225111085"></p>
+<img src="/fit5195-bi-notes/image-20210223225111085.png" class="" title="image-20210223225111085">
+
 <h4 id="Type-1"><a href="#Type-1" class="headerlink" title="Type 1"></a>Type 1</h4><p>和T0一样实际上并不在DIM上存历史数据</p>
 <p>只记录最新值</p>
 <p>例如：Book最新价格将记录在BookDIM中</p>
-<p><img src="./fit5195-bi-notes/image-20210223225107357.png" alt="image-20210223225107357"></p>
+<img src="/fit5195-bi-notes/image-20210223225107357.png" class="" title="image-20210223225107357">
+
 <h4 id="Type-2"><a href="#Type-2" class="headerlink" title="Type 2"></a>Type 2</h4><p>从主DIM跟踪历史</p>
 <p>例如：更改Book价格后，会创建具有相同详细信息的“另一本书”，有新的BookID和新价格</p>
-<p><img src="./fit5195-bi-notes/image-20210223225048177.png" alt="image-20210223225048177"></p>
+<img src="/fit5195-bi-notes/image-20210223225048177.png" class="" title="image-20210223225048177">
+
 <h4 id="Type-3"><a href="#Type-3" class="headerlink" title="Type 3"></a>Type 3</h4><p>简化版T2</p>
 <p>仅保留当前（Cur）和前一个（Prev）的值，而不保留整个历史记录</p>
 <p>例如：仅记录书的最后两个价格</p>
@@ -341,26 +401,37 @@
 <li>假设不需要分析完整的历史记录</li>
 <li>大多数分析将以当前价格和最多一个过去价格（例如， 与趋势比较</li>
 </ul>
-<p><img src="./fit5195-bi-notes/image-20210223225531130.png" alt="image-20210223225531130"></p>
+<img src="/fit5195-bi-notes/image-20210223225531130.png" class="" title="image-20210223225531130">
+
 <h4 id="Type-4"><a href="#Type-4" class="headerlink" title="Type 4"></a>Type 4</h4><p>创建一个新DIM来维护attribute 变更的历史记录</p>
 <p>如前面（with Bridge Table那里）的BookPriceDIM</p>
-<p><img src="./fit5195-bi-notes/image-20210223222154124.png" alt="image-20210223222154124"></p>
+<img src="/fit5195-bi-notes/image-20210223222154124.png" class="" title="image-20210223222154124">
+
 <p>主要优势：同一本书无需具有其他BookID。 此外，保留更改的全部历史记录。</p>
 <h4 id="Type-6"><a href="#Type-6" class="headerlink" title="Type 6"></a>Type 6</h4><p>T2和T3的结合。同一本书不需要单独的ID（同T3），但是会保留整个历史记录（同T2）</p>
 <p>Composite key {BookID, StartDate, EndDate}</p>
-<p><img src="./fit5195-bi-notes/image-20210223230148094.png" alt="image-20210223230148094"></p>
+<img src="/fit5195-bi-notes/image-20210223230148094.png" class="" title="image-20210223230148094">
+
 <p>如果由于Date，BookDIM和BookSalesFACT之间存在M:M关系</p>
 <p>Sol1：给BookDIM加个新的surrogate key</p>
 <p>Sol2：把StartDate和EndDate加到FACT-&gt;与TimeID混乱</p>
 <p>Sol3：加个辅助性的表（或Bridge Table）在BookSalesFACT和BookDIM之间-&gt;也乱</p>
 <p>结论：Sol1最佳</p>
 <h2 id="S7-Snowflake-Schema"><a href="#S7-Snowflake-Schema" class="headerlink" title="S7 Snowflake Schema"></a>S7 Snowflake Schema</h2><p>给Star的DIM分个层级（Hierarchy）就变Snowflake了</p>
-<p><img src="./fit5195-bi-notes/image-20210224001704514.png" alt="image-20210224001704514"></p>
+<img src="/fit5195-bi-notes/image-20210224001704514.png" class="" title="image-20210224001704514">
+
 <p>注意1:M关系，不能整倒了</p>
 <h3 id="Determinant-Dimensions"><a href="#Determinant-Dimensions" class="headerlink" title="Determinant Dimensions"></a>Determinant Dimensions</h3><p>显性维度</p>
 <p>在Star schema下检索的所有数据都必须使用此DIM，否则检索的数据将变得毫无意义。例如PetrolType</p>
 <p>差不多就是做Schema之前问题里都提到的一个要素吧</p>
-<p><img src="./fit5195-bi-notes/image-20210224002158112.png" alt="image-20210224002158112"></p>
+<img src="/fit5195-bi-notes/image-20210224002158112.png" class="" title="image-20210224002158112">
+
+
+
+
+
+
+
 <h2 id="S8-OLAP"><a href="#S8-OLAP" class="headerlink" title="S8 OLAP"></a>S8 OLAP</h2><p>熟悉的SQL</p>
 <p><strong>基础</strong></p>
 <p>COUNT([distinct] A)</p>
@@ -427,8 +498,8 @@
       <i class="fa fa-chevron-left"></i> Notes for FIT9131: Java
     </a></div>
       <div class="post-nav-item">
-    <a href="/hello-world/" rel="next" title="Hello World">
-      Hello World <i class="fa fa-chevron-right"></i>
+    <a href="/design-of-contracts/" rel="next" title="Design of Contracts">
+      Design of Contracts <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -442,6 +513,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -488,13 +560,13 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#S1-Intro"><span class="nav-number">1.1.</span> <span class="nav-text">S1 Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Operational-DB"><span class="nav-number">1.1.1.</span> <span class="nav-text">Operational DB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.2.</span> <span class="nav-text">数据仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">建立数据仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">使用数据仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E9%9C%80%E8%A6%81"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">数据分析的需要</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BI"><span class="nav-number">1.1.3.</span> <span class="nav-text">BI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S2-%E6%98%9F%E5%BD%A2%E6%9E%B6%E6%9E%84-Star-Schema"><span class="nav-number">1.2.</span> <span class="nav-text">S2 星形架构 Star Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%9F%E5%BD%A2%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">星形架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E5%8C%96%EF%BC%88ETL%EF%BC%89%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">转化（ETL）流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E5%88%97%E8%A1%A8%E6%A0%BC%E6%B3%95"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">双列表格法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL"><span class="nav-number">1.2.3.</span> <span class="nav-text">SQL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S3-%E6%A1%A5%E6%8E%A5%E8%A1%A8-Bridge-Tables"><span class="nav-number">1.3.</span> <span class="nav-text">S3 桥接表 Bridge Tables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bridge-Tables"><span class="nav-number">1.3.1.</span> <span class="nav-text">Bridge Tables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86"><span class="nav-number">1.3.2.</span> <span class="nav-text">数据清理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S4-Multifact"><span class="nav-number">1.4.</span> <span class="nav-text">S4 Multifact</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S5-DW-Architecture"><span class="nav-number">1.5.</span> <span class="nav-text">S5 DW Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-of-Aggregations"><span class="nav-number">1.5.1.</span> <span class="nav-text">Level of Aggregations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S6-Temporal-DW"><span class="nav-number">1.6.</span> <span class="nav-text">S6 Temporal DW</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#with-Bridge-Table"><span class="nav-number">1.6.1.</span> <span class="nav-text">with Bridge Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Temporal-Attributes"><span class="nav-number">1.6.2.</span> <span class="nav-text">Temporal Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Temporal-Dimensions"><span class="nav-number">1.6.3.</span> <span class="nav-text">Temporal Dimensions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slowly-Changing-Dimensions"><span class="nav-number">1.6.4.</span> <span class="nav-text">Slowly Changing Dimensions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-0"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">Type 0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-1"><span class="nav-number">1.6.4.2.</span> <span class="nav-text">Type 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-2"><span class="nav-number">1.6.4.3.</span> <span class="nav-text">Type 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-3"><span class="nav-number">1.6.4.4.</span> <span class="nav-text">Type 3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-4"><span class="nav-number">1.6.4.5.</span> <span class="nav-text">Type 4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-6"><span class="nav-number">1.6.4.6.</span> <span class="nav-text">Type 6</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S7-Snowflake-Schema"><span class="nav-number">1.7.</span> <span class="nav-text">S7 Snowflake Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Determinant-Dimensions"><span class="nav-number">1.7.1.</span> <span class="nav-text">Determinant Dimensions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S8-OLAP"><span class="nav-number">1.8.</span> <span class="nav-text">S8 OLAP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S9-BI"><span class="nav-number">1.9.</span> <span class="nav-text">S9 BI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigation-Methods"><span class="nav-number">1.9.1.</span> <span class="nav-text">Navigation Methods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EXAM"><span class="nav-number">1.10.</span> <span class="nav-text">EXAM</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#S1-Intro"><span class="nav-number">1.</span> <span class="nav-text">S1 Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Operational-DB"><span class="nav-number">1.1.</span> <span class="nav-text">Operational DB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">数据仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.2.1.</span> <span class="nav-text">建立数据仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用数据仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E9%9C%80%E8%A6%81"><span class="nav-number">1.2.3.</span> <span class="nav-text">数据分析的需要</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BI"><span class="nav-number">1.3.</span> <span class="nav-text">BI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S2-%E6%98%9F%E5%BD%A2%E6%9E%B6%E6%9E%84-Star-Schema"><span class="nav-number">2.</span> <span class="nav-text">S2 星形架构 Star Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%9F%E5%BD%A2%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">星形架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E5%8C%96%EF%BC%88ETL%EF%BC%89%E6%B5%81%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">转化（ETL）流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E5%88%97%E8%A1%A8%E6%A0%BC%E6%B3%95"><span class="nav-number">2.2.1.</span> <span class="nav-text">双列表格法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL"><span class="nav-number">2.3.</span> <span class="nav-text">SQL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S3-%E6%A1%A5%E6%8E%A5%E8%A1%A8-Bridge-Tables"><span class="nav-number">3.</span> <span class="nav-text">S3 桥接表 Bridge Tables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bridge-Tables"><span class="nav-number">3.1.</span> <span class="nav-text">Bridge Tables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">数据清理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S4-Multifact"><span class="nav-number">4.</span> <span class="nav-text">S4 Multifact</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S5-DW-Architecture"><span class="nav-number">5.</span> <span class="nav-text">S5 DW Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-of-Aggregations"><span class="nav-number">5.1.</span> <span class="nav-text">Level of Aggregations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S6-Temporal-DW"><span class="nav-number">6.</span> <span class="nav-text">S6 Temporal DW</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#with-Bridge-Table"><span class="nav-number">6.1.</span> <span class="nav-text">with Bridge Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Temporal-Attributes"><span class="nav-number">6.2.</span> <span class="nav-text">Temporal Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Temporal-Dimensions"><span class="nav-number">6.3.</span> <span class="nav-text">Temporal Dimensions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slowly-Changing-Dimensions"><span class="nav-number">6.4.</span> <span class="nav-text">Slowly Changing Dimensions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-0"><span class="nav-number">6.4.1.</span> <span class="nav-text">Type 0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-1"><span class="nav-number">6.4.2.</span> <span class="nav-text">Type 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-2"><span class="nav-number">6.4.3.</span> <span class="nav-text">Type 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-3"><span class="nav-number">6.4.4.</span> <span class="nav-text">Type 3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-4"><span class="nav-number">6.4.5.</span> <span class="nav-text">Type 4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-6"><span class="nav-number">6.4.6.</span> <span class="nav-text">Type 6</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S7-Snowflake-Schema"><span class="nav-number">7.</span> <span class="nav-text">S7 Snowflake Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Determinant-Dimensions"><span class="nav-number">7.1.</span> <span class="nav-text">Determinant Dimensions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S8-OLAP"><span class="nav-number">8.</span> <span class="nav-text">S8 OLAP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S9-BI"><span class="nav-number">9.</span> <span class="nav-text">S9 BI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigation-Methods"><span class="nav-number">9.1.</span> <span class="nav-text">Navigation Methods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EXAM"><span class="nav-number">10.</span> <span class="nav-text">EXAM</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -502,18 +574,39 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
 
       </div>
 
@@ -538,7 +631,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
@@ -571,28 +664,87 @@
 
 <script src="/js/next-boot.js"></script>
 
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
+<script src="/js/bookmark.js"></script>
 
 
 
 
   
 
+
+
+
   
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : '24944c48113447af34a39ab402be82ef',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

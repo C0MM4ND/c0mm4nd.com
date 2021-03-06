@@ -17,26 +17,26 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="因为NGIN的缘故，所以相当于是加入了wasmtime这个坑里。 虽然名义上bytecodealliance算是正规军但是有一说一至少这个wasmtime-go做的稀烂啊…… 这里就拿rust(写&amp;编译wasm)+wasmtime-go(调用)来介绍。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WASM 2Master">
-<meta property="og:url" content="http://example.com/wasm-2-master/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://c0mm4nd.com/wasm-2-master/index.html">
+<meta property="og:site_name" content="Talkless">
 <meta property="og:description" content="因为NGIN的缘故，所以相当于是加入了wasmtime这个坑里。 虽然名义上bytecodealliance算是正规军但是有一说一至少这个wasmtime-go做的稀烂啊…… 这里就拿rust(写&amp;编译wasm)+wasmtime-go(调用)来介绍。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-24T03:53:20.000Z">
 <meta property="article:modified_time" content="2021-03-06T07:57:49.459Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
 <meta property="article:tag" content="wasm">
 <meta property="article:tag" content="wasi">
 <meta property="article:tag" content="WebAssembly">
 <meta property="article:tag" content="todo">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/wasm-2-master/">
+<link rel="canonical" href="http://c0mm4nd.com/wasm-2-master/">
 
 
 <script id="page-configurations">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>WASM 2Master | Hexo</title>
+  <title>WASM 2Master | Talkless</title>
   
 
 
@@ -100,13 +100,14 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">Talkless</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -123,14 +124,51 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">34</span></a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">53</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -140,6 +178,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -154,16 +194,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/wasm-2-master/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/wasm-2-master/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -203,9 +243,9 @@
 <p>这里就拿rust(写&amp;编译wasm)+wasmtime-go(调用)来介绍。</p>
 <span id="more"></span>
 
-<h2 id="Beginning"><a href="#Beginning" class="headerlink" title="Beginning"></a>Beginning</h2><p>首先得推荐一个工具<a target="_blank" rel="noopener" href="https://webassembly.github.io/wabt/demo/wasm2wat/">wasm2wat</a>。既然是想耍wasm那肯定听说过wat，因为现在各个语言对wasm的支持都一言难尽，所以个人经验来说是有事没事转成wat看看挺好的。</p>
+<h2 id="Beginning"><a href="#Beginning" class="headerlink" title="Beginning"></a>Beginning</h2><p>首先得推荐一个工具<a href="https://webassembly.github.io/wabt/demo/wasm2wat/" target="_blank" rel="noopener">wasm2wat</a>。既然是想耍wasm那肯定听说过wat，因为现在各个语言对wasm的支持都一言难尽，所以个人经验来说是有事没事转成wat看看挺好的。</p>
 <p>然后就是一些基本概念</p>
-<p>基本上都在<a target="_blank" rel="noopener" href="https://webassembly.github.io/spec/core/">官方文档</a>里</p>
+<p>基本上都在<a href="https://webassembly.github.io/spec/core/" target="_blank" rel="noopener">官方文档</a>里</p>
 <h3 id="值"><a href="#值" class="headerlink" title="值"></a>值</h3><p>WASM底层内部就四种值：字节(Bytes),整数(Integers),浮点数(Floating-Point),还有命名(Names，基本上可以理解为string)</p>
 <p>这里的值和后面类型里的值是不一样的，这里是底层实现上的，类型的偏应用上。</p>
 <h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>值做开发时候一般没啥感知，但是类型就不一样了，处处受它制约。</p>
@@ -368,7 +408,7 @@
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> HELLO: &amp;<span class="symbol">&#x27;static</span> <span class="built_in">str</span> = <span class="string">&quot;Hello, World!&quot;</span>;</span><br></pre></td></tr></table></figure>
 
 <h2 id="WASI"><a href="#WASI" class="headerlink" title="WASI"></a>WASI</h2><p>WASI 是个很有趣的东西，他就直接把WASM带到了系统上</p>
-<p>在<a target="_blank" rel="noopener" href="https://github.com/WebAssembly/WASI/issues/223%EF%BC%8C">https://github.com/WebAssembly/WASI/issues/223，</a> 有个回答很精妙：At an application level though, the direction WASI is heading is away from “A passes B a string, then then B opens the resource”, and toward “A opens the resource and passes B a handle”. 这其实也就是WASM工作的原理。</p>
+<p>在<a href="https://github.com/WebAssembly/WASI/issues/223%EF%BC%8C" target="_blank" rel="noopener">https://github.com/WebAssembly/WASI/issues/223，</a> 有个回答很精妙：At an application level though, the direction WASI is heading is away from “A passes B a string, then then B opens the resource”, and toward “A opens the resource and passes B a handle”. 这其实也就是WASM工作的原理。</p>
 <h2 id="NGIN"><a href="#NGIN" class="headerlink" title="NGIN"></a>NGIN</h2><p>在链上应用我需要的是其对链上信息(block, tx etc)做出反应。</p>
 <p>例如，子网币的发行针对主网矿工，那么其应当在WASM中维护一个account balances，然后对block的事件侦听来实现分发，对tx事件侦听实现交易。</p>
 <p>那么换句话说，我们只需要把外部信息(结构体)传递到WASM沙箱中作为事件，然后再加点getter。</p>
@@ -413,6 +453,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -465,7 +506,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -473,18 +514,39 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
 
       </div>
 
@@ -509,7 +571,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
@@ -542,28 +604,87 @@
 
 <script src="/js/next-boot.js"></script>
 
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
+<script src="/js/bookmark.js"></script>
 
 
 
 
   
 
+
+
+
   
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : '2673a99ca27a8cd5af98965082faf88e',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

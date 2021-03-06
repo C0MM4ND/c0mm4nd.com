@@ -17,29 +17,29 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="比特币通常被宣传为隐私工具，但比特币中的唯一隐私性来自匿名地址，该匿名地址易销毁，但是通过地址重复使用，“污点”分析，跟踪付款，监控节点IP地址，网络爬虫以及许多其他机制很容易使该隐私性受到破坏。一旦破坏了这种隐私，很难恢复，有些情况下恢复成本也很高。 传统银行业务默认提供大量隐私保护。您的亲人看不到您正在购买节育措施剥夺他们未来的孙子孙女；您的雇主无法从薪水中获悉您支持的公益；贼人们也无法看到您">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CoinJoin: Bitcoin privacy for the real world">
-<meta property="og:url" content="http://example.com/coinjoin/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://c0mm4nd.com/coinjoin/index.html">
+<meta property="og:site_name" content="Talkless">
 <meta property="og:description" content="比特币通常被宣传为隐私工具，但比特币中的唯一隐私性来自匿名地址，该匿名地址易销毁，但是通过地址重复使用，“污点”分析，跟踪付款，监控节点IP地址，网络爬虫以及许多其他机制很容易使该隐私性受到破坏。一旦破坏了这种隐私，很难恢复，有些情况下恢复成本也很高。 传统银行业务默认提供大量隐私保护。您的亲人看不到您正在购买节育措施剥夺他们未来的孙子孙女；您的雇主无法从薪水中获悉您支持的公益；贼人们也无法看到您">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/coinjoin/coinjoin/tx.png">
+<meta property="og:image" content="http://c0mm4nd.com/coinjoin/tx.png">
 <meta property="article:published_time" content="2020-09-24T03:53:31.000Z">
-<meta property="article:modified_time" content="2021-03-06T07:45:00.792Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2021-03-06T14:38:01.069Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
 <meta property="article:tag" content="bitcointalk">
 <meta property="article:tag" content="bitcoin">
 <meta property="article:tag" content="done">
 <meta property="article:tag" content="coinjoin">
 <meta property="article:tag" content="privacy">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/coinjoin/coinjoin/tx.png">
+<meta name="twitter:image" content="http://c0mm4nd.com/coinjoin/tx.png">
 
-<link rel="canonical" href="http://example.com/coinjoin/">
+<link rel="canonical" href="http://c0mm4nd.com/coinjoin/">
 
 
 <script id="page-configurations">
@@ -52,7 +52,7 @@
   };
 </script>
 
-  <title>CoinJoin: Bitcoin privacy for the real world | Hexo</title>
+  <title>CoinJoin: Bitcoin privacy for the real world | Talkless</title>
   
 
 
@@ -103,13 +103,14 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">Talkless</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -126,14 +127,51 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">34</span></a>
 
   </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">53</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -143,6 +181,8 @@
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 
     <main class="main">
@@ -157,16 +197,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/coinjoin/">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/coinjoin/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Talkless">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -187,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-06 15:45:00" itemprop="dateModified" datetime="2021-03-06T15:45:00+08:00">2021-03-06</time>
+                <time title="修改时间：2021-03-06 22:38:01" itemprop="dateModified" datetime="2021-03-06T22:38:01+08:00">2021-03-06</time>
               </span>
 
           
@@ -204,14 +244,15 @@
         <p>比特币通常被宣传为隐私工具，但比特币中的唯一隐私性来自匿名地址，该匿名地址易销毁，但是通过地址重复使用，“污点”分析，跟踪付款，监控节点IP地址，网络爬虫以及许多其他机制很容易使该隐私性受到破坏。一旦破坏了这种隐私，很难恢复，有些情况下恢复成本也很高。</p>
 <p>传统银行业务默认提供大量隐私保护。您的亲人看不到您正在购买节育措施剥夺他们未来的孙子孙女；您的雇主无法从薪水中获悉您支持的公益；贼人们也无法看到您最近的购买或判断您是如何富有的人，他们无法锁定目标并欺骗您。对于个人和企业而言，比特币的隐私性不足会是一个首要的切实的不利因素。</p>
 <p>即使用户通过切换到BIP32地址链上来避免地址重复使用，当他们进行较大的交易时，他们仍然会因旧币和过去的付款而失去隐私。</p>
-<p>隐私错误也会造成外部成本：您可能有良好的保护隐私行为，但是当您与不这样做的人（例如使用<a target="_blank" rel="noopener" href="https://en.bitcoin.it/wiki/Green_address">“绿色地址”</a>的人）进行交易时，您和每个与他交易的人一样都会被迫失去一些隐私性。隐私性的缺失也给比特币带来了严重的系统风险：如果降级了的隐私性允许人们汇集中心化的列表甄别好坏币，则当您真诚接受的硬币后来未被其他人兑现时，您就会发现比特币上币与币之间的可替代性遭到破坏，并且其去中心性也伴随着人们被迫给他们自己的币实施流行的黑名单。</p>
+<p>隐私错误也会造成外部成本：您可能有良好的保护隐私行为，但是当您与不这样做的人（例如使用<a href="https://en.bitcoin.it/wiki/Green_address" target="_blank" rel="noopener">“绿色地址”</a>的人）进行交易时，您和每个与他交易的人一样都会被迫失去一些隐私性。隐私性的缺失也给比特币带来了严重的系统风险：如果降级了的隐私性允许人们汇集中心化的列表甄别好坏币，则当您真诚接受的硬币后来未被其他人兑现时，您就会发现比特币上币与币之间的可替代性遭到破坏，并且其去中心性也伴随着人们被迫给他们自己的币实施流行的黑名单。</p>
 <p>这条消息描述了比特币用户可以用来显着改善其隐私性的交易方式，我一直称其为CoinJoin。它不涉及比特币协议的任何更改，并且几年前至今也有数次使用，但是似乎尚未得到广泛的理解。</p>
 <p>我首先在一个异想天开的帖子中公开地描述了这种交易方式——“全盘污染！”——通过这个着重讨论了这些交易的一个特定副作用，并期望人们会自己看到其余的含义。</p>
 <p>往往清晰击败含蓄，甚至理解该想法的人也有一些本可以被解答的问题。因此，这个帖子就是为此而写。</p>
 <span id="more"></span>
 
 <h1 id="CoinJoin-现实世界的比特币隐私"><a href="#CoinJoin-现实世界的比特币隐私" class="headerlink" title="CoinJoin:现实世界的比特币隐私"></a>CoinJoin:现实世界的比特币隐私</h1><p>这个想法很简单，首先要有一些简单的背景知识：</p>
-<p><img src="./coinjoin/tx.png"></p>
+<img src="/coinjoin/tx.png" class="">
+
 <p>比特币交易消耗一个或多个输入(Input)并创建具有指定值的一个或多个输出(Output)。</p>
 <p>每个输入都是过去交易的输出。对于每个输入，都有一个不同的签名（scriptsig），该签名是根据过去使用的输出（scriptpubkey）中指定的规则创建的。</p>
 <p>比特币系统负责确保签名正确，输入存在且可支配，并且输出值的总和小于或等于输入值的总和（任何超出部分都将作为支付给矿工的费用包括交易）。</p>
@@ -275,7 +316,7 @@
 <p>Joe-criminal可以外出购买120％PPS采矿来获得全新的硬币，或者通过一系列半伪造的高现金流量赌博企业来赚钱，以减少50％的费用，他们可以负担寻找并与之交互的成本这些卑鄙的服务…乔和简·多伊？他们的名字在blockchain.info的跑马灯上。对于他们来说，这似乎不太好，但是如果修复它的成本很高，他们根本不会，因为修复它的成本是非常具体的，而且损失的成本或投机性是遥不可及的。他们可能只需要放弃比特币，而转而使用几乎完全私人的东西：现金…普通用户需要有效且廉价的隐私才能完全帮助他们。</p>
 <p>我知道制作这样的工具并不适合许多比特币企业的快速致富模式，但是重要性是显而易见的，并且最简单的版本不需要非常深入的技术指导。我认为，改善人们隐私的“政治”风险是您应该认真考虑的真实风险，但是在这些部分附近，我看到人们在一些风险非常高的东西上贴上自己的名字。我希望“全盘污染”的话题足以激发社区的某些行动，但是也许会。</p>
 <p>因此，应该反过来，我问你：它在哪里？</p>
-<p><a target="_blank" rel="noopener" href="https://bitcointalk.org/index.php?topic=279249.0">原文</a></p>
+<p><a href="https://bitcointalk.org/index.php?topic=279249.0" target="_blank" rel="noopener">原文</a></p>
 
     </div>
 
@@ -317,6 +358,7 @@
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -369,7 +411,7 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">John Doe</p>
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -377,18 +419,39 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
 
       </div>
 
@@ -413,7 +476,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
@@ -446,28 +509,87 @@
 
 <script src="/js/next-boot.js"></script>
 
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
+<script src="/js/bookmark.js"></script>
 
 
 
 
   
 
+
+
+
   
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '06edfa751f3d44529e6d',
+      clientSecret: 'e6469fb76c0061cfe1b084ee807d140e100a4c51',
+      repo        : 'c0mm4nd.com',
+      owner       : 'C0MM4ND',
+      admin       : ['C0MM4ND'],
+      id          : 'a60e1d2aaa7b97f8341f8c501cb8c1e3',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

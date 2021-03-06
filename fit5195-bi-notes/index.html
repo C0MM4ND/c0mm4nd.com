@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪…… S1 Intro这门课是基于intro to db的，默认大家都是SQL老手了。同样的，BI和数据仓库也是在DB之上的概念。 Operational DB企业拿来操作日常行为的数据库（买卖，预约 etc， 用来支持商业行为）  使用集中于事务 便于决策制定 但是决策分析能力不够  数据仓库相比Operational DB加强了决策能力。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes for FIT5195: Business intelligence and data warehousing">
+<meta property="og:url" content="http://example.com/fit5195-bi-notes/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪…… S1 Intro这门课是基于intro to db的，默认大家都是SQL老手了。同样的，BI和数据仓库也是在DB之上的概念。 Operational DB企业拿来操作日常行为的数据库（买卖，预约 etc， 用来支持商业行为）  使用集中于事务 便于决策制定 但是决策分析能力不够  数据仓库相比Operational DB加强了决策能力。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210110235639103.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210110235535385.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210111002948496.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210111003647783.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210111003924868.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210119153311615.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210119153321174.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223222154124.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223223650881.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223223700052.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223223251503.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223225111085.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223225107357.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223225048177.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223225531130.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223222154124.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210223230148094.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210224001704514.png">
+<meta property="og:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210224002158112.png">
+<meta property="article:published_time" content="2020-11-04T12:36:00.000Z">
+<meta property="article:modified_time" content="2021-03-06T11:40:03.683Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="done">
+<meta property="article:tag" content="business intelligence">
+<meta property="article:tag" content="data warehouse">
+<meta property="article:tag" content="database">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/fit5195-bi-notes/fit5195-bi-notes/image-20210110235639103.png">
+
+<link rel="canonical" href="http://example.com/fit5195-bi-notes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Notes for FIT5195: Business intelligence and data warehousing | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/fit5195-bi-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes for FIT5195: Business intelligence and data warehousing
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-04 20:36:00" itemprop="dateCreated datePublished" datetime="2020-11-04T20:36:00+08:00">2020-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-06 19:40:03" itemprop="dateModified" datetime="2021-03-06T19:40:03+08:00">2021-03-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><p>好家伙这个一上来我就听不懂……当初没分到信息管理现在遭罪……</p>
+<h2 id="S1-Intro"><a href="#S1-Intro" class="headerlink" title="S1 Intro"></a>S1 Intro</h2><p>这门课是基于intro to db的，默认大家都是SQL老手了。同样的，BI和数据仓库也是在DB之上的概念。</p>
+<h3 id="Operational-DB"><a href="#Operational-DB" class="headerlink" title="Operational DB"></a>Operational DB</h3><p>企业拿来操作日常行为的数据库（买卖，预约 etc， 用来支持商业行为）</p>
+<ul>
+<li>使用集中于事务</li>
+<li>便于决策制定</li>
+<li>但是决策分析能力不够</li>
+</ul>
+<h3 id="数据仓库"><a href="#数据仓库" class="headerlink" title="数据仓库"></a>数据仓库</h3><p>相比Operational DB加强了决策能力。</p>
+<p>数据仓库是数据库的多维视图，具有聚合和预计算的摘要</p>
+<h4 id="建立数据仓库"><a href="#建立数据仓库" class="headerlink" title="建立数据仓库"></a>建立数据仓库</h4><p>通过将Operational DB转换为数据仓库来创建数据仓库</p>
+<p>转换包括一系列数据操作步骤</p>
+<p>所有的数据转换称为Extract-Transform-Load ETL</p>
+<p><img src="./fit5195-bi-notes/image-20210110235639103.png" alt="image-20210110235639103"></p>
+<h4 id="使用数据仓库"><a href="#使用数据仓库" class="headerlink" title="使用数据仓库"></a>使用数据仓库</h4><p>使用数据仓库的手段是从数据仓库提取数据以进行进一步的数据分析</p>
+<p>从数据仓库中提取数据的查询是在线分析工具或OLAP</p>
+<p>OLAP会捕获原始数据，该原始数据可以使用任何Business Intelligence（BI）工具格式化。<br>在OLAP中，对数据进行集中处理的数据最为重要。BI工具可用于进一步的表示和可视化<br>接收原始数据的BI工具可以任何形式表示数据：报告，图形，仪表板等</p>
+<h4 id="数据分析的需要"><a href="#数据分析的需要" class="headerlink" title="数据分析的需要"></a>数据分析的需要</h4><h3 id="BI"><a href="#BI" class="headerlink" title="BI"></a>BI</h3><p>“商务智能”（BI）是指描述用于捕获，收集，集成，存储和分析数据的综合，内聚和集成的工具集和过程，其目的在于生成和呈现信息以支持业务决策。<br>BI是一个框架，可以使企业将数据转换为信息，信息知识和知识能力不足。</p>
+<p>一般而言，BI提供以下框架：</p>
+<ul>
+<li>收集和存储运营数据 </li>
+<li>将运营数据汇总为决策支持数据</li>
+<li>分析决策支持数据以生成信息</li>
+<li>向最终用户显示此类信息以支持业务决策</li>
+<li>制定业务决策，从而生成更多收集，存储和不久的数据（重新启动流程）</li>
+<li>监视结果以评估业务决策的结果，从而可以收集，存储和存储更多数据</li>
+<li>高度准确地预测未来的行为和结果</li>
+</ul>
+<p>在实践中，第一点是收集和存储操作数据，这不会影响到操作系统的持久性；而恰恰相反，它会损害操作系统的功能。<br>但是，BI系统将使用操作数据作为信息的输入材料。<br>其余的过程和结果将前面的点解释为面向生成知识，并且它们是BI系统的重点</p>
+<p><img src="./fit5195-bi-notes/image-20210110235535385.png" alt="image-20210110235535385"></p>
+<h2 id="S2-星形架构-Star-Schema"><a href="#S2-星形架构-Star-Schema" class="headerlink" title="S2 星形架构 Star Schema"></a>S2 星形架构 Star Schema</h2><h3 id="星形架构"><a href="#星形架构" class="headerlink" title="星形架构"></a>星形架构</h3><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/power-bi/guidance/star-schema">了解星型架构及其对 Power BI 的重要性 - Power BI | Microsoft Docs</a></p>
+<p>Star Schema 是多维视图的一种设计表示形式。是数据建模技术用于将多维决策支持数据映射到关系数据库中。</p>
+<p>对于Star Schema的开发主义者来说，关系建模技术是一种错误的解决方案：ER和归一化，无需多余的数据库结构即可处理复杂的数据分析。</p>
+<p>Star Schema由三个部件组成：</p>
+<ol>
+<li>Facts事实（可度量数值，表达特定商业领域或活动）</li>
+<li>Dimensions维度（其他属性，提供对Facts额外的视角）</li>
+<li>Attributes属性（包含在维度表中）</li>
+</ol>
+<p><img src="./fit5195-bi-notes/image-20210111002948496.png" alt="image-20210111002948496"></p>
+<h3 id="转化（ETL）流程"><a href="#转化（ETL）流程" class="headerlink" title="转化（ETL）流程"></a>转化（ETL）流程</h3><p>从ER图转为数据仓库（星形架构）</p>
+<p>首先得有个分析点</p>
+<h4 id="双列表格法"><a href="#双列表格法" class="headerlink" title="双列表格法"></a>双列表格法</h4><p>创建星型模式时，您需要想象要分析的数据由两列组成。</p>
+<p><strong>第一列</strong>是类别（例如A，B，C，D），<strong>第二列</strong>是统计数字（例如 B）。</p>
+<p>第二列（例如F）必须在所有两列表中保持一致。</p>
+<p><img src="./fit5195-bi-notes/image-20210111003647783.png" alt="image-20210111003647783"></p>
+<p>多个Facts下措施：</p>
+<p>双列表中的第二列是数字事实度量值（例如F列），实际上可以是多列（称它们为：F1，F2， F3）</p>
+<p>只要所有这些列（例如F1，F2， F3）涉及所有类别（例如A，B，C，D）。</p>
+<p><img src="./fit5195-bi-notes/image-20210111003924868.png" alt="image-20210111003924868"></p>
+<h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><ol>
+<li>先建立各个维度表</li>
+<li>将各个维度的行写入维度表</li>
+<li>建立tempfact表：select where A.id=B.id将各个事实表<strong>源</strong>的列 as到tempfact表（即完成表建立又同时数据转移）</li>
+<li>增加与源数据类型不同的列到tempfact表（例如源中DATE，事实表中NUMBER）</li>
+<li>为4中的新列写入数据</li>
+<li>最后建立fact表：使用group by从tempfact里把需要的列取出</li>
+</ol>
+<h2 id="S3-桥接表-Bridge-Tables"><a href="#S3-桥接表-Bridge-Tables" class="headerlink" title="S3 桥接表 Bridge Tables"></a>S3 桥接表 Bridge Tables</h2><p>好鸡儿难日常听不懂……</p>
+<h3 id="Bridge-Tables"><a href="#Bridge-Tables" class="headerlink" title="Bridge Tables"></a>Bridge Tables</h3><p>用来连接俩维度表（其中只有一个连接事实）</p>
+<p>到Fact source路径上存在N:N关系（可能N:N被分为1:N和N:1）</p>
+<p>you first need to identify the attributes required to calculate the fact measures, then circle the tables contain those attributes as a fact source. After that, you identify where the attributes needed to create the dimensions, and assess the relationship between those tables with the fact source table. If there is a many-to-many relationship and the dimension does not contribute directly to the calculation of the fact measure, a bridge table is needed</p>
+<h3 id="数据清理"><a href="#数据清理" class="headerlink" title="数据清理"></a>数据清理</h3><p>好像这个直接默认是已掌握内容……orz</p>
+<p>开始的时候，先问问自己</p>
+<ol>
+<li>How many records in the operational database?</li>
+<li>How many records in the data warehouse?</li>
+<li>What kind of data is in the operational database?</li>
+<li>How do the tables look like in the data warehouse?</li>
+</ol>
+<p>先做<strong>data exploration</strong>s</p>
+<p><del>先对所有的operational database的table都select count(*)一遍</del></p>
+<p><del>对比数据仓库和operational database</del></p>
+<ol>
+<li>一致性检查：根据每个变量的合理取值范围和相互关系，检查数据是否合乎要求，发现超出正常范围、逻辑上不合理或者相互矛盾的数据</li>
+<li>无效值和缺失值的处理</li>
+</ol>
+<h2 id="S4-Multifact"><a href="#S4-Multifact" class="headerlink" title="S4 Multifact"></a>S4 Multifact</h2><p>就讲讲怎么在一个DW里放多个Fact来更好地表达measure</p>
+<p><img src="./fit5195-bi-notes/image-20210119153311615.png" alt="image-20210119153311615"><img src="./fit5195-bi-notes/image-20210119153321174.png" alt="image-20210119153321174"></p>
+<p>我们需要在Fact表中存放一个avg参数么？NO： Average of an Average</p>
+<p>在FACT中存放平均值不是个好主意，那我们应该如何处理这些问题？</p>
+<p>我们可以存放<strong>总数</strong>（total xxx）以及<strong>数量</strong>（number of xxx）</p>
+<h2 id="S5-DW-Architecture"><a href="#S5-DW-Architecture" class="headerlink" title="S5 DW Architecture"></a>S5 DW Architecture</h2><p>Data Warehouse Architecture</p>
+<p>根据Tut来看讲的主要是multifact</p>
+<h3 id="Level-of-Aggregations"><a href="#Level-of-Aggregations" class="headerlink" title="Level of Aggregations"></a>Level of Aggregations</h3><p>聚合程度，最次是Level0就基本上是从Operational DB里拿的字段，然后1然后2这样往上越大越浓缩就是精华</p>
+<p>lower down level方法：</p>
+<ol>
+<li>加个新DIM （）</li>
+<li>Replace an existing DIM with a higher granularity DIM（Fact的measure值也被分割）</li>
+</ol>
+<h2 id="S6-Temporal-DW"><a href="#S6-Temporal-DW" class="headerlink" title="S6 Temporal DW"></a>S6 Temporal DW</h2><p>Temporal (or historical) aspect of records is incorporated into the data warehouse</p>
+<p>记录的时间（或历史）被合并到数据仓库中，比如 书籍价格随时间的变化</p>
+<p>也叫做SCD（Slowly Changing Dimensions，缓慢改变的维度）</p>
+<h3 id="with-Bridge-Table"><a href="#with-Bridge-Table" class="headerlink" title="with Bridge Table"></a>with Bridge Table</h3><p>使用Bridge的话可以像加个弱实体那样加个DIM</p>
+<p>像这样，其中BookID 和俩Date形成composite key</p>
+<p><img src="./fit5195-bi-notes/image-20210223222154124.png" alt="image-20210223222154124"></p>
+<p>如果Book和BookPrice是1：1关系那就可以并到一起</p>
+<p>例如<img src="./fit5195-bi-notes/image-20210223223650881.png" alt="image-20210223223650881">变<img src="./fit5195-bi-notes/image-20210223223700052.png" alt="image-20210223223700052"></p>
+<h3 id="Temporal-Attributes"><a href="#Temporal-Attributes" class="headerlink" title="Temporal Attributes"></a>Temporal Attributes</h3><p>Temporal attribute是一个属性，其值具有生命周期</p>
+<p>例如，每个书价都有生命期（即时间限制），即BookPriceDIM表中的StartDate和EndDate</p>
+<h3 id="Temporal-Dimensions"><a href="#Temporal-Dimensions" class="headerlink" title="Temporal Dimensions"></a>Temporal Dimensions</h3><p>Temporal Dimensions是其中具有特定生命周期的维度表</p>
+<p>例如图中BranchHistoryDIM（MerchandisePriceDIM算Temporal attribute）</p>
+<p><img src="./fit5195-bi-notes/image-20210223223251503.png" alt="image-20210223223251503"></p>
+<h3 id="Slowly-Changing-Dimensions"><a href="#Slowly-Changing-Dimensions" class="headerlink" title="Slowly Changing Dimensions"></a>Slowly Changing Dimensions</h3><p>主要讲SCD的几个种类，定义前面说了。值得一提的是这个Slowly也是很重要的，对于快速改变的值，比如股票价格，车辆位置，需要的是实时(realtime) DW，或者说流式(stream)DW</p>
+<h4 id="Type-0"><a href="#Type-0" class="headerlink" title="Type 0"></a>Type 0</h4><p>实际上并不在DIM上存历史数据</p>
+<p>建立数据仓库时，DIM存储记录的“原始或初始”的值</p>
+<p>例如：book的全价记录在BookDIM中</p>
+<p><img src="./fit5195-bi-notes/image-20210223225111085.png" alt="image-20210223225111085"></p>
+<h4 id="Type-1"><a href="#Type-1" class="headerlink" title="Type 1"></a>Type 1</h4><p>和T0一样实际上并不在DIM上存历史数据</p>
+<p>只记录最新值</p>
+<p>例如：Book最新价格将记录在BookDIM中</p>
+<p><img src="./fit5195-bi-notes/image-20210223225107357.png" alt="image-20210223225107357"></p>
+<h4 id="Type-2"><a href="#Type-2" class="headerlink" title="Type 2"></a>Type 2</h4><p>从主DIM跟踪历史</p>
+<p>例如：更改Book价格后，会创建具有相同详细信息的“另一本书”，有新的BookID和新价格</p>
+<p><img src="./fit5195-bi-notes/image-20210223225048177.png" alt="image-20210223225048177"></p>
+<h4 id="Type-3"><a href="#Type-3" class="headerlink" title="Type 3"></a>Type 3</h4><p>简化版T2</p>
+<p>仅保留当前（Cur）和前一个（Prev）的值，而不保留整个历史记录</p>
+<p>例如：仅记录书的最后两个价格</p>
+<p>基本原理：</p>
+<ul>
+<li>假设不需要分析完整的历史记录</li>
+<li>大多数分析将以当前价格和最多一个过去价格（例如， 与趋势比较</li>
+</ul>
+<p><img src="./fit5195-bi-notes/image-20210223225531130.png" alt="image-20210223225531130"></p>
+<h4 id="Type-4"><a href="#Type-4" class="headerlink" title="Type 4"></a>Type 4</h4><p>创建一个新DIM来维护attribute 变更的历史记录</p>
+<p>如前面（with Bridge Table那里）的BookPriceDIM</p>
+<p><img src="./fit5195-bi-notes/image-20210223222154124.png" alt="image-20210223222154124"></p>
+<p>主要优势：同一本书无需具有其他BookID。 此外，保留更改的全部历史记录。</p>
+<h4 id="Type-6"><a href="#Type-6" class="headerlink" title="Type 6"></a>Type 6</h4><p>T2和T3的结合。同一本书不需要单独的ID（同T3），但是会保留整个历史记录（同T2）</p>
+<p>Composite key {BookID, StartDate, EndDate}</p>
+<p><img src="./fit5195-bi-notes/image-20210223230148094.png" alt="image-20210223230148094"></p>
+<p>如果由于Date，BookDIM和BookSalesFACT之间存在M:M关系</p>
+<p>Sol1：给BookDIM加个新的surrogate key</p>
+<p>Sol2：把StartDate和EndDate加到FACT-&gt;与TimeID混乱</p>
+<p>Sol3：加个辅助性的表（或Bridge Table）在BookSalesFACT和BookDIM之间-&gt;也乱</p>
+<p>结论：Sol1最佳</p>
+<h2 id="S7-Snowflake-Schema"><a href="#S7-Snowflake-Schema" class="headerlink" title="S7 Snowflake Schema"></a>S7 Snowflake Schema</h2><p>给Star的DIM分个层级（Hierarchy）就变Snowflake了</p>
+<p><img src="./fit5195-bi-notes/image-20210224001704514.png" alt="image-20210224001704514"></p>
+<p>注意1:M关系，不能整倒了</p>
+<h3 id="Determinant-Dimensions"><a href="#Determinant-Dimensions" class="headerlink" title="Determinant Dimensions"></a>Determinant Dimensions</h3><p>显性维度</p>
+<p>在Star schema下检索的所有数据都必须使用此DIM，否则检索的数据将变得毫无意义。例如PetrolType</p>
+<p>差不多就是做Schema之前问题里都提到的一个要素吧</p>
+<p><img src="./fit5195-bi-notes/image-20210224002158112.png" alt="image-20210224002158112"></p>
+<h2 id="S8-OLAP"><a href="#S8-OLAP" class="headerlink" title="S8 OLAP"></a>S8 OLAP</h2><p>熟悉的SQL</p>
+<p><strong>基础</strong></p>
+<p>COUNT([distinct] A)</p>
+<p>SUM([distinct] A)</p>
+<p>AVG([distinct] A)</p>
+<p>MAX(A)</p>
+<p>MIN(A)</p>
+<p>GROUP BY</p>
+<p><strong>进阶</strong></p>
+<p>CUBE：扩展GROUP BY子句以在单个查询中生成<strong>交叉表</strong>格式的信息。</p>
+<p>ROLLUP：扩展GROUP BY子句以生成从最详细到总计的越来越细粒度的聚合。</p>
+<p>GROUPING：与SELECT语句一起使用，以显示有关聚合级别的信息以及每个聚合级别的相关小计。</p>
+<p>Partial CUBE：GROUP BY expr1, CUBE (expr2, expr3)</p>
+<p>Partial ROLLUP：GROUP BY expr1, ROLLUP (expr2, expr3)</p>
+<p><strong>高阶</strong></p>
+<p>RANK( ) OVER ([query_partition_clause] order_by_clause)</p>
+<p>DENSE_RANK( ) OVER ([query_partition_clause] order_by_clause)</p>
+<p>DENSE对于同rank重复情况下只加一</p>
+<p>RANK() OVER (PARTITION BY order_by_clause)</p>
+<p>例如select RANK() OVER (PARTITION BY channel_desc ORDER BY SUM(amount_sold) DESC) AS RANK_BY_CHANNEL from XXX</p>
+<p>如果需要显示多个属性的排名，则需要对聚合进行分区（PARTITION BY），以便可以为每个指定的属性显示适当的排名</p>
+<p>select rank() from XXX 外面再套个select * from () where rank&lt;5来实现TopN </p>
+<p>ROW_NUMBER函数为分区中的每一行分配一个唯一的编号（依次从1开始，由ORDER BY定义）。有点像sequence。用来手动排rank</p>
+<p>ROW_NUMBER() OVER ([query_partition_clause] order_by_clause)</p>
+<p>PERCENT RANK</p>
+<p>percent_rank() over (order by sum(f.revenue) desc) as “Percent Rank”</p>
+<p>Cumulative Aggregates</p>
+<p>SUM(SUM(XXX)) OVER (ORDER BY aaa,bbb ROWS UNBOUNDED PRECEDING)</p>
+<p>UNBOUNDED表示无界，PRECEDING前</p>
+<p>解析函数SUM为每一行定义一个窗口，该窗口从分区的开头（UNBOUNDED PRECEDING）开始，默认情况下在当前行结束。<br>在此示例中，需要嵌套SUM，因为我们正在对本身就是SUM的值执行SUM。<br>嵌套聚合在分析聚合函数中经常使用</p>
+<p>SUM(SUM(XXX)) OVER (PARTITION BY aaa ORDER BY aaa,bbb ROWS UNBOUNDED PRECEDING)</p>
+<p>Moving Aggregate</p>
+<p>(AVG(SUM(XXX)) OVER (ORDER BY aaa,bbb ROWS 2 PRECEDING)</p>
+<p>(AVG(SUM(XXX)) OVER (ORDER BY aaa,bbb ROWS 2 PRECEDING)</p>
+<p>用两个的平均表现moving</p>
+<h2 id="S9-BI"><a href="#S9-BI" class="headerlink" title="S9 BI"></a>S9 BI</h2><h3 id="Navigation-Methods"><a href="#Navigation-Methods" class="headerlink" title="Navigation Methods"></a>Navigation Methods</h3><p>Drill Down</p>
+<p>Drill Up (a.k.a. Roll Up)</p>
+<p>Drill Through</p>
+<p>Drill Across</p>
+<h2 id="EXAM"><a href="#EXAM" class="headerlink" title="EXAM"></a>EXAM</h2><p>考试就是1-9的内容。较难，不熟练会时间来不及（就是我）。</p>
+<p>考试内容和模拟考形式完全一致</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/done/" rel="tag"># done</a>
+              <a href="/tags/business-intelligence/" rel="tag"># business intelligence</a>
+              <a href="/tags/data-warehouse/" rel="tag"># data warehouse</a>
+              <a href="/tags/database/" rel="tag"># database</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/fit9131-java-bluej-notes/" rel="prev" title="Notes for FIT9131: Java">
+      <i class="fa fa-chevron-left"></i> Notes for FIT9131: Java
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#S1-Intro"><span class="nav-number">1.1.</span> <span class="nav-text">S1 Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Operational-DB"><span class="nav-number">1.1.1.</span> <span class="nav-text">Operational DB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.2.</span> <span class="nav-text">数据仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">建立数据仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">使用数据仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9A%84%E9%9C%80%E8%A6%81"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">数据分析的需要</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BI"><span class="nav-number">1.1.3.</span> <span class="nav-text">BI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S2-%E6%98%9F%E5%BD%A2%E6%9E%B6%E6%9E%84-Star-Schema"><span class="nav-number">1.2.</span> <span class="nav-text">S2 星形架构 Star Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%9F%E5%BD%A2%E6%9E%B6%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">星形架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E5%8C%96%EF%BC%88ETL%EF%BC%89%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">转化（ETL）流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E5%88%97%E8%A1%A8%E6%A0%BC%E6%B3%95"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">双列表格法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL"><span class="nav-number">1.2.3.</span> <span class="nav-text">SQL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S3-%E6%A1%A5%E6%8E%A5%E8%A1%A8-Bridge-Tables"><span class="nav-number">1.3.</span> <span class="nav-text">S3 桥接表 Bridge Tables</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Bridge-Tables"><span class="nav-number">1.3.1.</span> <span class="nav-text">Bridge Tables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B8%85%E7%90%86"><span class="nav-number">1.3.2.</span> <span class="nav-text">数据清理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S4-Multifact"><span class="nav-number">1.4.</span> <span class="nav-text">S4 Multifact</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S5-DW-Architecture"><span class="nav-number">1.5.</span> <span class="nav-text">S5 DW Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-of-Aggregations"><span class="nav-number">1.5.1.</span> <span class="nav-text">Level of Aggregations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S6-Temporal-DW"><span class="nav-number">1.6.</span> <span class="nav-text">S6 Temporal DW</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#with-Bridge-Table"><span class="nav-number">1.6.1.</span> <span class="nav-text">with Bridge Table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Temporal-Attributes"><span class="nav-number">1.6.2.</span> <span class="nav-text">Temporal Attributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Temporal-Dimensions"><span class="nav-number">1.6.3.</span> <span class="nav-text">Temporal Dimensions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slowly-Changing-Dimensions"><span class="nav-number">1.6.4.</span> <span class="nav-text">Slowly Changing Dimensions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-0"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">Type 0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-1"><span class="nav-number">1.6.4.2.</span> <span class="nav-text">Type 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-2"><span class="nav-number">1.6.4.3.</span> <span class="nav-text">Type 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-3"><span class="nav-number">1.6.4.4.</span> <span class="nav-text">Type 3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-4"><span class="nav-number">1.6.4.5.</span> <span class="nav-text">Type 4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-6"><span class="nav-number">1.6.4.6.</span> <span class="nav-text">Type 6</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S7-Snowflake-Schema"><span class="nav-number">1.7.</span> <span class="nav-text">S7 Snowflake Schema</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Determinant-Dimensions"><span class="nav-number">1.7.1.</span> <span class="nav-text">Determinant Dimensions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S8-OLAP"><span class="nav-number">1.8.</span> <span class="nav-text">S8 OLAP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S9-BI"><span class="nav-number">1.9.</span> <span class="nav-text">S9 BI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigation-Methods"><span class="nav-number">1.9.1.</span> <span class="nav-text">Navigation Methods</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EXAM"><span class="nav-number">1.10.</span> <span class="nav-text">EXAM</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

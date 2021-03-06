@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="首先在各种公开消息来源上都说这个是刷分水课来着。再加上本身自己在设计上想要有点提高（怎么说也算当过艺术生的），又经常有需要设计的场景（项目别太多）。现在也是前端更火热，所以掌握这个是很有价值的。  总算总结完了，感觉这门课可以改名叫UI Guidelines了……太tm多了这内容 [TOC] S1 Introduction to HCI and User Interface Design成吨的理论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes for FIT5152: UI Design">
+<meta property="og:url" content="http://example.com/fit5152-ui-design-notes/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="首先在各种公开消息来源上都说这个是刷分水课来着。再加上本身自己在设计上想要有点提高（怎么说也算当过艺术生的），又经常有需要设计的场景（项目别太多）。现在也是前端更火热，所以掌握这个是很有价值的。  总算总结完了，感觉这门课可以改名叫UI Guidelines了……太tm多了这内容 [TOC] S1 Introduction to HCI and User Interface Design成吨的理论">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/fit5152-ui-design-notes/fit5152-ui-design-notes/image-20210220115032057.png">
+<meta property="og:image" content="http://example.com/fit5152-ui-design-notes/image-20210220115139022.png">
+<meta property="og:image" content="http://example.com/fit5152-ui-design-notes/fit5152-ui-design-notes/image-20210221101807538.png">
+<meta property="og:image" content="http://example.com/fit5152-ui-design-notes/fit5152-ui-design-notes/image-20210222203134223.png">
+<meta property="og:image" content="http://example.com/fit5152-ui-design-notes/fit5152-ui-design-notes/image-20210222222651518.png">
+<meta property="og:image" content="http://example.com/fit5152-ui-design-notes/fit5152-ui-design-notes/image-20210222222656487.png">
+<meta property="og:image" content="http://example.com/fit5152-ui-design-notes/fit5152-ui-design-notes/image-20210222223934093.png">
+<meta property="article:published_time" content="2020-11-04T12:36:00.000Z">
+<meta property="article:modified_time" content="2021-03-06T14:31:00.215Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="done">
+<meta property="article:tag" content="UI">
+<meta property="article:tag" content="Design">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/fit5152-ui-design-notes/fit5152-ui-design-notes/image-20210220115032057.png">
+
+<link rel="canonical" href="http://example.com/fit5152-ui-design-notes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Notes for FIT5152: UI Design | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/fit5152-ui-design-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes for FIT5152: UI Design
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-04 20:36:00" itemprop="dateCreated datePublished" datetime="2020-11-04T20:36:00+08:00">2020-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-06 22:31:00" itemprop="dateModified" datetime="2021-03-06T22:31:00+08:00">2021-03-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>首先在各种公开消息来源上都说这个是刷分水课来着。再加上本身自己在设计上想要有点提高（怎么说也算当过艺术生的），又经常有需要设计的场景（项目别太多）。现在也是前端更火热，所以掌握这个是很有价值的。</p>
+<hr>
+<p>总算总结完了，感觉这门课可以改名叫UI Guidelines了……太tm多了这内容</p>
+<p>[TOC]</p>
+<h2 id="S1-Introduction-to-HCI-and-User-Interface-Design"><a href="#S1-Introduction-to-HCI-and-User-Interface-Design" class="headerlink" title="S1 Introduction to HCI and User Interface Design"></a>S1 Introduction to HCI and User Interface Design</h2><p>成吨的理论知识……后面几个S分别扩展</p>
+<p>HCI，即人机交互，包含了为达成某目标的一系列行为</p>
+<p>系统开发生命周期</p>
+<p><img src="./fit5152-ui-design-notes/image-20210220115032057.png" alt="image-20210220115032057"></p>
+<p>交互式系统设计</p>
+<img src="/fit5152-ui-design-notes/image-20210220115139022.png" class="" title="image-20210220115139022">
+
+<p>HCI主要的三个方面</p>
+<ul>
+<li>我们如何设计？（谁是用户？哪些任务？）Design</li>
+<li>我们如何构造？Prototyping</li>
+<li>我们如何评估？Evaluation</li>
+</ul>
+<h3 id="Design："><a href="#Design：" class="headerlink" title="Design："></a>Design：</h3><p>获取数据及定义需求-&gt; 用户分析，任务分析，环境/域分析，数据收集方式：采访，问卷，目标组或观察</p>
+<p>Conceptual Design：</p>
+<p>描述系统该做什么以及长啥样</p>
+<p>Physical Design：</p>
+<p>考虑系统实际细节</p>
+<h3 id="Prototyping"><a href="#Prototyping" class="headerlink" title="Prototyping"></a>Prototyping</h3><p>Assignment3的内容</p>
+<p>Low-fidelity (paper) prototyping</p>
+<p>High-fidelity (digital) prototyping</p>
+<p>Native prototyping</p>
+<h3 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h3><p>Expert reviews专家审阅： Heuristics evaluation 启发式评估, Cognitive walkthrough 认知走查</p>
+<p>Usability testing</p>
+<p>Field studies</p>
+<p>Observation</p>
+<h3 id="Usability"><a href="#Usability" class="headerlink" title="Usability"></a>Usability</h3><p>is a quality attribute of the UI</p>
+<p><strong>effectiveness</strong>, <strong>efficiency</strong>, and <strong>satisfaction</strong> in a specified context of use</p>
+<h3 id="Importance-of-UI-Design"><a href="#Importance-of-UI-Design" class="headerlink" title="Importance of UI Design"></a>Importance of UI Design</h3><p>lead to user satisfaction, business success, and cost savings…</p>
+<h3 id="User-Centered-Design"><a href="#User-Centered-Design" class="headerlink" title="User-Centered Design"></a>User-Centered Design</h3><p>puts human needs, capabilities, and behavior first</p>
+<p>match the needs and capabilities of the people</p>
+<p>based on the needs and interests of the user</p>
+<p>Users’ tasks and goals are the driving force</p>
+<h3 id="Why-to-involve-users"><a href="#Why-to-involve-users" class="headerlink" title="Why to involve users"></a>Why to involve users</h3><ul>
+<li>Users bring important knowledge of work tasks</li>
+<li>Designers can gain a better understanding of users’ needs and goals</li>
+<li>Greater acceptance of the system often results</li>
+<li>Fewer problems during development</li>
+<li>Lower maintenance costs over time</li>
+<li>Products that are easier to learn</li>
+<li>Reduction in errors</li>
+<li>Users develop a feeling of ownership through contributing to the development</li>
+</ul>
+<h3 id="Human-Centered-Design"><a href="#Human-Centered-Design" class="headerlink" title="Human-Centered Design"></a>Human-Centered Design</h3><p>Human-centred design puts more emphasis on all stakeholders, and not just ‘users’</p>
+<h3 id="Principles-of-Human-Centered-Design"><a href="#Principles-of-Human-Centered-Design" class="headerlink" title="Principles of Human-Centered Design"></a>Principles of Human-Centered Design</h3><p>The ISO standard describes 6 key principles.<br>These principles apply to user-centred design as well.<br>• The design is based upon an explicit understanding of users, tasks and environments<br>• Users are involved throughout entire development<br>• The design driven and refined by user-centered evaluation<br>• The process is iterative<br>• The design addresses the whole user experience<br>• The design team includes multidisciplinary skills and perspectives</p>
+<h2 id="S2-Everyday-Design"><a href="#S2-Everyday-Design" class="headerlink" title="S2 Everyday Design"></a>S2 Everyday Design</h2><p>实际上的标题是Design Theories, Models and Principles</p>
+<p>Discoverability</p>
+<p>Visibility</p>
+<p>Visibility is not just about what you can see</p>
+<p>Principles of Discoverability</p>
+<ul>
+<li>Affordances: 就像椅子、button一样一看就知道咋用</li>
+<li>Signifiers: 当affordance不能被察觉的时候拿来提示的（比如门上push, pull的贴纸</li>
+<li>Feedback: 反馈（比如震动</li>
+<li>Constraints: 约束，约束用户行为别乱搞乱用</li>
+<li>Mappings: 两类物品之间的映射关系（如音量+-，还有插头插座</li>
+</ul>
+<h3 id="Conceptual-model-of-the-system"><a href="#Conceptual-model-of-the-system" class="headerlink" title="Conceptual model of the system"></a>Conceptual model of the system</h3><p>系统的理论模型</p>
+<p>It provides understanding about the meaning of the controls and settings and what all that means</p>
+<h4 id="Users"><a href="#Users" class="headerlink" title="Users"></a>Users</h4><p>尝试解释产品如何工作</p>
+<p>在用户脑子里的叫mental models，通常根据experience, training or interaction with the product来形成</p>
+<h4 id="Designers"><a href="#Designers" class="headerlink" title="Designers"></a>Designers</h4><p>可能和用户的（mental models）不同</p>
+<p>和用户的交流局限于系统印象</p>
+<ol>
+<li>the <strong>physical structure</strong> of the product, and the discoverability through using affordances, signifiers, constraints and mappings</li>
+<li>technical <strong>manuals</strong> and <strong>documentations</strong></li>
+</ol>
+<h3 id="Knowledge-in-the-head"><a href="#Knowledge-in-the-head" class="headerlink" title="Knowledge in the head"></a>Knowledge in the head</h3><p>the knowledge in the human <strong>memory</strong> system</p>
+<p><strong>requires learning</strong></p>
+<p>也可以把knowledge of the world然后转进head</p>
+<h3 id="Knowledge-in-the-World"><a href="#Knowledge-in-the-World" class="headerlink" title="Knowledge in the World"></a>Knowledge in the World</h3><p>external knowledge</p>
+<p>客观存在的知识</p>
+<p>Much of the knowledge need to perform tasks can come from the information in the world (using affordances, signifiers, feedback and mappings) </p>
+<p>比如键盘布局！</p>
+<h3 id="Cognitive-Process"><a href="#Cognitive-Process" class="headerlink" title="Cognitive Process"></a>Cognitive Process</h3><p>认知过程</p>
+<p>include:</p>
+<ul>
+<li><p>attention (the first step) can be visual or auditory, 就听or看见</p>
+</li>
+<li><p>perception and recognition, 洞察与辨别</p>
+</li>
+<li><p>memory, 记下来</p>
+</li>
+<li><p>Learning (and then reading, speaking and listening) 学习</p>
+</li>
+<li><p>reasoning and problem solving (reflective cognition) 推理与解决问题（反射式认知）</p>
+</li>
+</ul>
+<p>交互时涉及大量认知过程</p>
+<h3 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h3><p>the ability to store and remember information</p>
+<h4 id="Sensory-memory"><a href="#Sensory-memory" class="headerlink" title="Sensory memory"></a>Sensory memory</h4><p>感官记忆，很短，且如果无意识就很快忘</p>
+<h4 id="Short-term-or-working-memory-STM"><a href="#Short-term-or-working-memory-STM" class="headerlink" title="Short-term (or working) memory (STM)"></a>Short-term (or working) memory (STM)</h4><p>少量信息。短时间</p>
+<p>接触新界面时候，会学习到新元素的使用，会存储这部分内容</p>
+<p>好设计应当减少其发生（E.g. using ‘recognition rather than recall’）</p>
+<h4 id="Long-term-memory-LTM"><a href="#Long-term-memory-LTM" class="headerlink" title="Long-term memory (LTM)"></a>Long-term memory (LTM)</h4><p>retain the information for hours, months or years </p>
+<p>无限容量</p>
+<p>过去经历和知识的存储位置</p>
+<p>形成了产品的mental model</p>
+<h3 id="Cognitive-Load"><a href="#Cognitive-Load" class="headerlink" title="Cognitive Load"></a>Cognitive Load</h3><p>认知负载。处理某任务所花费的气力</p>
+<p>减少memory load就能减少cognitive load。这对好的界面设计非常关键</p>
+<h3 id="External-Cognition"><a href="#External-Cognition" class="headerlink" title="External Cognition"></a>External Cognition</h3><p>external representations and aids</p>
+<p>应该最小化用户需要记忆的内容</p>
+<p>通过外部认知能过减小load</p>
+<p>– Externalising 外部化<br>• Transforming knowledge into external representations, e.g. using a calendar or diary (birthdays, appointments)<br>– Computational offloading 计算方面减负<br>• e.g. a calculator<br>– Annotating and cognitive tracing 注记或者认知追踪<br>• such as Word Track Changes</p>
+<h2 id="S3-Requirement-Gathering-Task-Analysis"><a href="#S3-Requirement-Gathering-Task-Analysis" class="headerlink" title="S3 Requirement Gathering, Task Analysis"></a>S3 Requirement Gathering, Task Analysis</h2><h3 id="Data-gathering"><a href="#Data-gathering" class="headerlink" title="Data gathering"></a>Data gathering</h3><p>首先需要收集 user, tasks, the context of use, the environment/domain and if any constraints</p>
+<h4 id="techniques"><a href="#techniques" class="headerlink" title="techniques"></a>techniques</h4><ul>
+<li>Studying existing documentation</li>
+<li>Researching similar systems/products</li>
+</ul>
+<p>就多看书or多抄</p>
+<p>或者S1里Design里那些</p>
+<h4 id="KYC（Know-your-user）"><a href="#KYC（Know-your-user）" class="headerlink" title="KYC（Know your user）"></a>KYC（Know your user）</h4><p>一些重要指标</p>
+<p>▪    Demographics: age, gender, occupation<br>▪    Needs, capabilities and limitations<br>▪    Digital literacy<br>▪    Cultural background<br>▪    Social status</p>
+<h4 id="Design-Personas"><a href="#Design-Personas" class="headerlink" title="Design Personas"></a>Design Personas</h4><p>Personas大致就是代表性用户画像的意思</p>
+<p>Design personas:  Focus more on user goals, needs, motivations, and user behaviour</p>
+<p>Each persona usually have <strong>2-4</strong> goals<br>Goals are different from tasks, which are performed to achieve goals</p>
+<p>Scenario: 场景， 就脑补（narrative叙述）一个persona通过交互实现goal的情形</p>
+<h3 id="Task-Analysis"><a href="#Task-Analysis" class="headerlink" title="Task Analysis"></a>Task Analysis</h3><p>Hierarchical Task Analysis (HTA)，就Assignment里画过的那东西。就尽可能分割任务然后用图表述。</p>
+<p>S4 Navigation, Menus</p>
+<h3 id="Navigation"><a href="#Navigation" class="headerlink" title="Navigation"></a>Navigation</h3><p>finding information by navigating through the interface</p>
+<p>主要是解决<del>fps游戏</del>三大问</p>
+<p>– Where am I? 我是谁<br>– What’s here? 这是哪<br>– Where can I go from here? 我该去哪</p>
+<p>It requires understanding user needs and behaviour, identifying tasks, and effective content organisation</p>
+<h4 id="Structural-Navigation"><a href="#Structural-Navigation" class="headerlink" title="Structural Navigation"></a>Structural Navigation</h4><p>根据页面层级</p>
+<ul>
+<li><p>顶级页面的主导航</p>
+</li>
+<li><p>次级页面里的二级导航</p>
+</li>
+</ul>
+<p><img src="./fit5152-ui-design-notes/image-20210221101807538.png" alt="image-20210221101807538"></p>
+<h4 id="Associative-Navigation"><a href="#Associative-Navigation" class="headerlink" title="Associative Navigation"></a>Associative Navigation</h4><p>Associative navigation connects pages with similar topics and content or with the same level of importance without considering their location in the hierarchy</p>
+<p>辅助性导航就属于是常驻的，不管页面层级</p>
+<ul>
+<li>Footer navigation</li>
+<li>quick links </li>
+<li>Contextual navigation</li>
+</ul>
+<p>Contextual Navigation：</p>
+<p>发生在内容上的导航</p>
+<ul>
+<li>Embedded navigation (e.g. Links within the text)</li>
+<li>Related links<ul>
+<li>Usually provided at the end or to the side of page</li>
+</ul>
+</li>
+<li>Adaptive navigation<ul>
+<li>E.g. the links change based on what the site visitors do/select</li>
+</ul>
+</li>
+</ul>
+<h3 id="Utility-navigation"><a href="#Utility-navigation" class="headerlink" title="Utility navigation"></a>Utility navigation</h3><p>工具导航（不被包括进页面层级</p>
+<p>–    Navigation between pages and features that helps with using the interface</p>
+<p>比如搜索栏</p>
+<h3 id="Visual-Flow"><a href="#Visual-Flow" class="headerlink" title="Visual Flow"></a>Visual Flow</h3><p>扫描顺序为Z形，阅读顺序为F形</p>
+<p>▪    Consider the logical flow of the users’ tasks.<br>▪    Create a logical path.<br>▪    Minimise eye movement.<br>▪    Use alignment and size uniformity for screen elements</p>
+<p>。。。</p>
+<h2 id="S5-Form-Design"><a href="#S5-Form-Design" class="headerlink" title="S5 Form Design"></a>S5 Form Design</h2><h3 id="Issues-with-Forms"><a href="#Issues-with-Forms" class="headerlink" title="Issues with Forms"></a>Issues with Forms</h3><p>可能存在问题：</p>
+<p>▪    Too <strong>long</strong><br>▪    <strong>Unclear</strong> purpose, asking for information that <strong>irrelevant</strong> to the user’s goals<br>▪    Poor information about the requirement of a given field，<strong>内容提示不足</strong><br>▪    Asking for the same (or similar) information more than once，<strong>重复</strong><br>▪    When there is an error, it does not clearly indicate where it happened or how it can be corrected，<strong>错误提示不足</strong><br>▪    Not clarifying the right <strong>data format</strong><br>▪    Not providing the necessary <strong>space</strong>，<strong>太窄</strong><br>▪    Taking user control away，<strong>不自由</strong></p>
+<h3 id="Data-Quality-Problem"><a href="#Data-Quality-Problem" class="headerlink" title="Data Quality Problem"></a>Data Quality Problem</h3><p>就提交上来的数据存在的问题</p>
+<p>▪    Data entered in the forms are often <strong>incomplete</strong> or have <strong>poor quality</strong><br>▪    Well designed forms can improve data quality<br>▪    目标：ensure correct data entry with minimal user effort</p>
+<p>用户填表顺序</p>
+<ol>
+<li>Understanding the question</li>
+<li>Finding an answer</li>
+<li>Judging an answer</li>
+<li>Entering the answer on the form</li>
+</ol>
+<h3 id="Guidelines"><a href="#Guidelines" class="headerlink" title="Guidelines"></a>Guidelines</h3><p>!important 这东西重要</p>
+<ul>
+<li>Meaningful, familiar and standard field labels</li>
+<li>Consistent terminology and abbreviations</li>
+<li>Optional and required fields clearly marked</li>
+<li>Comprehensible instructions</li>
+<li>Use visible space and boundaries for data entry fields</li>
+<li>Differentiate grouped items</li>
+<li>Visually appealing layout (alignment)</li>
+<li>Use lists if possible to minimise errors</li>
+<li>Immediate feedback</li>
+<li>Completion feedback</li>
+</ul>
+<h2 id="S6-Evaluation"><a href="#S6-Evaluation" class="headerlink" title="S6 Evaluation"></a>S6 Evaluation</h2><p>Evaluation and Usability Testing</p>
+<h3 id="Evaluation-Aims"><a href="#Evaluation-Aims" class="headerlink" title="Evaluation Aims"></a>Evaluation Aims</h3><p>评估目标</p>
+<ul>
+<li>Are the options and controls visible to the user?</li>
+<li>Does the user know how to interact with the UI elements?</li>
+<li>Is the navigation and workflow appropriate?</li>
+<li>Does the product do what the user expected it to do?</li>
+<li>Is the functionality correct from the user’s perspective?</li>
+<li>What are the good and poor features?</li>
+</ul>
+<p>作用</p>
+<ul>
+<li>Extensive testing is a key to successful design.</li>
+<li>To understand how real users use the product and if it meets their needs.</li>
+<li>To identify the issues and addressing them.</li>
+<li>To reduce user errors.</li>
+<li>To improve user experience and increase user satisfaction.</li>
+<li>To ensure the product meets the standards and guidelines.</li>
+<li>To compare with similar products.</li>
+<li>It is cheaper to fix a problem earlier in development than later.</li>
+</ul>
+<h3 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h3><p>Experts:</p>
+<ul>
+<li>Cognitive walkthrough</li>
+<li>Heuristic evaluation</li>
+</ul>
+<p>User:</p>
+<ul>
+<li>Usability Testing</li>
+<li>Field studies</li>
+<li>Thinking aloud</li>
+</ul>
+<h3 id="Expert-reviews"><a href="#Expert-reviews" class="headerlink" title="Expert reviews"></a>Expert reviews</h3><p>专家审阅</p>
+<p>identify usability problems and provide recommendations</p>
+<p>早期或晚期</p>
+<p>存在问题：</p>
+<ul>
+<li>Even knowledgeable experts might not know how real users, particularly first-time users, will interact with the product</li>
+<li>experts may not have an adequate understanding of the task domain or user communities.”</li>
+</ul>
+<h3 id="Cognitive-Walkthrough"><a href="#Cognitive-Walkthrough" class="headerlink" title="Cognitive Walkthrough"></a>Cognitive Walkthrough</h3><p>认知走查</p>
+<p>用于设计早期</p>
+<h3 id="Heuristic-Evaluation"><a href="#Heuristic-Evaluation" class="headerlink" title="Heuristic Evaluation"></a>Heuristic Evaluation</h3><p>启发式评估,，就assignment内容</p>
+<p><strong>–    Nielsen’s 10 heuristics</strong><br><strong>–    Shneiderman’s Eight Golden Rules</strong></p>
+<h3 id="Nielsen’s-10-heuristics"><a href="#Nielsen’s-10-heuristics" class="headerlink" title="Nielsen’s 10 heuristics"></a>Nielsen’s 10 heuristics</h3><ol>
+<li>Visibility of system status</li>
+<li>Match between system and the real world</li>
+<li>User control and freedom</li>
+<li>Consistency and standards</li>
+<li>Error prevention</li>
+<li>Recognition rather than recall (menu: to underline text, you look at the menu and recognise the option)</li>
+<li>Flexibility and efficiency of use</li>
+<li>Aesthetic and minimalist design</li>
+<li>Help users recognize, diagnose, and recover from errors</li>
+<li>Help and documentation</li>
+</ol>
+<h3 id="Shneiderman’s-Eight-Golden-Rules"><a href="#Shneiderman’s-Eight-Golden-Rules" class="headerlink" title="Shneiderman’s Eight Golden Rules"></a>Shneiderman’s Eight Golden Rules</h3><ol>
+<li>Strive for consistency (=N#4)</li>
+<li>   Cater to universal usability (=N#4)</li>
+<li>   Offer informative feedback (=N#9,)</li>
+<li>   Design dialogs to yield closure</li>
+<li>   Prevent errors</li>
+<li>   Permit easy reversal of actions (undo)</li>
+<li>   Support internal ‘locus of control’</li>
+<li>   Reduce short term memory</li>
+</ol>
+<h2 id="S7-Prototyping"><a href="#S7-Prototyping" class="headerlink" title="S7 Prototyping"></a>S7 Prototyping</h2><p>成功UI的四支柱Four pillars：</p>
+<p><img src="./fit5152-ui-design-notes/image-20210222203134223.png" alt="image-20210222203134223"></p>
+<ol>
+<li>   User interface requirements<br>§    Right and complete requirements are key</li>
+<li>   Guidelines documents and processes<br>§    Design principles that must be adopted within the design</li>
+<li>   User-Interface software tools and prototyping<br>§    To give users a clearer idea of design and its implications</li>
+<li>   Expert reviews and usability testing<br>§    To evaluate the design</li>
+</ol>
+<h3 id="Prototyping-1"><a href="#Prototyping-1" class="headerlink" title="Prototyping"></a>Prototyping</h3><p>重要性</p>
+<p>–    test their ideas,<br>–    test possible alternatives,<br>–    clarify requirements,<br>–    validate requirements,<br>–    solicit feedback<br>–    identify problems<br>–    and improve the final product</p>
+<p>类别</p>
+<p>Level of fidelity:</p>
+<p>§    Low-fidelity prototypes<br>§    High-fidelity prototypes</p>
+<p>Type of medium used:</p>
+<p>§    Sketching and paper prototypes<br>§    Digital prototypes<br>§    Native prototypes</p>
+<p>Level of interactivity:</p>
+<p>§    Static prototypes<br>§    Interactive prototypes</p>
+<p>Level of detail:</p>
+<p>§    Horizontal prototypes<br>§    Vertical prototypes</p>
+<h4 id="low-fidelity"><a href="#low-fidelity" class="headerlink" title="low fidelity"></a>low fidelity</h4><p>adv</p>
+<p>•    Simple, cheap and quick to create.<br>•    Truly hands-on because the designers have to manually manipulate the content.<br>•    The process of cutting, pasting, sorting, labelling forces designers to become familiar with the content elements.<br>•    It can be constructed quickly and efficiently and taken anywhere.<br>•    Even in a rough form, it gives the users a good idea of content organisation and navigation.<br>•    Easy to refine in the final product.<br>•    Prototypes appear to enhance teambuilding skills.</p>
+<p>•    With low-fidelity prototypes, users and designers are often more willing to suggest changes.<br>•    Users are more comfortable working with paper and criticising it rather than the real system.<br>•    Users recognise it as a ‘prototype’ so feel more free to make recommendations.<br>•    It allows for more iterations.<br>•    It allows to test with more users and identify more problems.</p>
+<h4 id="High-Fidelity"><a href="#High-Fidelity" class="headerlink" title="High-Fidelity"></a>High-Fidelity</h4><p>adv</p>
+<p>•    Interactive<br>•    Enables testing navigation, graphical elements and colours, legibility, image quality, alignment and spacing.<br>•    Looks and works more like the real product, resulting in more useful feedback.<br>•    Designers can show and test real flow and interactions.<br>•    At this stage certain limitations become apparent that were not identified earlier in the design.</p>
+<p>disadv</p>
+<p>•    It is not as cheap as low-fidelity prototypes.<br>•    It is not as fast as low-fidelity prototypes.<br>•    It cannot be taken anywhere easily like low-fidelity prototypes.<br>•    It cannot be refined as easy as low-fidelity prototypes.</p>
+<h2 id="S8-UI-Design-and-Usability-Graphics-and-Visual-Design"><a href="#S8-UI-Design-and-Usability-Graphics-and-Visual-Design" class="headerlink" title="S8 UI Design and Usability - Graphics and Visual Design"></a>S8 UI Design and Usability - Graphics and Visual Design</h2><h3 id="Visual-Design"><a href="#Visual-Design" class="headerlink" title="Visual Design"></a>Visual Design</h3><p>视觉设计</p>
+<p>▪    Line<br>▪    Shape<br>▪    Size and volume<br>▪    Position<br>▪    Negative/white space<br>▪    Colour<br>▪    Basic visual elements are used to create text, images, icons, textures, and animation</p>
+<p>【感觉就像SVG</p>
+<h4 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h4><p>Guidelines</p>
+<p>•    Select colors carefully<br>•    Minimize number of colors<br>•    Reduce eye strain instead of increasing it<br>•    Follow conventions: e.g. link colors<br>•    Be aware of accessibility rules<br>–    Be aware of color blindness<br>–    Provide sufficient contrast between foreground and background<br>–    Don’t use color alone to convey information</p>
+<h4 id="Typography"><a href="#Typography" class="headerlink" title="Typography"></a>Typography</h4><p>Guidelines</p>
+<p>•    Use more legible fonts<br>•    Use fewer typefaces (generally 1-2, or 3 max)<br>•    Italics, underline and bold can be used to emphasise points but should be used sparingly<br>–    Underlines can be mistaken by hyperlinks<br>•    Minimise using different sizes (1-3 max)<br>•    Support redundancy<br>•    There should be sufficient spacing between text lines to make it easy to read, and to increase reading speed<br>•    The size of the font should be large enough<br>•    The text alignment is also important and better to use left or justified alignment because the centre or right alignments make the text hard to read</p>
+<h2 id="S9-UI-Design-and-Usability-Interaction-Styles"><a href="#S9-UI-Design-and-Usability-Interaction-Styles" class="headerlink" title="S9 UI Design and Usability - Interaction Styles"></a>S9 UI Design and Usability - Interaction Styles</h2><p>交互风格</p>
+<h3 id="Command-Line-Interfaces"><a href="#Command-Line-Interfaces" class="headerlink" title="Command Line Interfaces"></a>Command Line Interfaces</h3><p>没错命令行也是……</p>
+<p>disadv</p>
+<ul>
+<li>Commands are issued in a specific language and different across different platforms. </li>
+<li>Hard to remember the name of commands and their order (specially for novice users).</li>
+<li>Hard to provide users with feedback and handle errors.</li>
+</ul>
+<p>adv</p>
+<ul>
+<li>It is more efficient to use by expert users.</li>
+<li>It is more efficient to perform repetitive tasks.</li>
+<li>Lack of graphical UI elements allows the user to focus on the task.</li>
+</ul>
+<h3 id="Direct-Manipulation"><a href="#Direct-Manipulation" class="headerlink" title="Direct Manipulation"></a>Direct Manipulation</h3><p>直接操作</p>
+<p>其实就是UI点点点这样的</p>
+<p>。。。</p>
+<h3 id="Fitts’s-Law"><a href="#Fitts’s-Law" class="headerlink" title="Fitts’s Law"></a>Fitts’s Law</h3><p>建议移动到目标区域所需的时间是考虑到<strong>目标的距离</strong>以及<strong>目标的宽度/大小</strong>的函数</p>
+<p>它是一种预测模型，可用于确定UI元素（如按钮）的正确<strong>大小</strong>和正确<strong>位置</strong></p>
+<p><img src="./fit5152-ui-design-notes/image-20210222222651518.png" alt="image-20210222222651518"><img src="./fit5152-ui-design-notes/image-20210222222656487.png" alt="image-20210222222656487"></p>
+<h3 id="Hick’s-Law"><a href="#Hick’s-Law" class="headerlink" title="Hick’s Law"></a>Hick’s Law</h3><p>用户做出决定所需的时间取决于可能的选择数量</p>
+<p>菜单中包含的选择越多，用户做出决定所花费的时间就越长</p>
+<p>不确定和不熟悉会增加决策时间</p>
+<p>KISS（保持简短和简单）</p>
+<p>使用带有较长列表和菜单的图像会很有帮助，并且可以将用户快速定向到正确的内容</p>
+<h3 id="Choice"><a href="#Choice" class="headerlink" title="Choice"></a>Choice</h3><p>如何选择交互风格</p>
+<ul>
+<li>Selecting the right input and output devices depends on: 选io设备根据<ul>
+<li>Environment and context of use 使用环境</li>
+<li>Speed of interaction (Games) 交互速度</li>
+<li>Accuracy of actions 准确度</li>
+<li>Type of tasks (if it requires entering a large amount of text) 任务类型</li>
+<li>Size (of screen) 屏幕大小</li>
+<li>Complexity of the system 系统复杂度</li>
+<li>Users? <ul>
+<li>People with disabilities 残障人士</li>
+<li>Their digital skills 用户电子水平</li>
+<li>Their previous experience with the device 用户对设备的使用经历</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>The most important thing is to meet the users’ goals but user preferences vary.</p>
+<p><strong>Interfaces change but principles do not</strong>(所以考guidelines)</p>
+<h2 id="S10-Design-Styles"><a href="#S10-Design-Styles" class="headerlink" title="S10 Design Styles"></a>S10 Design Styles</h2><p>UI Design and Usability - Design Languages and Styles</p>
+<p>设计语言（也就御三家的玩意……</p>
+<p>– Skeuomorphic Design（老罗最爱拟物设计）</p>
+<p>– Flat Design （扁平化）</p>
+<p>– Metro Design (MDL), MDL2 （时代眼泪）, and Fluent Design （微软biss）</p>
+<p>– Material Design （好家伙）</p>
+<p>– iOS Design（好看+流畅）</p>
+<h2 id="S11-Reports-amp-Error-Messages"><a href="#S11-Reports-amp-Error-Messages" class="headerlink" title="S11 Reports &amp; Error Messages"></a>S11 Reports &amp; Error Messages</h2><p>UI Design and Usability Reports - Error Messages</p>
+<h3 id="Report-Guidelines"><a href="#Report-Guidelines" class="headerlink" title="Report Guidelines"></a>Report Guidelines</h3><ul>
+<li>Use meaningful titles of the report.</li>
+<li>Include meaningful information.</li>
+<li>Balance the layout. 框架平衡</li>
+<li>Design an easy navigation system for a multi-page report.</li>
+<li>All important information should be highlighted. 高亮关键内容</li>
+<li>For displaying text in a report, <strong>文字</strong><ul>
+<li>use mixed uppercase and lowercase.</li>
+<li>void using overly fancy fonts</li>
+<li>use enough spacing between paragraphs.</li>
+<li>left-justify text and leave a ragged right margin.</li>
+<li>use abbreviations and acronyms only when they are widely understood and are significantly shorter than full-text.</li>
+</ul>
+</li>
+<li>For displaying content in tables and lists in a report <strong>表格/列表</strong><ul>
+<li>all columns and/or rows should have meaningful labels 都要有标签</li>
+<li>labels should be separated from other content by using highlighting 标签从内容里拎出来且高亮</li>
+<li>redisplay labels when the data extend beyond a single screen or page. 别超出屏幕</li>
+<li>sort in a meaningful order 排序</li>
+<li>avoid using overly fancy fonts 别用浮夸字体</li>
+<li>right-justify numeric data 数字数据右对齐</li>
+<li>left-justify textual data. 文字数据左对齐</li>
+<li>break long sequence of alphanumeric data into small groups of 3 to 4 characters each.用符号分割长数字</li>
+<li><img src="./fit5152-ui-design-notes/image-20210222223934093.png" alt="image-20210222223934093"></li>
+</ul>
+</li>
+<li>For displaying data with visuals, use the right type of visual with the data in the report to turn report data into knowledge.<ul>
+<li>Use <strong>line graph</strong> to track <strong>changes</strong> over <strong>a period of time</strong></li>
+<li>Use <strong>bar graph</strong> when <strong>comparing</strong> things between different <strong>groups</strong> or when tracking <strong>changes</strong> over <strong>a period of time</strong></li>
+<li>Use <strong>pie chart</strong> when <strong>comparing</strong> different <strong>parts of a whole.</strong></li>
+<li>If there is a lot of data to display in a report that requires scrolling, apply filters and make use of hierarchies/drill-downs.</li>
+</ul>
+</li>
+</ul>
+<h3 id="Error-Message"><a href="#Error-Message" class="headerlink" title="Error Message"></a>Error Message</h3><ul>
+<li>Be as specific and precise as possible.  尽可能精确详细</li>
+<li>Choose user-centred phrasing. State problem, cause, and solution. 向用户表述问题，原因以及解决方案</li>
+<li>Consider multiple levels of messages. 考虑多级消息</li>
+<li>Use a positive tone. Be courteous. Avoid condemnation. 用积极语气，别骂人</li>
+<li>Maintain consistent grammatical forms, terminology, and abbreviations. 用一致的格式术语缩写</li>
+<li>Keep error messages next to fields in forms. 将错误消息保留在表单中的字段旁边</li>
+<li>Use color to differentiate errors from normal field states 用颜色区分</li>
+<li>Add iconography or subtle animation for easy scanning 加icon或动画方便发现</li>
+<li>Maintain consistent visual format and placement. 保持一致的视觉格式和位置</li>
+<li>Use modal dialogs for important warnings to prevent or correct critical errors 使用对话框显示重要警告，以防止或纠正严重错误<ul>
+<li>Use modal dialogs only when there is a need to draw extra attention to an error that can lead to some irreparable consequences. 仅当需要特别注意可能导致某些无法弥补的后果的错误时，才使用对话框。</li>
+<li>Modal dialog boxes are disruptive as they disable the main content and do not allow the user to continue interacting with the interface until the dialog box is open, thereby, interrupting the user from completing their task.  模态对话框具有破坏性，因为它们禁用了主要内容，并且在对话框打开之前不允许用户继续与界面进行交互，从而中断了用户完成其任务。</li>
+</ul>
+</li>
+</ul>
+<h2 id="S12-CURRENT-TRENDS-IN-HCI"><a href="#S12-CURRENT-TRENDS-IN-HCI" class="headerlink" title="S12 CURRENT TRENDS IN HCI"></a>S12 CURRENT TRENDS IN HCI</h2><p>略</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/done/" rel="tag"># done</a>
+              <a href="/tags/UI/" rel="tag"># UI</a>
+              <a href="/tags/Design/" rel="tag"># Design</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/fit9132-db-notes/" rel="prev" title="Notes for FIT9132: Intro to DB">
+      <i class="fa fa-chevron-left"></i> Notes for FIT9132: Intro to DB
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/fit9136-algo-and-python-notes/" rel="next" title="Notes for FIT9136: algo & python">
+      Notes for FIT9136: algo & python <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#S1-Introduction-to-HCI-and-User-Interface-Design"><span class="nav-number">1.</span> <span class="nav-text">S1 Introduction to HCI and User Interface Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Design%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">Design：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prototyping"><span class="nav-number">1.2.</span> <span class="nav-text">Prototyping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Evaluation"><span class="nav-number">1.3.</span> <span class="nav-text">Evaluation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Usability"><span class="nav-number">1.4.</span> <span class="nav-text">Usability</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Importance-of-UI-Design"><span class="nav-number">1.5.</span> <span class="nav-text">Importance of UI Design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#User-Centered-Design"><span class="nav-number">1.6.</span> <span class="nav-text">User-Centered Design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-to-involve-users"><span class="nav-number">1.7.</span> <span class="nav-text">Why to involve users</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Human-Centered-Design"><span class="nav-number">1.8.</span> <span class="nav-text">Human-Centered Design</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Principles-of-Human-Centered-Design"><span class="nav-number">1.9.</span> <span class="nav-text">Principles of Human-Centered Design</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S2-Everyday-Design"><span class="nav-number">2.</span> <span class="nav-text">S2 Everyday Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Conceptual-model-of-the-system"><span class="nav-number">2.1.</span> <span class="nav-text">Conceptual model of the system</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Users"><span class="nav-number">2.1.1.</span> <span class="nav-text">Users</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Designers"><span class="nav-number">2.1.2.</span> <span class="nav-text">Designers</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-in-the-head"><span class="nav-number">2.2.</span> <span class="nav-text">Knowledge in the head</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Knowledge-in-the-World"><span class="nav-number">2.3.</span> <span class="nav-text">Knowledge in the World</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cognitive-Process"><span class="nav-number">2.4.</span> <span class="nav-text">Cognitive Process</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Memory"><span class="nav-number">2.5.</span> <span class="nav-text">Memory</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sensory-memory"><span class="nav-number">2.5.1.</span> <span class="nav-text">Sensory memory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Short-term-or-working-memory-STM"><span class="nav-number">2.5.2.</span> <span class="nav-text">Short-term (or working) memory (STM)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Long-term-memory-LTM"><span class="nav-number">2.5.3.</span> <span class="nav-text">Long-term memory (LTM)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cognitive-Load"><span class="nav-number">2.6.</span> <span class="nav-text">Cognitive Load</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#External-Cognition"><span class="nav-number">2.7.</span> <span class="nav-text">External Cognition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S3-Requirement-Gathering-Task-Analysis"><span class="nav-number">3.</span> <span class="nav-text">S3 Requirement Gathering, Task Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-gathering"><span class="nav-number">3.1.</span> <span class="nav-text">Data gathering</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#techniques"><span class="nav-number">3.1.1.</span> <span class="nav-text">techniques</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#KYC%EF%BC%88Know-your-user%EF%BC%89"><span class="nav-number">3.1.2.</span> <span class="nav-text">KYC（Know your user）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Design-Personas"><span class="nav-number">3.1.3.</span> <span class="nav-text">Design Personas</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Task-Analysis"><span class="nav-number">3.2.</span> <span class="nav-text">Task Analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigation"><span class="nav-number">3.3.</span> <span class="nav-text">Navigation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Structural-Navigation"><span class="nav-number">3.3.1.</span> <span class="nav-text">Structural Navigation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Associative-Navigation"><span class="nav-number">3.3.2.</span> <span class="nav-text">Associative Navigation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Utility-navigation"><span class="nav-number">3.4.</span> <span class="nav-text">Utility navigation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Flow"><span class="nav-number">3.5.</span> <span class="nav-text">Visual Flow</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S5-Form-Design"><span class="nav-number">4.</span> <span class="nav-text">S5 Form Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Issues-with-Forms"><span class="nav-number">4.1.</span> <span class="nav-text">Issues with Forms</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Quality-Problem"><span class="nav-number">4.2.</span> <span class="nav-text">Data Quality Problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Guidelines"><span class="nav-number">4.3.</span> <span class="nav-text">Guidelines</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S6-Evaluation"><span class="nav-number">5.</span> <span class="nav-text">S6 Evaluation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Evaluation-Aims"><span class="nav-number">5.1.</span> <span class="nav-text">Evaluation Aims</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Types"><span class="nav-number">5.2.</span> <span class="nav-text">Types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expert-reviews"><span class="nav-number">5.3.</span> <span class="nav-text">Expert reviews</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cognitive-Walkthrough"><span class="nav-number">5.4.</span> <span class="nav-text">Cognitive Walkthrough</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Heuristic-Evaluation"><span class="nav-number">5.5.</span> <span class="nav-text">Heuristic Evaluation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nielsen%E2%80%99s-10-heuristics"><span class="nav-number">5.6.</span> <span class="nav-text">Nielsen’s 10 heuristics</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shneiderman%E2%80%99s-Eight-Golden-Rules"><span class="nav-number">5.7.</span> <span class="nav-text">Shneiderman’s Eight Golden Rules</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S7-Prototyping"><span class="nav-number">6.</span> <span class="nav-text">S7 Prototyping</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prototyping-1"><span class="nav-number">6.1.</span> <span class="nav-text">Prototyping</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#low-fidelity"><span class="nav-number">6.1.1.</span> <span class="nav-text">low fidelity</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#High-Fidelity"><span class="nav-number">6.1.2.</span> <span class="nav-text">High-Fidelity</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S8-UI-Design-and-Usability-Graphics-and-Visual-Design"><span class="nav-number">7.</span> <span class="nav-text">S8 UI Design and Usability - Graphics and Visual Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Design"><span class="nav-number">7.1.</span> <span class="nav-text">Visual Design</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Color"><span class="nav-number">7.1.1.</span> <span class="nav-text">Color</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Typography"><span class="nav-number">7.1.2.</span> <span class="nav-text">Typography</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S9-UI-Design-and-Usability-Interaction-Styles"><span class="nav-number">8.</span> <span class="nav-text">S9 UI Design and Usability - Interaction Styles</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Command-Line-Interfaces"><span class="nav-number">8.1.</span> <span class="nav-text">Command Line Interfaces</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct-Manipulation"><span class="nav-number">8.2.</span> <span class="nav-text">Direct Manipulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fitts%E2%80%99s-Law"><span class="nav-number">8.3.</span> <span class="nav-text">Fitts’s Law</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hick%E2%80%99s-Law"><span class="nav-number">8.4.</span> <span class="nav-text">Hick’s Law</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Choice"><span class="nav-number">8.5.</span> <span class="nav-text">Choice</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S10-Design-Styles"><span class="nav-number">9.</span> <span class="nav-text">S10 Design Styles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S11-Reports-amp-Error-Messages"><span class="nav-number">10.</span> <span class="nav-text">S11 Reports &amp; Error Messages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Report-Guidelines"><span class="nav-number">10.1.</span> <span class="nav-text">Report Guidelines</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Message"><span class="nav-number">10.2.</span> <span class="nav-text">Error Message</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S12-CURRENT-TRENDS-IN-HCI"><span class="nav-number">11.</span> <span class="nav-text">S12 CURRENT TRENDS IN HCI</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

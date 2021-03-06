@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="整体难度不大，tutor也很给面子（要是我自己给自己打分肯定更低 建议尽早摘抄知识点并且在Tut&#x2F;Ass时候就用起来，别像我一样前面拍脑子考前总结才发现都在PPT里。 W1回顾历史DB发展以及名人 W2 Conceptual Modelling理论模型 因为是chow’s foot图，所以复合（1：1）、多值（1：N）属性记得加个实体来表述会更直观 理论模型设计开发企业数据模型。  对应于ANSI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes for FIT9132: Intro to DB">
+<meta property="og:url" content="http://example.com/fit9132-db-notes/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="整体难度不大，tutor也很给面子（要是我自己给自己打分肯定更低 建议尽早摘抄知识点并且在Tut&#x2F;Ass时候就用起来，别像我一样前面拍脑子考前总结才发现都在PPT里。 W1回顾历史DB发展以及名人 W2 Conceptual Modelling理论模型 因为是chow’s foot图，所以复合（1：1）、多值（1：N）属性记得加个实体来表述会更直观 理论模型设计开发企业数据模型。  对应于ANSI">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210218223640286.png">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210218223450092.png">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210217003847464.png">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210217003857615.png">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210217225042251.png">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210217225057637.png">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210217230405132.png">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210217155937874.png">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210218213524538.png">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210219224938123.png">
+<meta property="og:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210219225409532.png">
+<meta property="article:published_time" content="2020-11-04T12:36:00.000Z">
+<meta property="article:modified_time" content="2021-03-06T11:06:55.056Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="done">
+<meta property="article:tag" content="database">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/fit9132-db-notes/fit9132-db-notes/image-20210218223640286.png">
+
+<link rel="canonical" href="http://example.com/fit9132-db-notes/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Notes for FIT9132: Intro to DB | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/fit9132-db-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes for FIT9132: Intro to DB
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-04 20:36:00" itemprop="dateCreated datePublished" datetime="2020-11-04T20:36:00+08:00">2020-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-06 19:06:55" itemprop="dateModified" datetime="2021-03-06T19:06:55+08:00">2021-03-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>整体难度不大，tutor也很给面子（要是我自己给自己打分肯定更低</p>
+<p>建议尽早摘抄知识点并且在Tut/Ass时候就用起来，别像我一样前面拍脑子考前总结才发现都在PPT里。</p>
+<h2 id="W1"><a href="#W1" class="headerlink" title="W1"></a>W1</h2><p>回顾历史DB发展以及名人</p>
+<h2 id="W2-Conceptual-Modelling"><a href="#W2-Conceptual-Modelling" class="headerlink" title="W2 Conceptual Modelling"></a>W2 Conceptual Modelling</h2><p>理论模型</p>
+<p>因为是chow’s foot图，所以复合（1：1）、多值（1：N）属性记得加个实体来表述会更直观</p>
+<h3 id="理论模型设计"><a href="#理论模型设计" class="headerlink" title="理论模型设计"></a>理论模型设计</h3><p>开发企业数据模型。</p>
+<ul>
+<li>对应于ANSI / SPARC体系结构的概念级别。</li>
+<li>独立于所有物理实施注意事项（要使用的数据库类型）。</li>
+<li>可以采用各种设计方法，例如UML，ER（实体关系）。</li>
+<li>ER由实体之间的<strong>实体</strong>和<strong>关系</strong>组成</li>
+</ul>
+<p>ENTITY具有属性（我们希望记录的东西），其中一个或多个属性将标识实体实例（称为KEY）</p>
+<h3 id="强弱实体"><a href="#强弱实体" class="headerlink" title="强弱实体"></a>强弱实体</h3><p><strong>强实体</strong></p>
+<blockquote>
+<p>具有可以在不参考其他实体的情况下定义的Key。例如EMPLOYEE实体。</p>
+<p><img src="./fit9132-db-notes/image-20210218223640286.png" alt="image-20210218223640286"></p>
+</blockquote>
+<p><strong>弱实体</strong></p>
+<blockquote>
+<p>具有要求存在一个或多个其他实体的Key。例如FAMILY实体-需要包括员工的KEY才能为家庭创建合适的密钥</p>
+<p><img src="./fit9132-db-notes/image-20210218223450092.png" alt="image-20210218223450092"></p>
+</blockquote>
+<p>数据库设计人员通常根据业务规则确定一个实体是否可被描述为弱实体，例如</p>
+<blockquote>
+<p> 客户每月支付帐款</p>
+<p> Key：cust_no，date_paid</p>
+<p>或者：payment_no（如果是凭空创造的surrogate Key？- 不属于理论模型）</p>
+</blockquote>
+<p>理论模型不加surrogate Key！</p>
+<table>
+<thead>
+<tr>
+<th>显著Identifying</th>
+<th>不显著Non-identifying</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Identifier of A is part of identifier of B.</td>
+<td>Identifier of A is NOT part of identifier of B.</td>
+</tr>
+<tr>
+<td>实线</td>
+<td>虚线</td>
+</tr>
+<tr>
+<td>ENROLMENT - STUDENT Enrolment key includes student id, which is an identifier of student.<br />CAR - CAR_COLOR<br />存在同样的key</td>
+<td>Department no (identifier of department) is not part of Employee’s identifier.</td>
+</tr>
+</tbody></table>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>类型: 简易，复合，单值，多值，派生</p>
+<p>鱼尾纹chow’s foot表示法不支持多值属性。 值被列为单独的属性。</p>
+<p>关联（或复合）实体</p>
+<h2 id="ERD"><a href="#ERD" class="headerlink" title="ERD"></a>ERD</h2><p>关系数据库模型，即ERM，构成ERD(实体关系图)的基础。<br>ERD代表最终用户查看的概念数据库。<br>ERD描述了数据库的主要组成部分：实体，属性和关系。<br>因为实体代表现实世界中的对象，所以实体和对象一词经常互换使用。 </p>
+<p>正好实体关系图也能在vuepress里用markdown+mermaid绘制，所以可以直接画着玩。由于还处于experimental，所以是只能表现实体和关系，并不能展示属性</p>
+<p>在mermaid里，几对几这样的关系分成左右两部分描述。</p>
+<table>
+<thead>
+<tr>
+<th>左边</th>
+<th>右边</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>`</td>
+<td>o`</td>
+<td>`o</td>
+</tr>
+<tr>
+<td>`</td>
+<td></td>
+<td>`</td>
+</tr>
+<tr>
+<td><code>&#125;o</code></td>
+<td><code>o&#123;</code></td>
+<td>零或多个 (无上限)</td>
+</tr>
+<tr>
+<td>`}</td>
+<td>`</td>
+<td>`</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">erDiagram</span><br><span class="line">    CUSTOMER ||--o&#123; ORDER : places</span><br></pre></td></tr></table></figure>
+
+<p>表示<strong>一个</strong>CUSTOMER强对应<strong>0或多个</strong>ORDER，即一个顾客对应着0个(未点单)或多个其点过的订单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">erDiagram</span><br><span class="line">    ORDER ||--|&#123; ITEM : contains</span><br></pre></td></tr></table></figure>
+
+<p>表示<strong>一个</strong>ORDER强对应<strong>0或多个</strong>ITEM，即一份订单上存在一个或多个商品</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">erDiagram</span><br><span class="line">    CUSTOMER &#125;|..|&#123; ADDRESS : uses</span><br></pre></td></tr></table></figure>
+
+<p>表示<strong>0或多个</strong>CUSTOMER弱对应<strong>0或多个</strong>ADDRESS，即存在多个顾客且存在多个地址，之间存在弱对应关系</p>
+<h2 id="W3-Relational-Model"><a href="#W3-Relational-Model" class="headerlink" title="W3 Relational Model"></a>W3 Relational Model</h2><p>Relational Model&amp;Relational Algebra关系模型与代数</p>
+<p>这个作业里是用SQL Developer从Logical里生成出来的，所以到SQL（DDL）部分才开始create。</p>
+<p>这里主要讲的是</p>
+<ul>
+<li>用NAME(Attribs…)表示的实体，每个数据都是一个tuple</li>
+<li>其中的各种key: SuperKey(一或多个属性，独一无二), CK（一或多个属性）, PK（从CK中选的一个），AK（alternate keys。PK以外的CK）</li>
+<li>代数（select，project，join，其他union，diff，div啥的都不用）顺便为后面归一化做准备</li>
+</ul>
+<p>功能性依赖Functional Dep</p>
+<p>如果在任何时候属性（集）A的值都确定单属性B值（当且仅当），则属性B在A上是功能依赖的。</p>
+<p>• order_no → order_date<br>• prod_no → prod_desc<br>• order_no, prod_no → ordered_qty</p>
+<p>RM 特点：</p>
+<ul>
+<li>要有独一无二的名字</li>
+<li>每个属性要有独一无二名字（用prefix</li>
+<li>属性不能多值</li>
+<li>所有属性值应当来自同一个域</li>
+<li>必须有主键</li>
+<li>relations 之间的 Logical (not physical) connections 通过primary/foreign keys表示</li>
+</ul>
+<h2 id="W4-Normalisation"><a href="#W4-Normalisation" class="headerlink" title="W4 Normalisation"></a>W4 Normalisation</h2><p>归一化</p>
+<ul>
+<li><p>为了避免在插入，更新和删除数据时可能发生的异常，应规范化关系。</p>
+</li>
+<li><p>规范化是一系列系统步骤，用于逐步完善数据模型。</p>
+</li>
+<li><p>基于primary key（或候选 candidate keys）分析关系的正式方法 密钥）和功能依赖项。用作：“自下而上设计”的一种设计技术，以及作为一种验证通过“自上而下的设计”产生的结构的方式（将ER模型转换为逻辑模型-参见下周）</p>
+</li>
+</ul>
+<p>更新异常的类型包括：</p>
+<p>•插入异常-仅在新员工被分配到项目时才插入</p>
+<p>•删除异常-删除分配给项目的唯一员工？</p>
+<p>​    –删除特定工作类别的唯一员工？</p>
+<p>•修改（或 更新）异常</p>
+<p>​    -更新作业类别的每小时费率 - 需要更新多行</p>
+<p>归一化目标</p>
+<ul>
+<li><p>创建有效的关系，即每个关系都符合关系模型的属性。 特别是：–实体完整性–引用完整性–没有多对多关系–每个单元格都包含一个值（是原子的）。</p>
+</li>
+<li><p>在RDBMS中实施时，实际上：–每个表代表一个主题 –没有数据项 将不必要地存储在多个表中。–可以建立表之间的关系（标识了PK和FK对）。–每个表都没有插入，更新和删除异常。</p>
+</li>
+</ul>
+<p>功能性依赖Functional Dep</p>
+<p>参照前面</p>
+<p>部分依赖Partial Dep（1-&gt;2）</p>
+<p>缺少对多个属性键的完全依赖</p>
+<ul>
+<li>ORDERNO, PRODNO ➔ PRODDESC, QTY_ORDERED</li>
+<li>尽管qty_ordered完全取决于orderno和prodno，但仅需prodno即可确定proddesc</li>
+<li>proddesc部分依赖于orderno和prodno</li>
+<li>用人话说，就是现在看起来是主键是orderno，但是要是有个prodno也能决定qty ，那就把prodno和qty拎出去</li>
+<li>拎出去之后那个新实体的key在原位置保留且<strong>作为key</strong>！</li>
+</ul>
+<p>传递依赖Transitive Dep（2-&gt;3）</p>
+<ul>
+<li>当Y取决于X，Z取决于Y时发生</li>
+<li>因此Z也取决于X，即。 X➔Y➔Z 并且Y不是候选键（或候选键的一部分）</li>
+<li>ORDER_NO➔CUST_NO➔CUST_NAME: CUSTOMER(<u>CUST_NO</u>, CUST_NAME)</li>
+<li>emp_no➔job_class➔chg_hour: JOB (<u>job_class</u>, chg_hour)</li>
+<li>拎出去之后那个新实体的key在原位置保留但是<strong>不作为key</strong>！</li>
+</ul>
+<p>UNF-&gt;1NF</p>
+<ol>
+<li><p>确定重复组的Key。</p>
+</li>
+<li><p>删除任何重复组以及主要关系的PK。</p>
+</li>
+<li><p>由于重复组的去除而导致的新关系的PK通常具有由主要关系的PK组成的复合PK 以及上面1.中选择的唯一标识符，但是必须进行检查。说人话就是拎出来的实体要带原来的Key，也要有自己的Key，就反正至少俩</p>
+</li>
+</ol>
+<p>最后写出所有的Partial dependencies</p>
+<p>1NF -&gt; 2NF</p>
+<p>2NF下的关系</p>
+<ul>
+<li>继承前面的</li>
+<li>把所有Partial dependencies<strong>部分依赖</strong>拎出来</li>
+</ul>
+<p>最后写出所有的Transitive dependencies</p>
+<p>2NF -&gt; 3NF</p>
+<p>如果3NF，则存在关系</p>
+<ul>
+<li>继承前面的</li>
+<li>把所有Transitive dependencies<strong>传递依赖</strong>项都拎出来</li>
+</ul>
+<p>最后要写出所有的Full Dependencies</p>
+<h2 id="W5-Logical-Model"><a href="#W5-Logical-Model" class="headerlink" title="W5 Logical Model"></a>W5 Logical Model</h2><p>就是Assignment里让你画在SQL Developer里那个。按实际制作流程来看应该比relational model先讲。</p>
+<p>在Conceptual Model正确情况下较简单，但是别像我一样拍脑子做。</p>
+<h3 id="逻辑设计（1b）"><a href="#逻辑设计（1b）" class="headerlink" title="逻辑设计（1b）"></a>逻辑设计（1b）</h3><ul>
+<li>开发针对特定数据库模型的数据模型（例如关系，分层，网络，面向对象，noSQL）。</li>
+<li>独立于任何特定供应商DBMS软件包的任何实施细节。</li>
+<li>归一化技术（请参阅w4）用于测试关系逻辑模型的正确性。</li>
+</ul>
+<h3 id="1-映射常规（强）实体"><a href="#1-映射常规（强）实体" class="headerlink" title="1. 映射常规（强）实体"></a>1. 映射常规（强）实体</h3><p>先是把Conceptual Model里的Key转为PK或者FK，加UQ</p>
+<h3 id="2-映射弱实体"><a href="#2-映射弱实体" class="headerlink" title="2. 映射弱实体"></a>2. 映射弱实体</h3><h3 id="3-映射二元关系"><a href="#3-映射二元关系" class="headerlink" title="3. 映射二元关系"></a>3. 映射二元关系</h3><h4 id="1-M"><a href="#1-M" class="headerlink" title="1:M"></a>1:M</h4><p>记得加fk到M那侧</p>
+<h4 id="M-N"><a href="#M-N" class="headerlink" title="M:N"></a>M:N</h4><p>Conceptual里的M:N关系需要转为1:N和N:1</p>
+<p>例如</p>
+<p><img src="./fit9132-db-notes/image-20210217003847464.png" alt="image-20210217003847464"></p>
+<p>转为</p>
+<p><img src="./fit9132-db-notes/image-20210217003857615.png" alt="image-20210217003857615"></p>
+<p>如图TEAM和EMPLOYEEE之间的leads关系</p>
+<p><img src="./fit9132-db-notes/image-20210217225042251.png" alt="image-20210217225042251"></p>
+<p><img src="./fit9132-db-notes/image-20210217225057637.png" alt="image-20210217225057637"></p>
+<p>在强制侧的PK变成可选那侧的FK（如emp_no的到了team成了fk，虽然人家是1:M</p>
+<p>如果都是可选的，那就加到null最少那侧</p>
+<p>如果两边都强制那就考虑合并吧</p>
+<h3 id="4-映射关联实体"><a href="#4-映射关联实体" class="headerlink" title="4. 映射关联实体"></a>4. 映射关联实体</h3><p>就类似上面M:N的处理，不过关联实体往往有surrogate key，例如XXX_no，所以就这个no加P别的纯粹F</p>
+<h3 id="5-映射一元关系"><a href="#5-映射一元关系" class="headerlink" title="5. 映射一元关系"></a>5. 映射一元关系</h3><p>1:1，1:M 不变</p>
+<p>MN：加实体</p>
+<p><img src="./fit9132-db-notes/image-20210217230405132.png" alt="image-20210217230405132"></p>
+<h3 id="6-映射三元关系"><a href="#6-映射三元关系" class="headerlink" title="6. 映射三元关系"></a>6. 映射三元关系</h3><p>拆成三个二元</p>
+<h2 id="W6-DDL"><a href="#W6-DDL" class="headerlink" title="W6 DDL"></a>W6 DDL</h2><p>SQL create</p>
+<p>uq的constraint写inline</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> unit</span><br><span class="line">(</span><br><span class="line">unit_code <span class="type">CHAR</span>(<span class="number">8</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">unit_name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">CONSTRAINT</span> uq_unit_name <span class="keyword">UNIQUE</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> ,</span><br><span class="line"><span class="keyword">CONSTRAINT</span> pk_unit <span class="keyword">PRIMARY</span> KEY (unit_code)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里提一下前面W3里的内容，就是FK要么是其他的PK，要么就是NULL，所以就基本上不写NOT NULL。另外FK一般拎出来alter。ON DELETE CASCADE保证引用完整性（感觉一般不用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> enrolment</span><br><span class="line"><span class="keyword">ADD</span></span><br><span class="line">(</span><br><span class="line"><span class="keyword">CONSTRAINT</span> fk_enrolment_student <span class="keyword">FOREIGN</span> KEY (stu_nbr) <span class="keyword">REFERENCES</span> student ( stu_nbr),</span><br><span class="line"></span><br><span class="line"><span class="keyword">CONSTRAINT</span> fk_enrolment_unit <span class="keyword">FOREIGN</span> KEY (unit_code) <span class="keyword">REFERENCES</span> unit (unit_code)</span><br><span class="line">);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>值的约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE student</span><br><span class="line">ADD (stu_address varchar(200),</span><br><span class="line">status char(1) DEFAULT &#39;C&#39;,</span><br><span class="line">constraint status_chk CHECK (status in (&#39;G&#39;,&#39;C&#39;))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="W7-SQL"><a href="#W7-SQL" class="headerlink" title="W7 SQL"></a>W7 SQL</h2><p>主要讲的就是select和where</p>
+<p>限定词：</p>
+<ul>
+<li>=, !=, &lt;&gt;, &lt;, &gt;, &gt;=, &lt;=</li>
+<li>between</li>
+</ul>
+<p>NOTE: between aaa and bbb时候aaa和bbb<strong>都</strong>是被包括进去的</p>
+<ul>
+<li>in (‘aaa’, ‘bbb’ …)</li>
+<li>like: %表示0+个字符, _表示单字符</li>
+<li>is null, is not null (判断null时候不能用=或!=)</li>
+<li>any, all</li>
+<li>exists</li>
+</ul>
+<p>select执行后三种状态：True, False和Unknown（匹配到NULL）。是True才算被检索到。</p>
+<p>select 检索时候做运算（如grade+1）则列名变成该算式（”grade+1”），反正就很难看，所以一般用as 重命名一下。当as的新名字有空格，用**” “**去包围（不是单引号！），列名始终用双引号。</p>
+<p>NULL算啥都还是NULL，也可以用NVL(原列名, 值)来代替NULL做运算（如NVL(enrol_mark, 0)默认NULL为0）</p>
+<p>Order by</p>
+<ul>
+<li><p>NULL<strong>S</strong> LAST, NULL<strong>S</strong> FIRST</p>
+</li>
+<li><p>DESC （默认ASC故可省略）</p>
+</li>
+</ul>
+<p>SELECT DISTINCT 去重复行</p>
+<p>JOIN</p>
+<blockquote>
+<p>from aaa JOIN bbb ON aaa.a = bbb.b</p>
+<p>from aaa JOIN bbb ON aaa.key = bbb.key </p>
+<p>from aaa JOIN bbb USING (key) </p>
+<p>from aaa NATURAL JOIN bbb</p>
+</blockquote>
+<p>to_char(SYSDATE, ‘dd-Mon-yyyy hh:mi:ss PM’)</p>
+<p>反过来就to_date(datetime, ‘dd-Mon-yyyy hh:mi:ss PM’ )</p>
+<p>一些系统变量SYSDATE SYSDATETIME USER </p>
+<p>另外数字的format里0和9区别: 9占位但不padding（除非小数，但用FM连小数也不），0占位还padding</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select to_char(1, &#39;999.999&#39;),</span><br><span class="line">  2         to_char(1, &#39;000.000&#39;),</span><br><span class="line">  3         to_char(1, &#39;900.009&#39;),</span><br><span class="line">  4         to_char(1, &#39;999.000&#39;)</span><br><span class="line">  5  from   dual;</span><br><span class="line"></span><br><span class="line">1.000</span><br><span class="line">001.000</span><br><span class="line">01.000</span><br><span class="line">1.000</span><br><span class="line"></span><br><span class="line">select to_char(1, &#39;FM999.999&#39;),</span><br><span class="line">       to_char(1, &#39;FM000.000&#39;),</span><br><span class="line">       to_char(1, &#39;FM900.009&#39;),</span><br><span class="line">       to_char(1, &#39;FM999.000&#39;)</span><br><span class="line">from   dual;</span><br><span class="line"></span><br><span class="line">1.</span><br><span class="line">001.000</span><br><span class="line">01.00</span><br><span class="line">1.000</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="W8-DML"><a href="#W8-DML" class="headerlink" title="W8  DML"></a>W8  DML</h2><p>Update, Delete and Transaction Management</p>
+<p>记得每个insert/update 都要commit！</p>
+<h3 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h3><p>主要讲事务上的读写锁S（shared lock）和X（exclusive lock）</p>
+<p>当一个新Tx，</p>
+<ul>
+<li>读SLock: 更新SLock到S(Tx)</li>
+<li>写SLock: 新Tx wait 上个老Tx</li>
+<li>读XLock: wait</li>
+<li>写XLock: wait</li>
+</ul>
+<p><strong>最后画个wait的图</strong>，判断是否deadlock（回环）</p>
+<h3 id="CheckPoint"><a href="#CheckPoint" class="headerlink" title="CheckPoint"></a>CheckPoint</h3><p>rolled forward：REDO+after-images</p>
+<p>rolled back：UNDO+before-images</p>
+<p>checkpoint：就把在checkpoint后fail前commit的重做（REDO），未完成的rollback（UNDO），区间前面完成的也不理</p>
+<p><img src="./fit9132-db-notes/image-20210217155937874.png" alt="image-20210217155937874"></p>
+<p>如图</p>
+<p>T1: 无需操作</p>
+<p>T3,T5 roll back: 因为没commit</p>
+<p>T2 roll forward: 因为在checkpoint点和fail点中间提交的</p>
+<p>T4 roll forward: 因为在检查点后开始且fail前提交的</p>
+<h2 id="W9-Aggregate-Functions"><a href="#W9-Aggregate-Functions" class="headerlink" title="W9 Aggregate Functions"></a>W9 Aggregate Functions</h2><p>COUNT, MAX, MIN, AVG</p>
+<p>COUNT，AVG ignore null rows</p>
+<p>GROUP BY -&gt; 合并keys相同的rows，对每个合并后的Aggregate使用Fn</p>
+<p>HAVING -&gt; 对Group BY的结果进行约束 </p>
+<p>IN</p>
+<p>ANY, ALL</p>
+<p>extract</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extract(year from ofyear) as year</span><br></pre></td></tr></table></figure>
+
+
+
+<p>decode: </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">decode (cltype, </span><br><span class="line">  <span class="string">&#x27;L&#x27;</span>, <span class="string">&#x27;Lecture&#x27;</span>,</span><br><span class="line">  <span class="string">&#x27;T&#x27;</span>, <span class="string">&#x27;Tutorial&#x27;</span>) <span class="keyword">as</span> Classtype</span><br></pre></td></tr></table></figure>
+
+
+
+<p>lpad</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lpad(</span><br><span class="line">  extract(year from ofyear) || &#39; S&#39; || semester,</span><br><span class="line">  10,&#39; &#39;) as offering</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="W10-Advanced-SQL"><a href="#W10-Advanced-SQL" class="headerlink" title="W10 Advanced SQL"></a>W10 Advanced SQL</h2><p>好家伙分数大头</p>
+<h3 id="CASE"><a href="#CASE" class="headerlink" title="CASE"></a>CASE</h3><ul>
+<li>case when expr then val end</li>
+<li>case var then val end</li>
+</ul>
+<h3 id="Subquery"><a href="#Subquery" class="headerlink" title="Subquery"></a>Subquery</h3><p>基本上哪里都能套</p>
+<h4 id="nested"><a href="#nested" class="headerlink" title="nested"></a>nested</h4><p>xxx in (select)</p>
+<h4 id="correlated"><a href="#correlated" class="headerlink" title="correlated"></a>correlated</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> studid, unitcode, mark</span><br><span class="line"><span class="keyword">from</span> uni.enrolment e1</span><br><span class="line"><span class="keyword">where</span> mark <span class="operator">=</span> (<span class="keyword">select</span> <span class="built_in">max</span>(mark)</span><br><span class="line">  <span class="keyword">from</span> uni.enrolment e2</span><br><span class="line">  <span class="keyword">where</span> e1.unitcode <span class="operator">=</span> e2.unitcode)</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> unitcode, studid;</span><br></pre></td></tr></table></figure>
+
+<p>这个也能用在update，insert这些上（很好用</p>
+<h4 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> studid, e.unitcode, mark</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">(<span class="keyword">select</span> unitcode, <span class="built_in">max</span>(mark) <span class="keyword">as</span> max_mark</span><br><span class="line">  <span class="keyword">from</span> uni. enrolment</span><br><span class="line">  <span class="keyword">group</span> <span class="keyword">by</span> unitcode) max_table</span><br><span class="line"><span class="keyword">join</span> uni.enrolment e <span class="keyword">on</span> e.unitcode <span class="operator">=</span>   max_table.unitcode <span class="keyword">and</span></span><br><span class="line">e.mark <span class="operator">=</span> max_table.max_mark</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> unitcode, studid;</span><br></pre></td></tr></table></figure>
+
+<p>这里max_table就是select出来内容的alia</p>
+<p>或者</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">grade,</span><br><span class="line"><span class="built_in">count</span>(grade) <span class="keyword">as</span> grade_count,</span><br><span class="line">(<span class="keyword">SELECT</span> </span><br><span class="line">  <span class="built_in">count</span>(grade) <span class="keyword">from</span> uni.enrolment) <span class="keyword">as</span> total_rows,</span><br><span class="line">  <span class="number">100</span><span class="operator">*</span><span class="built_in">count</span>(grade)<span class="operator">/</span>(<span class="keyword">SELECT</span> <span class="built_in">count</span>(grade) <span class="keyword">FROM</span> uni.enrolment</span><br><span class="line">) <span class="keyword">as</span> percentage</span><br><span class="line"><span class="keyword">FROM</span> uni.enrolment</span><br><span class="line"><span class="keyword">where</span> grade <span class="keyword">is</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> grade</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> grade;</span><br></pre></td></tr></table></figure>
+
+<p>套中套</p>
+<h3 id="Views"><a href="#Views" class="headerlink" title="Views"></a>Views</h3><p>基本不用 （因为ass不让</p>
+<p>考试应该就可以</p>
+<p>但是基本上功能和前面subquery差不多</p>
+<h3 id="Joins"><a href="#Joins" class="headerlink" title="Joins"></a>Joins</h3><p>natural join, self join, outer join </p>
+<p>这个就没前面的natural join那样慈眉善目了，丢分巨头</p>
+<h4 id="self-join"><a href="#self-join" class="headerlink" title="self join"></a>self join</h4><p>Show the name of the manager for each employee.</p>
+<p>因为manager也是employee，所以就算self join，通过mgrno和empno来对应。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM emp.employee e1 JOIN emp.employee e2</span><br><span class="line">ON e1.mgrno &#x3D; e2.empno;</span><br></pre></td></tr></table></figure>
+
+<p>吓得我去看了眼考试SQL的模型，还好没一元关系</p>
+<h4 id="outer-join"><a href="#outer-join" class="headerlink" title="outer join"></a>outer join</h4><p>这个用的比较多</p>
+<h5 id="full-outer-join"><a href="#full-outer-join" class="headerlink" title="full outer join"></a>full outer join</h5><p>两边对应不上的都保留</p>
+<p><img src="./fit9132-db-notes/image-20210218213524538.png" alt="image-20210218213524538"></p>
+<p>如图，左边的id=3没对应所以右边空null，右边4没对应所以左边空null</p>
+<h5 id="left-right-outer-join"><a href="#left-right-outer-join" class="headerlink" title="left/right outer join"></a>left/right outer join</h5><p>left只保证左边的都有对应，因此只保留右边的null</p>
+<p>right只保证右边的都有对应，因此只留左边的null。</p>
+<p>另外左右是根据join关键词的左边右边决定的，比如上面的full就是<code>id_name full outer join id_subj_mark</code></p>
+<h3 id="Set-Operators"><a href="#Set-Operators" class="headerlink" title="Set Operators"></a>Set Operators</h3><p>大前提：列能对的上</p>
+<p>Union All 加法（不去重）</p>
+<p>Union 加法（去重）</p>
+<p>Intersect 重叠部分，即$A \and B$</p>
+<p>Minus 减法，即$A-(A \and B)$</p>
+<p>另外，union优先级比order by高</p>
+<h3 id="Oracle-Functions"><a href="#Oracle-Functions" class="headerlink" title="Oracle Functions"></a>Oracle Functions</h3><p>见文档</p>
+<h2 id="W11-BigData"><a href="#W11-BigData" class="headerlink" title="W11 BigData"></a>W11 BigData</h2><p>纯介绍+NoSQL</p>
+<p>JSON_OBJECT(‘key’ value val FORMAT JSON)</p>
+<p>JSON_ARRAYAGG(JSON_OBJECT(), JSON_OBJECT())</p>
+<p>MongoDB</p>
+<p>insertOne(), insertMany([])</p>
+<p>find({})或者find(匹配, 需要的列)，例如find({_id: 2}, {name: 1})只取id=2那列的name</p>
+<p>op: </p>
+<p>{$and: [{}, {}]}</p>
+<p>{$or: [{}, {}]}</p>
+<p>updateOne(匹配, {$set: {}})</p>
+<p>$ 替代符 placeholder to update the <strong>first element</strong> that matches the query condition，例如 client.$.addr</p>
+<p>deleteOne()</p>
+<p>deleteMany()</p>
+<h2 id="W12"><a href="#W12" class="headerlink" title="W12"></a>W12</h2><p>无Lec</p>
+<h2 id="错题"><a href="#错题" class="headerlink" title="错题"></a>错题</h2><p>输出<code>   Fri 01 February 2019 RM</code>这样的date str用<code> lpad(rtrim(to_char(ca.carndate, &#39;Dy DD Month&#39;)) || &#39; &#39; || to_char(ca.carndate, &#39;YYYY&#39;),23) AS carnival_date,</code>（人裂开</p>
+<h2 id="Exam"><a href="#Exam" class="headerlink" title="Exam"></a>Exam</h2><p>Sample给的这么全面想想也不会考的很简单……</p>
+<h3 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h3><h4 id="Relational-Model-10"><a href="#Relational-Model-10" class="headerlink" title="Relational Model 10"></a>Relational Model 10</h4><ol>
+<li>不同attrib（估计考试会换成不同的key）</li>
+<li>a. &amp; b. 代数式（一定要记得最后再π一下去掉不必要的列</li>
+</ol>
+<h4 id="Database-Design-20"><a href="#Database-Design-20" class="headerlink" title="Database Design 20"></a>Database Design 20</h4><p>根据文章徒手撸Logical Model（简易版，其实就和ASS1的Conceptual差不多了）</p>
+<p>写纸上</p>
+<h4 id="Normalisation-10"><a href="#Normalisation-10" class="headerlink" title="Normalisation 10"></a>Normalisation 10</h4><p>写全过程（记得最后一定要跟上Full Dep</p>
+<h4 id="SQL-40"><a href="#SQL-40" class="headerlink" title="SQL 40"></a>SQL 40</h4><p>根据给出的Model写</p>
+<ol>
+<li>insert，alter还有update</li>
+<li>简单select + 巨难的left outer join</li>
+<li>又是left outer join再配合having count(distinct ) + select subquery </li>
+</ol>
+<h4 id="Big-Data-and-No-SQL-10"><a href="#Big-Data-and-No-SQL-10" class="headerlink" title="Big Data and No SQL 10"></a>Big Data and No SQL 10</h4><ol>
+<li><p>json和mongodb</p>
+</li>
+<li><p>神tm名词解释Volume，Velocity，Variety。估计考试要求介绍NOSQL了</p>
+</li>
+</ol>
+<h4 id="Transaction-10"><a href="#Transaction-10" class="headerlink" title="Transaction 10"></a>Transaction 10</h4><ol>
+<li>锁</li>
+<li>checkpoint</li>
+</ol>
+<h2 id="Exam-1"><a href="#Exam-1" class="headerlink" title="Exam"></a>Exam</h2><p>题型的确和Sample一模一样</p>
+<p>前四个除了第一个问答题以外不用多说，老内容了，而且感觉更简单？（也可能是我掉坑）。</p>
+<p>第一个问答题改成了Relation里tuple的特性</p>
+<p><img src="./fit9132-db-notes/image-20210219224938123.png" alt="image-20210219224938123"></p>
+<p>就这部分内容</p>
+<p>后面BigData部分，mongodb直接要求写find和insertOne，find有点难因为是在一个list/array里找匹配的object。问题没有根据预测考NoSQL，考的是Volume的内容</p>
+<p><img src="./fit9132-db-notes/image-20210219225409532.png" alt="image-20210219225409532"></p>
+<p>checkpoint也变名词解释Write Through和Deferred Write</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/done/" rel="tag"># done</a>
+              <a href="/tags/database/" rel="tag"># database</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/fit9137-arch_and_net-notes/" rel="prev" title="Notes for FIT9137: Arch and Net notes">
+      <i class="fa fa-chevron-left"></i> Notes for FIT9137: Arch and Net notes
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/fit5152-ui-design-notes/" rel="next" title="Notes for FIT5152: UI Design">
+      Notes for FIT5152: UI Design <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#W1"><span class="nav-number">1.</span> <span class="nav-text">W1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W2-Conceptual-Modelling"><span class="nav-number">2.</span> <span class="nav-text">W2 Conceptual Modelling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">理论模型设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%BC%B1%E5%AE%9E%E4%BD%93"><span class="nav-number">2.2.</span> <span class="nav-text">强弱实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7"><span class="nav-number">2.3.</span> <span class="nav-text">属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ERD"><span class="nav-number">3.</span> <span class="nav-text">ERD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W3-Relational-Model"><span class="nav-number">4.</span> <span class="nav-text">W3 Relational Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W4-Normalisation"><span class="nav-number">5.</span> <span class="nav-text">W4 Normalisation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W5-Logical-Model"><span class="nav-number">6.</span> <span class="nav-text">W5 Logical Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%AE%BE%E8%AE%A1%EF%BC%881b%EF%BC%89"><span class="nav-number">6.1.</span> <span class="nav-text">逻辑设计（1b）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%98%A0%E5%B0%84%E5%B8%B8%E8%A7%84%EF%BC%88%E5%BC%BA%EF%BC%89%E5%AE%9E%E4%BD%93"><span class="nav-number">6.2.</span> <span class="nav-text">1. 映射常规（强）实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%98%A0%E5%B0%84%E5%BC%B1%E5%AE%9E%E4%BD%93"><span class="nav-number">6.3.</span> <span class="nav-text">2. 映射弱实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%98%A0%E5%B0%84%E4%BA%8C%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">6.4.</span> <span class="nav-text">3. 映射二元关系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-M"><span class="nav-number">6.4.1.</span> <span class="nav-text">1:M</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#M-N"><span class="nav-number">6.4.2.</span> <span class="nav-text">M:N</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E6%98%A0%E5%B0%84%E5%85%B3%E8%81%94%E5%AE%9E%E4%BD%93"><span class="nav-number">6.5.</span> <span class="nav-text">4. 映射关联实体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%98%A0%E5%B0%84%E4%B8%80%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">6.6.</span> <span class="nav-text">5. 映射一元关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%98%A0%E5%B0%84%E4%B8%89%E5%85%83%E5%85%B3%E7%B3%BB"><span class="nav-number">6.7.</span> <span class="nav-text">6. 映射三元关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W6-DDL"><span class="nav-number">7.</span> <span class="nav-text">W6 DDL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W7-SQL"><span class="nav-number">8.</span> <span class="nav-text">W7 SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W8-DML"><span class="nav-number">9.</span> <span class="nav-text">W8  DML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lock"><span class="nav-number">9.1.</span> <span class="nav-text">Lock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CheckPoint"><span class="nav-number">9.2.</span> <span class="nav-text">CheckPoint</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W9-Aggregate-Functions"><span class="nav-number">10.</span> <span class="nav-text">W9 Aggregate Functions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W10-Advanced-SQL"><span class="nav-number">11.</span> <span class="nav-text">W10 Advanced SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CASE"><span class="nav-number">11.1.</span> <span class="nav-text">CASE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Subquery"><span class="nav-number">11.2.</span> <span class="nav-text">Subquery</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nested"><span class="nav-number">11.2.1.</span> <span class="nav-text">nested</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#correlated"><span class="nav-number">11.2.2.</span> <span class="nav-text">correlated</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inline"><span class="nav-number">11.2.3.</span> <span class="nav-text">inline</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Views"><span class="nav-number">11.3.</span> <span class="nav-text">Views</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Joins"><span class="nav-number">11.4.</span> <span class="nav-text">Joins</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#self-join"><span class="nav-number">11.4.1.</span> <span class="nav-text">self join</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#outer-join"><span class="nav-number">11.4.2.</span> <span class="nav-text">outer join</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#full-outer-join"><span class="nav-number">11.4.2.1.</span> <span class="nav-text">full outer join</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#left-right-outer-join"><span class="nav-number">11.4.2.2.</span> <span class="nav-text">left&#x2F;right outer join</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-Operators"><span class="nav-number">11.5.</span> <span class="nav-text">Set Operators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Oracle-Functions"><span class="nav-number">11.6.</span> <span class="nav-text">Oracle Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W11-BigData"><span class="nav-number">12.</span> <span class="nav-text">W11 BigData</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#W12"><span class="nav-number">13.</span> <span class="nav-text">W12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E9%A2%98"><span class="nav-number">14.</span> <span class="nav-text">错题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exam"><span class="nav-number">15.</span> <span class="nav-text">Exam</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample"><span class="nav-number">15.1.</span> <span class="nav-text">Sample</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Relational-Model-10"><span class="nav-number">15.1.1.</span> <span class="nav-text">Relational Model 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Database-Design-20"><span class="nav-number">15.1.2.</span> <span class="nav-text">Database Design 20</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Normalisation-10"><span class="nav-number">15.1.3.</span> <span class="nav-text">Normalisation 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-40"><span class="nav-number">15.1.4.</span> <span class="nav-text">SQL 40</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Big-Data-and-No-SQL-10"><span class="nav-number">15.1.5.</span> <span class="nav-text">Big Data and No SQL 10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Transaction-10"><span class="nav-number">15.1.6.</span> <span class="nav-text">Transaction 10</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exam-1"><span class="nav-number">16.</span> <span class="nav-text">Exam</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

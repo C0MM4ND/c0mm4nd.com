@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="细枝末节略，无关内容略。 简介本文档介绍了WebAssembly核心标准的1.0版。WebAssembly是一种安全，可移植的低级代码格式，旨在有效执行和紧凑表达。 相关文档：核心WebAssembly规范，WebAssembly JS接口和WebAssembly Web API。 1. 引言1.1. 引言WebAssembly（缩写为Wasm）是一种安全，可移植的低级代码格式，旨在高效执行和紧凑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebAssembly核心标准：WebAssembly Core Specification">
+<meta property="og:url" content="http://example.com/wasm-core-1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="细枝末节略，无关内容略。 简介本文档介绍了WebAssembly核心标准的1.0版。WebAssembly是一种安全，可移植的低级代码格式，旨在有效执行和紧凑表达。 相关文档：核心WebAssembly规范，WebAssembly JS接口和WebAssembly Web API。 1. 引言1.1. 引言WebAssembly（缩写为Wasm）是一种安全，可移植的低级代码格式，旨在高效执行和紧凑">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-21T17:06:31.000Z">
+<meta property="article:modified_time" content="2021-03-06T07:58:16.361Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="wasm">
+<meta property="article:tag" content="WebAssembly">
+<meta property="article:tag" content="todo">
+<meta property="article:tag" content="specification">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/wasm-core-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>WebAssembly核心标准：WebAssembly Core Specification | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/wasm-core-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WebAssembly核心标准：WebAssembly Core Specification
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-22 01:06:31" itemprop="dateCreated datePublished" datetime="2020-09-22T01:06:31+08:00">2020-09-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-06 15:58:16" itemprop="dateModified" datetime="2021-03-06T15:58:16+08:00">2021-03-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>细枝末节略，无关内容略。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文档介绍了WebAssembly核心标准的1.0版。WebAssembly是一种安全，可移植的低级代码格式，旨在有效执行和紧凑表达。</p>
+<p>相关文档：核心WebAssembly规范，WebAssembly JS接口和WebAssembly Web API。</p>
+<h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h2><h3 id="1-1-引言"><a href="#1-1-引言" class="headerlink" title="1.1. 引言"></a>1.1. 引言</h3><p>WebAssembly（缩写为Wasm）是一种安全，可移植的低级代码格式，旨在高效执行和紧凑表达。</p>
+<p>它的主要目标是在Web上启用高性能应用程序，但是它没有做任何特定于Web的假设或提供特定于Web的功能，因此它也可以在其他环境中使用。</p>
+<p>WebAssembly是W3C组织开发的开放标准。</p>
+<p>本文档介绍了核心WebAssembly标准的1.0版。其未来将被替换为添加具有其他功能的新增量发行版。</p>
+<h4 id="1-1-1-设计目标"><a href="#1-1-1-设计目标" class="headerlink" title="1.1.1. 设计目标"></a>1.1.1. 设计目标</h4><p>WebAssembly的设计目标如下：</p>
+<ul>
+<li>快速，安全和可移植的语义：</li>
+</ul>
+<p><strong>快速</strong>：利用几乎所有现代硬件共有的功能，以接近本机的代码性能执行。</p>
+<p><strong>安全</strong>：代码经过验证并在内存安全的[2]沙盒环境中执行，可防止数据损坏或安全漏洞。</p>
+<p><strong>定义明确</strong>：以易于非正式地和正式地进行推理的方式，全面而精确地定义有效的程序及其行为。</p>
+<p><strong>与硬件无关</strong>：可以在所有现代体系结构，台式机或移动设备以及嵌入式系统上进行编译。</p>
+<p><strong>与语言无关</strong>：不青睐任何特定的语言，编程模型或对象模型。</p>
+<p><strong>与平台无关</strong>：可以嵌入在浏览器中，作为独立VM运行或集成在其他环境中。</p>
+<p><strong>开放</strong>：程序可以通过简单通用的方式与其环境进行互操作。</p>
+<ul>
+<li>高效便携的表示形式：</li>
+</ul>
+<p><strong>紧凑</strong>：具有比典型文本或本机代码格式小的传输速度快的二进制格式。</p>
+<p><strong>模块化</strong>：程序可以分成较小的部分，可以分别传输，缓存和使用。</p>
+<p><strong>高效</strong>：可以通过一次快速遍历进行解码，验证和编译，等同于即时（JIT）或提前（AOT）编译。</p>
+<p><strong>可流式传输</strong>：允许在看到所有数据之前尽快开始解码，验证和编译。</p>
+<p><strong>可并行化</strong>：允许将解码，验证和编译分为许多独立的并行任务。</p>
+<p><strong>可移植性</strong>：没有任何现代硬件无法广泛支持的架构假设。</p>
+<p>WebAssembly代码还旨在易于检查和调试，尤其是在Web浏览器之类的环境中，但是此类功能超出了本规范的范围。</p>
+<p>[1]“WebAssembly”的缩写，而不是首字母缩写，因此未使用大写字母。</p>
+<p>[2]没有任何程序可以破坏WebAssembly的内存模型。当然，它不能保证编译为WebAssembly的不安全语言不会破坏其自身的内存布局，例如WebAssembly的线性内存中。</p>
+<h4 id="1-1-2-作用域"><a href="#1-1-2-作用域" class="headerlink" title="1.1.2. 作用域"></a>1.1.2. 作用域</h4><p>WebAssembly的核心是一套<em>虚拟指令集体系结构（虚拟ISA）</em>。<br>因此，其具有许多用例，且可以嵌入许多不同的环境中。<br>为了涵盖它们的多样性并实现最大程度的重用，WebAssembly规范被拆分并分层为多个文档。</p>
+<p>本文档与WebAssembly的核心ISA层有关。<br>它定义了指令集，二进制编码，验证和执行语义以及文本表示形式。<br>但是，它没有定义WebAssembly程序如何与它们在其中执行的特定环境交互，也没有定义如何从这样的环境中调用它们。</p>
+<p>取而代之的是，此规范得到了其他文档的补充，这些文档定义了到特定嵌入环境（例如Web）的接口。<br>这些都将定义适合给定环境的WebAssembly<em>应用程序编程接口（API）</em>。</p>
+<h3 id="1-2-安全性考量"><a href="#1-2-安全性考量" class="headerlink" title="1.2. 安全性考量"></a>1.2. 安全性考量</h3><p>WebAssembly不提供对执行代码的计算环境的环境访问。<br>与环境的任何交互（例如I/O，对资源的访问或操作系统调用）只能通过调用嵌入器提供的功能并将其导入WebAssembly模块中来执行。<br>嵌入程序可以通过控制或限制其可用于导入的功能来建立适用于相应环境的安全策略。<br>这些注意事项是嵌入程序的责任，也是特定环境的API定义的内容。</p>
+<p>由于WebAssembly旨在转换为直接在主机硬件上运行的机器代码，因此可能会在硬件级别受到旁通道攻击。<br>在这是一个潜在的脆弱的环境中，嵌入程序可能必须设置适当的缓解措施以隔离WebAssembly计算。</p>
+<h4 id="1-2-1-依赖"><a href="#1-2-1-依赖" class="headerlink" title="1.2.1. 依赖"></a>1.2.1. 依赖</h4><p>WebAssembly依赖于两个现有标准：</p>
+<ul>
+<li>[IEEE-754-2019]，用于表示浮点数据和相应数字运算的语义。</li>
+<li>[UNICODE]，用于表示导入/导出名称和文本格式。</li>
+</ul>
+<p>但是，为了使本规范变得独立，将上述标准的相关方面定义并正式化为本规范的一部分，例如二进制表示和浮点值的取整，以及Unicode的值范围和UTF-8编码字符。</p>
+<blockquote>
+<p>注意!</p>
+<p>前述标准是所有各个定义的权威来源。本规范中给出的形式化旨在与这些定义匹配。所描述的语法或语义上的任何差异均应视为错误。</p>
+</blockquote>
+<h3 id="1-3-概览"><a href="#1-3-概览" class="headerlink" title="1.3. 概览"></a>1.3. 概览</h3><h4 id="1-3-1-概念"><a href="#1-3-1-概念" class="headerlink" title="1.3.1 概念"></a>1.3.1 概念</h4><p>WebAssembly编码一种低级的，类似于程序集的编程语言。该语言围绕以下概念构建。</p>
+<p><strong>值Values</strong></p>
+<blockquote>
+<p>WebAssembly仅提供四种基本值类型。这些是整数和<a target="_blank" rel="noopener" href="https://www.w3.org/TR/wasm-core-1/#biblio-ieee-754-2019">IEEE-754-2019</a>数字，分别为32位和64位宽度。32位整数还用作布尔值和内存地址。可以使用这些类型的常规操作，包括它们之间转换的完整矩阵。有符号和无符号整数类型之间没有区别。取而代之的是，整数会被相应的操作解释为无符号或有两个补码表示形式的符号。</p>
+</blockquote>
+<p><strong>指令Instructions</strong></p>
+<blockquote>
+<p>WebAssembly的计算模型基于<em>堆栈计算机</em> 。代码由按顺序执行的指令序列组成。指令在隐式操作数堆栈[1]上操作值，并分为两个主要类别。简单的指令对数据执行基本操作。它们从操作数堆栈中弹出参数，并将结果压回该操作数堆栈。控制指令会改变控制流程。控制流是结构化的，这意味着它可以用嵌套好的结构（例如块，循环和条件）来表示。分支只能针对此类构造。</p>
+</blockquote>
+<p><strong>陷阱Traps</strong></p>
+<blockquote>
+<p>w在某些情况下，某些指令可能会产生陷阱，该陷阱会立即中止执行。陷阱不能由WebAssembly代码处理，但是会报告给外部环境，通常可以在外部环境中捕获它们。</p>
+</blockquote>
+<p><strong>功能Functions</strong></p>
+<blockquote>
+<p>代码被组织成单独的功能。每个函数都将值序列作为参数，并返回值序列作为结果。 [2]函数可以互相调用，包括递归调用，从而导致无法直接访问的隐式调用堆栈。函数还可以声明可用作虚拟寄存器的可变局部变量。</p>
+</blockquote>
+<p><strong>表Tables</strong></p>
+<blockquote>
+<p>表是特定元素类型的不透明值的数组。它允许程序通过动态索引操作数间接选择这些值。当前，唯一可用的元素类型是无类型的函数引用。因此，程序可以通过向表中的动态索引间接调用函数。例如，这允许通过表索引模拟功能指针。</p>
+</blockquote>
+<p><strong>线性内存Linear Memory</strong></p>
+<blockquote>
+<p>线性内存是连续，可变的原始字节数组。这样的存储器以初始大小创建，但是可以动态增长。程序可以在任何字节地址（包括未对齐）将线性存储器中的值加载/存储在线性存储器中或将其存储在其中。整数加载和存储可以指定小于各自值类型的大小的存储大小。如果访问不在当前内存大小的范围内，则会发生陷阱。</p>
+</blockquote>
+<p><strong>模块Modules</strong></p>
+<blockquote>
+<p>WebAssembly二进制文件采用模块的形式，该模块包含函数，表和线性内存的定义以及可变或不可变的全局变量。也可以导入定义，指定模块/名称对和合适的类型。每个定义可以选择以一个或多个名称导出。除定义外，模块还可以为其内存或表定义初始化数据，该初始化数据采用复制到给定偏移量的段的形式。他们还可以定义自动执行的启动功能。</p>
+</blockquote>
+<p><strong>嵌入器Embedder</strong></p>
+<blockquote>
+<p>WebAssembly实现通常将嵌入到主机环境中。此环境定义了如何启动模块加载，如何提供导入（包括主机端定义）以及如何访问导出。但是，任何特定嵌入的细节都超出了本规范的范围，而是由互补的，特定于环境的API定义提供。</p>
+</blockquote>
+<p>[1]实际上，实现无需维护实际的操作数堆栈。取而代之的是，堆栈可以看作是一组由指令隐式引用的匿名寄存器。类型系统可确保始终静态地了解堆栈高度，从而确保所有引用的寄存器。<br>[2]在当前版本的WebAssembly中，最多只有一个结果值。</p>
+<h4 id="1-3-2-语义解析"><a href="#1-3-2-语义解析" class="headerlink" title="1.3.2. 语义解析"></a>1.3.2. 语义解析</h4><p>从概念上讲，WebAssembly的语义分为三个阶段。对于语言的每个部分，规范都会对其进行指定。</p>
+<p><strong>解码Decoding</strong></p>
+<blockquote>
+<p>WebAssembly模块以二进制格式分发。解码过程将格式化并将其转换为模块的内部表示形式。在本规范中，此表示是通过抽象语法建模的，但是实际的实现可以改为直接编译为机器代码。</p>
+</blockquote>
+<p><strong>验证Validation</strong></p>
+<blockquote>
+<p>被解码的模块必须<em>有效</em>。验证检查许多格式​​正确的条件，以确保模块有意义且安全。特别是，它对功能及其内部的指令序列进行类型检查，以确保例如一致地使用操作数堆栈。</p>
+</blockquote>
+<p><strong>执行Execution</strong></p>
+<blockquote>
+<p>最后，一个有效的模块可以被<em>执行</em>。执行可以进一步分为两个阶段：</p>
+<p><strong>实例化Instantiation</strong>。模块实例是模块的动态表示，带有其自己的状态和执行堆栈。实例化将执行模块主体本身，并为其定义所有导入。它将初始化全局变量，内存和表，并调用模块的启动函数（如果已定义）。它返回模块导出的实例。</p>
+<p><strong>调用Invocation</strong>。一旦实例化，就可以通过在模块实例上<em>调用</em>导出的函数来启动进一步的WebAssembly计算。给定必需的参数，该函数将执行相应的函数并返回其结果。</p>
+<p>实例化和调用是在嵌入环境中的操作。</p>
+</blockquote>
+<h2 id="2-架构"><a href="#2-架构" class="headerlink" title="2. 架构"></a>2. 架构</h2><h3 id="2-1-规定"><a href="#2-1-规定" class="headerlink" title="2.1. 规定"></a>2.1. 规定</h3><p>WebAssembly是一种编程语言，具有多种具体表示形式（其二进制格式和文本格式）。 两者都映射到一个共同的结构。为简明起见，以抽象语法的形式描述了此结构。本规范的所有部分均根据此抽象语法定义。</p>
+<h4 id="2-1-1-语法符号"><a href="#2-1-1-语法符号" class="headerlink" title="2.1.1. 语法符号"></a>2.1.1. 语法符号</h4><p>在定义抽象语法的语法规则时采用以下约定。</p>
+<ul>
+<li>结束符号（原子）以sans-serif字体编写$\mathrm{i32, end}$。</li>
+<li>非结束符以斜体字体表示：$valtype，instr$。</li>
+<li>$A^n$是A的$n\geq0$个迭代的序列。</li>
+<li>$A^*$是A的可能是空的迭代序列。（这是n无关的$A^n$的简写。）</li>
+<li>$A^+$是A的非空迭代序列。（这是$A^n$的简写，其中n≥1。）</li>
+<li>$A^?$是A的可选出现。（这是$A^n$的简写，其中n≤1。）</li>
+<li>产生式被写成$sym::=A_1∣…∣A_n$。</li>
+<li>大型产生式可能会分为多个定义，可以用第一个以显式椭圆$sym::=A_1|…$结束，并以椭圆以$sym::=…∣A_2$开头来表示。</li>
+<li>一些产品在括号中加上附加条件“$(\mathrm{if} condition)$”，这为将产品组合扩展为许多单独的案例提供了捷径。</li>
+</ul>
+<h4 id="2-1-2-辅助符号"><a href="#2-1-2-辅助符号" class="headerlink" title="2.1.2. 辅助符号"></a>2.1.2. 辅助符号</h4><p>在处理语法结构时，还使用以下表示法：</p>
+<ul>
+<li>$\epsilon$表示空序列。</li>
+<li>$|s|$表示序列s的长度。</li>
+<li>$s[i]$表示序列s的第i个元素，从0开始。</li>
+<li>$s[i:n]$表示序列s的子序列$s[i]…s [i+n-1]$。</li>
+<li>$s\ with [i] = A$表示与s相同的序列，除了第i个元素被A代替。</li>
+<li>$s\ with [i:n] = A^n$表示与s相同的序列，不同之处在于子序列$s[i:n]$被An取代。</li>
+<li>$concat(s^*)$表示通过将$s^*$中的所有序列$s^i$串联而形成的平坦序列。</li>
+</ul>
+<p>此外，采用以下约定：</p>
+<ul>
+<li><p>符号$x^n$（其中x是非终结符号）被视为跨x的各个序列（类似于$x^*$，$x^+$，$x^?$）的元变量。</p>
+</li>
+<li><p>当给定一个序列$x^n$时，则假定在$(A1xA2)^n$中写入的序列中x的出现与xn呈逐点对应关系（对于$x^*$，$x^+$，$x^?$同样）。这隐式表达了在序列上映射语法结构的形式。</p>
+</li>
+</ul>
+<p>以下形式的生产被解释为分别将一组固定的字段$field_i$映射到“值” Ai的记录：<br>$$r ::= { field_1 A_1, field_2 A_2,… }$$</p>
+<p>使用以下表示法来处理此类记录：</p>
+<ul>
+<li><p>$r.field$表示r的字段filed的内容。</p>
+</li>
+<li><p>$r\ with\ field = A$表示与r相同的记录，除了字段组件的内容被A代替。</p>
+</li>
+<li><p>$r1 \oplus r2$通过逐点追加每个序列来表示具有相同序列字段的两个记录的组合：</p>
+</li>
+</ul>
+<p>$${ field_1 A_1^*, field_2 A_2^*, … } {field_1 B_1^*, field_2 B_2^*, … } = { field_1 A_1^* B_1^*, field_2 A_2^* B_2^*,… }$$</p>
+<ul>
+<li>$\oplus r^*$分别表示记录序列的组成；如果序列为空，则结果记录的所有字段均为空。</li>
+</ul>
+<p>序列和记​​录的更新符号递归地概括为“路径” $pth ::=([…]|.field)^+$所访问的嵌套组件：</p>
+<ul>
+<li>$s\ with\ [i]\ pth = A$是$s\ with [i] =(s[i]\ with\ pth = A)$的缩写。</li>
+<li>$r\ with\ field\ pth = A$是$r\ with\ field =(r.field\ with\ pth = A)$的缩写。</li>
+</ul>
+<p>其中$r\ with\ .field = A$缩写为$r\ with\ field = A$</p>
+<h4 id="2-1-3-向量"><a href="#2-1-3-向量" class="headerlink" title="2.1.3. 向量"></a>2.1.3. 向量</h4><p>向量是形式为$A^n$（或$A^*$）的有界序列，其中A可以是值或复杂的构造。一个向量最多可包含$2^32-1$（即MaxUint256）个元素。</p>
+<p>$$vec(A) ::= A^n\ (if\ n&lt;2^{32})$$</p>
+<h3 id="2-2-值"><a href="#2-2-值" class="headerlink" title="2.2. 值"></a>2.2. 值</h3><p>WebAssembly程序对原始数值进行操作。<br>此外，在程序的定义中，值的不可变序列出现以表示更复杂的数据，例如文本字符串或其他向量。</p>
+<h4 id="2-2-1-Bytes"><a href="#2-2-1-Bytes" class="headerlink" title="2.2.1. Bytes"></a>2.2.1. Bytes</h4><p>值的最简单形式是未解释的原始字节。<br>在抽象语法中，它们表示为十六进制文字。</p>
+<p>$$ byte​::=​0x00 |…| 0xFF​ $$</p>
+<h5 id="2-2-1-1-惯例"><a href="#2-2-1-1-惯例" class="headerlink" title="2.2.1.1. 惯例"></a>2.2.1.1. 惯例</h5><ul>
+<li><p>元变量$b$的范围为字节。</p>
+</li>
+<li><p>字节有时被解释为自然数$n &lt; 256$。</p>
+</li>
+</ul>
+<p>2.2.2. 整数</p>
+<p>具有不同值范围的不同类别的整数通过其<em>位宽</em>$N$以及是<em>无符号</em>还是<em>有符号</em>来区分。</p>
+<p>$$uN ::= 0 | 1| … | 2^N-1$$<br>$$sN ::= -2^N-1|…| -1 | 0 | 1 | … | 2^N-1$$<br>$$iN ::= uN$$</p>
+<p>后者定义了未解释的整数，其有符号性解释会根据上下文而变化。<br>在抽象语法中，它们表示为无符号值。<br>但是，某些运算会根据二进制补码解释将其转换为带符号。</p>
+<blockquote>
+<p>注意</p>
+<p>在本规范中出现的主要整数类型是u32，u64，s32，s64，i8，i16，i32，i64。但是，例如在浮点数的定义中，其他大小也可以作为辅助结构。</p>
+</blockquote>
+<h5 id="2-2-2-1-惯例"><a href="#2-2-2-1-惯例" class="headerlink" title="2.2.2.1. 惯例"></a>2.2.2.1. 惯例</h5><ul>
+<li>元变量$m，n，i$的范围是整数。</li>
+<li>如上面的语法所示，数字可以用简单的算术表示。<br>为了区分$2^N$之类的算术与$(1)^N$之类的序列，用括号将后者区分。</li>
+</ul>
+<h4 id="2-2-3-浮点数"><a href="#2-2-3-浮点数" class="headerlink" title="2.2.3. 浮点数"></a>2.2.3. 浮点数</h4><p>浮点数据表示32或64位值，它们对应于[IEEE-754-2019]标准（第3.3节）的相应二进制格式。</p>
+<p>每个值都有一个符号和大小。 幅值可以表示为形式为$m_0 m_1 m_2 \ldots m_M \cdot 2^e$的正态数，其中$e$是指数，m是其最高位$m_0$为1的有效数，或者以次正规数来表示 指数固定为最小可能值，且$m_0$为0; 在次法线中的是零正值和负值。 由于有效位数是二进制值，因此法线以$(1 +m\cdot 2^{-M})\cdot 2e$的形式表示，其中$M$是$m$的位宽； 对于次普通人也是如此。</p>
+<p>可能的大小还包括特殊值$\infty$（无穷大）和nan（即NaN，非数字）。NaN值具有一个有效载荷，该载荷描述了基础二进制表示形式中的尾数位。 信号和安静的NaN之间没有区别。</p>
+<p>$$fN ::= +fNmag | -fNmag$$<br>$$\displaylines{fNmag ::=(1+uM\cdot 2^{-M})\cdot 2^e ((if\ −2^{E−1} + 2 \leq e \leq 2^{E−1}−1))\<br>|\ (0+uM\cdot 2^{-M})\cdot 2^e (if\ e=-2^{E-1}+2)\<br>\infty\<br>nan(n)\ (if 1\leq n\lt 2^M)}$$</p>
+<p>当 M=signif(N) 且 E=expon(N) 则</p>
+<p>$$\displaylines{signif(32) = 23 \<br>expon(32) =8 \<br>signif(64)=52\<br>expon(64)=11}$$</p>
+<p>一个*规范的(canonical)*NaN是浮点数值$\pm nan(canon_N)$，其中$canon_N$是有效载荷，其最高有效位为1而所有其他均为0：</p>
+<p>$$canon_N = 2^{signif(N)-1}$$</p>
+<p>一个*算术(arithmetic)*NaN是$n\geq canon_N$的浮点值$\pm nan(n)$，因此最高有效位为1，其他所有位均为任意。</p>
+<blockquote>
+<p>注意</p>
+<p>在抽象语法中，子范数以有效数字的前导0区分。 次正态的指数与正态数的最小可能指数具有相同的值。 仅在二进制表示中，次正态的指数与任何正态数的指数的编码方式不同。</p>
+</blockquote>
+<h5 id="2-2-3-1-惯例"><a href="#2-2-3-1-惯例" class="headerlink" title="2.2.3.1. 惯例"></a>2.2.3.1. 惯例</h5><ul>
+<li>元变量z取自从上下文清晰可辨的浮点值。</li>
+</ul>
+<h4 id="2-2-4-名称Names"><a href="#2-2-4-名称Names" class="headerlink" title="2.2.4. 名称Names"></a>2.2.4. 名称Names</h4><p>名称是字符序列，是[UNICODE]（第2.4节）定义的标量值。</p>
+<p>$$\displaylines{name::= char^* \ (if\ |utf8(char^*)|&lt;2^{32})\<br>char ::= U+00|\ldots|U+D7FF|U+E000|…U+10FFFF}$$</p>
+<p>由于二进制格式的限制，名称的长度受其UTF-8编码的长度限制。</p>
+<h5 id="2-2-4-1-惯例"><a href="#2-2-4-1-惯例" class="headerlink" title="2.2.4.1. 惯例"></a>2.2.4.1. 惯例</h5><ul>
+<li>字符（Unicode标量值）有时与n &lt;1114112的自然数互换使用。</li>
+</ul>
+<h3 id="2-3-类型Types"><a href="#2-3-类型Types" class="headerlink" title="2.3 类型Types"></a>2.3 类型Types</h3><p>WebAssembly中的各种实体按类型分类。<br>在验证，实例化以及可能的执行期间检查类型。</p>
+<h4 id="2-3-1-值-Value-类型"><a href="#2-3-1-值-Value-类型" class="headerlink" title="2.3.1 值(Value)类型"></a>2.3.1 值(Value)类型</h4><p>值类型对WebAssembly代码可以计算的单个值以及变量接受的值进行分类。</p>
+<p>$$valtype ::= i32|i64|f32|f64$$</p>
+<p>i32和i64类型分别将32位和64位整数分类。<br>整数不是固有地带符号或无符号的，它们的解释由单个操作确定。</p>
+<p>f32和f64类型分别将32位和64位浮点数分类。<br>它们分别对应于[IEEE-754-2019]标准（第3.3节）定义的相应二进制浮点表示形式，也称为单精度和双精度。</p>
+<h5 id="2-3-3-1-惯例"><a href="#2-3-3-1-惯例" class="headerlink" title="2.3.3.1. 惯例"></a>2.3.3.1. 惯例</h5><ul>
+<li>元变量t可以从清晰的上下文中范围内的值类型。</li>
+<li>符号$|t|$表示值类型的位宽。即，$|i32|=|f32|=32$和$|i64|=|f64|＝64$。</li>
+</ul>
+<h4 id="2-3-2-结果-Result-类型"><a href="#2-3-2-结果-Result-类型" class="headerlink" title="2.3.2. 结果(Result)类型"></a>2.3.2. 结果(Result)类型</h4><p>结果类型对执行指令或块的结果进行分类，该指令或块是用括号写入的一系列值。</p>
+<p>$$resulttyle ::= [valtype^?]$$</p>
+<blockquote>
+<p>注意</p>
+<p>在当前版本的WebAssembly中，结果最多允许一个值。但是，这可能会泛化为将来版本中的值序列。</p>
+</blockquote>
+<h4 id="2-3-3-函数-Function-类型"><a href="#2-3-3-函数-Function-类型" class="headerlink" title="2.3.3 函数(Function)类型"></a>2.3.3 函数(Function)类型</h4><p>函数类型对函数的签名进行分类，将参数向量映射到结果向量，如下所示。</p>
+<p>$$ functype ::= [vec(valtype)] -&gt; [vec(valtype)]$$</p>
+<blockquote>
+<p>注意</p>
+<p>在当前版本的WebAssembly中，有效函数类型的结果类型向量的长度最多为1。此限制在将来的版本中可能会消除。</p>
+</blockquote>
+<h4 id="2-3-4-限制"><a href="#2-3-4-限制" class="headerlink" title="2.3.4. 限制"></a>2.3.4. 限制</h4><p>限制对与内存类型和表类型关联的可调整大小的存储的大小范围进行分类。</p>
+<p>$$limits ::= {min u32, max u32^?}$$</p>
+<p>如果没有给出最大值，则相应的存储可以增长到任何大小。</p>
+<h4 id="2-3-5-内存-Memories-类型"><a href="#2-3-5-内存-Memories-类型" class="headerlink" title="2.3.5. 内存(Memories)类型"></a>2.3.5. 内存(Memories)类型</h4><p>存储器类型将线性存储器及其大小范围分类。</p>
+<p>$$memtype ::= limits$$</p>
+<p>这些限制限制了内存的最小和最大可选大小。 限制以页面大小为单位给出。</p>
+<h4 id="2-3-6-表格类型"><a href="#2-3-6-表格类型" class="headerlink" title="2.3.6. 表格类型"></a>2.3.6. 表格类型</h4><p>表类型根据大小范围内的元素类型的元素对表进行分类。</p>
+<p>$$\displaylines{tabletype ::= limits elemtype\<br>elemtype::=funcref}$$</p>
+<p>像内存一样，表格的最小和最大大小限制也受到限制。<br>限制以条目数给出。</p>
+<p>元素类型funcref是所有函数类型的无限并集。<br>因此，该类型的表包含对异构类型函数的引用。</p>
+<blockquote>
+<p>注意</p>
+<p>在WebAssembly的未来版本中，可能会引入其他元素类型。</p>
+</blockquote>
+<h4 id="2-3-7-全局变量类型"><a href="#2-3-7-全局变量类型" class="headerlink" title="2.3.7. 全局变量类型"></a>2.3.7. 全局变量类型</h4><p>全局变量类型对全局变量进行分类，这些全局变量具有一个值，并且可以是可变的或不可变的。</p>
+<p>$$\displaylines{globaltype ::= mut valtype\mut ::= const | var}</p>
+<h4 id="2-3-8-外部类型"><a href="#2-3-8-外部类型" class="headerlink" title="2.3.8. 外部类型"></a>2.3.8. 外部类型</h4><p>外部类型使用各自的类型对导入和外部值进行分类。</p>
+<p>$$ externtype :: = func functype| table tabletype | mem memtype | global globaltype $$</p>
+<h5 id="2-3-8-1-惯例"><a href="#2-3-8-1-惯例" class="headerlink" title="2.3.8.1 惯例"></a>2.3.8.1 惯例</h5><p>为外部类型的序列定义了以下辅助符号。<br>它以保留顺序的方式筛选出特定种类的条目：</p>
+<p>$$\displaylines{funcs(externtype^*)=[functype|(func functype) \in externtype^*] \<br>tables(externtype^*)=[tabletype | (table tabletype)\in externtype^*] \<br>mems(externtype^*)=[memtype | (mem memtype)\in externtype^*] \<br>globals(externtype^*)=[globaltype | (global globaltype)\in externtype^*]}$$</p>
+<h3 id="2-4-指令Instructions"><a href="#2-4-指令Instructions" class="headerlink" title="2.4. 指令Instructions"></a>2.4. 指令Instructions</h3><p>WebAssembly代码由指令序列组成。 它的计算模型基于堆栈机，其中指令在隐式操作数堆栈上操纵值，使用（弹出）自变量值并生成或返回（推入）结果值。</p>
+<blockquote>
+<p>注意</p>
+<p>在当前版本的WebAssembly中，单个指令最多可以推入一个结果值。在将来的版本中可能会取消此限制。</p>
+</blockquote>
+<p>除了来自堆栈的动态操作数之外，某些指令还具有静态中间参数，通常是索引或类型注释，它们是指令本身的一部分。</p>
+<p>某些指令的结构在于将嵌套的指令序列括起来。</p>
+<p>以下各节将指令分为许多不同的类别。</p>
+<h4 id="2-4-1-数值指令"><a href="#2-4-1-数值指令" class="headerlink" title="2.4.1. 数值指令"></a>2.4.1. 数值指令</h4><p>数值指令提供对特定类型数值的基本操作。<br>这些操作与硬件中可用的各个操作紧密匹配。</p>
+<p>$$nn,mm::= 32| 64$$<br>$$sx ::=  \rm{u} |  \rm{s}$$<br>$$\displaylines{instr ::= \mathrm{i} nn.\mathrm{const}\ inn | \mathrm{i}nn.\mathrm{const}\ fnn \<br>| \mathrm{i}nn.iunop | \mathrm{f}nn.funop \<br>| \mathrm{i}nn.ibinop | \mathrm{f}nn.fbinop \<br>| \mathrm{i}nn.itestop \<br>| \mathrm{i}nn.irelop | \mathrm{f}nn.frelop \<br>| \mathrm{i32.wrap_i64} | \mathrm{i64.extend_i32_}sx | \mathrm{i}nn.\mathrm{trunc_f}mm_sx \<br>| \mathrm{f32.demote_f64} | \mathrm{f64.promote_f32} | \mathrm{f}nn.\mathrm{convert_i}mm_sx \<br>| \mathrm{i}nn.\mathrm{reinterpret_f}nn | \mathrm{i}nn.\mathrm{reinterpret_i}nn \<br>| \ldots}$$<br>$$ iunop ::= \mathrm{clz | ctz | opocnt}$$<br>$$ \displaylines{ibinop ::= \mathrm{add | sub | mul | div_}sx \mathrm{|rem_}sx \<br>| \mathrm{and | or | xor | shl | shr_}sx \mathrm{| rtol | rtor} }$$<br>$$ funop ::= \mathrm{abs | neg | sqrt | ceil | floor | trunc | nearest}$$<br>$$ fbinop ::= \mathrm{add | sub | mul | div | min | max | copysign}$$<br>$$ itestop ::= \mathrm{eqz}$$<br>$$ irelop ::= \mathrm{eq | ne | lt_}sx \mathrm{| gt_}sc \mathrm{| le_}sx \mathrm{| ge_}sx$$<br>$$ frelop ::= \mathrm{eq | ne | lt | gt | le | ge }$$</p>
+<p>数字指令按值类型划分。 对于每种类型，可以区分几个子类别：</p>
+<ul>
+<li>常量：返回静态常量。</li>
+<li>一元运算符：使用一个操作数并产生相应类型的一个结果。</li>
+<li>二进制运算符：使用两个操作数并产生一个相应类型的结果。</li>
+<li>测试：消耗一个相应类型的操作数，并产生一个布尔整数结果。</li>
+<li>比较：消耗两个各自类型的操作数，并产生一个布尔整数结果。</li>
+<li>转换：使用一种类型的值并产生另一种类型的结果（转换的源类型是“_”之后的类型）。</li>
+</ul>
+<p>一些整数指令有两种形式，其中带符号注释sx区分是将操作数解释为无符号整数还是带符号整数。<br>对于其他整数指令，对有符号的解释使用二进制补码意味着无论有符号性如何，它们的行为都相同。</p>
+<h5 id="2-4-1-1-惯例"><a href="#2-4-1-1-惯例" class="headerlink" title="2.4.1.1. 惯例"></a>2.4.1.1. 惯例</h5><p>有时，根据以下语法速记将操作分组在一起很方便：</p>
+<p>$$unop ::= iunop | funop$$<br>$$binop ::= ibinop | fbinop$$<br>$$testop ::= itestop$$<br>$$relop ::= irelop | frelop$$<br>$$cutop ::= \mathrm{wrap | entend | trunc | convert | demote | promote | reinterpret}$$</p>
+<h4 id="2-4-2-参数指令"><a href="#2-4-2-参数指令" class="headerlink" title="2.4.2. 参数指令"></a>2.4.2. 参数指令</h4><p>该组中的指令可以对任何值类型的操作数进行运算。</p>
+<p>$$ \displaylines{ instr ::= \ldots \<br>| \mathrm{drop} \<br>| \mathrm{select} }$$ </p>
+<p>drop运算符只是丢掉单个操作数。</p>
+<p>select运算符根据其第三个操作数是否为零来选择执行其前两个操作数之一。</p>
+<h4 id="2-4-3-变量指令"><a href="#2-4-3-变量指令" class="headerlink" title="2.4.3. 变量指令"></a>2.4.3. 变量指令</h4><p>变量指令涉及对局部或全局变量的访问。</p>
+<p>$$ \displaylines{ instr ::= \ldots \<br>| \mathrm{local.get}\ localidx \<br>| \mathrm{local.set}\  localidx \<br>| \mathrm{local.tee}\ localidx \<br>| \mathrm{global.get}\ globalidx \<br>| \mathrm{global.set}\ globalidx}$$</p>
+<p>这些指令分别获取或设置变量的值。<br>local.tee指令类似于local.set，但会返回其参数。</p>
+<h4 id="2-4-4-内存指令"><a href="#2-4-4-内存指令" class="headerlink" title="2.4.4. 内存指令"></a>2.4.4. 内存指令</h4><p>该组指令与线性内存有关。</p>
+<p>$$ memarg ::= { \mathrm{offset}\ u32, \mathrm{align}\ u32 }$$</p>
+<p>内存可以通过使用不同<em>值类型</em>的加载（load）和存储（store）指令来访问。<br>它们都使用一个内存中间值memarg，该值包含一个地址<em>偏移量（offset）</em>和一个预期的<em>编排方式</em>（表示为2的幂的指数）。<br>整数的加载和存储可以选择指定小于各自值类型的位宽度的存储大小。<br>在一些加载情况下，则需要符号扩展模式$sx$来选择适当的行为。</p>
+<p>静态地址偏移量被添加到动态地址操作数，从而产生33位长度的<em>有效地址</em>，该地址是从零开始的索引，可从该索引访问内存。<br>所有值以Little-Endian读取和写入。<br>如果任何已访问的内存字节超出了内存当前大小所隐含的地址范围，就会产生陷阱（Trap）。</p>
+<blockquote>
+<p>注意</p>
+<p>WebAssembly的未来版本可能会提供具有64位地址范围的内存指令。</p>
+<p>（这也是为啥现在叫wasm32）</p>
+</blockquote>
+<p>memory.size指令返回当前的内存大小。<br>memory.grow指令将内存增加给定的增量，并返回先前的大小；如果无法分配足够的内存，则返回-1。<br>两条指令均以页面大小为单位。</p>
+<blockquote>
+<p>注意</p>
+<p>在当前版本的WebAssembly中，所有内存指令都隐式地（默认）对内存索引0进行操作。此限制在将来的版本中可能会取消。</p>
+</blockquote>
+<h4 id="2-4-5-控制指令"><a href="#2-4-5-控制指令" class="headerlink" title="2.4.5. 控制指令"></a>2.4.5. 控制指令</h4><p>该组中的指令会影响控制流程。</p>
+<p>$$ \displaylines{ instr ::= \ldots \<br>| \mathrm{nop} \<br>| \mathrm{unreachable} \<br>| \mathrm{block}\ resulttype\ instr^<em>\ \mathrm{end} \<br>| \mathrm{loop }\ resulttype\ instr^</em>\ \mathrm{end} \<br>| \mathrm{if}\ resulttype\ instr^<em>\ \mathrm{else}\ instr^</em>\ \mathrm{end} \<br>| \mathrm{br}\ labelidx \<br>| \mathrm{br_if}\ labelidx \<br>| \mathrm{br_table}\ vec(labelidx)\ labelidx \<br>| \mathrm{return} \<br>| \mathrm{call}\ funcidx \<br>| \mathrm{call_indirect}\ typeidx}$$</p>
+<p>nop指令不执行任何操作。</p>
+<p>unreachable指令触发无条件的陷阱。</p>
+<p>block,loop以及if指令是结构化指令。<br>它们将嵌套的指令序列（称为块）括起来，以指令末尾或伪指令终止或分隔。<br>正如语法规定的那样，必须将它们嵌套好。<br>结构化指令可以产生一个如注释结果类型描述的值。</p>
+<p>每个结构化控制指令都会引入一个隐式标签。<br>标签（Label）是分支指令通过标签索引引用的目标。<br>与其他索引空间不同，标签的索引是相对于嵌套深度的，也就是说，标签0指的是包围引用分支指令的最内部结构化控制指令，而递增的索引则引用更远的索引。<br>因此，只能从关联的结构化控制指令中引用标签。<br>这也意味着分支只能指向外部，“脱离”它们所针对的控制构造的块。<br>具体效果取决于该控制结构：<br>在block或if情况下，向前跳转直到匹配到end后恢复执行。<br>在loop循环情况下，向后跳到loop开始。</p>
+<blockquote>
+<p>注意</p>
+<p>这将强制执行结构化的控制流程。<br>直观地讲，在大多数类似于C的语言中，针对块的if分支的行为类似于break语句，而针对循环的分支的行为类似于continue语句。</p>
+</blockquote>
+<p>分支（Branch）指令有以下几种形式：<br>br：执行无条件分支<br>br_if：执行条件分支<br>br_table：通过操作数索引到标签向量的间接操作来执行该间接操作，该标签向量是指令的直接执行对象，如果操作数超出范围，则指向默认目标。<br>return：无条件分支到最外层代码块的快捷方式，该块隐式地是当前函数的主体。<br>采取分支将操作数堆栈展开到输入目标结构化控制指令的高度。<br>但是，以非空结果类型为目标的控制指令作为目标的前向分支首先消耗匹配的操作数，并在展开后将它们推回操作数堆栈中，以作为终止的结构化指令的结果。</p>
+<p>call指令调用另一个函数，从堆栈中使用必要的参数并返回调用的结果值。<br>call_indirect指令通过将操作数索引到表中来间接调用函数。<br>由于表（table）可能包含异构类型funcref的函数元素，因此将根据指令的立即数对被调用方进行动态检查，以检查该函数类型（function type），如果调用不匹配，则调用将使用陷阱（trap）中止。</p>
+<blockquote>
+<p>注意</p>
+<p>在当前版本的WebAssembly中，call_indirect默认对表索引（tableidx）0操作。在将来的版本中可能会取消此限制。</p>
+</blockquote>
+<h4 id="2-4-6-表达式Expression"><a href="#2-4-6-表达式Expression" class="headerlink" title="2.4.6. 表达式Expression"></a>2.4.6. 表达式Expression</h4><p>函数（function）主体，全局变量（globals）的初始化值以及元素（element）或数据（data）段的偏移量都作为表达式给出。表达式是由结束（end）标记终止的指令（instruction）序列。</p>
+<p>$$ expr ::= instr* \mathrm{end}$$</p>
+<p>在某些地方，验证器将表达式限制为常量，从而限制了被允许的指令集。</p>
+<h3 id="2-5-模块-Modules"><a href="#2-5-模块-Modules" class="headerlink" title="2.5 模块 Modules"></a>2.5 模块 Modules</h3><p>WebAssembly程序被组织成模块，这些模块是部署，加载和编译的单元。<br>一个模块包含了类型（types），函数（functions），表（tables），内存（memories）和全局变量（globals）的定义。<br>此外，它可以声明导入（imports）和导出（exports），并以数据（data）和元素（element）段或启动函数的形式提供初始化逻辑。</p>
+<p>$$ \displaylines{ module ::= { types\ vec(functype),<br>funcs\ vec(func), \<br>tables\ vec(table), \<br>mems vec(mem), \<br>globals\ vec(elem), \<br>data\ vec(data), \<br>start\ start^?, \<br>imports\ vec(import),<br>exports\ vec(export) }}$$</p>
+<p>每个向量，甚至整个模块，都可能是空的。</p>
+<h4 id="2-5-1-索引"><a href="#2-5-1-索引" class="headerlink" title="2.5.1. 索引"></a>2.5.1. 索引</h4><p>定义被以从0开始的索引引用。<br>每个定义类都有其自己专属的索引空间，如以下类所示。</p>
+<p>$$\displaylines{ typeidx ::= u32\<br>funcidx ::= u32\<br>tableidx ::= u32\<br>memidx ::= u32\<br>globalidx ::= u32\<br>localidx ::= u32\<br>labelidx ::= u32}$$</p>
+<p>函数（functions），表（tables），内存（memories）和全局变量（globals）的索引空间包括在同一模块中声明的相应导入（imports）中。<br>这些导入（imports）的索引在同一索引空间中优先于其他定义的索引。</p>
+<p>局部变量（locals）的索引空间只能在函数内部访问，并且包括以此为参数的函数。这种函数位于局部变量之前。</p>
+<p>标签（label）索引引用指令序列内的结构化控制指令。</p>
+<h5 id="2-5-1-1-惯例"><a href="#2-5-1-1-惯例" class="headerlink" title="2.5.1.1. 惯例"></a>2.5.1.1. 惯例</h5><ul>
+<li>元变量l覆盖标签索引。</li>
+<li>元变量x，y覆盖其他任何索引空间中的索引。</li>
+</ul>
+<h4 id="2-5-2-类型"><a href="#2-5-2-类型" class="headerlink" title="2.5.2. 类型"></a>2.5.2. 类型</h4><p>模块的类型组件定义了一个功能类型（function types）的向量。</p>
+<p>所有功能类型必须在此组件中定义模块中使用。<br>它们由类型索引引用。</p>
+<blockquote>
+<p>注意</p>
+<p>WebAssembly的未来版本可能会添加类型定义的其他形式。</p>
+</blockquote>
+<h4 id="2-5-3-函数"><a href="#2-5-3-函数" class="headerlink" title="2.5.3. 函数"></a>2.5.3. 函数</h4><p>模块的funcs组件定义具有以下结构的函数向量：</p>
+<p>$$ func ::= {\mathrm{type}\ typeidx, \mathrm{locals}\ vec(valtype), \mathrm{body}\ expr}$$</p>
+<p>函数（function）的类型通过引用模块中定义的类型来声明其签名。<br>该函数的参数通过函数主体中从0的局部索引进行引用； 他们是可变的。</p>
+<p>局部变量（locals）声明一个可变局部变量及其类型的向量。<br>这些变量是通过函数体内的局部索引来引用的。<br>第一个局部变量的索引是最小索引，其不引用任何参数。</p>
+<p>主体（body）是一个指令序列，在终止时必须产生一个与函数类型的结果类型（result type）匹配的堆栈。</p>
+<p>函数通过函数索引被引用，由最小索引开始，不引用任何函数导入（function import）。</p>
+<h4 id="2-5-4-表"><a href="#2-5-4-表" class="headerlink" title="2.5.4. 表"></a>2.5.4. 表</h4><p>模块的表组件定义了由表类型描述的一个表向量：</p>
+<p>$$ table ::= { \mathrm{type}\ tabletype }$$</p>
+<p>表是特定表元素类型的不透明值的向量。<br>表类型的限制中的最小的大小指定了该表的初始大小。<br>而如果存在最大则其大小限制该表稍后可以增长至的大小。</p>
+<p>可以通过元素段（element segment）初始化表。</p>
+<p>通过表索引引用表，从最小索引开始，不需要引用一个表导入（table import）。<br>大多数构造都隐式引用表索引0。</p>
+<blockquote>
+<p>注意</p>
+<p>在当前版本的WebAssembly中，最多可以在一个模块中定义或导入一个表，并且所有构造都隐式引用表0。此限制在将来的版本中可能会取消。</p>
+</blockquote>
+<h4 id="2-5-5-内存"><a href="#2-5-5-内存" class="headerlink" title="2.5.5. 内存"></a>2.5.5. 内存</h4><p>模块的内存（mems）组件定义了一个线性存储器（或简称为存储器）的向量，如其存储器类型所述：</p>
+<p>$$ mem := {\mathrm{type}\ memtype }$$</p>
+<p>内存是未被解释的原始字节的向量。<br>内存类型的限制中的最小（Min）大小指定该内存的初始大小，而最大内存大小（Max，如果存在）则限制了以后可以增长的大小。<br>两者均以页面大小为单位。</p>
+<p>可以通过数据段（data segment）初始化内存。</p>
+<p>内存被内存索引引用，从最小索引开始，不引用内存导入（memory import）。<br>大多数构造都隐式引用内存索引0。</p>
+<blockquote>
+<p>注意</p>
+<p>在当前版本的WebAssembly中，最多可以在一个模块中定义或导入一个内存，并且所有构造都隐式引用此内存0。此限制在将来的版本中可能会取消。</p>
+<p>（换句话说现在的mems根本就是个单元素数组，里面就一个memory）</p>
+</blockquote>
+<h4 id="2-5-6-全局变量Globals"><a href="#2-5-6-全局变量Globals" class="headerlink" title="2.5.6. 全局变量Globals"></a>2.5.6. 全局变量Globals</h4><p>模块的全局变量组件定义了一个全局变量的向量（或简称为globals）：</p>
+<p>$$global ::= { \mathrm{type}\ globaltype, \mathrm{init}\ expr}$$</p>
+<p>每个全局变量都存储给定全局变量类型（global type）的单个值。<br>它的类型还指定了全局变量是不可变的还是可变的。<br>此外，每个全局变量都使用常量初始化表达式（expr）给出的初始化值进行初始化。</p>
+<p>全局变量通过全局索引引用，从最小的索引开始，不引用全局导入。</p>
+<h4 id="2-5-7-元素段-Element-Segments"><a href="#2-5-7-元素段-Element-Segments" class="headerlink" title="2.5.7. 元素段 Element Segments"></a>2.5.7. 元素段 Element Segments</h4><p>表的初始内容未初始化。<br>模块的elem组件定义元素段的向量，这些向量以给定的偏移量从元素的静态向量初始化表的子范围。</p>
+<p>$$ elem ::= { \mathrm{table}\ tableidx, \mathrm{offset}\ express, \mathrm{init} vec(funcidx)}$$</p>
+<p>偏移量（offset）由一个常量表达式给出。</p>
+<blockquote>
+<p>注意</p>
+<p>在当前版本的WebAssembly中，模块中最多允许一个表。因此，唯一有效的tableidx为0。</p>
+</blockquote>
+<h4 id="2-5-8-数据段-Data-Segments"><a href="#2-5-8-数据段-Data-Segments" class="headerlink" title="2.5.8. 数据段 Data Segments"></a>2.5.8. 数据段 Data Segments</h4><p>内存的初始内容为一堆零值字节。<br>模块的数据组件定义数据段的向量，这些数据段以给定的偏移量和静态字节向量来初始化内存范围。</p>
+<p>$$ data ::= { \mathrm{data}\ memidx, \mathrm{offset}\ expr, \mathrm{init}\ vec(byte) }$$</p>
+<p>偏移量（offset）由一个常量表达式给出。</p>
+<blockquote>
+<p>注意</p>
+<p>在当前版本的WebAssembly中，一个模块中最多允许有一个内存。 因此，唯一有效的memidx为0。</p>
+</blockquote>
+<h4 id="2-5-9-启动函数-Start-Function"><a href="#2-5-9-启动函数-Start-Function" class="headerlink" title="2.5.9. 启动函数 Start Function"></a>2.5.9. 启动函数 Start Function</h4><p>模块的启动（start）组件声明一个启动函数的函数索引，该函数在初始化表和内存后在实例化模块时自动调用。</p>
+<p>$$ start ::= { \mathrm{func}\ funcidx }$$</p>
+<blockquote>
+<p>注意</p>
+<p>启动功能用于初始化模块的状态。在初始化完成之前，无法访问模块及其导出（exports）。</p>
+</blockquote>
+<h4 id="2-5-10-导出-exports"><a href="#2-5-10-导出-exports" class="headerlink" title="2.5.10. 导出 exports"></a>2.5.10. 导出 exports</h4><p>模块的导出组件定义了一组导出。一旦实例化该模块，主机环境就可以访问它们。</p>
+<p>$$ export ::= { \mathrm{name}\ name, \mathrm{desc}\ exportdesc }$$<br>$$ \displaylines{ exportdesc ::= \mathrm{func}\ funcidx\<br>| \mathrm{table}\ tableidx\<br>| \mathrm{mem}\ memidx\<br>| \mathrm{global}\ globalidx}$$</p>
+<p>每个导出都用唯一的名称标记。<br>可导出的定义是函数，表，内存和全局变量，它们通过相应的描述符进行引用。</p>
+<h5 id="2-5-10-1-惯例"><a href="#2-5-10-1-惯例" class="headerlink" title="2.5.10.1. 惯例"></a>2.5.10.1. 惯例</h5><p>为导出序列定义了以下辅助符号，以保留顺序的方式过滤出特定种类的索引：</p>
+<ul>
+<li>$func(export^*)=[ funcidx | \mathrm(func)\ funcidx \in (export.\mathrm{desc}) ]$</li>
+<li>$tables(export^*)=[ tableidx | \mathrm(table)\ tableidx \in (export.\mathrm{desc}) ]$</li>
+<li>$mems(export^*)=[ memidx | \mathrm(mem)\ memidx \in (export.\mathrm{desc}) ]$</li>
+<li>$globals(export^*)=[ globalidx | \mathrm(global)\ globalidx \in (export.\mathrm{desc}) ]$</li>
+</ul>
+<h4 id="2-5-11-导入-imports"><a href="#2-5-11-导入-imports" class="headerlink" title="2.5.11. 导入 imports"></a>2.5.11. 导入 imports</h4><p>模块的导入组件定义了实例化所需的一组导入。</p>
+<p>$$ import ::= { \mathrm{module}\ name, \mathrm{name}\ name, \mathrm{desc}\ importdesc}$$<br>$$ \displaylines{ importdesc ::= \mathrm{func}\ typeidx\<br>| \mathrm{table}\ tabletype\<br>| \mathrm{mem}\ memtype\<br>| \mathrm{global}\ globaltype}$$</p>
+<p>每个导入都由两级名称空间标记，该名称空间由<em>模块名称</em>和该模块内<em>实体的名称</em>组成。<br>可导入的定义为函数，表，内存和全局变量。<br>每个导入都由一个描述符指定，该描述符的类型与实例化期间提供的定义必须匹配。</p>
+<p>每次导入都会在相应的索引空间（index space）中定义一个索引。<br>在每个索引空间中，导入索引都位于模块本身包含的任何定义的第一个索引之前。</p>
+<blockquote>
+<p>注意</p>
+<p>与导出名称不同，导入名称不一定是唯一的。<br>可以多次导入同一“模块名::名称”。<br>这样的导入甚至可能具有不同的类型描述，包括不同种类的实体。<br>仍然可以实例化具有此类导入的模块，具体取决于<em>嵌入程序</em>如何允许解析和提供导入的细节。<br>但是，不需要嵌入程序来支持此类重载，并且WebAssembly模块本身无法实现重载名称。</p>
+</blockquote>
+<h2 id="3-验证"><a href="#3-验证" class="headerlink" title="3. 验证"></a>3. 验证</h2><h3 id="3-1-惯例"><a href="#3-1-惯例" class="headerlink" title="3.1. 惯例"></a>3.1. 惯例</h3><p>验证将检查WebAssembly模块的格式是否正确，因为只能有效的模块能够被实例化。</p>
+<p>有效性是由类型系统根据模块及其内容的抽象语法定义的。<br>对于每个抽象语法，都有一个键入规则，用于指定适用于它的约束。<br>所有规则均以两种等效形式给出：</p>
+<ul>
+<li>用行文，以直观的形式描述含义。</li>
+<li>用公式表示法，以数学形式描述规则。[1]</li>
+</ul>
+<blockquote>
+<p>注意</p>
+<p>行文和公式规则是等效的，因此阅读本规范不需要理解公式符号。<br>公式提供了更简洁的符号描述，该符号广泛用于编程语言的语义中，并易于进行数学证明。</p>
+</blockquote>
+<p>在这两种情况下，规则都是以声明方式制定的。也就是说，它们仅制定约束条件，而没有定义算法。<br>附录中提供了根据本规范的用于类型检查指令序列的健全完整算法的框架。</p>
+<h4 id="3-1-1-上下文"><a href="#3-1-1-上下文" class="headerlink" title="3.1.1. 上下文"></a>3.1.1. 上下文</h4><p>单个定义的有效性被制定为与上下文相关，该上下文收集有关周围模块和范围内定义的相关信息：</p>
+<ul>
+<li>类型：当前模块中定义的类型列表。</li>
+<li>函数：在当前模块中声明的功能列表，以其功能类型表示。</li>
+<li>表：在当前模块中声明的表格列表，以表格类型表示。</li>
+<li>内存：在当前模块中声明的内存列表，以其内存类型表示。</li>
+<li>全局变量：在当前模块中声明的全局变量列表，以其全局类型表示。</li>
+<li>局部变量：在当前函数中声明的本地列表（包括参数），以其值类型表示。</li>
+<li>标签：从当前位置可访问的标签堆栈，以其结果类型表示。</li>
+<li>返回值：当前函数的返回类型，表示为可选结果类型，当不允许返回时（如独立表达式），该结果类型不存在。</li>
+</ul>
+<p>换句话说，上下文包含每个索引空间的一系列适当类型，描述该空间中的每个定义条目。<br>局部变量，标签和返回类型仅用于验证函数体中的指令，而在其他地方保留为空。<br>标签栈是上下文中随指令序列的验证而变化的唯一部分。</p>
+<p>更具体地说，上下文被定义为具有抽象语法的记录（records），$C$：</p>
+<p>$$ \displaylines{C::=\mathrm{types}\ functype^*,\<br>\mathrm{funcs}\ functype^*,\<br>\mathrm{tables}\ tabletype^*,\<br>\mathrm{mems}\ memtype^*,\<br>\mathrm{globals}\ globaltype^*,\<br>\mathrm{locals}\ valtype^*,\<br>\mathrm{labels}\ resulttype^*,\<br>\mathrm{return}\ resulttype^?}$$</p>
+<p>除了使用$C.\mathrm{field}$编写的现场访问外，还采用以下表示法来处理上下文：</p>
+<ul>
+<li>拼写上下文时，将省略空白字段。</li>
+<li>$C, \mathrm{field}\ A^*$表示与$C$相同的上下文，但元素$A^*$附加在其$\mathrm{field}$组件序列之前。</li>
+</ul>
+<blockquote>
+<p>注意</p>
+<p>我们使用诸如$C.labels[i]$之类的索引符号在上下文中的相应索引空间中查找索引。<br>上下文扩展符号$C，\mathrm{field}\ A$主要用于局部扩展相对索引空间，例如标签索引。<br>因此，将符号定义为附加在各个序列的前面，引入新的相对索引0并移动现有的相对索引。</p>
+</blockquote>
+<h4 id="3-1-2-行文符号"><a href="#3-1-2-行文符号" class="headerlink" title="3.1.2. 行文符号"></a>3.1.2. 行文符号</h4><p>验证由程式化规则为抽象语法的每个相关部分指定。 这些规则不仅说明定义短语何时有效的约束，而且还使用类型对短语进行分类。 在说明这些规则时采用了以下约定。</p>
+<ul>
+<li>当且仅当满足相应规则表示的所有约束时，短语A才被称为“对于T型有效”。 T的形式取决于A是什么。</li>
+</ul>
+<blockquote>
+<p>注意</p>
+<p>例如，如果$A$是一个函数，则$T$也是一个函数类型。<br>如果$A$是全局类型，则$T$也是全局类型； 如此类推。</p>
+</blockquote>
+<ul>
+<li><p>规则隐式假定给定上下文$C$。</p>
+</li>
+<li><p>在某些地方，此上下文在本地扩展到带有其他条目的上下文$C’$。措词“*在上下文中$C’$，…声明…*”用于表示以下声明必须在扩展上下文中包含的假设下适用。</p>
+</li>
+</ul>
+<h4 id="3-1-3-正式符号"><a href="#3-1-3-正式符号" class="headerlink" title="3.1.3. 正式符号"></a>3.1.3. 正式符号</h4><blockquote>
+<p>注意</p>
+<p>本节简要说明了正式指定键入规则的表示法。<br>对于感兴趣的读者，可以在相应的书中找到更全面的介绍。 [2]</p>
+</blockquote>
+<p>短语$A$具有各自类型$T$的命题被写为$A:T$。<br>但是，总的来说，键入取决于上下文$C$。<br>为明确表示这一点，完整的形式为判断$C\vdash A:T$，它表示$A:T$在C的假设下成立。</p>
+<p>正式的符号规则使用一种标准的方法来指定类型系统，将它们呈现为<em>推理规则</em>。<br>每个规则具有以下一般形式：</p>
+<p>$$\frac{<br>     {premise}_1 \qquad {premise}_2 \qquad \dots \qquad {premise}_n<br>   }{<br>     {conclusion}<br>   }$$</p>
+<p>这样的规则被认为是一个大含义：如果所有前提都成立，那么结论成立。<br>有些规则没有前提；它们是其结论无条件成立的<em>公理</em>。<br>结论始终是判断$C \vdash A : T$，并且抽象语法的每个相关构造A都有一个相应的规则。</p>
+<blockquote>
+<p>注意</p>
+<p>例如，可以将i32.add指令的输入规则作为一个公理给出：<br>$$\frac{<br>      }{<br>        C \vdash i32.add : [i32, i32] \to [i32]<br>      }$$</p>
+<p>该指令对于[i32, i32]→[i32]类型始终有效（假设它使用两个i32值并产生一个i32），而与任何其他条件无关。<br>像local.get这样的指令可以按如下方式键入：<br>$$\frac{<br>        C.locals[x] = t<br>      }{<br>        C \vdash \mathrm{local.get}\ x : [] \to [t]<br>      }$$<br>在此，前提要求上下文中存在直接本地索引x。<br>该指令产生其各自类型t的值（并且不消耗任何值）。<br>如果C.locals[x]不存在，则前提不成立，并且指令类型错误。</p>
+<p>最后，结构化指令需要一个递归规则，其中前提本身就是键入判断：<br>$$\frac{<br>        C,\ \mathrm{label}[t^?] \vdash instr^\ast : [] \to [t^?]<br>      }{<br>        C \vdash \mathrm{block}[t^?]\ instr^\ast \ \mathrm{end}: [] \to [t^?]<br>      }$$<br>一个block指令仅在其主体中的指令序列有效时才有效。<br>此外，结果类型必须与区块的注解$[t^?]$匹配。<br>如果是这样，则块指令与主体具有相同的类型。<br>在内部，可以使用相同类型的其他标签，这可以通过使用前提的其他标签信息扩展上下文C来表示。</p>
+</blockquote>
+<p>[1]语义来自以下文章：Andreas Haas，Andreas Rossberg，Derek Schuff，Ben Titzer，Dan Gohman，Luke Wagner，Alon Zakai，JF Bastien，Michael Holman。 《通过WebAssembly加速Web》。 第38届ACM SIGPLAN编程语言设计和实现会议（PLDI 2017）的会议记录。 ACM 2017年。</p>
+<p>[2]例如：Benjamin Pierce。 《类型和编程语言》。 麻省理工学院出版社2002</p>
+<h3 id="3-2-类型"><a href="#3-2-类型" class="headerlink" title="3.2. 类型"></a>3.2. 类型</h3><p>大多数类型都是普遍有效的。<br>但是，限制适用于函数类型以及表类型和内存类型的限制，必须在验证期间进行检查。</p>
+<h4 id="3-2-1-限制Limits"><a href="#3-2-1-限制Limits" class="headerlink" title="3.2.1. 限制Limits"></a>3.2.1. 限制Limits</h4><p>界限必须具有在给定范围内的有意义的界限。</p>
+<h5 id="3-2-1-1-min-n-max-m"><a href="#3-2-1-1-min-n-max-m" class="headerlink" title="3.2.1.1. ${min\ n, max\ m^?}$"></a>3.2.1.1. ${min\ n, max\ m^?}$</h5><ul>
+<li>n的值不能大于k。</li>
+<li>如果最大值$m^?$不为空，则：<ul>
+<li>它的值不能大于k。</li>
+<li>它的值不能小于n。</li>
+</ul>
+</li>
+<li>然后该限制在范围k内有效。</li>
+</ul>
+<p>$$\frac{<br>     n \leq k<br>     \qquad<br>     (m \leq k)^?<br>     \qquad<br>     (n \leq m)^?<br>   }{<br>     \vdash limits { min<del>n, max</del>m^? } : k<br>   }$$</p>
+<h4 id="3-2-2-函数类型"><a href="#3-2-2-函数类型" class="headerlink" title="3.2.2. 函数类型"></a>3.2.2. 函数类型</h4><p>函数类型不能指定一个以上的结果。</p>
+<h5 id="3-2-2-1-t-1-n-to-t-2-m"><a href="#3-2-2-1-t-1-n-to-t-2-m" class="headerlink" title="3.2.2.1. $[t_1^n] \to [t_2^m]$"></a>3.2.2.1. $[t_1^n] \to [t_2^m]$</h5><ul>
+<li>参数m不得大于1。</li>
+<li>则函数类型有效。</li>
+</ul>
+<p>$$\frac{<br>   }{<br>     \vdash [t_1^\ast] \to [t_2^?] ~ok<br>   }$$</p>
+<blockquote>
+<p>注意</p>
+<p>在将来的WebAssembly版本中，可能消除对返回值至多一个的限制。</p>
+</blockquote>
+<h4 id="3-2-3-表类型"><a href="#3-2-3-表类型" class="headerlink" title="3.2.3. 表类型"></a>3.2.3. 表类型</h4><h5 id="3-2-3-1-元素类型：限制"><a href="#3-2-3-1-元素类型：限制" class="headerlink" title="3.2.3.1. 元素类型：限制"></a>3.2.3.1. 元素类型：限制</h5><ul>
+<li>限制limits必须在$2^32$范围内有效</li>
+<li>则表类型有效。</li>
+</ul>
+<p>$$   \frac{<br>     \vdash limits: 2^{32}<br>   }{<br>     \vdash limits<del>elemtype</del>\mathrm{ok}<br>   }$$</p>
+<h4 id="3-2-4-内存类型"><a href="#3-2-4-内存类型" class="headerlink" title="3.2.4. 内存类型"></a>3.2.4. 内存类型</h4><h5 id="3-2-4-1-限制"><a href="#3-2-4-1-限制" class="headerlink" title="3.2.4.1. 限制"></a>3.2.4.1. 限制</h5><ul>
+<li>限制limits必须在$2^16$范围内有效</li>
+<li>则内存类型有效。</li>
+</ul>
+<p>$$   \frac{<br>     \vdash limits: 2^{16}<br>   }{<br>     \vdash limits~\mathrm{ok}<br>   }$$</p>
+<h4 id="3-2-5-全局类型"><a href="#3-2-5-全局类型" class="headerlink" title="3.2.5. 全局类型"></a>3.2.5. 全局类型</h4><h5 id="3-2-5-1-可变值类型"><a href="#3-2-5-1-可变值类型" class="headerlink" title="3.2.5.1. 可变值类型"></a>3.2.5.1. 可变值类型</h5><ul>
+<li>全局类型有效</li>
+</ul>
+<p>$$   \frac{<br>   }{<br>     \vdash globaltype\ mut<del>valtype</del>\mathrm{ok}<br>   }$$</p>
+<h4 id="3-2-6-外部类型"><a href="#3-2-6-外部类型" class="headerlink" title="3.2.6. 外部类型"></a>3.2.6. 外部类型</h4><h5 id="3-2-6-1-函数类型-func"><a href="#3-2-6-1-函数类型-func" class="headerlink" title="3.2.6.1. 函数类型 func"></a>3.2.6.1. 函数类型 func</h5><ul>
+<li>func的函数类型functype必须有效。</li>
+<li>则外部类型有效。</li>
+</ul>
+<p>$$   \frac{<br>     \vdash functype<del>ok<br>   }{<br>     \vdash func</del>functype~ok<br>   }$$</p>
+<h5 id="3-2-6-2-表类型-table"><a href="#3-2-6-2-表类型-table" class="headerlink" title="3.2.6.2. 表类型 table"></a>3.2.6.2. 表类型 table</h5><ul>
+<li>差不多同上，仅类型区别，类型有效则有效</li>
+</ul>
+<h5 id="3-2-6-3-内存类型-mem"><a href="#3-2-6-3-内存类型-mem" class="headerlink" title="3.2.6.3. 内存类型 mem"></a>3.2.6.3. 内存类型 mem</h5><ul>
+<li>差不多同上，仅类型区别，类型有效则有效</li>
+</ul>
+<h5 id="3-2-6-4-全局类型-global"><a href="#3-2-6-4-全局类型-global" class="headerlink" title="3.2.6.4. 全局类型 global"></a>3.2.6.4. 全局类型 global</h5><ul>
+<li>差不多同上，仅类型区别，类型有效则有效</li>
+</ul>
+<h3 id="3-3-指令"><a href="#3-3-指令" class="headerlink" title="3.3. 指令"></a>3.3. 指令</h3><p>指令按函数类型[t]→[t]进行分类，这些函数类型描述了指令如何操纵操作数堆栈。 这些类型描述了必需的输入堆栈，其中弹出了一条指令的类型为t的参数值，以及提供的输出堆栈，其返回的结果为类型t的结果。</p>
+<h2 id="4-执行"><a href="#4-执行" class="headerlink" title="4. 执行"></a>4. 执行</h2><h2 id="5-二进制格式"><a href="#5-二进制格式" class="headerlink" title="5. 二进制格式"></a>5. 二进制格式</h2><h2 id="6-文本格式"><a href="#6-文本格式" class="headerlink" title="6. 文本格式"></a>6. 文本格式</h2><h2 id="A-附录"><a href="#A-附录" class="headerlink" title="A. 附录"></a>A. 附录</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/wasm/" rel="tag"># wasm</a>
+              <a href="/tags/WebAssembly/" rel="tag"># WebAssembly</a>
+              <a href="/tags/todo/" rel="tag"># todo</a>
+              <a href="/tags/specification/" rel="tag"># specification</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/chain-scaling/" rel="prev" title="区块链缩放研究">
+      <i class="fa fa-chevron-left"></i> 区块链缩放研究
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/build-wasm-runtime/" rel="next" title="Wasm Runtime的创作: Build Wasm Runtime">
+      Wasm Runtime的创作: Build Wasm Runtime <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%BC%95%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">1. 引言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%BC%95%E8%A8%80"><span class="nav-number">2.1.</span> <span class="nav-text">1.1. 引言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-%E8%AE%BE%E8%AE%A1%E7%9B%AE%E6%A0%87"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1.1. 设计目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.1.2. 作用域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%AE%89%E5%85%A8%E6%80%A7%E8%80%83%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">1.2. 安全性考量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-%E4%BE%9D%E8%B5%96"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1. 依赖</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%A6%82%E8%A7%88"><span class="nav-number">2.3.</span> <span class="nav-text">1.3. 概览</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-%E6%A6%82%E5%BF%B5"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.3.1 概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-%E8%AF%AD%E4%B9%89%E8%A7%A3%E6%9E%90"><span class="nav-number">2.3.2.</span> <span class="nav-text">1.3.2. 语义解析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9E%B6%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">2. 架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%A7%84%E5%AE%9A"><span class="nav-number">3.1.</span> <span class="nav-text">2.1. 规定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-%E8%AF%AD%E6%B3%95%E7%AC%A6%E5%8F%B7"><span class="nav-number">3.1.1.</span> <span class="nav-text">2.1.1. 语法符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-%E8%BE%85%E5%8A%A9%E7%AC%A6%E5%8F%B7"><span class="nav-number">3.1.2.</span> <span class="nav-text">2.1.2. 辅助符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-%E5%90%91%E9%87%8F"><span class="nav-number">3.1.3.</span> <span class="nav-text">2.1.3. 向量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%80%BC"><span class="nav-number">3.2.</span> <span class="nav-text">2.2. 值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-Bytes"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1. Bytes</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-1-%E6%83%AF%E4%BE%8B"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">2.2.1.1. 惯例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-1-%E6%83%AF%E4%BE%8B"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">2.2.2.1. 惯例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2.3. 浮点数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-1-%E6%83%AF%E4%BE%8B"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">2.2.3.1. 惯例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-%E5%90%8D%E7%A7%B0Names"><span class="nav-number">3.2.3.</span> <span class="nav-text">2.2.4. 名称Names</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-4-1-%E6%83%AF%E4%BE%8B"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">2.2.4.1. 惯例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E7%B1%BB%E5%9E%8BTypes"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 类型Types</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-%E5%80%BC-Value-%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.1.</span> <span class="nav-text">2.3.1 值(Value)类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-3-1-%E6%83%AF%E4%BE%8B"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">2.3.3.1. 惯例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-%E7%BB%93%E6%9E%9C-Result-%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.2.</span> <span class="nav-text">2.3.2. 结果(Result)类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-%E5%87%BD%E6%95%B0-Function-%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.3.</span> <span class="nav-text">2.3.3 函数(Function)类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-4-%E9%99%90%E5%88%B6"><span class="nav-number">3.3.4.</span> <span class="nav-text">2.3.4. 限制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-5-%E5%86%85%E5%AD%98-Memories-%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.5.</span> <span class="nav-text">2.3.5. 内存(Memories)类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-6-%E8%A1%A8%E6%A0%BC%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.6.</span> <span class="nav-text">2.3.6. 表格类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-7-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.7.</span> <span class="nav-text">2.3.7. 全局变量类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-8-%E5%A4%96%E9%83%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.3.8.</span> <span class="nav-text">2.3.8. 外部类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-8-1-%E6%83%AF%E4%BE%8B"><span class="nav-number">3.3.8.1.</span> <span class="nav-text">2.3.8.1 惯例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%8C%87%E4%BB%A4Instructions"><span class="nav-number">3.4.</span> <span class="nav-text">2.4. 指令Instructions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-%E6%95%B0%E5%80%BC%E6%8C%87%E4%BB%A4"><span class="nav-number">3.4.1.</span> <span class="nav-text">2.4.1. 数值指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-1-1-%E6%83%AF%E4%BE%8B"><span class="nav-number">3.4.1.1.</span> <span class="nav-text">2.4.1.1. 惯例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-%E5%8F%82%E6%95%B0%E6%8C%87%E4%BB%A4"><span class="nav-number">3.4.2.</span> <span class="nav-text">2.4.2. 参数指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-3-%E5%8F%98%E9%87%8F%E6%8C%87%E4%BB%A4"><span class="nav-number">3.4.3.</span> <span class="nav-text">2.4.3. 变量指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-4-%E5%86%85%E5%AD%98%E6%8C%87%E4%BB%A4"><span class="nav-number">3.4.4.</span> <span class="nav-text">2.4.4. 内存指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-5-%E6%8E%A7%E5%88%B6%E6%8C%87%E4%BB%A4"><span class="nav-number">3.4.5.</span> <span class="nav-text">2.4.5. 控制指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-6-%E8%A1%A8%E8%BE%BE%E5%BC%8FExpression"><span class="nav-number">3.4.6.</span> <span class="nav-text">2.4.6. 表达式Expression</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E6%A8%A1%E5%9D%97-Modules"><span class="nav-number">3.5.</span> <span class="nav-text">2.5 模块 Modules</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-1-%E7%B4%A2%E5%BC%95"><span class="nav-number">3.5.1.</span> <span class="nav-text">2.5.1. 索引</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-1-1-%E6%83%AF%E4%BE%8B"><span class="nav-number">3.5.1.1.</span> <span class="nav-text">2.5.1.1. 惯例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-2-%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.5.2.</span> <span class="nav-text">2.5.2. 类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-3-%E5%87%BD%E6%95%B0"><span class="nav-number">3.5.3.</span> <span class="nav-text">2.5.3. 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-4-%E8%A1%A8"><span class="nav-number">3.5.4.</span> <span class="nav-text">2.5.4. 表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-5-%E5%86%85%E5%AD%98"><span class="nav-number">3.5.5.</span> <span class="nav-text">2.5.5. 内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-6-%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8FGlobals"><span class="nav-number">3.5.6.</span> <span class="nav-text">2.5.6. 全局变量Globals</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-7-%E5%85%83%E7%B4%A0%E6%AE%B5-Element-Segments"><span class="nav-number">3.5.7.</span> <span class="nav-text">2.5.7. 元素段 Element Segments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-8-%E6%95%B0%E6%8D%AE%E6%AE%B5-Data-Segments"><span class="nav-number">3.5.8.</span> <span class="nav-text">2.5.8. 数据段 Data Segments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-9-%E5%90%AF%E5%8A%A8%E5%87%BD%E6%95%B0-Start-Function"><span class="nav-number">3.5.9.</span> <span class="nav-text">2.5.9. 启动函数 Start Function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-10-%E5%AF%BC%E5%87%BA-exports"><span class="nav-number">3.5.10.</span> <span class="nav-text">2.5.10. 导出 exports</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-10-1-%E6%83%AF%E4%BE%8B"><span class="nav-number">3.5.10.1.</span> <span class="nav-text">2.5.10.1. 惯例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-11-%E5%AF%BC%E5%85%A5-imports"><span class="nav-number">3.5.11.</span> <span class="nav-text">2.5.11. 导入 imports</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%AA%8C%E8%AF%81"><span class="nav-number">4.</span> <span class="nav-text">3. 验证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%83%AF%E4%BE%8B"><span class="nav-number">4.1.</span> <span class="nav-text">3.1. 惯例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-number">4.1.1.</span> <span class="nav-text">3.1.1. 上下文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-%E8%A1%8C%E6%96%87%E7%AC%A6%E5%8F%B7"><span class="nav-number">4.1.2.</span> <span class="nav-text">3.1.2. 行文符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-%E6%AD%A3%E5%BC%8F%E7%AC%A6%E5%8F%B7"><span class="nav-number">4.1.3.</span> <span class="nav-text">3.1.3. 正式符号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.2.</span> <span class="nav-text">3.2. 类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-%E9%99%90%E5%88%B6Limits"><span class="nav-number">4.2.1.</span> <span class="nav-text">3.2.1. 限制Limits</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-1-min-n-max-m"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">3.2.1.1. ${min\ n, max\ m^?}$</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.2.2.</span> <span class="nav-text">3.2.2. 函数类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-2-1-t-1-n-to-t-2-m"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">3.2.2.1. $[t_1^n] \to [t_2^m]$</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-%E8%A1%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.2.3.</span> <span class="nav-text">3.2.3. 表类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-3-1-%E5%85%83%E7%B4%A0%E7%B1%BB%E5%9E%8B%EF%BC%9A%E9%99%90%E5%88%B6"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">3.2.3.1. 元素类型：限制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-4-%E5%86%85%E5%AD%98%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.2.4.</span> <span class="nav-text">3.2.4. 内存类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-4-1-%E9%99%90%E5%88%B6"><span class="nav-number">4.2.4.1.</span> <span class="nav-text">3.2.4.1. 限制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-5-%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.2.5.</span> <span class="nav-text">3.2.5. 全局类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-5-1-%E5%8F%AF%E5%8F%98%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.2.5.1.</span> <span class="nav-text">3.2.5.1. 可变值类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-6-%E5%A4%96%E9%83%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.2.6.</span> <span class="nav-text">3.2.6. 外部类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-6-1-%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B-func"><span class="nav-number">4.2.6.1.</span> <span class="nav-text">3.2.6.1. 函数类型 func</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-6-2-%E8%A1%A8%E7%B1%BB%E5%9E%8B-table"><span class="nav-number">4.2.6.2.</span> <span class="nav-text">3.2.6.2. 表类型 table</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-6-3-%E5%86%85%E5%AD%98%E7%B1%BB%E5%9E%8B-mem"><span class="nav-number">4.2.6.3.</span> <span class="nav-text">3.2.6.3. 内存类型 mem</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-6-4-%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B-global"><span class="nav-number">4.2.6.4.</span> <span class="nav-text">3.2.6.4. 全局类型 global</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%8C%87%E4%BB%A4"><span class="nav-number">4.3.</span> <span class="nav-text">3.3. 指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%89%A7%E8%A1%8C"><span class="nav-number">5.</span> <span class="nav-text">4. 执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%A0%BC%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text">5. 二进制格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">6. 文本格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#A-%E9%99%84%E5%BD%95"><span class="nav-number">8.</span> <span class="nav-text">A. 附录</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

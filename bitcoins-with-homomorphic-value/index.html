@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="原文链接 我已经不停地研究了几个月，因为它本身似乎是一个有趣的结构，是支付隐私的另一个不同的方面（例如，从用户的角度来看，或者如果我们希望商业实体能够从可审计但对商业敏感的信息中获取信息， 使用智能合约），而且除了可以直接使用以外，它还可以实现一些我们尚未想到的功能，或者可以提高ZeroCoin之类想法的效率（我不知道如何使用，但似乎与之相关 ）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="具有同态值的比特币 bitcoins with homomorphic value">
+<meta property="og:url" content="http://example.com/bitcoins-with-homomorphic-value/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="原文链接 我已经不停地研究了几个月，因为它本身似乎是一个有趣的结构，是支付隐私的另一个不同的方面（例如，从用户的角度来看，或者如果我们希望商业实体能够从可审计但对商业敏感的信息中获取信息， 使用智能合约），而且除了可以直接使用以外，它还可以实现一些我们尚未想到的功能，或者可以提高ZeroCoin之类想法的效率（我不知道如何使用，但似乎与之相关 ）。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-24T03:53:31.000Z">
+<meta property="article:modified_time" content="2021-03-06T07:43:54.082Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="bitcointalk">
+<meta property="article:tag" content="bitcoin">
+<meta property="article:tag" content="crypto">
+<meta property="article:tag" content="autonomy">
+<meta property="article:tag" content="done">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/bitcoins-with-homomorphic-value/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>具有同态值的比特币 bitcoins with homomorphic value | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/bitcoins-with-homomorphic-value/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          具有同态值的比特币 bitcoins with homomorphic value
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-24 11:53:31" itemprop="dateCreated datePublished" datetime="2020-09-24T11:53:31+08:00">2020-09-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-06 15:43:54" itemprop="dateModified" datetime="2021-03-06T15:43:54+08:00">2021-03-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://bitcointalk.org/index.php?topic=305791.0">原文链接</a></p>
+<p>我已经不停地研究了几个月，因为它本身似乎是一个有趣的结构，是支付隐私的另一个不同的方面（例如，从用户的角度来看，或者如果我们希望商业实体能够从可审计但对商业敏感的信息中获取信息， 使用智能合约），而且除了可以直接使用以外，它还可以实现一些我们尚未想到的功能，或者可以提高ZeroCoin之类想法的效率（我不知道如何使用，但似乎与之相关 ）。</p>
+<span id="more"></span>
+
+<p>出发点是，据我们所知可以进行加法同态加密（additively homomorphic encryption），并且还存在基于小于的零知识证明（即下文ZK小于证明）。 （证明$E(a)+ E(b)= E(a+b)$还不够，您还必须证明攻击者在此过程中没有将n加到他的余额上，因为加法是除n的模）。计算小于2的幂的效率更高，但是通过组合可以得到任意值（毕竟，所有值都可以从2的幂范围构建而成）。</p>
+<p>这两个（同态加和ZK小于证明）均基于已建立的保守加密假设，但是小于的通用ZKP很大（数字签名大小的证明数量与log(v)成比例，其中$v=\log_2(n \div vmax)+1=\log_2(n)-\log_2(vmax)+1$，因此在比特币中$\log_2(n)=256$，vmax取决于编码，但有2100万BTC小于$2^{51}$聪。 而且可能还很慢，因为它涉及验证v签名。</p>
+<p>本来我以为这会变得缓慢而笨拙（有点像零币），所以我一直在讨论是否以及直到找到可行的有效方法为止。 贝里·斯科恩马克斯（Berry Schoenmakers）的效率也比ZKP差（他从来没有费心写过论文，natch）。 但是，在我看来，这是基于为Schnorr组选择非标准p＆q的更非标准的假设，并且也不适用于椭圆曲线，因此对ECDSA无效（仅对Schnorr（DSA是其变体））。</p>
+<p>但是最后我认为我看到了比特币使用和验证硬币值的缺失步骤，您只需要证明每个硬币的两个最高有效位为0，并使用设置$vmax&lt;2^{254}$的编码即可（即提高比特币精度） 从51位到254位，私密密钥超出&lt;$2^{51}$聪之外的次要有效位，即提供203位安全性的编码，高于提供128位安全性的P256的ECDSA的安全性。</p>
+<p>因此，最终有了一种不费吹灰之力的方式来处理EC-Schnorr签名，每个输入和输出的成本仅为2 ECS信号（成本和大小与ECDSA相同），其中#input &lt; 4和#output &lt; 4 。 对于#input &gt; 3，您还需要显示例如$ZKPoK \{ (a+b+c, d): a+b+c &lt; 2^{254}, d &lt; 2^{254} \}$，如果#output&gt; 3，则显示相同。 因此，2个$k + 2\log_3(k)$签名用于k个输入或输出。 （3因为$2^{254} \times 3 &lt; n$但$2^{254} \times 4 &gt; n$。）</p>
+<p>顺便说一句，在ECDSA IMO上使用ECS是有充分的理由的，IMO仍然较为保守和简单，而且DSA都基于此。因为它更简单（没有* k ^ -1步骤），所以它更灵活并且轻松地支持多方签名（n of n）甚至阈值签名（k of n），从而允许在一个ECS签名的空间内进行多重签名（甚至不公开其存在）在n的k中，也没有k或n的偶数），有一些论点认为ECS在关于哈希属性的假设中比ECDSA更安全。要使用ECDSA进行多方访问是一个研究主题，即使多方DSA也非常复杂，并且取决于同构加密实例的安全性，该同等加密实例的大小足以容纳涉及q的幂的临时结果，例如具有大密钥的paillier密码系统和偶数阈值DSA。更复杂的Damgard-Jurik扩展了Paillier方案。 ECS的灵活性使其在许多方面都具有更大的灵活性，例如，基于表示问题（这是对Pederson承诺的一种概括，其本身是schnorr的一种概括）的零知识选择性披露和品牌证书的盲目认证功能。使用Brands证书进行智能合约可以做很多事情，通过使用布尔公式的ZK证明等来保留依赖智能合约的人的属性的隐私。</p>
+<p>同样，为每个值额外签名的成本，您甚至可以拥有无条件的值保密性。 （即，一个假设的功能强大的实体能够以最小的努力执行离散日志，仍然无法告诉您您支付了多少钱）。 这是因为像OTP一样，所有可能的值都是同等可能的，例如，在pederson承诺，两个基点G, H然后$xG+yH$存在x和y的所有可能值的n个可能解（其中x是密钥，y是一个可以证明事情的价值）。 强大的对手只能解决并找到所有可能性，但您公开记录的ZKP并不会显示您知道哪个x值，也不会显示您转移的y。</p>
+<p>目前将发布更多的加密级别细节，也许还会发布基于openSSL的实现。</p>
+<p>亚当</p>
+<hr>
+<p>因此，如果您假设x知识的ZK证明存在（语法$x_i$是x的第i位，即LSB从0开始），那么$ZKPoK\{(x): x_i = 0\}$可以检查两个通过使用$ZKPoK{(x): x_{255} = 0 \And x_{254} = 0}$，有效位为0。</p>
+<p>该证明适用于某些组中的值，我们使用schnorr组的EC实例（例如DSA，相同的键，参数，但签名更简单； DSA是Schnorr签名变体，与原始AFAIK相比没有任何优点，而我提到了许多缺点）在OP中）。因此，我们将调用值x，其中前两位必须为0 $x_{255} = x_{254} = 0$，并且$x_{253 … x202}$是以“聪”为单位的值（与现有精度相同）以及剩下的值$x_{201..x0}$是私钥。</p>
+<p>xG将是公共的，并且也是币的公钥（与现有的比特币地址的公钥略有不同）。现在人们可以验证加密的输入值(A，B)等于加密的输出值(X，C)和费用f，其中X是加密支出，C是加密更改，而f是费用，因为$A = aG$和$A + B = X + C + fG$，因为$aG + bG = xG + cG + fG$。这将强制$a + b \mod n = x + c + f \mod n$。发送者必须包括$ZKPoK\{(a，b): a_{255} = a_{254} = 0\}$。发送者还必须加密x并将其发送给接收者，以便他依次花钱时可以证明有关它的信息。 f是公开的，因为任何人都必须能够通过采矿活动将其收集并附加到其地址上。</p>
+<p>当接收者花费xG时，他将不得不类似地证明$x_{255} = x_{254} = 0$。</p>
+<p>我们需要两位的原因是因为n不是2的幂。为简单起见，我们说$n = 250$。现在假设$a = 3$，$b = 1$，但是我们必须加n来防止欺诈，因为$a + b + n = 254$，$(a + b + n) \mod n = 4$，且$x = 127，c = 126，f = 1$，因此仅检查最高位1可以通过n由于$a + b + n = (x + c + f) \mod n$即$3 + 1 = (127 + 126 + 1) \mod 250$就能伪造价值。攻击者在没有使用$msb \neq 0$的任何值的情况下将其值增加了250（减去1手续费）。如果我们证明前两位为0，则最多可以防止3次输入攻击。 （因为$3 * 64 &lt;250$；但4次输入不行，因为$4 * 64&gt; 250$）。因此，对于3个以上的输入，我们还证明了3元表达式树中的每个中间计算也具有两个msbits = 0。例如Z(x)是$ZKPoK\{(x): x_{255} = 0和x_{254} = 0\}$的简写，Z(a)，Z(b)，Z(c)，Z(a + b + c)，Z(d)，Z(e)，Z(f)，Z(d + e + f)，Z(g)，Z(h)，Z(i)，Z(g + h + i)，Z((a + b + c)+(d + e + f)+(g + h + i))，因此正如我提到的，对于k个输入，必须有$k + log_3(k)$对证明（对，因为有一个对$x_{255} = 0$，$x_{254} = 1$）。</p>
+<p>最后请注意，证明知识是一种签名，因此原则上您可以在得到他人认可的情况下向他人支付现有余额，而不是将值的控制权转移到新地址。也就是说，说您的收款人已经有余额y，并且您想为他们添加x，然后向他们透露x（通过为他们的公钥加密），然后他们就可以添加，因此您可以用以下方式替换硬币地址：现有余额以节省签名和密钥。</p>
+<p>例如$ZKPoK[Y]\{(a，b，x，y，c), f：a + b = x + c + f \And Z(a) \And Z(b) \And Z(y）\}, E(x) $</p>
+<p>其中[Y]表示与PoK结合的某些信息的辅助签名。因此，发件人绑定了他的X支出，表示可以将其添加到现有余额Y中（发件人不知道y）。</p>
+<p>现在，区块验证将允许接收者将其余额替换为$Y’= Y + X =(x + y)G$。当发送方为接收方加密值x时，他现在可以进行转账。</p>
+<p>通过将污点作为环转移的一种方式花在一些其他用户身上，也可以实现污染混合（尽管在规模上并不便宜）。 （环签名是一种方案，您可以在未经其许可的情况下将其他签名者隐含为签名的可能的发起者，其中发起者希望在可能的作者中隐藏其身份）。因此，这有点像coinjoin，但是您不需要其他用户的积极协作。如果E（值）是脱链的（例如，直接发送给接收者），则接收者可能会甚至可能无法使用额外的值，如果他不知道尘埃值（他只能通过参考先前的余额来拒绝它），但这并不能证明他仍然可以保留它-很难证明它是否定的。）我们可以选择将其附加到链上（以一定的大小代价），甚至可以加密，并带有证明收件人可以解密的证据。 （很容易证明$xG = xH$，其中$H = yG$，证明者不知道y，因此EC Egamal可以提供可证明的可解密值，在这种情况下，该软件可以合并硬币并阻止所有者使用较早版本）。</p>
+<p>（尘埃是一个现在被认为很小的值，但是由于$x_{202..0}$由发送方随机分配，并且没有DL能力就无法计算，因此必须将其传达给接收方，以使其具有价值。）</p>
+<p>通过开采，原始硬币的已知价值为25个比特币（且无尘），但是接收者仍然可以安全地使用它，而无需人们通过保留尘埃作为零钱来消除其当前余额（他可能永远不会花掉，因为它实际上是可忽略的小数的nano satoshi值）。</p>
+<hr>
+<p><em>验证节点如何将输入和输出值相加以确定费用？ 这是我唯一不清楚的部分。 网络不需要知道$输出总和-输入总和$吗？</em></p>
+<p>与当前不同，您将必须明确传达费用，并让其作为输入与输出的总和进行验证。 （在我的第二篇文章中显示了f的通信，而输入a，b和输出x（支出）和c（更改）是加密形式的，但是可以证明A + B = X + C + fG。</p>
+<p>亚当</p>
+<hr>
+<p><em>您打算如何证明高两位为零？ 我认为没有人知道如何对小于，位提取或mod x之类的内容进行有效的ZK证明。 有通用的ZK方案，例如Pinocchio和TinyRAM，但它们很昂贵。 你有什么考虑？</em></p>
+<p>是的，给我一个机会我会实现这个。</p>
+<p>小于1的现有ZKP使用0或1的证明作为构建基块（这就是为什么它们效率低下，它们根据范围执行了数十次）。 即，为了证明$x \leq 5 = 101b$的模数，对于n = 257（一个9位素数）的说明，他们证明$x = 000000101b$，首先证明$x &lt;100b$，方法是证明前6位为0，然后通过证明$xG-4G$的前8位为0来证明$xG-4G = 01b \leq 1$。</p>
+<p>亚当</p>
+<p>我认为，Brands PhD论文/MIT新闻书“重新思考公共密钥基础结构”的第3章提供了说明/脚注/参考，可以免费下载。 它的一个组成部分是ZK范围证明或ZK小于证明。</p>
+<p><a target="_blank" rel="noopener" href="http://www.credentica.com/the_mit_pressbook.html">http://www.credentica.com/the_mit_pressbook.html</a></p>
+<p>有空的话，我将其写出来。 （暂离一段时间）。</p>
+<p>亚当</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/bitcointalk/" rel="tag"># bitcointalk</a>
+              <a href="/tags/bitcoin/" rel="tag"># bitcoin</a>
+              <a href="/tags/crypto/" rel="tag"># crypto</a>
+              <a href="/tags/autonomy/" rel="tag"># autonomy</a>
+              <a href="/tags/done/" rel="tag"># done</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/coinjoin/" rel="prev" title="CoinJoin: Bitcoin privacy for the real world">
+      <i class="fa fa-chevron-left"></i> CoinJoin: Bitcoin privacy for the real world
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/public-blockchain-research-report/" rel="next" title="市场上新一代公链研究">
+      市场上新一代公链研究 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

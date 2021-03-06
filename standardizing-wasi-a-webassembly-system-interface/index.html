@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="今天，我们宣布一项新标准化工作的开始——WASI，即WebAssembly系统接口。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="标准化WASI: 一个网页外运行WebAssembly的系统接口">
+<meta property="og:url" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="今天，我们宣布一项新标准化工作的开始——WASI，即WebAssembly系统接口。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/01-01_crash-data-leak-1-500x220.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/01-02-protection-ring-sec-1-500x298.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/01-03-syscall-1-500x227.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/02-01-implementations-1-500x267.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/02-02-implementations-1-500x260.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/03-01-emscripten-1-500x329.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/03-02-system3-1-500x179.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/03-03-emulation-1-500x341.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/04-01-portability-1-500x375.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/04-02-portability-1-500x484.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/04-03-access-control-1-500x224.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/04-04-bitcoin-1-500x258.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/04-05-sandbox-1-500x278.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/05-01-wasi-1-500x419.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/05-02-wasi-1-500x251.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/05-03-open-imps-1-500x229.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/05-04-imports-1-500x285.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/05-05-sec-port-2-500x705.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/05-06-openat-path-1-500x192.png">
+<meta property="og:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/05-07-file-perms-1-500x423.png">
+<meta property="og:image" content="https://github.com/musec/libpreopen">
+<meta property="article:published_time" content="2020-06-24T03:53:20.000Z">
+<meta property="article:modified_time" content="2021-03-06T07:57:10.438Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="wasm">
+<meta property="article:tag" content="wasi">
+<meta property="article:tag" content="WebAssembly">
+<meta property="article:tag" content="done">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/standardizing-wasi-a-webassembly-system-interface/standardizing-wasi-a-webassembly-system-interface/01-01_crash-data-leak-1-500x220.png">
+
+<link rel="canonical" href="http://example.com/standardizing-wasi-a-webassembly-system-interface/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>标准化WASI: 一个网页外运行WebAssembly的系统接口 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/standardizing-wasi-a-webassembly-system-interface/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          标准化WASI: 一个网页外运行WebAssembly的系统接口
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-24 11:53:20" itemprop="dateCreated datePublished" datetime="2020-06-24T11:53:20+08:00">2020-06-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-06 15:57:10" itemprop="dateModified" datetime="2021-03-06T15:57:10+08:00">2021-03-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>今天，我们宣布一项新标准化工作的开始——WASI，即WebAssembly系统接口。</p>
+<span id="more"></span>
+
+<p><strong>为何需要WASI</strong>：开发人员开始将WebAssembly(译：下称WASM)推向浏览器以外的世界，因为WASM提供了一种快速，可扩展，且安全的方式在所有计算机上运行相同的代码。</p>
+<p>但是现在我们还没有坚实的基础可以构建WASI。浏览器外部的代码需要一种与系统对话的方式，即系统接口，这是当前WASM平台还没有的。</p>
+<p><strong>WASI是什么</strong>：WebAssembly是用于概念中计算机的汇编语言，而不是用于物理计算机的汇编语言。这就是它可以在各种不同的机器架构上运行的原因。</p>
+<p>就像WASM是概念中计算机的汇编语言一样，WebAssembly需要概念中的操作系统（而不是任何一个具体的操作系统）的系统接口。这样，它可以在所有不同的操作系统上运行。</p>
+<p>这就是WASI – WASM平台的系统接口。</p>
+<p>我们旨在创建一个系统接口，该接口将成为WebAssembly的真正伙伴，并经历时间考验。这意味着要坚持WASM的关键原则——“可移植性和安全性”。</p>
+<p><strong>谁在制作WASI</strong>：我们正组织一个WebAssembly子项目组来专攻标准化WASI。我们已经召集了感兴趣的合作伙伴，并正在寻找更多加入的伙伴。</p>
+<p>我们与合作伙伴，还有支持者，认为WASI重要的一些原因如下：</p>
+<p>Mozilla首席研发官Sean White</p>
+<p>“ WebAssembly正在为人们改变网络带来新的引人入胜的内容的方式，并使开发人员和创作者能够在网络上100%发挥实力。到目前为止，这是都是通过浏览器实现的。但是通过WASI，我们可以将WebAssembly和Web的优势交给更多的用户，更多的岗位，更多的设备，并作为更多体验的一部分。”</p>
+<p>Fastly的首席技术官Tyler McMullen</p>
+<p>“我们将WebAssembly扩展到浏览器之外，作为在边缘云中快速，安全地执行代码的平台。尽管我们的边缘和浏览器之间的环境存在差异，但WASI意味着WebAssembly开发人员无需将其代码移植到每个不同的平台上。”<br>Myles Borins，Node技术指导委员会主任</p>
+<p>“ WebAssembly可以解决Node中最大的问题之一 —— 如何以接近本机的速度并像使用本机模块一样重用以C和C++等其他语言编写的代码，同时仍保持可移植性和安全性。标准化此系统接口是实现这一目标的第一步。”</p>
+<p>npm的联合创始人Laurie Voss</p>
+<p>“ npm对可能的WebAssembly能够扩展npm生态系统的功能感到非常兴奋，同时极大地简化了使本机代码在服务器端JavaScript应用程序中运行的过程。我们期待这一过程的结果。”</p>
+<p>所以这是个大新闻！ 🎉</p>
+<p>WASI当前有3种实现：</p>
+<ul>
+<li>wasmtime，Mozilla主导的WebAssembly运行时</li>
+<li>Lucet，Fastly主导的WebAssembly运行时</li>
+<li>浏览器上的polyfill</li>
+</ul>
+<p>如果您想了解有关该系统接口应如何工作的建议的更多信息，请继续阅读。</p>
+<h2 id="什么是系统接口？"><a href="#什么是系统接口？" class="headerlink" title="什么是系统接口？"></a>什么是系统接口？</h2><p>许多人谈论像C这样可以使您直接访问系统资源的语言。但事实并不是这样的。</p>
+<p>这些语言实际上无权直接在大多数系统上执行，打开或创建文件之类的操作。为什么不？</p>
+<p>因为这些系统资源（例如文件，内存和网络连接）对于稳定性和安全性来说非常重要。</p>
+<p>如果一个程序无意间弄乱了另一个程序的资源，则可能使该程序崩溃。更糟糕的是，如果某个程序（或用户）故意弄乱了另一个程序的资源，它可能会窃取敏感数据。(译：就是缓冲区溢出导致RCE)</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/01-01_crash-data-leak-1-500x220.png" alt="crash-data-leak"></p>
+<p>因此，我们需要一种方法来控制哪些程序和用户可以访问哪些资源。人们很早就意识到了这一点，并提出了一种提供这种控制的方法：保护环的安保。</p>
+<p>借助保护环的安保，操作系统基本上可以在系统资源周围设置保护屏障。这也就是内核(Kernel)。内核是唯一一个需要做比如创建新文件，打开文件或打开网络连接之类的操作的东西。</p>
+<p>用户程序在此内核之外以“用户模式”运行。如果程序想要执行任何操作，例如打开文件，则必须要求内核为其打开文件。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/01-02-protection-ring-sec-1-500x298.png" alt="protection-ring-sec"></p>
+<p>这就是系统调用(syscall)这个概念出现的地方。当程序需要让内核执行这些操作之一时，它会要求使用系统调用。这使内核有机会弄清楚是哪个用户在要求。然后，它可以在该用户在打开文件之前查看用户是否有权访问该文件。</p>
+<p>在大多数设备上，这是代码可以通过系统调用访问系统资源的唯一方法。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/01-03-syscall-1-500x227.png" alt="syscall"></p>
+<p>操作系统使系统调用可用。但是，如果每个操作系统都有自己的系统调用，那么是否就需要为每个操作系统使用不同版本的代码？幸运的是，现在的您不需要。</p>
+<p>那这个问题是如何被解决的？抽象化。</p>
+<p>大多数语言都提供标准库。进行编码时，程序员无需知道他们针对的系统。他们只是使用接口。</p>
+<p>然后，在编译时，您的工具链会根据您要定位的系统来选择要使用的接口实现。此实现使用操作系统API中的功能，因此特定于系统。</p>
+<p>这就是系统接口的所在。例如，为Windows机器编译的printf可以使用Windows API与该机器进行交互。如果要针对Mac或Linux进行编译，它将改用POSIX。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/02-01-implementations-1-500x267.png" alt="implementations"></p>
+<p>但是，这也给WebAssembly带来了一个问题。</p>
+<p>使用WebAssembly，即使在编译时，您也不知道要使用哪种操作系统。因此，您不能在标准库的WebAssembly实现中使用任何单个操作系统的系统接口。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/02-02-implementations-1-500x260.png" alt="implementations"></p>
+<p>我之前说过，为何WebAssembly是个<a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/">用于概念计算机的汇编语言</a>而不是真实计算机的汇编语言。以同样的方式，WebAssembly需要用于概念性操作系统的系统接口，而不是真正的操作系统。</p>
+<p>但是，即使没有适当的系统接口，也已经有运行时可以在浏览器外部运行WebAssembly。他们是怎么做到的呢？ 让我们来看看。</p>
+<h2 id="当下，WebAssembly是如何在浏览器之外运行？"><a href="#当下，WebAssembly是如何在浏览器之外运行？" class="headerlink" title="当下，WebAssembly是如何在浏览器之外运行？"></a>当下，WebAssembly是如何在浏览器之外运行？</h2><p>生成WebAssembly的第一个工具是Emscripten。它在网页上模拟了特定的OS系统接口POSIX。这意味着程序员可以使用C标准库（libc）中的函数。</p>
+<p>为此，Emscripten创建了自己的libc实现。 此实现分为两部分 —— 将一部分编译到WebAssembly模块中，另一部分用JS胶水代码实现；然后，此JS胶水将调用浏览器，此后浏览器将与OS通信。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/03-01-emscripten-1-500x329.png" alt="emscripten"></p>
+<p>早期的大多数WebAssembly代码都是使用Emscripten编译的。因此，当人们开始希望在没有浏览器的情况下运行WebAssembly时，他们首先通过运行Emscripten编译的代码开始。</p>
+<p>所以，为JS胶水代码中的所有这些功能，这些运行时需要创建自己的实现。</p>
+<p>不过这里有个问题。该JS胶水代码提供的接口并非标准设计，甚至不是面向外部的接口。因为这不是它当时需要解决的问题。</p>
+<p>打个比方，对于一个类似于public接口API上<code>read</code>的函数的调用，JS胶水代码改用 <code>_system3(which, varargs)</code>。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/03-02-system3-1-500x179.png" alt="system3"></p>
+<p>第一个参数，<code>which</code>，是一个整数，该整数始终与名称中的数字相同（在这种情况下为3）。</p>
+<p>第二个参数，<code>varargs</code>，是要使用的参数。之所以称为varargs，是因为您可以使用可变数量的变量。但是WebAssembly无法提供将可变数量的参数传递给函数的方法。因此，参数是通过线性内存传递的。这不是安全的类型，而且比使用寄存器传递参数的速度要慢。</p>
+<p>这对于在浏览器中运行Emscripten来说很好。但是现在，运行时将其视为事实上的标准，实现了自己的JS胶水代码版本。他们正在仿真POSIX仿真层的内部细节。</p>
+<p>这意味着他们正在重新实现基于Emscripten约束有意义的选择（例如将参数作为堆值传递），即使这些约束不适用于他们当前的环境。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/03-03-emulation-1-500x341.png" alt="emulation"></p>
+<p>如果我们要建立一个可持续数十年的WebAssembly生态系统，则需要坚实的基础。 这意味着我们的事实上的标准不能是模仿的模仿。</p>
+<p>但是，我们应该采用什么原则？</p>
+<h3 id="WASI需要遵循哪些原则？"><a href="#WASI需要遵循哪些原则？" class="headerlink" title="WASI需要遵循哪些原则？"></a>WASI需要遵循哪些原则？</h3><p>WebAssembly中包含两个重要的原则：</p>
+<ul>
+<li>可移植性</li>
+<li>安全性</li>
+</ul>
+<p>在转向浏览器外的使用时，我们需要保证这些关键原则。</p>
+<p>事实是，POSIX和Unix的安全性访问控制方法还不能完全解决问题。让我们看看它们的不足之处。</p>
+<h4 id="可移植性"><a href="#可移植性" class="headerlink" title="可移植性"></a>可移植性</h4><p>POSIX提供源代码可移植性。您可以使用不同版本的libc编译相同的源代码，以针对不同的计算机。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/04-01-portability-1-500x375.png" alt="portability"></p>
+<p>但是WebAssembly需要超越这一步骤。我们需要能够编译一次并跨一大堆不同的机器运行。我们需要可移植的二进制文件。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/04-02-portability-1-500x484.png" alt="portability"></p>
+<p>这种可移植性使向用户分发代码变得更加容易。</p>
+<p>例如，如果Node的本机模块是用WebAssembly编写的，则用户在安装带有本机模块的应用程序时无需运行node-gyp，并且开发人员无需配置和分发数十个二进制文件。</p>
+<h4 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h4><p>当一行代码要求操作系统进行某些输入或输出时，操作系统需要确定执行代码要求的操作是否安全。</p>
+<p>操作系统通常使用基于所有权和组的访问控制来处理此问题。</p>
+<p>例如，程序可能要求操作系统打开文件。用户具有他们有权访问的一组文件。</p>
+<p>当用户启动程序时，该程序代表该用户运行。如果用户有权访问文件——（因为他们是所有者，或者因为他们在具有访问权限的组中），那么程序也具有相同的访问权限。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/04-03-access-control-1-500x224.png" alt="access-control"></p>
+<p>这样可以用户之间进行保护。在早期操作系统的开发中，这很有意义。系统通常是多用户的，并且管理员控制要安装的软件。因此，最主要的威胁是其他用户偷看您的文件。</p>
+<p>但是，大人，时代变了。系统现在通常是单用户，但是它们正在运行的代码会引入许多其他可信度未知的第三方代码。现在最大的威胁是您自己正在运行的代码将对您不利。</p>
+<p>例如，假设您在应用程序中使用的库获得了一个新的维护程序（在开放源代码中经常发生）。那个维护者可能会引起您的兴趣……或者他们可能是坏人之一。 而且，如果他们有权在您的系统上执行任何操作（例如打开任何文件并通过网络发送文件），那么他们的代码可能会造成很大的破坏。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/04-04-bitcoin-1-500x258.png" alt="bitcoin"></p>
+<p>这就是为什么使用可以直接与系统对话的第三方库很危险的原因。</p>
+<p>WebAssembly的安全性方法不同。WebAssembly已沙盒化。</p>
+<p>这意味着代码无法直接与操作系统对话。但是，它如何处理系统资源呢？主机（可能是浏览器，也可能是wasm运行时）将函数放入代码可以使用的沙箱中。</p>
+<p>这意味着主机可以限制程序在逐个程序的基础上可以执行的操作。它不仅可以让程序代表用户执行操作，还可以在具有用户完全权限的情况下调用任何系统调用。</p>
+<p>仅仅拥有一种沙箱机制并不能保证系统本身的安全性——因为主机仍然可以将所有功能都放到沙箱中，在这种情况下，我们的状况就不会更好了——但它至少使主机可以能够选择创建一个更安全的系统。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/04-05-sandbox-1-500x278.png" alt="sandbox"></p>
+<p>在我们设计的任何系统接口中，我们都需要坚持这两个原则。可移植性使开发和分发软件更加容易，并且绝对必须为主机提供工具以保护自己或他们的用户安全。</p>
+<h3 id="WASI应该是什么样？"><a href="#WASI应该是什么样？" class="headerlink" title="WASI应该是什么样？"></a>WASI应该是什么样？</h3><p>给定这两个关键原则，WebAssembly系统接口的设计应该是什么？</p>
+<p>这就是我们在标准化过程中要解决的问题。 不过，我们确实有一个建议：</p>
+<ul>
+<li>创建一组标准接口</li>
+<li>从标准化最基本的模块wasi-core开始</li>
+</ul>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/05-01-wasi-1-500x419.png" alt="wasi"></p>
+<p>wasi-core将会是个啥？</p>
+<p>wasi-core将包含所有程序需要的基础。它将覆盖与POSIX相同的大部分内容，包括文件，网络连接，时钟和随机数。</p>
+<p>对于许多这些事情，它将采用与POSIX非常相似的方法。例如，它将使用POSIX的面向文件的方式，在此基础上您可以进行诸如open，close，read和write之类的系统调用，而其他所有操作基本上都可以在顶部进行增强。</p>
+<p>但是wasi-core无法涵盖POSIX的所有功能。例如，进程概念不能清楚地映射到WebAssembly上。除此之外，说每个WebAssembly引擎都需要支持进程操作（如fork）是没有意义的。 但是我们也想使标准化fork成为可能。</p>
+<p>这就是模块化方法的用武之地。通过这种方式，我们可以获得良好的标准化覆盖率，同时仍然允许细分平台仅使用WASI在该平台上有意义的部分。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/05-02-wasi-1-500x251.png" alt="wasi"></p>
+<p>像Rust这样的语言将直接在其标准库中使用wasi-core。 例如，Rust的<code>open</code>是通过在编译为WebAssembly时调用<code>__wasi_path_open</code>来实现的。</p>
+<p>对于C和C++，我们创建了一个<a target="_blank" rel="noopener" href="https://github.com/CraneStation/wasi-sysroot">wasi-sysroot</a>，它根据wasi-core函数实现了libc。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/05-03-open-imps-1-500x229.png" alt="open-imps"></p>
+<p>我们希望像clang这样的编译器准备好与WASI API交互，并且像Rust编译器和Emscripten这样的完整工具链也可以将WASI用作其系统实现的一部分</p>
+<p>那么用户的代码需要如何调用这些WASI函数？</p>
+<p>答案是，运行代码的运行时将wasi-core函数作为导入(imports)传递进WASM。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/05-04-imports-1-500x285.png" alt="imports"></p>
+<p>这给我们带来了可移植性，因为每个主机都可以有自己的wasi-core实现，该实现专门针对其平台编写——从Mozilla的wasmtime和Fastly的Lucet之类的WebAssembly运行时，到Node甚至是浏览器。</p>
+<p>这也给我们提供了沙箱管理功能，因为主机可以逐个程序选择要传入的wasi-core函数，因此，可以允许哪个系统调用。 这样可以保持安全性。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/05-05-sec-port-2-500x705.png" alt="sec-port"></p>
+<p>WASI为我们提供了进一步扩展此安全性的方法。它从基于功能的安全性中引入了更多概念。</p>
+<p>传统上，如果代码需要打开文件，则使用字符串（路径名）调用open。然后，操作系统会检查代码是否具有权限（基于启动程序的用户）。</p>
+<p>使用WASI，如果要调用需要访问文件的函数，则必须传入文件描述符，该描述符具有附加的权限。这可以用于文件本身，也可以用于包含文件的目录。</p>
+<p>这样，您就不会拥有随机要求打开/etc/passwd的代码。相反，代码只能在传递给它的目录上操作。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/05-06-openat-path-1-500x192.png" alt="openat-path"></p>
+<p>这使得可以安全地给沙盒代码更多地访问不同的系统调用的权限，因为这些系统调用的功能可能受到限制。</p>
+<p>而且这是逐个模块进行的。默认情况下，模块无权访问文件描述符。但是，如果一个模块中的代码具有文件描述符，则可以选择将该文件描述符传递给它在其他模块中调用的函数。或者，它可以创建文件描述符的更多受限版本以传递给其他功能。</p>
+<p>因此，运行时将应用程序可以使用的文件描述符传递给顶层代码，然后根据需要，将文件描述符传播到系统的其余部分。</p>
+<p><img src="./standardizing-wasi-a-webassembly-system-interface/05-07-file-perms-1-500x423.png" alt="file-perms"></p>
+<p>这使WebAssembly更接近最小特权原则，在该原则下，模块只能访问执行其工作所需的确切资源。</p>
+<p>这些概念来自面向功能的系统，例如CloudABI和Capsicum。面向功能的系统的一个问题是，通常很难向其移植代码。但是我们认为这个问题可以解决。</p>
+<p>如果代码已经使用了带有相对文件路径的<code>openat</code>，那么编译代码就可以了。</p>
+<p>如果代码使用<code>open</code>并且正迁移到<code>openat</code>风格是过度的前期投资，WASI可以提供一个增量解决方案。使用<img src="https://github.com/musec/libpreopen" alt="libpreopen">，您可以创建应用程序需要合法访问的文件路径的列表。然后，您可以使用open，但只能使用这些路径。</p>
+<h3 id="接下来做什么"><a href="#接下来做什么" class="headerlink" title="接下来做什么"></a>接下来做什么</h3><p>我们认为wasi-core是一个好的开始。它保留了WebAssembly的可移植性和安全性，为生态系统奠定了坚实的基础。</p>
+<p>但是，在wasi-core完全标准化之后，我们仍然需要解决一些问题。这些问题包括：</p>
+<ul>
+<li>异步I/O</li>
+<li>文件监控</li>
+<li>文件锁定</li>
+</ul>
+<p>这仅仅是开始，因此，如果您有解决这些问题的想法，请加入我们！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/wasm/" rel="tag"># wasm</a>
+              <a href="/tags/wasi/" rel="tag"># wasi</a>
+              <a href="/tags/WebAssembly/" rel="tag"># WebAssembly</a>
+              <a href="/tags/done/" rel="tag"># done</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/wasm-2-master/" rel="prev" title="WASM 2Master">
+      <i class="fa fa-chevron-left"></i> WASM 2Master
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/why-shouldnt-put-sheet-into-block/" rel="next" title="为什么选择放弃在block中加入sheet">
+      为什么选择放弃在block中加入sheet <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是系统接口？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%93%E4%B8%8B%EF%BC%8CWebAssembly%E6%98%AF%E5%A6%82%E4%BD%95%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B9%8B%E5%A4%96%E8%BF%90%E8%A1%8C%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">当下，WebAssembly是如何在浏览器之外运行？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WASI%E9%9C%80%E8%A6%81%E9%81%B5%E5%BE%AA%E5%93%AA%E4%BA%9B%E5%8E%9F%E5%88%99%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">WASI需要遵循哪些原则？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E7%A7%BB%E6%A4%8D%E6%80%A7"><span class="nav-number">2.1.1.</span> <span class="nav-text">可移植性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">2.1.2.</span> <span class="nav-text">安全性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WASI%E5%BA%94%E8%AF%A5%E6%98%AF%E4%BB%80%E4%B9%88%E6%A0%B7%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">WASI应该是什么样？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">2.3.</span> <span class="nav-text">接下来做什么</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

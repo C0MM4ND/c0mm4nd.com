@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="比特币通常被宣传为隐私工具，但比特币中的唯一隐私性来自匿名地址，该匿名地址易销毁，但是通过地址重复使用，“污点”分析，跟踪付款，监控节点IP地址，网络爬虫以及许多其他机制很容易使该隐私性受到破坏。一旦破坏了这种隐私，很难恢复，有些情况下恢复成本也很高。 传统银行业务默认提供大量隐私保护。您的亲人看不到您正在购买节育措施剥夺他们未来的孙子孙女；您的雇主无法从薪水中获悉您支持的公益；贼人们也无法看到您">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CoinJoin: Bitcoin privacy for the real world">
+<meta property="og:url" content="http://example.com/coinjoin/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="比特币通常被宣传为隐私工具，但比特币中的唯一隐私性来自匿名地址，该匿名地址易销毁，但是通过地址重复使用，“污点”分析，跟踪付款，监控节点IP地址，网络爬虫以及许多其他机制很容易使该隐私性受到破坏。一旦破坏了这种隐私，很难恢复，有些情况下恢复成本也很高。 传统银行业务默认提供大量隐私保护。您的亲人看不到您正在购买节育措施剥夺他们未来的孙子孙女；您的雇主无法从薪水中获悉您支持的公益；贼人们也无法看到您">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/coinjoin/coinjoin/tx.png">
+<meta property="article:published_time" content="2020-09-24T03:53:31.000Z">
+<meta property="article:modified_time" content="2021-03-06T07:45:00.792Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="bitcointalk">
+<meta property="article:tag" content="bitcoin">
+<meta property="article:tag" content="done">
+<meta property="article:tag" content="coinjoin">
+<meta property="article:tag" content="privacy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/coinjoin/coinjoin/tx.png">
+
+<link rel="canonical" href="http://example.com/coinjoin/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CoinJoin: Bitcoin privacy for the real world | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/coinjoin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CoinJoin: Bitcoin privacy for the real world
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-24 11:53:31" itemprop="dateCreated datePublished" datetime="2020-09-24T11:53:31+08:00">2020-09-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-06 15:45:00" itemprop="dateModified" datetime="2021-03-06T15:45:00+08:00">2021-03-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>比特币通常被宣传为隐私工具，但比特币中的唯一隐私性来自匿名地址，该匿名地址易销毁，但是通过地址重复使用，“污点”分析，跟踪付款，监控节点IP地址，网络爬虫以及许多其他机制很容易使该隐私性受到破坏。一旦破坏了这种隐私，很难恢复，有些情况下恢复成本也很高。</p>
+<p>传统银行业务默认提供大量隐私保护。您的亲人看不到您正在购买节育措施剥夺他们未来的孙子孙女；您的雇主无法从薪水中获悉您支持的公益；贼人们也无法看到您最近的购买或判断您是如何富有的人，他们无法锁定目标并欺骗您。对于个人和企业而言，比特币的隐私性不足会是一个首要的切实的不利因素。</p>
+<p>即使用户通过切换到BIP32地址链上来避免地址重复使用，当他们进行较大的交易时，他们仍然会因旧币和过去的付款而失去隐私。</p>
+<p>隐私错误也会造成外部成本：您可能有良好的保护隐私行为，但是当您与不这样做的人（例如使用<a target="_blank" rel="noopener" href="https://en.bitcoin.it/wiki/Green_address">“绿色地址”</a>的人）进行交易时，您和每个与他交易的人一样都会被迫失去一些隐私性。隐私性的缺失也给比特币带来了严重的系统风险：如果降级了的隐私性允许人们汇集中心化的列表甄别好坏币，则当您真诚接受的硬币后来未被其他人兑现时，您就会发现比特币上币与币之间的可替代性遭到破坏，并且其去中心性也伴随着人们被迫给他们自己的币实施流行的黑名单。</p>
+<p>这条消息描述了比特币用户可以用来显着改善其隐私性的交易方式，我一直称其为CoinJoin。它不涉及比特币协议的任何更改，并且几年前至今也有数次使用，但是似乎尚未得到广泛的理解。</p>
+<p>我首先在一个异想天开的帖子中公开地描述了这种交易方式——“全盘污染！”——通过这个着重讨论了这些交易的一个特定副作用，并期望人们会自己看到其余的含义。</p>
+<p>往往清晰击败含蓄，甚至理解该想法的人也有一些本可以被解答的问题。因此，这个帖子就是为此而写。</p>
+<span id="more"></span>
+
+<h1 id="CoinJoin-现实世界的比特币隐私"><a href="#CoinJoin-现实世界的比特币隐私" class="headerlink" title="CoinJoin:现实世界的比特币隐私"></a>CoinJoin:现实世界的比特币隐私</h1><p>这个想法很简单，首先要有一些简单的背景知识：</p>
+<p><img src="./coinjoin/tx.png"></p>
+<p>比特币交易消耗一个或多个输入(Input)并创建具有指定值的一个或多个输出(Output)。</p>
+<p>每个输入都是过去交易的输出。对于每个输入，都有一个不同的签名（scriptsig），该签名是根据过去使用的输出（scriptpubkey）中指定的规则创建的。</p>
+<p>比特币系统负责确保签名正确，输入存在且可支配，并且输出值的总和小于或等于输入值的总和（任何超出部分都将作为支付给矿工的费用包括交易）。</p>
+<p>通常，一笔交易会花费很多投入，以便获得足够的价值来支付其预期的付款，通常还会创建一个额外的“更改”输出，以接收未花费（和非费用）的超额费用。</p>
+<p>不需要使用的输入的scriptpubkey相同。也就是说，不要求将其支付到同一地址。而且，实际上当正确使用比特币支付一次性付款时，没有一个会是相同的。</p>
+<p>在考虑比特币所有权的历史时，可以将从多个不同的scriptpubkey花费的交易视为它们的所有权共同加入，并做出一个假设：除非有共同方控制这些地址，否则该交易又如何从多个地址花费？</p>
+<p>在图中，“交易2”花费了分配给1A1和1C3的硬币。那么1A1和1C3就一定是同一方吗？</p>
+<p>这个假设是不正确的。单个交易中的用法并不能证明是通用控制（尽管目前看来很有意义），这就是使CoinJoin成为可能的原因：</p>
+<p>交易事务内部的每个输入的签名彼此完全独立。这意味着比特币用户可能会同意要花费的一组输入，要支付的一组输出，然后分别单独签署交易并随后合并其签名。在提供所有签名之前，该交易是无效的，并且不会被网络接受，并且没有人会签名不符合他们喜好的交易。</p>
+<p>为了使用它来增加隐私，N个用户将同意一个统一的输出大小，并提供至少等于该大小的输入。如果某些用户提供的输入超出目标，则该交易将具有该大小的N个输出，并可能有N个更多的更改输出。所有人都会签署交易，然后可以传输交易。任何时候都没有被盗的风险。</p>
+<p>在图示中，“交易2”的输入来自1A1和1C3。假设我们相信1A1是用于Alice的地址，而1C3是用于Charlie的地址。 Alice和Charlie中的哪一个拥有1D和1E的输出？</p>
+<p>这个想法也可以更随意地使用。当您要付款时，找到也要付款并共同付款的其他人。这样做并不会增加太多隐私，但是实际上会使您的交易更小，从而在网络上更轻松（费用更低）；额外的隐私更是一种增益。</p>
+<p>这样的交易在外部来看与通过常规使用创建的交易没有区别。因此，如果这些交易变得很普遍，它们甚至可以改善不使用它们的人的隐私，因为不再将输入共同参与作为通用控制的有力证据。</p>
+<p>这个想法可能有很多变种，并且可以与变种共存，因为该想法不需要更改比特币系统。百花齐放：我们可以在实现这一目标的方式上有多种选择，并学到最好的方法。</p>
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><p><em>是否不需要tor或其他东西来阻止所有人分析每个人的IP？</em></p>
+<p>任何希望隐藏用户地址的交易隐私系统都应以某种匿名网络开始。 没什么两样。 幸运的是，像Tor，I2P，Bitmessage和Freenet这样的网络都已经存在，并且可以全部用于此目的。 （但是，Freenet会导致交易非常缓慢）</p>
+<p>但是，加强“污点分析”并缩小交易规模甚至不需要用户彼此私密。 因此，即使没有类似tor之类的，也不会比常规交易更糟糕。</p>
+<p><em>用户是否不了解哪些输入与哪些输出匹配？</em></p>
+<p>在用户使用基于tor的IRC之类的最简单的可能实现方式中，是的。下一个最简单的实现是，用户将其输入和输出信息发送到某些集合点服务器上，然后服务器创建交易并要求人们对其进行签名。服务器学习了映射，但其他人都没有，服务器仍然无法窃取硬币。</p>
+<p>在甚至服务器都不学习映射的情况下，也可能有更复杂的实现。</p>
+<p>例如。使用chaum盲签名：用户连接并提供输入（和更改地址）以及他们希望私人硬币进入的地址的密码盲版本；服务器对令牌进行签名并返回它们。用户匿名重新连接，取消隐藏其输出地址，然后将其返回给服务器。服务器可以看到所有输出均已由其签名，因此所有输出都必须来自有效参与者。后来人们重新连接并签名。</p>
+<p>类似的事情可以通过各种零知识证明系统来完成。</p>
+<p><em>完全隐私的版本是否需要一台服务器？ 如果关机了怎么办？</em></p>
+<p>不是。在所有用户都充当盲签名服务器的情况下，可以通过分散方式实现相同的隐私。 最终需要n^2个签名，并且通常很难创建分布式系统。 我不知道是否有理由去辛辛苦苦做出具有完全保密性的完全分布式版本，但是这肯定是可能的。</p>
+<p><em>DoS（拒绝服务）攻击如何？ 即使交易有效，有人也不能拒绝签名吗？</em></p>
+<p>是的，这可以通过两种不同的方式受到DoS的攻击：有人可以拒绝签署有效的联合交易，或者有人可以在联合交易完成之前从联合交易中花费其输入。</p>
+<p>但是，如果所有签名都没有在一定期限内到来，或者创建了冲突的交易，则您可以轻松地离开恶意方，然后重试。使用自动过程，任何重试对于用户都是不可见的。因此，唯一真正的风险是持久的DoS攻击者。</p>
+<p>在非分散（或分散但非参与者专有）的情况下，对DoS攻击者获得一定的免疫力是很容易的：如果某人未签名输入，则在以后的回合中将该输入列入黑名单。然后，他们自然会受到创建更多已确认比特币交易的能力的限制。</p>
+<p>在分散式系统中获得DoS抵抗力要困难得多，因为很难确定哪个用户实际上违反了规则。一种解决方案是让用户在零知识证明系统下执行其活动，因此您可以确定哪个用户是骗子，然后同意忽略他们。</p>
+<p>在所有情况下，您都可以通过工作证明，保真度绑定或其他稀缺资源使用来补充反DoS机制。但是我怀疑，随着实际攻击的发生，最好适应这种攻击，因为我们不必事先针对所有用户都采用单一的安全机制。我还认为，错误的输入排除可以为入门提供足够的保护。</p>
+<p><em>匿名集大小是否不受一次交易中可以拥有多少方的限制？</em></p>
+<p>不完全是。显然，单个交易的匿名集大小受其参与方数量的限制。交易规模的限制以及失败（重试）的风险意味着真正庞大的联合交易是不明智的。但是，由于这些交易价格便宜，因此可以联合的交易数量没有限制。</p>
+<p>特别是，如果您可以建立每个事务有m个参与者的事务，则可以创建一个m*3事务序列，该序列构成一个三阶段交换网络，该网络允许m^2个最终输出中的任何一个来自m^2个原始输入（例如，使用32个交易的三个阶段，每个输入有32个输入，每个1024个用户可以加入96个交易）。这允许匿名集设置为任何大小，仅受参与限制。</p>
+<p>实际上，我希望大多数用户只希望防止闲的蛋疼的朋友（和小偷）进入他们的财务生活，并恢复由于地址重用等不良做法而丢失的一些隐私。这些用户可能只通过一次通行证就会感到满意；其他人将只是机会性地进行操作，而其他人则可能会努力实现许多通行证和重要的匿名设置。所有人都可以共存。</p>
+<p><em>与ZeroCoin相比如何？</em></p>
+<p>作为一个密码学和计算机科学的极客，我对Zerocoin感到非常兴奋：其背后的技术令人着迷并且非常重要。但是，作为比特币用户和开发人员，推广它作为改善隐私的解决方案令我感到失望。</p>
+<p>Zerocoin有很多严重的局限性：</p>
+<ul>
+<li>它使用最先进的加密技术，这可能是不安全的，并且相对较少的人可以理解（例如，与ECDSA相比）。</li>
+<li>它会产生较大的签名（20 KB），这些签名会使区块链膨胀（如果将其填充到外部存储中会产生风险）。</li>
+<li>它需要一个受信方来启动其累加器。如果该组织作弊，他们可以偷硬币。 （也许可以通过更先进的加密技术修复。）</li>
+<li>验证非常慢（在快速CPU上每秒可以处理约2tx），这是在比特币中部署的主要障碍，因为每个完整节点都必须验证每笔交易。</li>
+<li>大笔交易和缓慢的验证也意味着昂贵的交易，这将减少匿名集的大小，并可能使零散地关注随机性的公众无法使用ZC。</li>
+<li>使用永久增长且无修剪的累加器。实际上，这意味着我们需要定期切换累加器以减小工作集大小，从而减小匿名集大小。如果未预先设置累加器的范围，则可能会造成大的UTXO膨胀问题。</li>
+</ul>
+<p>随着时间的流逝，随着数学和软件工程的改善，其中一些事情可能会显着改善。</p>
+<p>但最重要的是：<strong>Zerocoin要求对比特币协议进行软分叉更改</strong>，所有完整节点都必须采用此更改，这会将比特币提交到Zerocoin协议的特定版本。这不可能很快发生——可能不会在几年内发生，特别是考虑到有很大的潜力可以进一步改进算法以降低成本。这将在政治上引起争议，因为一些开发人员和比特币业务非常担心过度与“匿名”相关联。网络范围内的规则更改有点像自杀协议：我们不应该也不要轻视它们。</p>
+<p><strong>CoinJoin交易从今天开始就可以工作</strong>，从比特币的第一天开始就开始运作。 它们与正常交易没有区别，因此无法阻止或抑制，除非可以阻止其他任何比特币交易。</p>
+<p>（顺便说一句：ZeroCoin可能在去中心化CoinJoin中以比特币的形式在外部使用，以一种抵御DoS攻击的方式使用户相互不可见。这将使ZeroCoin在实时交锋中成熟，而无需承担成本或承诺网络范围内的特点协议。）</p>
+<p>我可以通过CoinJoin为ZeroCoin提出的主要论点是，它可能会提供更大的匿名集，这超出了我的加密极客的愿望。 但是由于ZC的性能和扩展限制，以及使用CoinJoin构造分类网络事务的可能性，或者仅具有使用数百个CoinJoin事务以及一项ZeroCoin事务所需的存储和处理能力的能力，我不知道实际上哪个会 在实践中产生更大的匿名集。 例如。 要加入1024个用户，仅ZeroCoin兑换将涉及20k * 1024字节的数据，而对于32个32位联合交易的完整三阶段联合来说，该数据不到3％。 尽管ZeroCoin匿名集可以更轻松地跨越更大的时间范围。</p>
+<p>CoinJoin交易的匿名集很容易足够大，普通用户可以重新获得他们的一些临时隐私，这就是我认为最有趣的事情。</p>
+<p><em>这与CoinWitness相比如何？</em></p>
+<p>CoinWitness甚至比Zerocoin更超前复杂，它还具有许多改善隐私性的弱点：新颖的加密技术，计算成本以及需要软分叉的巨大缺点，并且现阶段不可用。 如果它不仅仅用作隐私工具，还可能具有一些扩展优势。 但这确实是解决该问题的过度手段，并且不会在任何真正的时间推出。</p>
+<p><em>听起来不错！ 它在哪里？</em></p>
+<p>麻烦之处：尚无现成的，易于使用的软件来执行此操作。您可以使用bitcoin-qt和原始交易API手动进行交易，就像我们在“富含污点”线程中所做的那样，但是要使之成为现实，我们需要易于使用的自动化工具。</p>
+<p>卢克（Luke）编写了一些协议的草图，该协议将允许通过常规比特币网络建立联合交易。</p>
+<p>Bitcoin-qt RPC系统为此类系统的参与者提供了编写辅助小程序所需的一切（包括锁定txout的功能，以防止它们被从其下方花费掉）。但是，如今有如此多的用户使用可监视他们的集中式网络钱包这一事实最终将限制这些工具的用户群。</p>
+<p>就我个人而言，我大部分的编码大脑能力都花在了其他事情上，这些事情对我来说更重要。而且我可以在比特币上剩余的钱都花在了更多的核心和安全性上—如果我很快处理与钱包相关的任何事情，那可能会改善硬币选择的隐私行为……但此外：</p>
+<p>建立此功能的任何人都将被指控进行犯罪活动，无论是否有任何实际的犯罪分子使用此行为，都无关紧要：犯罪活动会成为头条新闻。作为比特币核心开发人员，已经可以填补我这种指控的名额，尤其是我什至没有付钱的风险名额。笑脸</p>
+<p>实际上，真正的犯罪分子即使有丝毫线索也不需要CoinJoin：他们有能力以普通用户无法获得的方式购买隐私，这只是他们（通常是利润丰厚的）业务的成本。</p>
+<p>Joe-criminal可以外出购买120％PPS采矿来获得全新的硬币，或者通过一系列半伪造的高现金流量赌博企业来赚钱，以减少50％的费用，他们可以负担寻找并与之交互的成本这些卑鄙的服务…乔和简·多伊？他们的名字在blockchain.info的跑马灯上。对于他们来说，这似乎不太好，但是如果修复它的成本很高，他们根本不会，因为修复它的成本是非常具体的，而且损失的成本或投机性是遥不可及的。他们可能只需要放弃比特币，而转而使用几乎完全私人的东西：现金…普通用户需要有效且廉价的隐私才能完全帮助他们。</p>
+<p>我知道制作这样的工具并不适合许多比特币企业的快速致富模式，但是重要性是显而易见的，并且最简单的版本不需要非常深入的技术指导。我认为，改善人们隐私的“政治”风险是您应该认真考虑的真实风险，但是在这些部分附近，我看到人们在一些风险非常高的东西上贴上自己的名字。我希望“全盘污染”的话题足以激发社区的某些行动，但是也许会。</p>
+<p>因此，应该反过来，我问你：它在哪里？</p>
+<p><a target="_blank" rel="noopener" href="https://bitcointalk.org/index.php?topic=279249.0">原文</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/bitcointalk/" rel="tag"># bitcointalk</a>
+              <a href="/tags/bitcoin/" rel="tag"># bitcoin</a>
+              <a href="/tags/done/" rel="tag"># done</a>
+              <a href="/tags/coinjoin/" rel="tag"># coinjoin</a>
+              <a href="/tags/privacy/" rel="tag"># privacy</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/ielts-notes/" rel="prev" title="LELTS Notes">
+      <i class="fa fa-chevron-left"></i> LELTS Notes
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/bitcoins-with-homomorphic-value/" rel="next" title="具有同态值的比特币 bitcoins with homomorphic value">
+      具有同态值的比特币 bitcoins with homomorphic value <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CoinJoin-%E7%8E%B0%E5%AE%9E%E4%B8%96%E7%95%8C%E7%9A%84%E6%AF%94%E7%89%B9%E5%B8%81%E9%9A%90%E7%A7%81"><span class="nav-number">1.</span> <span class="nav-text">CoinJoin:现实世界的比特币隐私</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.1.</span> <span class="nav-text">常见问题</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">55</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="因为NGIN的缘故，所以相当于是加入了wasmtime这个坑里。 虽然名义上bytecodealliance算是正规军但是有一说一至少这个wasmtime-go做的稀烂啊…… 这里就拿rust(写&amp;编译wasm)+wasmtime-go(调用)来介绍。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WASM 2Master">
+<meta property="og:url" content="http://c0mm4nd.com/post/wasm-2-master/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="因为NGIN的缘故，所以相当于是加入了wasmtime这个坑里。 虽然名义上bytecodealliance算是正规军但是有一说一至少这个wasmtime-go做的稀烂啊…… 这里就拿rust(写&amp;编译wasm)+wasmtime-go(调用)来介绍。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-24T03:53:20.000Z">
+<meta property="article:modified_time" content="2021-03-06T07:57:49.459Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
+<meta property="article:tag" content="wasm">
+<meta property="article:tag" content="wasi">
+<meta property="article:tag" content="WebAssembly">
+<meta property="article:tag" content="todo">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://c0mm4nd.com/post/wasm-2-master/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>WASM 2Master | Talkless</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Talkless</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">34</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">53</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/post/wasm-2-master/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WASM 2Master
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-24 11:53:20" itemprop="dateCreated datePublished" datetime="2020-06-24T11:53:20+08:00">2020-06-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-06 15:57:49" itemprop="dateModified" datetime="2021-03-06T15:57:49+08:00">2021-03-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>因为NGIN的缘故，所以相当于是加入了wasmtime这个坑里。</p>
+<p>虽然名义上bytecodealliance算是正规军但是有一说一至少这个wasmtime-go做的稀烂啊……</p>
+<p>这里就拿rust(写&amp;编译wasm)+wasmtime-go(调用)来介绍。</p>
+<span id="more"></span>
+
+<h2 id="Beginning"><a href="#Beginning" class="headerlink" title="Beginning"></a>Beginning</h2><p>首先得推荐一个工具<a href="https://webassembly.github.io/wabt/demo/wasm2wat/" target="_blank" rel="noopener">wasm2wat</a>。既然是想耍wasm那肯定听说过wat，因为现在各个语言对wasm的支持都一言难尽，所以个人经验来说是有事没事转成wat看看挺好的。</p>
+<p>然后就是一些基本概念</p>
+<p>基本上都在<a href="https://webassembly.github.io/spec/core/" target="_blank" rel="noopener">官方文档</a>里</p>
+<h3 id="值"><a href="#值" class="headerlink" title="值"></a>值</h3><p>WASM底层内部就四种值：字节(Bytes),整数(Integers),浮点数(Floating-Point),还有命名(Names，基本上可以理解为string)</p>
+<p>这里的值和后面类型里的值是不一样的，这里是底层实现上的，类型的偏应用上。</p>
+<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><p>值做开发时候一般没啥感知，但是类型就不一样了，处处受它制约。</p>
+<p>WASM有这样几个类型：值，结果，函数，约束，内存，表，全局，导出。</p>
+<p>好像约束是最近多出来的以前好像没见过(</p>
+<h4 id="值-1"><a href="#值-1" class="headerlink" title="值"></a>值</h4><p>就四种值：i32，i64，f32，f64。其中i表示整型，f表示浮点，32，64就是位，比如f64就是等价于其他语言类型的float64。</p>
+<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><p>表示一系列指令或者函数执行后的结果</p>
+<p>结果本质上是一个值(上面那个i32这样的)的队列</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>函数类型对函数的签名进行分类，将参数映射到结果。</p>
+<p>还用于对指令的输入和输出进行分类。</p>
+<p>就类似C语言头文件里那个对函数的预定义，就写个名字，参数(类型)和结果(类型)</p>
+<h4 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h4><p>约束对与内存和表关联的可调整大小的存储的大小范围进行分类。</p>
+<p>如果没有给出最大值，则相应的存储可以增长到任何大小。</p>
+<p>换句话说就是把WASM沙箱当虚拟机client，约束就控制它的内存存储防止它把host资源用了</p>
+<h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p>内存是个线性的存储器，可以用约束对它进行限制，以页面大小为单位。</p>
+<h4 id="表"><a href="#表" class="headerlink" title="表"></a>表</h4><p>表就相当于一些语言里的hashMap或者Array。</p>
+<p>像内存一样，表格的最小和最大大小也受到约束，单位是条目数。</p>
+<p>其中元素类型funcref是所有函数的无限并集。因此，有这个类型的表就相当于包含对函数的引用。</p>
+<h4 id="全局"><a href="#全局" class="headerlink" title="全局"></a>全局</h4><p>就修饰其他值说明其为全局变量，可变也行不可变也ok。</p>
+<h4 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h4><p>导出是修饰其他值来说明其可外部访问/调用。</p>
+<h4 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h4><p>也很可能加别的类型，请告知我更新</p>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>WebAssembly代码由指令序列组成。它的计算模型基于堆栈计算机，其中指令在隐式操作数堆栈上操纵值，消耗（pop）参数值并生成或返回（push）结果值。</p>
+<p>除了来自堆栈的动态操作数外，某些指令还具有静态直接变量，通常是索引或类型注释，它们是指令本身的一部分。</p>
+<p>一些指令的结构形式是，它们将嵌套的指令序列括起来。</p>
+<p>指令里包括： 数值，参数，变量，内存，控制，表达式</p>
+<p>简单点讲就是对不同的类型的不同使用方式罢了</p>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>个人觉得这个很重点，经常考。</p>
+<p>WebAssembly中的代码的可分发，可加载和可执行单元称为模块。 </p>
+<p>在运行时，可以使用一组导入值实例化一个模块以生成一个实例，该实例是一个不可变的元组，引用了正在运行的模块可访问的所有状态。 </p>
+<p>多个模块实例可以访问相同的共享状态，这是WebAssembly中动态链接(dynamic linking)的基础。 WebAssembly模块还可以在将来与ES6模块集成</p>
+<p>一个模块包含以下部分：</p>
+<ul>
+<li>导入</li>
+<li>导出</li>
+<li>程序开始函数</li>
+<li>全局</li>
+<li>内存</li>
+<li>数据</li>
+<li>表</li>
+<li>元素</li>
+<li>函数和代码</li>
+</ul>
+<p>一个模块还定义了几个索引空间，这些索引空间由模块中的各种运算符和section字段静态索引：</p>
+<ul>
+<li>函数索引空间</li>
+<li>全局索引空间</li>
+<li>线性内存索引空间</li>
+<li>表索引空间</li>
+</ul>
+<h4 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h4><p>一个模块可以声明一系列导入，这些导入在实例化时由宿主机环境提供。有这样几种：</p>
+<ul>
+<li>函数导入，可以由<code>call</code>函数在模块内部调用；</li>
+<li>全局导入，可以由全局操作在模块内部访问；</li>
+<li>线性内存导入，可以由内存操作在模块内部访问；和</li>
+<li>表导入，将来可以通过call_indirect和其他表运算符在模块内部访问。</li>
+</ul>
+<p>将来可能会增加其他的导入。导入的目的是在允许模块共享代码和数据情况下，同时允许单独的编译和缓存。</p>
+<p>所有导入都包括两个显性名称：模块名称和导入名称，必须是有效的UTF-8。这些名称的解释取决于宿主机环境，但旨在允许宿主机环境（如Web）支持两级命名空间。</p>
+<p>每种特定的导入类型都定义了额外字段：</p>
+<p>函数导入包括用于模块内部导入函数的签名。主机环境定义了针对模块外部导入功能的签名检查。但是，如果导入的函数是WebAssembly函数，则如果签名不匹配，则宿主机环境必须触发实例化时间错误。</p>
+<p>全局变量导入包括全局变量的值类型和可变性。这些字段的含义与“全局”部分中的含义相同。在最简化实现中，全局变量导入必须是不可变的。</p>
+<p>线性内存导入包括“线性存储器”部分中定义的相同字段集：初始长度和可选的最大长度。主机环境必须仅允许导入WebAssembly线性内存，这些内存的初始长度大于或等于导入中声明的初始长度，并且最大长度&lt;=导入中声明的最大长度。这样可以确保可以进行单独的编译：在声明的初始长度以下的内存访问始终是入站的，在声明的最大长度以上的内存访问始终是越界的，如果初始等于最大值，则该长度是固定的。在最简实现中，每个内存都是默认内存，因此至多可以有一个线性内存导入或线性内存定义。</p>
+<p>表导入包括“表”部分中定义的相同字段集：元素类型，初始长度和可选的最大长度。与线性内存部分一样，主机环境必须确保仅导入具有完全匹配的元素类型，初始长度等于或大于最大长度，或等于或小于等于最大长度的WebAssembly表。在MVP中，每个表都是默认表，因此最多可以有一个表导入或表定义。</p>
+<p>由于WebAssembly规范未定义如何解释导入名称：</p>
+<ul>
+<li>Web环境将名称定义为UTF8编码的字符串；</li>
+<li>宿主机环境可以将模块名称解释为文件路径，URL，一组固定的内置模块中的密钥，或者主机环境可以调用用户定义的挂钩将模块名称解析为其中之一；</li>
+<li>模块名称不需要解析为WebAssembly模块；它可以解析为内置模块（由主机环境实现）或以其他兼容语言编写的模块；和</li>
+<li>调用导入函数的含义是宿主机定义的。</li>
+</ul>
+<p>模块导入的开放性使得它们可以用于向WebAssembly代码公开任意宿主机环境里的函数，类似于本机syscall。例如，一个shell环境可以定义一个带有内置stdio模块<code>puts</code>的导出。</p>
+<h4 id="导出-1"><a href="#导出-1" class="headerlink" title="导出"></a>导出</h4><p>模块可以声明一系列导出，这些导出在实例化时返回给主机环境。每个导出都有三个字段：一个名称（必须是有效的UTF-8），其名称由主机环境定义；一个类型（用于说明导出是函数，全局，内存还是表），以及指向类型对应索引空间的索引。</p>
+<p>所有定义都是可导出的：函数，全局变量，线性内存和表。导出了的定义的实际含义由宿主机环境定义。但是，如果另一个WebAssembly实例导入该定义，则两个实例将共享相同的定义，并且共享了关联的状态（全局变量值，线性内存字节，表元素）。</p>
+<p>导出名称必须唯一。</p>
+<p>在最小实现中，只能导出不可变的全局变量。</p>
+<h4 id="模块启动函数"><a href="#模块启动函数" class="headerlink" title="模块启动函数"></a>模块启动函数</h4><p>如果模块已定义起始节点，则在实例实例初始化之后，包括通过“数据”和“元素”部分的“内存”和“表”，以及可调用导出的函数之前，加载器应调用它引用的函数。</p>
+<ul>
+<li>start函数不能接受任何参数或返回任何内容</li>
+<li>该功能由功能索引标识，可以是导入的，也可以导出的</li>
+<li>每个模块最多只能有一个起始节点</li>
+</ul>
+<p>例如，模块中的起始节点将是：</p>
+<p><code>(start $start_function)</code></p>
+<p>要么</p>
+<p><code>(start 42)</code></p>
+<p>在这第一个示例中，预期环境在调用任何其他模块函数之前先调用函数$start_function。在第二种情况下，预期环​​境将调用索引为42的模块函数。该数字是从0开始的函数索引（与导出相同）。</p>
+<p>一个模块可以：</p>
+<ul>
+<li>最多只有一个起始节点</li>
+<li>如果模块包含起始节点，则必须在模块中定义功能</li>
+<li>在加载模块之后且对模块函数的任何调用完成之前，将调用start函数</li>
+</ul>
+<h4 id="全局部分"><a href="#全局部分" class="headerlink" title="全局部分"></a>全局部分</h4><p>全局部分提供了零或数个全局变量的内部定义。</p>
+<p>每个全局变量内部定义都声明其类型（值类型），可变性（布尔标志）和初始值设定项（初始值设定项表达式）。</p>
+<h4 id="线性内存部分"><a href="#线性内存部分" class="headerlink" title="线性内存部分"></a>线性内存部分</h4><p>线性内存部分提供了一个线性内存的内部定义。在最小实现中，每个内存都是默认内存，并且最多可以有一个线性内存导入或线性内存定义。</p>
+<p>每个线性内存部分都声明一个初始内存大小（随后可以通过grow_memory增加）和一个可选的最大内存大小。</p>
+<p>如果尝试增长超过声明的最大值，grow_memory将确保失败。 声明后，实现应（非规范性的）尝试保留最大大小的虚拟内存。 分配初始内存大小失败是运行时错误，而保留最大内存失败则不是。 如果未声明最大内存大小，则在虚拟地址空间有限的体系结构上，引擎应仅分配初始大小并按需重新分配。</p>
+<h4 id="数据部分"><a href="#数据部分" class="headerlink" title="数据部分"></a>数据部分</h4><p>线性存储器的初始内容为零。</p>
+<p>数据节包含一个可能为空的数据段数组，这些数据段指定给定内存的固定（偏移，长度）范围的初始内容，该内容由其线性内存索引指定。</p>
+<p>数据部分类似于原生可执行文件的<code>.data</code>部分。</p>
+<p>长度是一个整数常数值（定义给定段的长度）。偏移量是一个初始化表达式。</p>
+<h4 id="表部分"><a href="#表部分" class="headerlink" title="表部分"></a>表部分</h4><p>表格部分包含零或数个不同表格的定义。在最小实现中，每个表都是默认表，并且至多一个表导入或表定义。</p>
+<p>每个表定义都声明一个元素类型，初始长度和可选的最大长度。</p>
+<p>在最小实现中，唯一有效的元素类型是<code>anyfunc</code>，但将来，可能会添加更多元素类型。</p>
+<p>在最小实现中，只能通过宿主机定义的API（例如JavaScript的<code>WebAssembly.Table.prototype.grow</code>）来调整表的大小。将来可能会添加一个grow_table。</p>
+<p>在任何一种情况下，如果试图增长到声明的最大值以上，表增长都会失败。与线性内存一样，当声明最大值时，实现应（非规范）尝试将虚拟内存保留为最大大小。分配初始内存大小失败是运行时错误，而保留最大内存失败则不是。如果未声明最大内存大小，则在虚拟地址空间有限的体系结构上，引擎应仅分配初始大小并按需重新分配。</p>
+<h4 id="元素部分"><a href="#元素部分" class="headerlink" title="元素部分"></a>元素部分</h4><p>表中元素的初始内容是个标记值（如果被调用，则会被捕获）。 </p>
+<p>元素部分允许模块使用模块中的任何其他定义初始化（在实例化时）任何导入的或内部定义的表的元素。这与数据部分允许模块初始化任何已导入或已定义存储器的字节对称。</p>
+<p>元素部分包含元素段的可能为空的数组，这些元素段指定给定表的固定（偏移，长度）范围的初始内容，该范围由表索引指定。</p>
+<p>长度是一个整数常数值（定义给定段的长度）。偏移量是一个初始化表达式。元素由它们在相应索引空间中的索引指定。</p>
+<h4 id="功能和代码部分"><a href="#功能和代码部分" class="headerlink" title="功能和代码部分"></a>功能和代码部分</h4><p>一个逻辑功能定义由以下两个部分决定</p>
+<ul>
+<li>函数部分声明模块中每个内部函数定义的签名</li>
+<li>代码部分包含功能部分声明的每个函数的函数主体</li>
+</ul>
+<p>此拆分通过将构成模块大部分字节大小的函数主体放在结尾处来帮助进行流式编译，以便在编译开始之前可以使用递归模块加载和并行编译所需的所有元数据。</p>
+<h4 id="功能索引空间"><a href="#功能索引空间" class="headerlink" title="功能索引空间"></a>功能索引空间</h4><p>函数索引空间对所有导入的和内部定义的函数定义建立索引，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，函数导入（如果有），然后是模块内定义的函数。</p>
+<p>函数索引空间由以下部分使用：</p>
+<ul>
+<li>调用，以识别直接调用的被调用函数。</li>
+<li>元素。</li>
+<li>导出，以确定哪些功能公开给嵌入器。</li>
+<li>启动函数，以确定实例完全初始化后调用哪个函数。</li>
+</ul>
+<h4 id="全局索引空间"><a href="#全局索引空间" class="headerlink" title="全局索引空间"></a>全局索引空间</h4><p>全局索引空间对所有导入的和内部定义的全局定义进行索引，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，首先是全局导入（如果有），然后是模块内定义的全局。</p>
+<p>全局索引空间用于：</p>
+<ul>
+<li>全局变量访问运算符，标识要读取/写入的全局变量</li>
+<li>数据段，以将数据段的偏移量（在线性存储器中）定义为全局变量的值</li>
+<li>线性内存索引空间</li>
+<li>线性内存索引空间索引所有导入的和内部定义的线性内存定义，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，首先是内存导入（如果有），然后是模块内定义的内存。</li>
+</ul>
+<p>线性内存的索引空间仅由数据部分使用。在最小实现中，最多只有一个线性内存，因此该索引空间只是当可以有多个内存时使用的占位符。</p>
+<h4 id="表索引空间"><a href="#表索引空间" class="headerlink" title="表索引空间"></a>表索引空间</h4><p>表索引空间为所有导入的和内部定义的表定义建立索引，并根据模块中定义的顺序（由二进制编码定义）分配单调递增的索引。因此，索引空间从零开始，首先是表导入（如果有），然后是模块中定义的表。</p>
+<p>表索引空间仅由元素部分使用。在最小实现中，最多有一个表，因此该索引空间只是可以存在多个表时的占位符。</p>
+<h3 id="初始化程序表达式"><a href="#初始化程序表达式" class="headerlink" title="初始化程序表达式"></a>初始化程序表达式</h3><p>初始化程序表达式在实例化时进行执行，现在用于：</p>
+<ul>
+<li>定义全局变量的初始值</li>
+<li>定义数据段或元素段的偏移量</li>
+</ul>
+<p>一个初始化程序表达式是纯WebAssembly表达式，其编码与WebAssembly表达式相同。并不是所有的WebAssembly运算符都可以或不应该在初始化表达式中得到支持。初始化表达式表示WebAssembly表达式的最小纯子集。</p>
+<p>在最小实现中，为了使事情简单，同时仍支持动态链接的基本需求，初始化器表达式仅限于以下空运算符：</p>
+<ul>
+<li>四个常量运算符</li>
+<li><code>get_global</code>，其中全局索引必须引用不可变的导入。</li>
+</ul>
+<p>将来，可以添加诸如<code>i32.add</code>之类的运算符，以实现更具表现力的base + offset耗时计算。</p>
+<h3 id="Tricks-基本操作"><a href="#Tricks-基本操作" class="headerlink" title="Tricks 基本操作"></a>Tricks 基本操作</h3><p>很明显哈，wasm半点都没提到string或者bytes，那么在使用嵌入式的WASM模块时候我们怎么输入string和bytes(Uint8Array)？</p>
+<p>先从非语言相关角度看，由于没法传数组没法传不定参数，所以我们需要一个起点和一个长度来定位需要导入的string。因此就直接发送指针位置和长度两个值作为i32到WASM就充当了string。</p>
+<p>就相当于，宿主机往内存写入数据，然后把位置和长度告诉WASM，WASM再从内存上取出来。</p>
+<p>这里有个增强WASM的rust库，wasm-bindgen，基本上能帮忙把东西都给实现了</p>
+<p>【吐槽一下基本上每个WASM相关rust库都能看到alexcrichton在回答issue……劳模啊……</p>
+<p>做WASM开发的时候可以把<code>.wasm</code>看作是一个dll，so或者out，面向的是WASM这个系统，所以就可以意识到为啥内置没string这些高级的类型了【不让你写0101已经很不错了。</p>
+<p>那么这么来看wat就是汇编语言了:-)</p>
+<h2 id="例"><a href="#例" class="headerlink" title="例"></a>例</h2><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// no_mangle表示不会为函数进行函数名混淆，保证FFI名字不变</span></span><br><span class="line"><span class="meta">#[no_mangle]</span></span><br><span class="line"><span class="keyword">pub</span> <span class="keyword">extern</span> <span class="function"><span class="keyword">fn</span> <span class="title">string</span></span>() -&gt;  *<span class="keyword">const</span> <span class="built_in">u8</span> &#123;</span><br><span class="line">    <span class="string">b&quot;Hello, World!\0&quot;</span>.as_ptr()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为什么我们可以通过<code>instance.GetExport(&quot;memory&quot;).Memory().UnsafeData()</code>获取<code>Hello, World!</code>?</p>
+<p>因为编译的时候这个Hello world就被写进了wasm里面，是·个·常·量！初始化之后就理所当然进了线性内存(liner memory)里。call string的时候本质就是string乖乖把<strong>在WASM上的</strong>内存地址给返回了。</p>
+<p>也就是说相当于</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> HELLO: &amp;<span class="symbol">&#x27;static</span> <span class="built_in">str</span> = <span class="string">&quot;Hello, World!&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="WASI"><a href="#WASI" class="headerlink" title="WASI"></a>WASI</h2><p>WASI 是个很有趣的东西，他就直接把WASM带到了系统上</p>
+<p>在<a href="https://github.com/WebAssembly/WASI/issues/223%EF%BC%8C" target="_blank" rel="noopener">https://github.com/WebAssembly/WASI/issues/223，</a> 有个回答很精妙：At an application level though, the direction WASI is heading is away from “A passes B a string, then then B opens the resource”, and toward “A opens the resource and passes B a handle”. 这其实也就是WASM工作的原理。</p>
+<h2 id="NGIN"><a href="#NGIN" class="headerlink" title="NGIN"></a>NGIN</h2><p>在链上应用我需要的是其对链上信息(block, tx etc)做出反应。</p>
+<p>例如，子网币的发行针对主网矿工，那么其应当在WASM中维护一个account balances，然后对block的事件侦听来实现分发，对tx事件侦听实现交易。</p>
+<p>那么换句话说，我们只需要把外部信息(结构体)传递到WASM沙箱中作为事件，然后再加点getter。</p>
+<p>当然我们也要提供好存储。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/wasm/" rel="tag"># wasm</a>
+              <a href="/tags/wasi/" rel="tag"># wasi</a>
+              <a href="/tags/WebAssembly/" rel="tag"># WebAssembly</a>
+              <a href="/tags/todo/" rel="tag"># todo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/state-chain-on-pm-paper/" rel="prev" title="工程项目管理应用的低存储量区块链实现">
+      <i class="fa fa-chevron-left"></i> 工程项目管理应用的低存储量区块链实现
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/standardizing-wasi-a-webassembly-system-interface/" rel="next" title="标准化WASI: 一个网页外运行WebAssembly的系统接口">
+      标准化WASI: 一个网页外运行WebAssembly的系统接口 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Beginning"><span class="nav-number">1.</span> <span class="nav-text">Beginning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%80%BC"><span class="nav-number">1.1.</span> <span class="nav-text">值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%80%BC-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.2.</span> <span class="nav-text">结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F"><span class="nav-number">1.2.4.</span> <span class="nav-text">约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%85%E5%AD%98"><span class="nav-number">1.2.5.</span> <span class="nav-text">内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8"><span class="nav-number">1.2.6.</span> <span class="nav-text">表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80"><span class="nav-number">1.2.7.</span> <span class="nav-text">全局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA"><span class="nav-number">1.2.8.</span> <span class="nav-text">导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A"><span class="nav-number">1.2.9.</span> <span class="nav-text">更多</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97"><span class="nav-number">1.4.</span> <span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5"><span class="nav-number">1.4.1.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">导出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%90%AF%E5%8A%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.3.</span> <span class="nav-text">模块启动函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%83%A8%E5%88%86"><span class="nav-number">1.4.4.</span> <span class="nav-text">全局部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%86%85%E5%AD%98%E9%83%A8%E5%88%86"><span class="nav-number">1.4.5.</span> <span class="nav-text">线性内存部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%83%A8%E5%88%86"><span class="nav-number">1.4.6.</span> <span class="nav-text">数据部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E9%83%A8%E5%88%86"><span class="nav-number">1.4.7.</span> <span class="nav-text">表部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E9%83%A8%E5%88%86"><span class="nav-number">1.4.8.</span> <span class="nav-text">元素部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E5%92%8C%E4%BB%A3%E7%A0%81%E9%83%A8%E5%88%86"><span class="nav-number">1.4.9.</span> <span class="nav-text">功能和代码部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%B4%A2%E5%BC%95%E7%A9%BA%E9%97%B4"><span class="nav-number">1.4.10.</span> <span class="nav-text">功能索引空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E7%B4%A2%E5%BC%95%E7%A9%BA%E9%97%B4"><span class="nav-number">1.4.11.</span> <span class="nav-text">全局索引空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E7%B4%A2%E5%BC%95%E7%A9%BA%E9%97%B4"><span class="nav-number">1.4.12.</span> <span class="nav-text">表索引空间</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E7%A8%8B%E5%BA%8F%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.5.</span> <span class="nav-text">初始化程序表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tricks-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.6.</span> <span class="nav-text">Tricks 基本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WASI"><span class="nav-number">3.</span> <span class="nav-text">WASI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NGIN"><span class="nav-number">4.</span> <span class="nav-text">NGIN</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+</body>
+</html>

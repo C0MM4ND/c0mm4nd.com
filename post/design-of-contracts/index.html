@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"c0mm4nd.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":true,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="说实话其实一开始压根没想做合约，就只是想做个chain。 但是后来发现你不做DAPP你的chain都没人看，那些做coin的也都在往DAPP靠。就有种被逼上梁山的感觉。不过还好现在有个去华山的路（WASM），可以考虑上了华山再往梁山飞。 其实我也不算是第一个选择华山飞梁山的，cosmos和eth2.0也选，不过人家有现成地图，我只能凭感觉乱飘。而且我们不是一个山头起飞的，他们选了更早被人发现的山头">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Design of Contracts">
+<meta property="og:url" content="http://c0mm4nd.com/post/design-of-contracts/index.html">
+<meta property="og:site_name" content="Talkless">
+<meta property="og:description" content="说实话其实一开始压根没想做合约，就只是想做个chain。 但是后来发现你不做DAPP你的chain都没人看，那些做coin的也都在往DAPP靠。就有种被逼上梁山的感觉。不过还好现在有个去华山的路（WASM），可以考虑上了华山再往梁山飞。 其实我也不算是第一个选择华山飞梁山的，cosmos和eth2.0也选，不过人家有现成地图，我只能凭感觉乱飘。而且我们不是一个山头起飞的，他们选了更早被人发现的山头">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-06T14:03:46.368Z">
+<meta property="article:modified_time" content="2021-03-06T07:45:07.157Z">
+<meta property="article:author" content="Command M (C0MM4ND&#x2F;K0MM4ND)">
+<meta property="article:tag" content="todo">
+<meta property="article:tag" content="NGIN">
+<meta property="article:tag" content="contract">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://c0mm4nd.com/post/design-of-contracts/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Design of Contracts | Talkless</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Talkless</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">34</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">53</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://c0mm4nd.com/post/design-of-contracts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Command M (C0MM4ND/K0MM4ND)">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Talkless">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Design of Contracts
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-06 22:03:46 / 修改时间：15:45:07" itemprop="dateCreated datePublished" datetime="2021-03-06T22:03:46+08:00">2021-03-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>说实话其实一开始压根没想做合约，就只是想做个chain。</p>
+<p>但是后来发现你不做DAPP你的chain都没人看，那些做coin的也都在往DAPP靠。就有种被逼上梁山的感觉。不过还好现在有个去华山的路（WASM），可以考虑上了华山再往梁山飞。</p>
+<p>其实我也不算是第一个选择华山飞梁山的，cosmos和eth2.0也选，不过人家有现成地图，我只能凭感觉乱飘。而且我们不是一个山头起飞的，他们选了更早被人发现的山头（wasmer），我选了个看起来粗大(?)一点的新山头（wasmtime）。</p>
+<span id="more"></span>
+
+<p>不瞎扯了，下面就开始分析对于合约的设计。</p>
+<p>做ethereum开发的都知道Solidity，因此需求也是从这个上面靠拢。不过由于现在主要支持wasm的语言C和RUST都是比较成熟的所以直接就选择他们对具体功能开干。</p>
+<p>+-x÷是都没有问题，问题在于和链的互动，和rpc的互动，以及事件的侦听。</p>
+<h1 id="ngVM"><a href="#ngVM" class="headerlink" title="ngVM"></a>ngVM</h1><h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p>上传至链上的wasm需要为<a href="https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md" target="_blank" rel="noopener">binary格式</a></p>
+<h3 id="数据类型-data-type"><a href="#数据类型-data-type" class="headerlink" title="数据类型 data type"></a>数据类型 data type</h3><ul>
+<li>i32: 返回code，&gt;0为正常，&lt;=异常 </li>
+<li>i64: 指针</li>
+<li>u64: 账户</li>
+<li>bytes: 底层mem</li>
+</ul>
+<h3 id="Imports"><a href="#Imports" class="headerlink" title="Imports"></a>Imports</h3><p>wasm只能import在ngVMI中指定的接口。</p>
+<h3 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h3><p>在Debug环境里提供一系列print的接口</p>
+<h3 id="Exports"><a href="#Exports" class="headerlink" title="Exports"></a>Exports</h3><p>合同必须完全具有两个export：</p>
+<ul>
+<li><code>memory</code>: 可供EEI写入的共享内存空间。</li>
+<li><code>main</code>: 没有参数和结果值的函数。</li>
+</ul>
+<h3 id="入口"><a href="#入口" class="headerlink" title="入口"></a>入口</h3><p>导出为<code>main</code>的方法将由NGIN内部VM Manager执行。</p>
+<p>如果成功执行，则正常返回。</p>
+<p>如果由于故障而需要中止，则返回error，避免panic。</p>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>如果执行wasm代码触发了wasm异常，则执行将失败并终止。</p>
+<h2 id="接口-ngVMI-NGIN-VM-Interface"><a href="#接口-ngVMI-NGIN-VM-Interface" class="headerlink" title="接口(ngVMI: NGIN VM Interface)"></a>接口(ngVMI: NGIN VM Interface)</h2><p>WIP</p>
+<h3 id="log-debug-msg-ptr-i64-msg-len-i64"><a href="#log-debug-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::debug(msg_ptr i64, msg_len i64)"></a>log::debug(msg_ptr i64, msg_len i64)</h3><h3 id="log-info-msg-ptr-i64-msg-len-i64"><a href="#log-info-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::info(msg_ptr i64, msg_len i64)"></a>log::info(msg_ptr i64, msg_len i64)</h3><h3 id="log-error-msg-ptr-i64-msg-len-i64"><a href="#log-error-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::error(msg_ptr i64, msg_len i64)"></a>log::error(msg_ptr i64, msg_len i64)</h3><h3 id="log-warn-msg-ptr-i64-msg-len-i64"><a href="#log-warn-msg-ptr-i64-msg-len-i64" class="headerlink" title="log::warn(msg_ptr i64, msg_len i64)"></a>log::warn(msg_ptr i64, msg_len i64)</h3><p>打印输出，默认关闭。</p>
+<h3 id="self-get-num-gt-num-i64"><a href="#self-get-num-gt-num-i64" class="headerlink" title="self::get_num() -&gt; num i64"></a>self::get_num() -&gt; num i64</h3><p>获取vm自身account num(uint64)</p>
+<h3 id="self-get-owner-gt-owner-ptr-i64"><a href="#self-get-owner-gt-owner-ptr-i64" class="headerlink" title="self::get_owner() -&gt; owner_ptr i64"></a>self::get_owner() -&gt; owner_ptr i64</h3><p>获取vm自身owner’s address (length = 33 bytes)</p>
+<h3 id="self-get-contract-len-ptr-i64-gt-contract-ptr-i64"><a href="#self-get-contract-len-ptr-i64-gt-contract-ptr-i64" class="headerlink" title="self::get_contract(len_ptr i64) -&gt; contract_ptr i64"></a>self::get_contract(len_ptr i64) -&gt; contract_ptr i64</h3><p>获取vm自身合约代码</p>
+<h3 id="context-read-src-ptr-i64-dst-ptr-i64-len-u64"><a href="#context-read-src-ptr-i64-dst-ptr-i64-len-u64" class="headerlink" title="context::read(src_ptr: i64, dst_ptr: i64, len: u64)"></a>context::read(src_ptr: i64, dst_ptr: i64, len: u64)</h3><p>可持续存储读取</p>
+<h3 id="context-alloc-len-u64"><a href="#context-alloc-len-u64" class="headerlink" title="context::alloc(len: u64)"></a>context::alloc(len: u64)</h3><p>为可持续存储分配空间<br>//TODO: 收费</p>
+<h3 id="context-write-src-ptr-i64-dst-ptr-i64-len-u64"><a href="#context-write-src-ptr-i64-dst-ptr-i64-len-u64" class="headerlink" title="context::write(src_ptr: i64, dst_ptr: i64, len: u64)"></a>context::write(src_ptr: i64, dst_ptr: i64, len: u64)</h3><p>可持续存储写入</p>
+<h3 id="coin-transfer-to-u64-value-ptr-i64-gt-i32"><a href="#coin-transfer-to-u64-value-ptr-i64-gt-i32" class="headerlink" title="coin::transfer(to: u64, value_ptr: i64) -&gt; i32"></a>coin::transfer(to: u64, value_ptr: i64) -&gt; i32</h3><p>原来叫create_transaction，表示由wasm_vm主动创建一个事务tx让chain通过处理tx方式修改state</p>
+<p>通过此函数，vm能够提供例如bank/token的基础资金转移功能。</p>
+<p>但是遇到一个之前忽略掉的问题——从vm里发出的交易该怎么sign？</p>
+<p>根据ETH的方法，调用都会被算为是由tx的call触发，因此这些变化都是由原tx负责。</p>
+<p>换句话说，变动的只有state，并不会出现由contract主动触发的tx。</p>
+<p>因此这个tx摆在这里就不合适了，因为vm里的操作都是直接作用于state</p>
+<p>所以这里就不应该使用transaction or tx来称呼这个操作，而用transfer来简化这个函数。</p>
+<h3 id="tx-get-convener-gt-num-u64"><a href="#tx-get-convener-gt-num-u64" class="headerlink" title="tx::get_convener() -&gt; num u64"></a>tx::get_convener() -&gt; num u64</h3><p>获取transaction的convener</p>
+<h3 id="tx-get-participants-len-gt-len-u64"><a href="#tx-get-participants-len-gt-len-u64" class="headerlink" title="tx::get_participants_len() -&gt; len u64"></a>tx::get_participants_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
+<h3 id="tx-get-participant-index-u64-gt-account-ptr-i64"><a href="#tx-get-participant-index-u64-gt-account-ptr-i64" class="headerlink" title="tx::get_participant(index: u64) -&gt; account_ptr i64"></a>tx::get_participant(index: u64) -&gt; account_ptr i64</h3><p>获取transaction的参与人，需要用account namespace的api处理</p>
+<h3 id="tx-get-values-len-gt-len-u64"><a href="#tx-get-values-len-gt-len-u64" class="headerlink" title="tx::get_values_len() -&gt; len u64"></a>tx::get_values_len() -&gt; len u64</h3><p>获取transaction的参与人数量</p>
+<h3 id="tx-get-value-index-u64-gt-value-ptr-i64"><a href="#tx-get-value-index-u64-gt-value-ptr-i64" class="headerlink" title="tx::get_value(index: u64) -&gt; value_ptr i64"></a>tx::get_value(index: u64) -&gt; value_ptr i64</h3><p>获取transacation的对应value(uint256)</p>
+<h3 id="state-get-balance-addr-i64-gt-balance-ptr-i64"><a href="#state-get-balance-addr-i64-gt-balance-ptr-i64" class="headerlink" title="state::get_balance(addr: i64) -&gt; balance_ptr i64"></a>state::get_balance(addr: i64) -&gt; balance_ptr i64</h3><p>balance 长度 8*4 = 24 </p>
+<h3 id="state-get-owner-num-u64-gt-addr-ptr-i64"><a href="#state-get-owner-num-u64-gt-addr-ptr-i64" class="headerlink" title="state::get_owner(num: u64) -&gt; addr_ptr i64"></a>state::get_owner(num: u64) -&gt; addr_ptr i64</h3><p>addr 长度 33</p>
+<h2 id="Deploy"><a href="#Deploy" class="headerlink" title="Deploy"></a>Deploy</h2><p>Assign &amp; Append tx</p>
+<h2 id="Publish"><a href="#Publish" class="headerlink" title="Publish"></a>Publish</h2><p>WASM的发布分为两种: Web or Wasm.</p>
+<h3 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h3><p>任何ngcore节点能够作为http server提供http服务(单页面)，端口为52528。默认关闭，通过Flag打开</p>
+<p>例如 <a href="http://app.ngin.sh:52528/#10086/path1/path2" target="_blank" rel="noopener">http://app.ngin.sh:52528/#10086/path1/path2</a></p>
+<p>服务运营者可以通过nginx反代限制app为</p>
+<p><a href="https://app.mydomain.com/path1/path2?param1=1&amp;params2=2" target="_blank" rel="noopener">https://app.mydomain.com/path1/path2?param1=1&amp;params2=2</a></p>
+<p>发布Web应用需要将wasm binary写入Contract字段。在访问时会自动将字段作为文件拉取，并且通过导出的main函数进行执行</p>
+<h3 id="Wasm"><a href="#Wasm" class="headerlink" title="Wasm"></a>Wasm</h3><p>Wasm可以作为网站后端运行，也可以纯提供链上事务或者作为其他Wasi运行库</p>
+<p>Wasm要求Contract为wasm binary.</p>
+<h2 id="当前遇到的问题"><a href="#当前遇到的问题" class="headerlink" title="当前遇到的问题"></a>当前遇到的问题</h2><h3 id="Infinite-loop"><a href="#Infinite-loop" class="headerlink" title="Infinite loop"></a>Infinite loop</h3><p>当前使用wasmtime，无法在运行前拦截vm中infinite loop</p>
+<p>当loop执行，就会导致全网主机阻塞在处理该vm对应的tx上</p>
+<p>感觉该看一下wasm的opcode</p>
+<h3 id="Fee-charging"><a href="#Fee-charging" class="headerlink" title="Fee charging"></a>Fee charging</h3><p>由于wasmtime只提供封闭的ffi，因此无法将opcode与fee进行挂钩</p>
+<p>这里可以理解为我们需要自己写一个ngin专用的wasm runtime</p>
+<p>找材料的时候发现了perlin-network的一个wasm方案，<a href="https://github.com/perlin-network/life" target="_blank" rel="noopener">life</a>.</p>
+<p>钱多好办事哈，人家自己也折腾了个chain daemon叫<a href="https://github.com/perlin-network/wavelet" target="_blank" rel="noopener">wavelet</a>，意思是小波浪</p>
+<p>life里加gas是在compile时候，对每个Block做totalCost的计算（递增1，即每个instruction费用为1），然后给每个block的code前面都加上一个add_gas的instruction。</p>
+<p>当然这个add_gas的ins当前还没用，也不知道他们准备加点啥。</p>
+<p>compile是将wasm binary转换为host上的一个module，他们的api应该是参考的<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/compile" target="_blank" rel="noopener">js interface</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/todo/" rel="tag"># todo</a>
+              <a href="/tags/NGIN/" rel="tag"># NGIN</a>
+              <a href="/tags/contract/" rel="tag"># contract</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/post/fit5195-bi-notes/" rel="prev" title="Notes for FIT5195: Business intelligence and data warehousing">
+      <i class="fa fa-chevron-left"></i> Notes for FIT5195: Business intelligence and data warehousing
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/post/ecdsa-sign/" rel="next" title="ECDSA签名及验证">
+      ECDSA签名及验证 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ngVM"><span class="nav-number">1.</span> <span class="nav-text">ngVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-data-type"><span class="nav-number">1.1.1.</span> <span class="nav-text">数据类型 data type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Imports"><span class="nav-number">1.1.2.</span> <span class="nav-text">Imports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debug"><span class="nav-number">1.1.3.</span> <span class="nav-text">Debug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exports"><span class="nav-number">1.1.4.</span> <span class="nav-text">Exports</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3"><span class="nav-number">1.1.5.</span> <span class="nav-text">入口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8"><span class="nav-number">1.1.6.</span> <span class="nav-text">异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3-ngVMI-NGIN-VM-Interface"><span class="nav-number">1.2.</span> <span class="nav-text">接口(ngVMI: NGIN VM Interface)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#log-debug-msg-ptr-i64-msg-len-i64"><span class="nav-number">1.2.1.</span> <span class="nav-text">log::debug(msg_ptr i64, msg_len i64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log-info-msg-ptr-i64-msg-len-i64"><span class="nav-number">1.2.2.</span> <span class="nav-text">log::info(msg_ptr i64, msg_len i64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log-error-msg-ptr-i64-msg-len-i64"><span class="nav-number">1.2.3.</span> <span class="nav-text">log::error(msg_ptr i64, msg_len i64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#log-warn-msg-ptr-i64-msg-len-i64"><span class="nav-number">1.2.4.</span> <span class="nav-text">log::warn(msg_ptr i64, msg_len i64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self-get-num-gt-num-i64"><span class="nav-number">1.2.5.</span> <span class="nav-text">self::get_num() -&gt; num i64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self-get-owner-gt-owner-ptr-i64"><span class="nav-number">1.2.6.</span> <span class="nav-text">self::get_owner() -&gt; owner_ptr i64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#self-get-contract-len-ptr-i64-gt-contract-ptr-i64"><span class="nav-number">1.2.7.</span> <span class="nav-text">self::get_contract(len_ptr i64) -&gt; contract_ptr i64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#context-read-src-ptr-i64-dst-ptr-i64-len-u64"><span class="nav-number">1.2.8.</span> <span class="nav-text">context::read(src_ptr: i64, dst_ptr: i64, len: u64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#context-alloc-len-u64"><span class="nav-number">1.2.9.</span> <span class="nav-text">context::alloc(len: u64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#context-write-src-ptr-i64-dst-ptr-i64-len-u64"><span class="nav-number">1.2.10.</span> <span class="nav-text">context::write(src_ptr: i64, dst_ptr: i64, len: u64)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#coin-transfer-to-u64-value-ptr-i64-gt-i32"><span class="nav-number">1.2.11.</span> <span class="nav-text">coin::transfer(to: u64, value_ptr: i64) -&gt; i32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tx-get-convener-gt-num-u64"><span class="nav-number">1.2.12.</span> <span class="nav-text">tx::get_convener() -&gt; num u64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tx-get-participants-len-gt-len-u64"><span class="nav-number">1.2.13.</span> <span class="nav-text">tx::get_participants_len() -&gt; len u64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tx-get-participant-index-u64-gt-account-ptr-i64"><span class="nav-number">1.2.14.</span> <span class="nav-text">tx::get_participant(index: u64) -&gt; account_ptr i64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tx-get-values-len-gt-len-u64"><span class="nav-number">1.2.15.</span> <span class="nav-text">tx::get_values_len() -&gt; len u64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tx-get-value-index-u64-gt-value-ptr-i64"><span class="nav-number">1.2.16.</span> <span class="nav-text">tx::get_value(index: u64) -&gt; value_ptr i64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#state-get-balance-addr-i64-gt-balance-ptr-i64"><span class="nav-number">1.2.17.</span> <span class="nav-text">state::get_balance(addr: i64) -&gt; balance_ptr i64</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#state-get-owner-num-u64-gt-addr-ptr-i64"><span class="nav-number">1.2.18.</span> <span class="nav-text">state::get_owner(num: u64) -&gt; addr_ptr i64</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deploy"><span class="nav-number">1.3.</span> <span class="nav-text">Deploy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Publish"><span class="nav-number">1.4.</span> <span class="nav-text">Publish</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web"><span class="nav-number">1.4.1.</span> <span class="nav-text">Web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wasm"><span class="nav-number">1.4.2.</span> <span class="nav-text">Wasm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.5.</span> <span class="nav-text">当前遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Infinite-loop"><span class="nav-number">1.5.1.</span> <span class="nav-text">Infinite loop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fee-charging"><span class="nav-number">1.5.2.</span> <span class="nav-text">Fee charging</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Command M (C0MM4ND/K0MM4ND)</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">53</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/c0mm4nd" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;c0mm4nd" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:maoxs2#gmail.com" title="E-Mail → mailto:maoxs2#gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/k0mm4nd" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;k0mm4nd" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://ngin.sh/" title="https:&#x2F;&#x2F;NGIN.sh" rel="noopener" target="_blank">NGIN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Command M (C0MM4ND/K0MM4ND)</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+
+</body>
+</html>
